@@ -3,11 +3,7 @@ import { Request, Response } from 'express';
 import * as path from 'path';
 import * as cors from 'cors';
 
-import {
-  MessagesRouter,
-  ContactsRouter,
-  DocumentsRouter,
-} from './server/routes/';
+import { CommentRouter, UserRouter, CourseRouter } from './server/routes/';
 
 let app = express();
 
@@ -16,15 +12,15 @@ app.use(cors());
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, 'dist/second_app/')));
+app.use(express.static(path.join(__dirname, 'dist/final_project/')));
 
 app.get('/', (req: Request, res: Response) => {
-  res.sendFile(path.join(__dirname, 'dist/second_app/index.html'));
+  res.render(path.join(__dirname, 'dist/final_project/index.html'));
 });
 
 //routes
-app.use('/contacts', ContactsRouter);
-app.use('/messages', MessagesRouter);
-app.use('/documents', DocumentsRouter);
+app.use('/users', UserRouter);
+app.use('/courses', CourseRouter);
+app.use('/comments', CommentRouter);
 
 export default app;

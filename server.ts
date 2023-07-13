@@ -1,10 +1,11 @@
 import app from './app';
+import { Database } from './server/data/database';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-const port = 8000;
+const PORT = process.env.PORT || 8000;
 
-// Define your routes and middleware here
-
-app.listen(port, () => {
-  //   Database.connect();
-  console.log(`Server is running on port ${port}.`);
+app.listen(PORT, () => {
+  Database.connect();
+  console.log(`Server is running on port ${PORT}.`);
 });
