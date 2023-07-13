@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { CommentsController } from '../controllers';
+import { UserUtils } from '../utils/userUtils';
 
 const router = express.Router();
 
@@ -9,19 +10,22 @@ router
   .get((req: Request, res: Response) => {
     CommentsController.getComments(res);
   })
-  .post((req: Request, res: Response) => {
+  .post(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
     CommentsController.createComment(req, res);
   });
 
 router
   .route('/:id')
-  .put((req: Request, res: Response) => {
+  .put(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
     CommentsController.updateComment(req, res);
   })
-  .delete((req: Request, res: Response) => {
-    CommentsController.deleteComment(req, res);
-  })
-  .get((req: Request, res: Response) => {
+  .delete(
+    UserUtils.ensureRightUserMiddleware,
+    (req: Request, res: Response) => {
+      CommentsController.deleteComment(req, res);
+    }
+  )
+  .get(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
     CommentsController.getComment(req, res);
   });
 

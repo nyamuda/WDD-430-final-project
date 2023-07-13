@@ -3,25 +3,26 @@ import { Request, Response } from 'express';
 
 const router = express.Router();
 import { UsersController } from '../controllers';
+import { UserUtils } from '../utils/userUtils';
 
 router
   .route('/')
-  .get((req: Request, res: Response) => {
+  .get(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     UsersController.getUsers(res);
-  })
-  .post((req: Request, res: Response) => {
-    UsersController.createUser(req, res);
   });
 
 router
   .route('/:id')
-  .put((req: Request, res: Response) => {
+  .put(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
     UsersController.updateUser(req, res);
   })
-  .delete((req: Request, res: Response) => {
-    UsersController.deleteUser(req, res);
-  })
-  .get((req: Request, res: Response) => {
+  .delete(
+    UserUtils.ensureRightUserMiddleware,
+    (req: Request, res: Response) => {
+      UsersController.deleteUser(req, res);
+    }
+  )
+  .get(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
     UsersController.getUser(req, res);
   });
 

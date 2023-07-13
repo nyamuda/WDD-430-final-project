@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
 import { CoursesController } from '../controllers';
+import { UserUtils } from '../utils/userUtils';
 
 import Joi from 'joi';
 
@@ -11,16 +12,16 @@ router
   .get((req: Request, res: Response) => {
     CoursesController.getCourses(res);
   })
-  .post((req: Request, res: Response) => {
+  .post(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     CoursesController.createCourse(req, res);
   });
 
 router
   .route('/:id')
-  .put((req: Request, res: Response) => {
+  .put(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     CoursesController.updateCourse(req, res);
   })
-  .delete((req: Request, res: Response) => {
+  .delete(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     CoursesController.deleteCourse(req, res);
   })
   .get((req: Request, res: Response) => {
