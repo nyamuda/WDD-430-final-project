@@ -4,11 +4,10 @@ import * as bcrypt from 'bcrypt';
 import * as Joi from 'joi';
 import { UserUtils } from '../utils/userUtils';
 
-export class CoursesController {
+export class LoginController {
   //Create a new Course
-  public static async createCourse(req: Request, res: Response) {
+  public static async loginUser(req: Request, res: Response) {
     let schema = Joi.object({
-      name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required().min(8),
     });
@@ -22,42 +21,41 @@ export class CoursesController {
     let userExists = await User.findOne({ email: req.body.email });
 
     //if the user is already registered
-    if (userExists) {
+    if (!userExists) {
       return res.status(409).json({
         message:
-          'Oops! It seems that an account with that email already exists. Please log in using your existing credentials',
+          'Sorry, it appears that there is no user registered with the provided email address. Please verify the email or create a new account.',
       });
     }
 
-    //hash the password
-    let hashedPassword = await bcrypt.hash(req.body.password, 10);
+    //compare passwords
+    let passwordCorrect = await bcrypt.compare(
+      userExists.password,
+      req.body.password
+    );
 
-    let newUser = {
-      name: req.body.name,
-      email: req.body.email,
-      password: hashedPassword,
-    };
-
-    //Create user
-    User.create(newUser)
-      .then((user) => {
-        //Create token
-        let userId = user._id.toString();
-        //create an access token
-        let accessToken = UserUtils.createAccessToken({
-          email: user.email,
-          admin: false,
-          userId: user._id.toString(),
-        });
-        return res
-          .status(201)
-          .json({ message: 'The user was successfully created.' });
-      })
-      .catch((err) => {
-        return res.status(500).json({
-          message: 'An unexpected error occurred on the server.',
-          error: err,
-        });
+    //Password incorrect
+    if (!passwordCorrect) {
+      return res.status(400).json({
+        message:
+          'The password you entered is incorrect. Please double-check and try again.',
       });
+    }
+
+    //create and access token
+    let userId = userExists._id.toString();
+    let email = userExists.email;
+    let isAdmin = userExists.isAdmin;
+
+    let accessToken = UserUtils.createAccessToken({
+      email,
+      isAdmin,
+      userId,
+    });
+
+    return res.json({
+      message: 'Login successful! Welcome back.',
+      token: accessToken,
+    });
   }
 }

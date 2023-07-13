@@ -14,6 +14,6 @@ export class UserUtils {
 
 type TokenPayload = {
   email: String;
-  admin: Boolean;
+  isAdmin: Boolean;
   userId: String;
 };

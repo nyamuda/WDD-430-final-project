@@ -6,7 +6,7 @@ import { UserUtils } from '../utils/userUtils';
 
 export class RegisterController {
   //Create a new Course
-  public static async createCourse(req: Request, res: Response) {
+  public static async registerUser(req: Request, res: Response) {
     let schema = Joi.object({
       name: Joi.string().required(),
       email: Joi.string().email().required(),
@@ -46,7 +46,7 @@ export class RegisterController {
         //create an access token
         let accessToken = UserUtils.createAccessToken({
           email: user.email,
-          admin: false,
+          isAdmin: false,
           userId: user._id.toString(),
         });
         return res
