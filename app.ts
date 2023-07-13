@@ -3,7 +3,13 @@ import { Request, Response } from 'express';
 import * as path from 'path';
 import * as cors from 'cors';
 
-import { CommentRouter, UserRouter, CourseRouter } from './server/routes/';
+import {
+  CommentRouter,
+  UserRouter,
+  CourseRouter,
+  LoginRouter,
+  RegisterRouter,
+} from './server/routes/';
 
 let app = express();
 
@@ -22,5 +28,7 @@ app.get('/', (req: Request, res: Response) => {
 app.use('/users', UserRouter);
 app.use('/courses', CourseRouter);
 app.use('/comments', CommentRouter);
+app.use('/login', LoginRouter);
+app.use('/register', RegisterRouter);
 
 export default app;

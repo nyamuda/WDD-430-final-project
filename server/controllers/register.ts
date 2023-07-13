@@ -36,6 +36,7 @@ export class RegisterController {
       name: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      isAdmin: false,
     };
 
     //Create user
@@ -43,15 +44,17 @@ export class RegisterController {
       .then((user) => {
         //Create token
         let userId = user._id.toString();
+
         //create an access token
         let accessToken = UserUtils.createAccessToken({
           email: user.email,
-          isAdmin: false,
-          userId: user._id.toString(),
+          isAdmin: user.isAdmin,
+          userId,
         });
-        return res
-          .status(201)
-          .json({ message: 'The user was successfully created.' });
+        return res.status(201).json({
+          message: 'The user was successfully created.',
+          token: accessToken,
+        });
       })
       .catch((err) => {
         return res.status(500).json({

@@ -1,4 +1,6 @@
-import jwt, { JwtPayload, Secret, JsonWebTokenError } from 'jsonwebtoken';
+import { JwtPayload, Secret, JsonWebTokenError } from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
+
 import { Request, Response, NextFunction } from 'express';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -6,9 +8,9 @@ dotenv.config();
 export class UserUtils {
   public static createAccessToken = (payload: TokenPayload): string => {
     let SECRET: Secret = process.env.SECRET!;
-
+    console.log(SECRET);
     let accessToken: string = jwt.sign(payload, SECRET, { expiresIn: '24h' });
-
+    console.log(accessToken);
     return accessToken;
   };
 
@@ -23,11 +25,11 @@ export class UserUtils {
       let SECRET: Secret = process.env.SECRET!;
       let token = jwt.verify(clientToken, SECRET);
       return next();
-    } catch (error) {
+    } catch (JsonWebTokenError) {
       return res.status(401).json({
         message:
           'Access denied. You are not authorized to perform this action.',
-        error,
+        error: JsonWebTokenError,
       });
     }
   };
@@ -55,10 +57,10 @@ export class UserUtils {
       return res.status(401).json({
         message: 'You do not have the authority to carry out this action.',
       });
-    } catch (error) {
+    } catch (JsonWebTokenError) {
       return res.status(401).json({
         message: 'You do not have the authority to carry out this action.',
-        error,
+        error: JsonWebTokenError,
       });
     }
   };
@@ -81,10 +83,10 @@ export class UserUtils {
       }
 
       return next();
-    } catch (error) {
+    } catch (JsonWebTokenError) {
       return res.status(401).json({
         message: 'You do not have the authority to carry out this action.',
-        error,
+        error: JsonWebTokenError,
       });
     }
   };
