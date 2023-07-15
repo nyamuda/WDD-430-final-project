@@ -10,8 +10,8 @@ export class CoursesController {
       title: Joi.string().required(),
       description: Joi.string().required(),
       price: Joi.number().required(),
-      imgUrl: Joi.string().required(),
-    });
+      imageUrl: Joi.string().required(),
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {
@@ -22,7 +22,7 @@ export class CoursesController {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      imgUrl: req.body.imgUrl,
+      imageUrl: req.body.imageUrl,
     };
 
     //Post request
@@ -73,8 +73,8 @@ export class CoursesController {
       title: Joi.string(),
       description: Joi.string(),
       price: Joi.number(),
-      imgUrl: Joi.string(),
-    });
+      imageUrl: Joi.string(),
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {
@@ -93,7 +93,7 @@ export class CoursesController {
       title: req.body.title,
       description: req.body.description,
       price: req.body.price,
-      imgUrl: req.body.imgUrl,
+      imageUrl: req.body.imageUrl,
     };
 
     //PUT request

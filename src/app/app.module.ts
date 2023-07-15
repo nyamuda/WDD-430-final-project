@@ -21,10 +21,35 @@ import { MdbTooltipModule } from 'mdb-angular-ui-kit/tooltip';
 import { MdbValidationModule } from 'mdb-angular-ui-kit/validation';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CoursesComponent } from './courses/courses.component';
+import { CourseItemComponent } from './courses/course-item/course-item.component';
+import { CourseListComponent } from './courses/course-list/course-list.component';
+import { CourseDetailsComponent } from './courses/course-details/course-details.component';
+import { CourseEditComponent } from './courses/course-edit/course-edit.component';
+import { routes } from './app.routing';
+import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommentsComponent } from './comments/comments.component';
+import { CommentItemComponent } from './comments/comment-item/comment-item.component';
+import { CommentEditComponent } from './comments/comment-edit/comment-edit.component';
+import { CommentListComponent } from './comments/comment-list/comment-list.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { UsersComponent } from './users/users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CoursesComponent,
+    CourseItemComponent,
+    CourseListComponent,
+    CourseDetailsComponent,
+    CourseEditComponent,
+    CommentsComponent,
+    CommentItemComponent,
+    CommentEditComponent,
+    CommentListComponent,
+    UsersComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,8 +69,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    RouterModule.forRoot(routes, {
+      scrollPositionRestoration: 'enabled',
+    }),
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [RouterModule],
 })
-export class AppModule { }
+export class AppModule {}

@@ -10,7 +10,7 @@ export class CommentsController {
       content: Joi.string().required(),
       userId: Joi.string().required().hex().length(24),
       courseId: Joi.string().required().hex().length(24),
-    });
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {
@@ -89,7 +89,7 @@ export class CommentsController {
     //Validation
     let schema = Joi.object({
       content: Joi.string().required(),
-    });
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {

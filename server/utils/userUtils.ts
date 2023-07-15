@@ -51,7 +51,7 @@ export class UserUtils {
       }
 
       //if you're an admin
-      if (token.admin) {
+      if (token.isAdmin) {
         return next();
       }
       return res.status(401).json({
@@ -76,7 +76,8 @@ export class UserUtils {
       let SECRET: Secret = process.env.SECRET!;
       let token: any = jwt.verify(clientToken, SECRET);
       //if the user is not an admin, or if admin=false
-      if (!token.admin) {
+
+      if (!token.isAdmin) {
         return res.status(401).json({
           message: 'You do not have the authority to carry out this action.',
         });

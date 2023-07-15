@@ -11,7 +11,7 @@ export class RegisterController {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
       password: Joi.string().required().min(8),
-    });
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {

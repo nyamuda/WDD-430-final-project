@@ -1,0 +1,33 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-6">
+      <!-- Course Image -->
+      <img
+        [src]="course.imageUrl"
+        alt="Course Image"
+        class="img-fluid mb-3 rounded"
+      />
+    </div>
+    <div class="col-lg-6">
+      <!-- Course Details -->
+      <h2 class="display-3">{{ course.title }}</h2>
+      <p class="fs-5">{{ course.description }}</p>
+      <h3 class="fs-4 text-info">${{ course.price }}</h3>
+      <div class="d-flex mt-4">
+        <a (click)="updateCourse(course['_id'])" class="btn btn-primary me-2"
+          >Edit</a
+        >
+        <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
+          >Delete</a
+        >
+      </div>
+    </div>
+  </div>
+  <div class="row mt-5">
+    <div class="col-lg-6">
+      <!-- Comments Section -->
+      <h3 class="mt-3">Comments</h3>
+      <app-comments></app-comments>
+    </div>
+  </div>
+</div>

@@ -10,7 +10,7 @@ export class LoginController {
     let schema = Joi.object({
       email: Joi.string().email().required(),
       password: Joi.string().required().min(8),
-    });
+    }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
     if (error) {
@@ -30,8 +30,8 @@ export class LoginController {
 
     //compare passwords
     let passwordCorrect = await bcrypt.compare(
-      userExists.password,
-      req.body.password
+      req.body.password,
+      userExists.password
     );
 
     //Password incorrect
