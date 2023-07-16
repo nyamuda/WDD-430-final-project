@@ -19,6 +19,6 @@ let userSchema = new Schema<IUser>(
   }
 );
 
-let User = model<IUser>('Author', userSchema, 'users');
+let User = model<IUser>('User', userSchema, 'users');
 
 export { User };

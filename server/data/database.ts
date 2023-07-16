@@ -15,6 +15,7 @@ export class Database {
       console.log('Database connection successful.');
     } catch (error) {
       console.log('Connection to the database failed.');
+      console.log(error);
     }
   };
 }

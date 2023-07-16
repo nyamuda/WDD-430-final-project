@@ -60,7 +60,7 @@ export class CommentsController {
   //Get all the Comments
   public static async getComments(res: Response) {
     try {
-      let comments = await Comment.find({});
+      let comments = await Comment.find().populate('userId');
       return res.json(comments);
     } catch (err) {
       return res.status(500).json({
