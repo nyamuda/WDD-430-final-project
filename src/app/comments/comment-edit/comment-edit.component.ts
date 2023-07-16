@@ -28,11 +28,14 @@ export class CommentEditComponent implements OnInit {
     this.commentFormGroup = this.formBuilder.group({
       content: ['', Validators.required],
     });
+    //Grab the  course ID
+    this.activatedRoute.parent.params.subscribe((params) => {
+      this.courseId = params['id'];
+    });
 
-    this.activatedRoute.parent.paramMap.subscribe((params) => {
-      let commentId = params.get('commentId');
-      let courseId = params.get('id');
-      this.courseId = courseId;
+    //Grab the comment ID
+    this.activatedRoute.params.subscribe((params) => {
+      let commentId = params['commentId'];
 
       //if the id is not null
       //then its editing mode

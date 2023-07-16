@@ -20,7 +20,9 @@ export class CommentItemComponent {
   deleteComment(id: string) {
     this.commentService.deleteComment(id);
 
-    this.router.navigateByUrl('/comments');
+    this.router.navigateByUrl(
+      `courses/${this.commentService.courseIdChangeEvent.getValue()}`
+    );
   }
 
   updateComment(id: string) {

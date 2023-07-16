@@ -4,6 +4,7 @@ import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 import { CommentsService } from '../../comments/comments.service';
 import { Comment } from '../../comments/comment.model';
+import { throws } from 'assert';
 
 @Component({
   selector: 'app-course-details',
@@ -30,7 +31,7 @@ export class CourseDetailsComponent implements OnInit {
         //The comments for course
         let comments: Comment[] = course.comments;
         //save the ID of the course to the comment service
-
+        this.commentService.courseIdChangeEvent.next(courseId);
         //show the comments for the course
         this.commentService.commentListChangedEvent.next(comments);
       });

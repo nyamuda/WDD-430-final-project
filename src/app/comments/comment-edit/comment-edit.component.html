@@ -1,16 +1,16 @@
-<div class="border rounded-top px-0 mt-5 px-4 py-3">
+<div class="border rounded-top px-0 my-2 px-4 py-3">
   <form [formGroup]="commentFormGroup">
     <div class="mb-3">
       <label for="comment-content">Comment:</label>
-      <input
+      <textarea
         [ngClass]="{
           'invalid-input': commentFormGroup.get('content')?.value == ''
         }"
         class="form-control"
-        type="text"
-        id="comment-content"
+        rows="3"
         formControlName="content"
-      />
+        id="comment-content"
+      ></textarea>
     </div>
 
     <div *ngIf="commentFormGroup.invalid">

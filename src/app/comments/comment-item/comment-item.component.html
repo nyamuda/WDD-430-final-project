@@ -1,4 +1,4 @@
-<div class="bg-light rounded my-4 row">
+<div class="rounded my-4 px-3 row">
   <div class="col-md-8">
     <p class="fs-5 text-primary mb-1">{{ comment.userId.name }}</p>
     <p class="fs-6">{{ comment.content }}</p>
@@ -9,6 +9,6 @@
       class="btn btn-primary me-2"
       >Edit</a
     >
-    <a routerLink="comments/new" class="btn btn-danger">Delete</a>
+    <a (click)="deleteComment(comment['_id'])" class="btn btn-danger">Delete</a>
   </div>
 </div>

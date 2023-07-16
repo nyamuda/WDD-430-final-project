@@ -8,8 +8,8 @@ import { Comment } from './comment.model';
 })
 export class CommentsService {
   private _comments = new Array<Comment>();
-  private _courseId = '';
   commentListChangedEvent = new BehaviorSubject<Comment[]>(this._comments);
+  courseIdChangeEvent = new BehaviorSubject<string>('');
 
   constructor(private http: HttpClient) {}
 
@@ -28,7 +28,9 @@ export class CommentsService {
       };
 
       this.http.post(url, commentDto, { headers }).subscribe(
-        (response) => {},
+        (response) => {
+          this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
+        },
         (error) => {
           console.error(error);
         }
@@ -43,12 +45,13 @@ export class CommentsService {
 
   //READ
   getCommentsForCourse(courseId: string) {
-    const url = `http://localhost:8000/courses/${courseId}comments`;
+    const url = `http://localhost:8000/courses/${courseId}/comments`;
 
     this.http.get<Comment[]>(url).subscribe(
       (comments: Comment[]) => {
         this._comments = comments;
-        this.commentListChangedEvent.next(this._comments);
+
+        this.commentListChangedEvent.next(comments);
       },
       (error) => {
         console.error(error);
@@ -69,7 +72,7 @@ export class CommentsService {
         .put(`http://localhost:8000/comments/${id}`, commentDto, { headers })
         .subscribe(
           (response) => {
-            this.getCommentsForCourse(this._courseId);
+            this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
           },
           (error) => {
             console.error(error);
@@ -85,7 +88,7 @@ export class CommentsService {
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        this.getCommentsForCourse(this._courseId);
+        this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
       },
       (error) => {
         console.error(error);

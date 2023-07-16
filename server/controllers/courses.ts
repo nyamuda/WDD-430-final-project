@@ -88,7 +88,7 @@ export class CoursesController {
             path: 'userId',
           },
         });
-      return res.json(course);
+      return res.json(course.comments);
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
