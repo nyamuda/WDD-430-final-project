@@ -38,7 +38,7 @@ export class CommentsController {
       courseId: req.body.courseId,
     };
     //Post request
-    Comment.create(newComment)
+    await Comment.create(newComment)
       .then(async (comment) => {
         //add the comment ID to the course
         await Course.updateOne(
@@ -106,13 +106,13 @@ export class CommentsController {
     }
 
     let comment = {
-      content: req.body.name,
+      content: req.body.content,
     };
 
     //PUT request
-    Comment.updateOne({ _id: req.params.id }, comment)
+    await Comment.updateOne({ _id: req.params.id }, comment)
       .then((comment) => {
-        return res.status(204);
+        return res.status(204).end();
       })
       .catch((err) => {
         return res.status(500).json({
@@ -132,7 +132,7 @@ export class CommentsController {
       });
     }
 
-    Comment.deleteOne({ _id: req.params.id })
+    await Comment.deleteOne({ _id: req.params.id })
       .then(async (comment) => {
         //Remove the comment ID from the course
         await Course.findOneAndUpdate(

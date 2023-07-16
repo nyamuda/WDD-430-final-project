@@ -26,7 +26,7 @@ export class CoursesController {
     };
 
     //Post request
-    Course.create(course)
+    await Course.create(course)
       .then((course) => {
         return res
           .status(201)
@@ -97,9 +97,9 @@ export class CoursesController {
     };
 
     //PUT request
-    Course.updateOne({ _id: req.params.id }, course)
+    await Course.updateOne({ _id: req.params.id }, course)
       .then((course) => {
-        return res.status(204);
+        return res.status(204).end();
       })
       .catch((err) => {
         return res.status(500).json({
@@ -119,7 +119,7 @@ export class CoursesController {
       });
     }
 
-    Course.deleteOne({ _id: req.params.id })
+    await Course.deleteOne({ _id: req.params.id })
       .then(async (course) => {
         //Delete any comments associated with that course
         await Comment.deleteMany({ courseId: courseExists._id });

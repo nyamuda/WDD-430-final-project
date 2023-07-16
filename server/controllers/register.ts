@@ -40,7 +40,7 @@ export class RegisterController {
     };
 
     //Create user
-    User.create(newUser)
+    await User.create(newUser)
       .then((user) => {
         //Create token
         let userId = user._id.toString();
