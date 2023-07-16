@@ -66,7 +66,6 @@ export class CourseEditComponent {
       newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
-      console.log(newCourse);
       //if in edit mode
       if (this.editMode) {
         this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);

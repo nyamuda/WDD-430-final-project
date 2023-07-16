@@ -16,8 +16,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
   constructor(private courseService: CoursesService) {}
 
   ngOnInit() {
-    this.courseService.getCourses();
-    console.log(this.courseService.getCourses());
+    //if there are no current courses in the store
+    if (this.courseService.courses.length == 0) {
+      this.courseService.getCourses();
+    } else {
+      this.courses = this.courseService.courses;
+    }
     this.subscription = this.courseService.courseListChangedEvent.subscribe(
       (courseList: Course[]) => {
         this.courses = courseList;

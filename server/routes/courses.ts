@@ -28,4 +28,8 @@ router
     CoursesController.getCourse(req, res);
   });
 
+router.route('/:id/comments').get((req: Request, res: Response) => {
+  CoursesController.getCourseComments(req, res);
+});
+
 export { router as CourseRouter };

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CommentsService } from '../comments.service';
 import { Comment } from '../comment.model';
@@ -8,18 +8,17 @@ import { Comment } from '../comment.model';
   templateUrl: './comment-list.component.html',
   styleUrls: ['./comment-list.component.scss'],
 })
-export class CommentListComponent {
-  comments: Comment[] = new Array<Comment>();
+export class CommentListComponent implements OnInit, OnDestroy {
+  @Input('comments') comments: Comment[] = new Array<Comment>();
   subscription: Subscription = new Subscription();
 
   constructor(private commentService: CommentsService) {}
 
   ngOnInit() {
-    this.commentService.getComments();
+    // this.commentService.getCommentsForCourse(courseId);
     this.subscription = this.commentService.commentListChangedEvent.subscribe(
       (comments: Comment[]) => {
         this.comments = comments;
-        console.log(comments);
       }
     );
   }

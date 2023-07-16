@@ -10,7 +10,7 @@ import { Comment } from '../../comments/comment.model';
   templateUrl: './course-details.component.html',
   styleUrls: ['./course-details.component.scss'],
 })
-export class CourseDetailsComponent {
+export class CourseDetailsComponent implements OnInit {
   course: Course = new Course();
 
   constructor(
@@ -22,17 +22,18 @@ export class CourseDetailsComponent {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params) => {
-      let currentId = params['id'];
+      let courseId = params['id'];
 
-      this.courseService
-        .getCourseById(currentId)
-        .subscribe((course: Course) => {
-          this.course = course;
+      this.courseService.getCourseById(courseId).subscribe((course: Course) => {
+        this.course = course;
 
-          //the comments for course
-          let comments: Comment[] = course.comments;
-          this.commentService.commentListChangedEvent.next(comments);
-        });
+        //The comments for course
+        let comments: Comment[] = course.comments;
+        //save the ID of the course to the comment service
+
+        //show the comments for the course
+        this.commentService.commentListChangedEvent.next(comments);
+      });
     });
   }
 

@@ -30,30 +30,28 @@ export class CommentEditComponent implements OnInit {
     });
 
     this.activatedRoute.parent.paramMap.subscribe((params) => {
-      let id = params.get('commentId');
-
+      let commentId = params.get('commentId');
       let courseId = params.get('id');
       this.courseId = courseId;
 
-      console.log(id);
-
       //if the id is not null
       //then its editing mode
-      if (!!id) {
-        this.commentId = id;
-        this.commentService.getCommentById(id).subscribe((comment: Comment) => {
-          //if the comment exists
-          if (!!comment) {
-            this.editMode = true;
-            this.courseId = id;
-            this.commentToEdit = comment;
+      if (!!commentId) {
+        this.commentId = commentId;
+        this.commentService
+          .getCommentById(commentId)
+          .subscribe((comment: Comment) => {
+            //if the comment exists
+            if (!!comment) {
+              this.editMode = true;
+              this.commentToEdit = comment;
 
-            //populate the form
-            this.commentFormGroup.patchValue({
-              content: comment.content,
-            });
-          }
-        });
+              //populate the form
+              this.commentFormGroup.patchValue({
+                content: comment.content,
+              });
+            }
+          });
       }
       //else its add new comment mode
       return;

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
 
@@ -7,8 +7,8 @@ import { Course } from './course.model';
   providedIn: 'root',
 })
 export class CoursesService {
-  courseListChangedEvent = new Subject<Course[]>();
   private _courses = new Array<Course>();
+  courseListChangedEvent = new BehaviorSubject<Course[]>(this._courses);
 
   constructor(private http: HttpClient) {}
 
@@ -49,8 +49,6 @@ export class CoursesService {
   //READ
   getCourses(): void {
     const url = `http://localhost:8000/courses`;
-
-    this.courseListChangedEvent.next([]);
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {
@@ -103,7 +101,7 @@ export class CoursesService {
   }
 
   getAccessToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NDQ4MzgwLCJleHAiOjE2ODk1MzQ3ODB9.qQullTgLNbnSh4hWlpPh4PA_tOkrhjfyIDjpr-j6RMs';
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NTM4NDY1LCJleHAiOjE2ODk2MjQ4NjV9.hsfuGrQfV9G90K0dfExl2rHlynnU9nWnvIF4UoCbv-4';
   }
 
   headers(): HttpHeaders {
@@ -113,5 +111,10 @@ export class CoursesService {
       .set('Authorization', `Bearer ${token}`);
 
     return headers;
+  }
+
+  //a getter for _courses
+  public get courses(): Array<Course> {
+    return this._courses;
   }
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Subject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Comment } from './comment.model';
 
@@ -7,8 +7,9 @@ import { Comment } from './comment.model';
   providedIn: 'root',
 })
 export class CommentsService {
-  commentListChangedEvent = new Subject<Comment[]>();
   private _comments = new Array<Comment>();
+  private _courseId = '';
+  commentListChangedEvent = new BehaviorSubject<Comment[]>(this._comments);
 
   constructor(private http: HttpClient) {}
 
@@ -27,10 +28,7 @@ export class CommentsService {
       };
 
       this.http.post(url, commentDto, { headers }).subscribe(
-        (response) => {
-          this.getComments();
-          console.log(response);
-        },
+        (response) => {},
         (error) => {
           console.error(error);
         }
@@ -44,8 +42,8 @@ export class CommentsService {
   }
 
   //READ
-  getComments(): Array<Comment> {
-    const url = `http://localhost:8000/comments`;
+  getCommentsForCourse(courseId: string) {
+    const url = `http://localhost:8000/courses/${courseId}comments`;
 
     this.http.get<Comment[]>(url).subscribe(
       (comments: Comment[]) => {
@@ -56,7 +54,6 @@ export class CommentsService {
         console.error(error);
       }
     );
-    return this._comments;
   }
 
   //UPDATE
@@ -72,8 +69,7 @@ export class CommentsService {
         .put(`http://localhost:8000/comments/${id}`, commentDto, { headers })
         .subscribe(
           (response) => {
-            console.log(response);
-            this.getComments();
+            this.getCommentsForCourse(this._courseId);
           },
           (error) => {
             console.error(error);
@@ -89,8 +85,7 @@ export class CommentsService {
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        console.log(response);
-        this.getComments();
+        this.getCommentsForCourse(this._courseId);
       },
       (error) => {
         console.error(error);
@@ -99,7 +94,7 @@ export class CommentsService {
   }
 
   getAccessToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NDQ4MzgwLCJleHAiOjE2ODk1MzQ3ODB9.qQullTgLNbnSh4hWlpPh4PA_tOkrhjfyIDjpr-j6RMs';
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NTM4NDY1LCJleHAiOjE2ODk2MjQ4NjV9.hsfuGrQfV9G90K0dfExl2rHlynnU9nWnvIF4UoCbv-4';
   }
 
   headers(): HttpHeaders {

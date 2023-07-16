@@ -43,7 +43,12 @@ export class CoursesController {
   //Get all the Courses
   public static async getCourses(res: Response) {
     try {
-      let courses = await Course.find({}).populate('comments');
+      let courses = await Course.find({}).populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      });
       return res.json(courses);
     } catch (err) {
       return res.status(500).json({
@@ -56,7 +61,33 @@ export class CoursesController {
   //Get Course by ID
   public static async getCourse(req: Request, res: Response) {
     try {
-      let course = await Course.findById(req.params.id).populate('comments');
+      let course = await Course.findById(req.params.id).populate({
+        path: 'comments',
+        populate: {
+          path: 'userId',
+        },
+      });
+      return res.json(course);
+    } catch (err) {
+      return res.status(500).json({
+        message: 'An unexpected error occurred on the server.',
+        error: err,
+      });
+    }
+  }
+
+  //Get comments for a particular course
+  //Get Course by ID
+  public static async getCourseComments(req: Request, res: Response) {
+    try {
+      let course = await Course.findById(req.params.id)
+        .select('comments')
+        .populate({
+          path: 'comments',
+          populate: {
+            path: 'userId',
+          },
+        });
       return res.json(course);
     } catch (err) {
       return res.status(500).json({
