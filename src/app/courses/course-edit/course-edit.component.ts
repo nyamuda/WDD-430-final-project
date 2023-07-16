@@ -24,7 +24,7 @@ export class CourseEditComponent {
   ngOnInit() {
     this.courseFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       imageUrl: ['', Validators.required],
       price: ['', Validators.required],
     });

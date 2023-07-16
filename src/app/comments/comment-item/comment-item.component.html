@@ -1,6 +1,10 @@
 <div class="bg-light rounded mb-2">
   <p class="fs-5 text-primary mb-1">{{ comment.userId.name }}</p>
   <p class="fs-6">{{ comment.content }}</p>
-  <a (click)="updateComment(comment.id)" class="btn btn-primary me-2">Edit</a>
-  <a (click)="deleteComment(comment.id)" class="btn btn-danger">Delete</a>
+  <a
+    [routerLink]="'comments/' + comment['_id'] + '/edit'"
+    class="btn btn-primary me-2"
+    >Edit</a
+  >
+  <a routerLink="comments/new" class="btn btn-danger">Delete</a>
 </div>

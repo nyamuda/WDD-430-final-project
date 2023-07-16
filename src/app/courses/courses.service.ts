@@ -50,6 +50,8 @@ export class CoursesService {
   getCourses(): void {
     const url = `http://localhost:8000/courses`;
 
+    this.courseListChangedEvent.next([]);
+
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {
         this._courses = courses;
@@ -74,7 +76,9 @@ export class CoursesService {
       this.http
         .put(`http://localhost:8000/courses/${id}`, courseDto, { headers })
         .subscribe(
-          (response) => {},
+          (response) => {
+            this.getCourses();
+          },
           (error) => {
             console.error(error);
           }

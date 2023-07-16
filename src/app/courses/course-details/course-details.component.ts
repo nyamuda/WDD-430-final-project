@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
+import { CommentsService } from '../../comments/comments.service';
+import { Comment } from '../../comments/comment.model';
 
 @Component({
   selector: 'app-course-details',
@@ -14,7 +16,8 @@ export class CourseDetailsComponent {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private courseService: CoursesService
+    private courseService: CoursesService,
+    private commentService: CommentsService
   ) {}
 
   ngOnInit() {
@@ -25,6 +28,10 @@ export class CourseDetailsComponent {
         .getCourseById(currentId)
         .subscribe((course: Course) => {
           this.course = course;
+
+          //the comments for course
+          let comments: Comment[] = course.comments;
+          this.commentService.commentListChangedEvent.next(comments);
         });
     });
   }

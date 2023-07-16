@@ -1,10 +1,11 @@
+import { Comment } from '../comments/comment.model';
 export class Course {
   private _id: string;
   private _title: string;
   private _description: string;
   private _price: number;
   private _imageUrl: string;
-  private _comments: Array<object> = new Array<object>();
+  private _comments: Array<Comment> = new Array<Comment>();
 
   constructor() {}
 
@@ -47,11 +48,11 @@ export class Course {
     this._imageUrl = imageUrl;
   }
 
-  public get comments(): Array<object> {
+  public get comments(): Array<Comment> {
     return this._comments;
   }
 
-  public set comments(comments: Array<object>) {
+  public set comments(comments: Array<Comment>) {
     this._comments = comments;
   }
 }

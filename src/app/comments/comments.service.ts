@@ -13,11 +13,20 @@ export class CommentsService {
   constructor(private http: HttpClient) {}
 
   //CREATE
-  addComment(newComment: Comment) {
+  addComment(courseId: string, newComment: Comment) {
     if (!!newComment) {
-      const url = 'http://localhost:3000/comments';
+      const url = 'http://localhost:8000/comments';
+      const headers = this.headers();
 
-      this.http.post(url, newComment).subscribe(
+      console.log(newComment.content);
+
+      let commentDto = {
+        content: newComment.content,
+        userId: '64b2e98385921ebe20021281',
+        courseId: courseId,
+      };
+
+      this.http.post(url, commentDto, { headers }).subscribe(
         (response) => {
           this.getComments();
           console.log(response);
@@ -29,13 +38,14 @@ export class CommentsService {
     }
   }
   getCommentById(id: string): Observable<Comment> {
-    const url = `http://localhost:3000/comments/${id}`;
-    return this.http.get<Comment>(url);
+    const headers = this.headers();
+    const url = `http://localhost:8000/comments/${id}`;
+    return this.http.get<Comment>(url, { headers });
   }
 
   //READ
   getComments(): Array<Comment> {
-    const url = `http://localhost:3000/comments`;
+    const url = `http://localhost:8000/comments`;
 
     this.http.get<Comment[]>(url).subscribe(
       (comments: Comment[]) => {
@@ -52,10 +62,14 @@ export class CommentsService {
   //UPDATE
   updateComment(id: string, newComment: Comment) {
     if (!!newComment) {
-      const headers = new HttpHeaders().set('Content-Type', 'application/json');
+      const headers = this.headers();
+
+      let commentDto = {
+        content: newComment.content,
+      };
 
       this.http
-        .put(`http://localhost:3000/comments/${id}`, newComment, { headers })
+        .put(`http://localhost:8000/comments/${id}`, commentDto, { headers })
         .subscribe(
           (response) => {
             console.log(response);
@@ -70,9 +84,10 @@ export class CommentsService {
 
   //DELETE
   deleteComment(id: string) {
-    const url = `http://localhost:3000/comments/${id}`;
+    const headers = this.headers();
+    const url = `http://localhost:8000/comments/${id}`;
 
-    this.http.delete(url).subscribe(
+    this.http.delete(url, { headers }).subscribe(
       (response) => {
         console.log(response);
         this.getComments();
@@ -81,5 +96,18 @@ export class CommentsService {
         console.error(error);
       }
     );
+  }
+
+  getAccessToken(): string {
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NDQ4MzgwLCJleHAiOjE2ODk1MzQ3ODB9.qQullTgLNbnSh4hWlpPh4PA_tOkrhjfyIDjpr-j6RMs';
+  }
+
+  headers(): HttpHeaders {
+    let token = this.getAccessToken();
+    const headers = new HttpHeaders()
+      .set('Content-Type', 'application/json')
+      .set('Authorization', `Bearer ${token}`);
+
+    return headers;
   }
 }

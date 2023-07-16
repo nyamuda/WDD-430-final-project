@@ -15,9 +15,11 @@ export class CommentListComponent {
   constructor(private commentService: CommentsService) {}
 
   ngOnInit() {
+    this.commentService.getComments();
     this.subscription = this.commentService.commentListChangedEvent.subscribe(
       (comments: Comment[]) => {
         this.comments = comments;
+        console.log(comments);
       }
     );
   }

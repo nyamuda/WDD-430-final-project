@@ -1,4 +1,12 @@
 <div class="container border rounded-top px-0 mt-5 ms-md-5 px-4 py-3">
+  <div class="container-sm text-center my-5">
+    <p *ngIf="editMode; else new" class="display-6 text-uppercase">
+      Edit course
+    </p>
+    <ng-template #new>
+      <p class="display-6 text-uppercase">Add new course</p>
+    </ng-template>
+  </div>
   <form [formGroup]="courseFormGroup">
     <div class="mb-3">
       <label for="course-title">Course title:</label>
@@ -15,6 +23,9 @@
     <div class="mb-3">
       <label for="course-description">Course description:</label>
       <input
+        [ngClass]="{
+          'invalid-input': courseFormGroup.get('description')?.value == ''
+        }"
         class="form-control"
         type="text"
         id="course-description"
@@ -22,16 +33,27 @@
       />
     </div>
     <div class="mb-3">
-      <label for="course-title">Course price:</label>
+      <label for="price">Course price:</label>
       <input
         [ngClass]="{
-          'invalid-input': courseFormGroup.get('price')?.value == ''
+          'invalid-input':
+            courseFormGroup.get('price')?.value == '' ||
+            courseFormGroup.get('price')?.invalid
         }"
         class="form-control"
         type="text"
-        id="course-title"
+        id="price"
         formControlName="price"
       />
+      <!-- <div
+        *ngIf="
+          courseFormGroup.get('price').touched &&
+          courseFormGroup.get('price').invalid
+        "
+        class="form-text alert alert-danger"
+      >
+        Price must be a number
+      </div> -->
     </div>
     <div class="mb-3">
       <label for="course-url">Image URL</label>
@@ -49,7 +71,7 @@
     </div>
     <div *ngIf="courseFormGroup.invalid">
       <p class="alert alert-danger text-start">
-        The course title, price, and image URL fields are required.
+        The course title, description, price, and image URL fields are required.
       </p>
     </div>
 

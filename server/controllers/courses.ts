@@ -70,10 +70,10 @@ export class CoursesController {
   public static async updateCourse(req: Request, res: Response) {
     //Validation
     let schema = Joi.object({
-      title: Joi.string(),
-      description: Joi.string(),
-      price: Joi.number(),
-      imageUrl: Joi.string(),
+      title: Joi.string().optional(),
+      description: Joi.string().optional(),
+      price: Joi.number().optional(),
+      imageUrl: Joi.string().optional(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
