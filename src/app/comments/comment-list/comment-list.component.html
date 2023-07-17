@@ -1,6 +1,9 @@
-<div class="bg-light px-2 py-3 container-lg">
+<section
+  *ngIf="comments().length > 0"
+  class="comments px-2 py-3 container-fluid bg-light px-2 px-lg-3"
+>
   <app-comment-item
-    *ngFor="let comment of comments"
+    *ngFor="let comment of comments()"
     [comment-details]="comment"
   ></app-comment-item>
-</div>
+</section>

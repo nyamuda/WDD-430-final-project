@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Signal, computed } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CoursesService } from '../courses.service';
 import { Course } from '../course.model';
@@ -9,9 +9,9 @@ import { Course } from '../course.model';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit, OnDestroy {
-  courses: Course[] = new Array<Course>();
+  // courses: Course[] = new Array<Course>();
 
-  subscription: Subscription = new Subscription();
+  // subscription: Subscription = new Subscription();
 
   constructor(private courseService: CoursesService) {}
 
@@ -19,16 +19,12 @@ export class CourseListComponent implements OnInit, OnDestroy {
     //if there are no current courses in the store
     if (this.courseService.courses.length == 0) {
       this.courseService.getCourses();
-    } else {
-      this.courses = this.courseService.courses;
     }
-    this.subscription = this.courseService.courseListChangedEvent.subscribe(
-      (courseList: Course[]) => {
-        this.courses = courseList;
-      }
-    );
   }
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
+
+  courses: Signal<Course[]> = computed(() =>
+    this.courseService.courseListSignal()
+  );
+
+  ngOnDestroy() {}
 }

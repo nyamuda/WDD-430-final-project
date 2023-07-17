@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Injectable, signal, WritableSignal } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
 
@@ -8,7 +8,8 @@ import { Course } from './course.model';
 })
 export class CoursesService {
   private _courses = new Array<Course>();
-  courseListChangedEvent = new BehaviorSubject<Course[]>(this._courses);
+
+  public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
   constructor(private http: HttpClient) {}
 
@@ -40,7 +41,9 @@ export class CoursesService {
       let course = this._courses.filter(
         (course: Course) => course['_id'] == id
       )[0];
-      return of(course);
+      if (!!course) {
+        return of(course);
+      }
     }
     const url = `http://localhost:8000/courses/${id}`;
     return this.http.get<Course>(url);
@@ -53,7 +56,7 @@ export class CoursesService {
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {
         this._courses = courses;
-        this.courseListChangedEvent.next(this._courses);
+        this.courseListSignal.set(this._courses);
       },
       (error) => {
         console.error(error);
@@ -91,7 +94,6 @@ export class CoursesService {
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        console.log(response);
         this.getCourses();
       },
       (error) => {

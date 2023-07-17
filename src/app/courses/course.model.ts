@@ -6,6 +6,7 @@ export class Course {
   private _price: number;
   private _imageUrl: string;
   private _comments: Array<Comment> = new Array<Comment>();
+  private _updatedAt: string;
 
   constructor() {}
 
@@ -54,5 +55,9 @@ export class Course {
 
   public set comments(comments: Array<Comment>) {
     this._comments = comments;
+  }
+
+  public get updatedAt(): string {
+    return this._updatedAt;
   }
 }

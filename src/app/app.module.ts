@@ -36,6 +36,7 @@ import { CommentEditComponent } from './comments/comment-edit/comment-edit.compo
 import { CommentListComponent } from './comments/comment-list/comment-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
+import { MomentPipe } from './pipes/moment.pipe';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { UsersComponent } from './users/users.component';
     CommentEditComponent,
     CommentListComponent,
     UsersComponent,
+    MomentPipe,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ export class Comment {
   private _content: string;
   private _userId: User;
   private _courseId: Course;
+  private _updatedAt: string;
 
   constructor() {}
 
@@ -43,5 +44,8 @@ export class Comment {
 
   set courseId(value: Course) {
     this._courseId = value;
+  }
+  public get updatedAt(): string {
+    return this._updatedAt;
   }
 }

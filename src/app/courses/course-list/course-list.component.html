@@ -14,7 +14,7 @@
   <div class="row">
     <app-course-item
       class="col-md-4"
-      *ngFor="let course of courses"
+      *ngFor="let course of courses()"
       [course-detail]="course"
     ></app-course-item>
   </div>

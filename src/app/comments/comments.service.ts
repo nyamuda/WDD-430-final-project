@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, WritableSignal, signal } from '@angular/core';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Comment } from './comment.model';
 
@@ -8,8 +8,8 @@ import { Comment } from './comment.model';
 })
 export class CommentsService {
   private _comments = new Array<Comment>();
-  commentListChangedEvent = new BehaviorSubject<Comment[]>(this._comments);
-  courseIdChangeEvent = new BehaviorSubject<string>('');
+  public commentListSignal: WritableSignal<Comment[]> = signal(this._comments);
+  public courseIdSignal: WritableSignal<string> = signal('');
 
   constructor(private http: HttpClient) {}
 
@@ -29,7 +29,7 @@ export class CommentsService {
 
       this.http.post(url, commentDto, { headers }).subscribe(
         (response) => {
-          this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
+          this.getCommentsForCourse(this.courseIdSignal());
         },
         (error) => {
           console.error(error);
@@ -51,7 +51,7 @@ export class CommentsService {
       (comments: Comment[]) => {
         this._comments = comments;
 
-        this.commentListChangedEvent.next(comments);
+        this.commentListSignal.set(comments);
       },
       (error) => {
         console.error(error);
@@ -72,7 +72,7 @@ export class CommentsService {
         .put(`http://localhost:8000/comments/${id}`, commentDto, { headers })
         .subscribe(
           (response) => {
-            this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
+            this.getCommentsForCourse(this.courseIdSignal());
           },
           (error) => {
             console.error(error);
@@ -88,7 +88,7 @@ export class CommentsService {
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        this.getCommentsForCourse(this.courseIdChangeEvent.getValue());
+        this.getCommentsForCourse(this.courseIdSignal());
       },
       (error) => {
         console.error(error);

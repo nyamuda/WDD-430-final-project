@@ -21,7 +21,7 @@ export class CommentItemComponent {
     this.commentService.deleteComment(id);
 
     this.router.navigateByUrl(
-      `courses/${this.commentService.courseIdChangeEvent.getValue()}`
+      `courses/${this.commentService.courseIdSignal()}`
     );
   }
 

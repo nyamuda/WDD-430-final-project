@@ -1,0 +1,9 @@
+.link-secondary {
+  text-decoration: none; /* Remove underline by default */
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.link-secondary:hover {
+  color: #007bff !important; /* Apply a blueish color on hover */
+}
