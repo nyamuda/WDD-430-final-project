@@ -6,6 +6,8 @@ import { ReviewsService } from '../../reviews/reviews.service';
 import { Review } from '../../reviews/review.model';
 import { ViewportScroller } from '@angular/common';
 
+import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+
 @Component({
   selector: 'app-course-details',
   templateUrl: './course-details.component.html',
@@ -18,8 +20,7 @@ export class CourseDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
-    private reviewService: ReviewsService,
-    private viewPortScroller: ViewportScroller
+    private reviewService: ReviewsService
   ) {}
 
   ngOnInit() {
@@ -51,4 +52,6 @@ export class CourseDetailsComponent implements OnInit {
   updateCourse(id: string) {
     this.router.navigate(['courses', id, 'edit']);
   }
+
+  
 }

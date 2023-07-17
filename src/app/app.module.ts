@@ -37,6 +37,7 @@ import { ReviewListComponent } from './reviews/review-list/review-list.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { MomentPipe } from './pipes/moment.pipe';
+import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { MomentPipe } from './pipes/moment.pipe';
     ReviewListComponent,
     UsersComponent,
     MomentPipe,
+    ConfirmationModalComponent,
   ],
   imports: [
     BrowserModule,

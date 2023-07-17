@@ -5,6 +5,8 @@ import { ReviewsService } from '../reviews.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from '../review.model';
 
+import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+
 @Component({
   selector: 'app-review-edit',
   templateUrl: './review-edit.component.html',

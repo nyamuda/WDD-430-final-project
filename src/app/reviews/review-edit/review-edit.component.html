@@ -4,7 +4,7 @@
       <label class="form-label" for="review-content">Review</label>
       <textarea
         [ngClass]="{
-          'invalid-input': reviewFormGroup.invalid && reviewFormGroup.touched
+          'is-invalid': reviewFormGroup.invalid && reviewFormGroup.touched
         }"
         class="form-control"
         rows="3"
@@ -14,7 +14,7 @@
     </div>
 
     <div *ngIf="reviewFormGroup.invalid">
-      <p class="alert alert-danger text-start">The review field is required.</p>
+      <p class="alert alert-danger text-start">The field is required.</p>
     </div>
 
     <div class="d-flex justify-content-start">

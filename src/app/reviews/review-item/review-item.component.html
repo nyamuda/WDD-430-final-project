@@ -73,10 +73,11 @@
             <a
               [routerLink]="'reviews/' + review['_id'] + '/edit'"
               class="link-secondary"
+              fragment="reviewForm"
               >Edit</a
             >
             •
-            <a (click)="deleteReview(review['_id'])" class="link-secondary"
+            <a (click)="openModal(review['_id'])" class="link-secondary"
               >Remove</a
             >
             •
