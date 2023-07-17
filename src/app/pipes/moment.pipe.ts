@@ -6,6 +6,7 @@ import * as moment from 'moment';
 })
 export class MomentPipe implements PipeTransform {
   transform(value: string, format: string = 'YYYY-MM-DD HH:mm:ss'): string {
-    return moment(value, format).fromNow();
+    let localTime = moment(value).local().format(format);
+    return moment(localTime).fromNow();
   }
 }
