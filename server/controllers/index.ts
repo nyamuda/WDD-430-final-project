@@ -1,4 +1,4 @@
-export * from './comments';
+export * from './reviews';
 export * from './users';
 export * from './courses';
 export * from './login';

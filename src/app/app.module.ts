@@ -30,10 +30,10 @@ import { routes } from './app.routing';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommentsComponent } from './comments/comments.component';
-import { CommentItemComponent } from './comments/comment-item/comment-item.component';
-import { CommentEditComponent } from './comments/comment-edit/comment-edit.component';
-import { CommentListComponent } from './comments/comment-list/comment-list.component';
+import { ReviewsComponent } from './reviews/reviews.component';
+import { ReviewItemComponent } from './reviews/review-item/review-item.component';
+import { ReviewEditComponent } from './reviews/review-edit/review-edit.component';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { MomentPipe } from './pipes/moment.pipe';
@@ -46,10 +46,11 @@ import { MomentPipe } from './pipes/moment.pipe';
     CourseListComponent,
     CourseDetailsComponent,
     CourseEditComponent,
-    CommentsComponent,
-    CommentItemComponent,
-    CommentEditComponent,
-    CommentListComponent,
+    ReviewEditComponent,
+    ReviewsComponent,
+    ReviewItemComponent,
+    ReviewEditComponent,
+    ReviewListComponent,
     UsersComponent,
     MomentPipe,
   ],
@@ -73,6 +74,7 @@ import { MomentPipe } from './pipes/moment.pipe';
     MdbValidationModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
+      anchorScrolling: 'enabled',
     }),
     HttpClientModule,
     FormsModule,

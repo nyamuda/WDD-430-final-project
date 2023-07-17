@@ -1,10 +1,9 @@
-import { User, Comment, Course } from '../models/';
-
+import { User, Review, Course } from '../models/';
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
 
 export class UsersController {
-  //Get all the users
+  // Get all the users
   public static async getUsers(res: Response) {
     try {
       let users = await User.find({});
@@ -17,7 +16,7 @@ export class UsersController {
     }
   }
 
-  //Get user by ID
+  // Get user by ID
   public static async getUser(req: Request, res: Response) {
     try {
       let user = await User.findById(req.params.id);
@@ -30,9 +29,9 @@ export class UsersController {
     }
   }
 
-  //Update user by ID
+  // Update user by ID
   public static async updateUser(req: Request, res: Response) {
-    //Validation
+    // Validation
     let schema = Joi.object({
       name: Joi.string().optional(),
       email: Joi.string().email().optional(),
@@ -43,7 +42,7 @@ export class UsersController {
       return res.status(400).json({ error: error.details[0].message });
     }
 
-    //Check if the user exists
+    // Check if the user exists
     let userExists = await User.findById(req.params.id);
     console.log(req.params.id);
 
@@ -58,7 +57,7 @@ export class UsersController {
       email: req.body.email,
     };
 
-    //PUT request
+    // PUT request
     await User.updateOne({ _id: req.params.id }, user)
       .then((user) => {
         return res.status(204).end();
@@ -71,7 +70,7 @@ export class UsersController {
       });
   }
 
-  //Delete user by ID
+  // Delete user by ID
   public static async deleteUser(req: Request, res: Response) {
     let userExists = await User.findById(req.params.id);
 
@@ -83,21 +82,22 @@ export class UsersController {
 
     await User.deleteOne({ _id: req.params.id })
       .then(async (user) => {
-        //Delete any comments associated with that user
+        // Delete any reviews associated with that user
 
-        //1. Get the IDs of the comments to be deleted
-        let commentIds = await (
-          await Comment.find({ userId: userExists._id })
-        ).map((comment) => comment._id);
-
-        //2. Delete the comments
-        await Comment.deleteMany({ userId: userExists._id });
-
-        //3. Remove the comments from the course
-        await Course.updateMany(
-          { comments: { $in: commentIds } },
-          { $pull: { comments: { $in: commentIds } } }
+        // 1. Get the IDs of the reviews to be deleted
+        let reviewIds = (await Review.find({ userId: userExists._id })).map(
+          (review) => review._id
         );
+
+        // 2. Delete the reviews
+        await Review.deleteMany({ userId: userExists._id });
+
+        // 3. Remove the reviews from the course
+        await Course.updateMany(
+          { reviews: { $in: reviewIds } },
+          { $pull: { reviews: { $in: reviewIds } } }
+        );
+
         return res.status(204).end();
       })
       .catch((err) => {

@@ -1,11 +1,11 @@
-import { Course, Comment } from '../models/';
+import { Course, Review } from '../models/';
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
 
 export class CoursesController {
-  //Create a new Course
+  // Create a new Course
   public static async createCourse(req: Request, res: Response) {
-    //Validation
+    // Validation
     let schema = Joi.object({
       title: Joi.string().required(),
       description: Joi.string().required(),
@@ -25,7 +25,7 @@ export class CoursesController {
       imageUrl: req.body.imageUrl,
     };
 
-    //Post request
+    // Post request
     await Course.create(course)
       .then((course) => {
         return res
@@ -40,11 +40,11 @@ export class CoursesController {
       });
   }
 
-  //Get all the Courses
+  // Get all the Courses
   public static async getCourses(res: Response) {
     try {
       let courses = await Course.find({}).populate({
-        path: 'comments',
+        path: 'reviews',
         populate: {
           path: 'userId',
         },
@@ -58,11 +58,11 @@ export class CoursesController {
     }
   }
 
-  //Get Course by ID
+  // Get Course by ID
   public static async getCourse(req: Request, res: Response) {
     try {
       let course = await Course.findById(req.params.id).populate({
-        path: 'comments',
+        path: 'reviews',
         populate: {
           path: 'userId',
         },
@@ -76,19 +76,18 @@ export class CoursesController {
     }
   }
 
-  //Get comments for a particular course
-  //Get Course by ID
-  public static async getCourseComments(req: Request, res: Response) {
+  // Get reviews for a particular course
+  public static async getCourseReviews(req: Request, res: Response) {
     try {
       let course = await Course.findById(req.params.id)
-        .select('comments')
+        .select('reviews')
         .populate({
-          path: 'comments',
+          path: 'reviews',
           populate: {
             path: 'userId',
           },
         });
-      return res.json(course.comments);
+      return res.json(course.reviews);
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
@@ -97,9 +96,9 @@ export class CoursesController {
     }
   }
 
-  //Update Course by ID
+  // Update Course by ID
   public static async updateCourse(req: Request, res: Response) {
-    //Validation
+    // Validation
     let schema = Joi.object({
       title: Joi.string().optional(),
       description: Joi.string().optional(),
@@ -111,7 +110,8 @@ export class CoursesController {
     if (error) {
       return res.status(400).json({ error: error.details[0].message });
     }
-    //Check if the Course exists
+
+    // Check if the Course exists
     let courseExists = await Course.findById(req.params.id);
 
     if (!courseExists) {
@@ -127,7 +127,7 @@ export class CoursesController {
       imageUrl: req.body.imageUrl,
     };
 
-    //PUT request
+    // PUT request
     await Course.updateOne({ _id: req.params.id }, course)
       .then((course) => {
         return res.status(204).end();
@@ -140,7 +140,7 @@ export class CoursesController {
       });
   }
 
-  //Delete Course by ID
+  // Delete Course by ID
   public static async deleteCourse(req: Request, res: Response) {
     let courseExists = await Course.findById(req.params.id);
 
@@ -152,8 +152,8 @@ export class CoursesController {
 
     await Course.deleteOne({ _id: req.params.id })
       .then(async (course) => {
-        //Delete any comments associated with that course
-        await Comment.deleteMany({ courseId: courseExists._id });
+        // Delete any reviews associated with that course
+        await Review.deleteMany({ courseId: courseExists._id });
         return res.status(204).end();
       })
       .catch((err) => {

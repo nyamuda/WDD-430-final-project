@@ -1,35 +1,35 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Comment } from './comment.model';
+import { Review } from './review.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CommentsService {
-  private _comments = new Array<Comment>();
-  public commentListSignal: WritableSignal<Comment[]> = signal(this._comments);
+export class ReviewsService {
+  private _reviews = new Array<Review>();
+  public reviewListSignal: WritableSignal<Review[]> = signal(this._reviews);
   public courseIdSignal: WritableSignal<string> = signal('');
 
   constructor(private http: HttpClient) {}
 
-  //CREATE
-  addComment(courseId: string, newComment: Comment) {
-    if (!!newComment) {
-      const url = 'http://localhost:8000/comments';
+  // CREATE
+  addReview(courseId: string, newReview: Review) {
+    if (!!newReview) {
+      const url = 'http://localhost:8000/reviews';
       const headers = this.headers();
 
-      console.log(newComment.content);
+      console.log(newReview.content);
 
-      let commentDto = {
-        content: newComment.content,
+      let reviewDto = {
+        content: newReview.content,
         userId: '64b2e98385921ebe20021281',
         courseId: courseId,
       };
 
-      this.http.post(url, commentDto, { headers }).subscribe(
+      this.http.post(url, reviewDto, { headers }).subscribe(
         (response) => {
-          this.getCommentsForCourse(this.courseIdSignal());
+          this.getReviewsForCourse(this.courseIdSignal());
         },
         (error) => {
           console.error(error);
@@ -37,21 +37,21 @@ export class CommentsService {
       );
     }
   }
-  getCommentById(id: string): Observable<Comment> {
+
+  getReviewById(id: string): Observable<Review> {
     const headers = this.headers();
-    const url = `http://localhost:8000/comments/${id}`;
-    return this.http.get<Comment>(url, { headers });
+    const url = `http://localhost:8000/reviews/${id}`;
+    return this.http.get<Review>(url, { headers });
   }
 
-  //READ
-  getCommentsForCourse(courseId: string) {
-    const url = `http://localhost:8000/courses/${courseId}/comments`;
+  // READ
+  getReviewsForCourse(courseId: string) {
+    const url = `http://localhost:8000/courses/${courseId}/reviews`;
 
-    this.http.get<Comment[]>(url).subscribe(
-      (comments: Comment[]) => {
-        this._comments = comments;
-
-        this.commentListSignal.set(comments);
+    this.http.get<Review[]>(url).subscribe(
+      (reviews: Review[]) => {
+        this._reviews = reviews;
+        this.reviewListSignal.set(reviews);
       },
       (error) => {
         console.error(error);
@@ -59,20 +59,20 @@ export class CommentsService {
     );
   }
 
-  //UPDATE
-  updateComment(id: string, newComment: Comment) {
-    if (!!newComment) {
+  // UPDATE
+  updateReview(id: string, newReview: Review) {
+    if (!!newReview) {
       const headers = this.headers();
 
-      let commentDto = {
-        content: newComment.content,
+      let reviewDto = {
+        content: newReview.content,
       };
 
       this.http
-        .put(`http://localhost:8000/comments/${id}`, commentDto, { headers })
+        .put(`http://localhost:8000/reviews/${id}`, reviewDto, { headers })
         .subscribe(
           (response) => {
-            this.getCommentsForCourse(this.courseIdSignal());
+            this.getReviewsForCourse(this.courseIdSignal());
           },
           (error) => {
             console.error(error);
@@ -81,14 +81,14 @@ export class CommentsService {
     }
   }
 
-  //DELETE
-  deleteComment(id: string) {
+  // DELETE
+  deleteReview(id: string) {
     const headers = this.headers();
-    const url = `http://localhost:8000/comments/${id}`;
+    const url = `http://localhost:8000/reviews/${id}`;
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        this.getCommentsForCourse(this.courseIdSignal());
+        this.getReviewsForCourse(this.courseIdSignal());
       },
       (error) => {
         console.error(error);

@@ -1,4 +1,4 @@
-import { Course, Comment, User } from '../models/';
+import { User } from '../models/';
 import { Request, Response } from 'express';
 import * as bcrypt from 'bcrypt';
 import * as Joi from 'joi';

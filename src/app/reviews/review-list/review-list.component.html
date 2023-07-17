@@ -1,0 +1,10 @@
+<section
+  *ngIf="reviews().length > 0"
+  class="comments px-2 py-3 container-fluid bg-light px-2 px-lg-3"
+>
+ 
+  <app-review-item
+    *ngFor="let review of reviews()"
+    [review-details]="review"
+  ></app-review-item>
+</section>

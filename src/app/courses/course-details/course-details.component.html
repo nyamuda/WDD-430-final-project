@@ -2,21 +2,28 @@
   <div class="row">
     <div class="col-lg-6">
       <!-- Course Image -->
+
       <img
         [src]="course.imageUrl"
         alt="Course Image"
         class="img-fluid mb-3 rounded"
       />
     </div>
+
     <div class="col-lg-6">
       <!-- Course Details -->
+
       <h2 class="display-3">{{ course.title }}</h2>
+
       <p class="fs-5">{{ course.description }}</p>
+
       <h3 class="fs-4 text-info">${{ course.price }}</h3>
+
       <div class="d-flex mt-4">
         <a (click)="updateCourse(course['_id'])" class="btn btn-primary me-2"
           >Edit</a
         >
+
         <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
           >Delete</a
         >
@@ -24,18 +31,25 @@
     </div>
   </div>
 
-  <div class="comment-headline mt-3">
+  <div class="review-headline mt-3">
     <h3 class="">Reviews</h3>
-    <div class="comment-count">
-      <span class="badge bg-primary">{{ commentCount() }}</span>
+
+    <div class="review-count">
+      <span class="badge bg-primary">{{ reviewCount() }}</span>
     </div>
   </div>
 
   <div class="d-flex justify-content-end">
-    <a routerLink="comments/new" class="btn btn-primary mb-3">Add new</a>
+    <a
+      routerLink="reviews/new"
+      fragment="reviewForm"
+      class="btn btn-primary mb-3"
+      >Add new</a
+    >
   </div>
-  <!--Comment edit or new form -->
-  <router-outlet></router-outlet>
-  <!--Comments for the course -->
-  <app-comments></app-comments>
+
+  <!-- Review edit or new form -->
+  <router-outlet id="reviewForm"></router-outlet>
+  <!-- Reviews for the course -->
+  <app-reviews id="reviews"></app-reviews>
 </div>

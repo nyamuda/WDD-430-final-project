@@ -2,8 +2,9 @@ import { Component, OnInit, Signal, computed, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
-import { CommentsService } from '../../comments/comments.service';
-import { Comment } from '../../comments/comment.model';
+import { ReviewsService } from '../../reviews/reviews.service';
+import { Review } from '../../reviews/review.model';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-course-details',
@@ -17,7 +18,8 @@ export class CourseDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
-    private commentService: CommentsService
+    private reviewService: ReviewsService,
+    private viewPortScroller: ViewportScroller
   ) {}
 
   ngOnInit() {
@@ -27,24 +29,23 @@ export class CourseDetailsComponent implements OnInit {
       this.courseService.getCourseById(courseId).subscribe((course: Course) => {
         this.course = course;
 
-        //The comments for course
-        let comments: Comment[] = course.comments;
-        //save the ID of the course to the comment service
-        this.commentService.courseIdSignal.set(courseId);
-        //show the comments for the course
-        this.commentService.commentListSignal.set(comments);
+        // The reviews for the course
+        let reviews: Review[] = course.reviews;
+        // Save the ID of the course to the review service
+        this.reviewService.courseIdSignal.set(courseId);
+        // Show the reviews for the course
+        this.reviewService.reviewListSignal.set(reviews);
       });
     });
   }
 
-  commentCount: Signal<number> = computed(
-    () => this.commentService.commentListSignal().length
+  reviewCount: Signal<number> = computed(
+    () => this.reviewService.reviewListSignal().length
   );
 
   deleteCourse(id: string) {
     this.courseService.deleteCourse(id);
-
-    this.router.navigateByUrl('/courses');
+    this.router.navigateByUrl('courses');
   }
 
   updateCourse(id: string) {

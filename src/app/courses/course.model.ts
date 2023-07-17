@@ -1,11 +1,11 @@
-import { Comment } from '../comments/comment.model';
+import { Review } from '../reviews/review.model';
 export class Course {
   private _id: string;
   private _title: string;
   private _description: string;
   private _price: number;
   private _imageUrl: string;
-  private _comments: Array<Comment> = new Array<Comment>();
+  private _reviews: Array<Review> = new Array<Review>();
   private _updatedAt: string;
 
   constructor() {}
@@ -17,6 +17,7 @@ export class Course {
   public set id(id: string) {
     this._id = id;
   }
+
   public get title(): string {
     return this._title;
   }
@@ -49,12 +50,12 @@ export class Course {
     this._imageUrl = imageUrl;
   }
 
-  public get comments(): Array<Comment> {
-    return this._comments;
+  public get reviews(): Array<Review> {
+    return this._reviews;
   }
 
-  public set comments(comments: Array<Comment>) {
-    this._comments = comments;
+  public set reviews(reviews: Array<Review>) {
+    this._reviews = reviews;
   }
 
   public get updatedAt(): string {

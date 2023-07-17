@@ -1,12 +1,12 @@
 import mongoose, { Schema, model } from 'mongoose';
 
-interface IComment {
+interface IReview {
   content: string;
   userId: object;
   courseId: object;
 }
 
-let commentSchema = new Schema<IComment>(
+let reviewSchema = new Schema<IReview>(
   {
     content: String,
     userId: { type: mongoose.Types.ObjectId, ref: 'User' },
@@ -17,6 +17,6 @@ let commentSchema = new Schema<IComment>(
   }
 );
 
-let Comment = model<IComment>('Comment', commentSchema, 'comments');
+let Review = model<IReview>('Review', reviewSchema, 'reviews');
 
-export { Comment };
+export { Review };

@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { Request, Response } from 'express';
-import { CommentsController } from '../controllers';
+import { ReviewsController } from '../controllers';
 import { UserUtils } from '../utils/userUtils';
 
 const router = express.Router();
@@ -8,25 +8,25 @@ const router = express.Router();
 router
   .route('/')
   .get((req: Request, res: Response) => {
-    CommentsController.getComments(res);
+    ReviewsController.getReviews(res);
   })
   .post(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
-    CommentsController.createComment(req, res);
+    ReviewsController.createReview(req, res);
   });
 
 router
   .route('/:id')
   .put(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
-    CommentsController.updateComment(req, res);
+    ReviewsController.updateReview(req, res);
   })
   .delete(
     UserUtils.ensureRightUserMiddleware,
     (req: Request, res: Response) => {
-      CommentsController.deleteComment(req, res);
+      ReviewsController.deleteReview(req, res);
     }
   )
   .get(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
-    CommentsController.getComment(req, res);
+    ReviewsController.getReview(req, res);
   });
 
-export { router as CommentRouter };
+export { router as ReviewRouter };

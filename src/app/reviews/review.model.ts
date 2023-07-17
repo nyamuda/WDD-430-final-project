@@ -1,7 +1,7 @@
 import { Course } from '../courses/course.model';
 import { User } from '../users/user.model';
 
-export class Comment {
+export class Review {
   private _id: string;
   private _content: string;
   private _userId: User;

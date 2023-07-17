@@ -4,10 +4,10 @@ import { CourseDetailsComponent } from './courses/course-details/course-details.
 import { CourseListComponent } from './courses/course-list/course-list.component';
 import { CourseEditComponent } from './courses/course-edit/course-edit.component';
 import { CoursesComponent } from './courses/courses.component';
-import { CommentEditComponent } from './comments/comment-edit/comment-edit.component';
-import { CommentItemComponent } from './comments/comment-item/comment-item.component';
-import { CommentListComponent } from './comments/comment-list/comment-list.component';
-import { CommentsComponent } from './comments/comments.component';
+import { ReviewEditComponent } from './reviews/review-edit/review-edit.component';
+import { ReviewItemComponent } from './reviews/review-item/review-item.component';
+import { ReviewListComponent } from './reviews/review-list/review-list.component';
+import { ReviewsComponent } from './reviews/reviews.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'courses', pathMatch: 'full' },
@@ -21,8 +21,8 @@ export const routes: Routes = [
         path: ':id',
         component: CourseDetailsComponent,
         children: [
-          { path: 'comments/:commentId/edit', component: CommentEditComponent },
-          { path: 'comments/new', component: CommentEditComponent },
+          { path: 'reviews/:reviewId/edit', component: ReviewEditComponent },
+          { path: 'reviews/new', component: ReviewEditComponent },
         ],
       },
       { path: ':id/edit', component: CourseEditComponent },

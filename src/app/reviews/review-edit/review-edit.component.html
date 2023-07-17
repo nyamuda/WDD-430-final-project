@@ -1,33 +1,36 @@
 <div class="border rounded-top px-0 my-2 px-4 py-3">
-  <form [formGroup]="commentFormGroup">
+  <form [formGroup]="reviewFormGroup">
     <div class="mb-3">
-      <label for="comment-content">Comment:</label>
+      <label class="form-label" for="review-content">Review</label>
       <textarea
         [ngClass]="{
-          'invalid-input': commentFormGroup.get('content')?.value == ''
+          'invalid-input': reviewFormGroup.invalid && reviewFormGroup.touched
         }"
         class="form-control"
         rows="3"
         formControlName="content"
-        id="comment-content"
+        id="review-content"
       ></textarea>
     </div>
 
-    <div *ngIf="commentFormGroup.invalid">
-      <p class="alert alert-danger text-start">
-        The comment field is required.
-      </p>
+    <div *ngIf="reviewFormGroup.invalid">
+      <p class="alert alert-danger text-start">The review field is required.</p>
     </div>
 
     <div class="d-flex justify-content-start">
       <a
         (click)="submitForm($event)"
-        [ngClass]="{ disabled: commentFormGroup.invalid }"
+        [routerLink]="'/courses/' + courseId"
+        fragment="reviews"
+        [ngClass]="{ disabled: reviewFormGroup.invalid }"
         class="btn btn-outline-success btn-sm d-flex justify-content-center align-items-center px-3"
         href=""
         >Save</a
       >
+
       <a
+        [routerLink]="'/courses/' + courseId"
+        fragment="reviews"
         (click)="onCancel($event)"
         class="btn btn-outline-primary btn-sm d-flex justify-content-center align-items-center ms-2 px-3"
         href=""

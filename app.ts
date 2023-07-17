@@ -4,7 +4,7 @@ import * as path from 'path';
 import * as cors from 'cors';
 
 import {
-  CommentRouter,
+  ReviewRouter,
   UserRouter,
   CourseRouter,
   LoginRouter,
@@ -27,7 +27,7 @@ app.get('/', (req: Request, res: Response) => {
 //routes
 app.use('/users', UserRouter);
 app.use('/courses', CourseRouter);
-app.use('/comments', CommentRouter);
+app.use('/reviews', ReviewRouter);
 app.use('/login', LoginRouter);
 app.use('/register', RegisterRouter);
 

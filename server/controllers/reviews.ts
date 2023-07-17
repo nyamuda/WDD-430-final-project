@@ -1,11 +1,11 @@
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
-import { Course, Comment, User } from '../models/';
+import { Course, Review, User } from '../models';
 
-export class CommentsController {
-  //Create a new Comment
-  public static async createComment(req: Request, res: Response) {
-    //Validation
+export class ReviewsController {
+  // Create a new Review
+  public static async createReview(req: Request, res: Response) {
+    // Validation
     let schema = Joi.object({
       content: Joi.string().required(),
       userId: Joi.string().required().hex().length(24),
@@ -17,7 +17,7 @@ export class CommentsController {
       return res.status(400).json({ error: error.details[0].message });
     }
 
-    //Check if the user and course with the specified ID exists
+    // Check if the user and course with the specified ID exists
     let userExists = await User.findById(req.body.userId);
     let courseExists = await Course.findById(req.body.courseId);
 
@@ -32,22 +32,22 @@ export class CommentsController {
       });
     }
 
-    let newComment = {
+    let newReview = {
       content: req.body.content,
       userId: req.body.userId,
       courseId: req.body.courseId,
     };
-    //Post request
-    await Comment.create(newComment)
-      .then(async (comment) => {
-        //add the comment ID to the course
+    // Post request
+    await Review.create(newReview)
+      .then(async (review) => {
+        // Add the review ID to the course
         await Course.updateOne(
-          { _id: comment.courseId },
-          { $push: { comments: comment._id } }
+          { _id: review.courseId },
+          { $push: { reviews: review._id } }
         );
         return res
           .status(201)
-          .json({ message: 'The comment was successfully created.' });
+          .json({ message: 'The review was successfully created.' });
       })
       .catch((err) => {
         return res.status(500).json({
@@ -57,11 +57,11 @@ export class CommentsController {
       });
   }
 
-  //Get all the Comments
-  public static async getComments(res: Response) {
+  // Get all the Reviews
+  public static async getReviews(res: Response) {
     try {
-      let comments = await Comment.find().populate('userId');
-      return res.json(comments);
+      let reviews = await Review.find().populate('userId');
+      return res.json(reviews);
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
@@ -70,16 +70,11 @@ export class CommentsController {
     }
   }
 
-  
-
-
-
-  //Get Comment by ID
-  public static async getComment(req: Request, res: Response) {
+  // Get Review by ID
+  public static async getReview(req: Request, res: Response) {
     try {
-      let comment = await Comment.findById(req.params.id);
-
-      return res.json(comment);
+      let review = await Review.findById(req.params.id);
+      return res.json(review);
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
@@ -88,9 +83,9 @@ export class CommentsController {
     }
   }
 
-  //Update Comment by ID
-  public static async updateComment(req: Request, res: Response) {
-    //Validation
+  // Update Review by ID
+  public static async updateReview(req: Request, res: Response) {
+    // Validation
     let schema = Joi.object({
       content: Joi.string().required(),
     }).unknown(true);
@@ -100,22 +95,22 @@ export class CommentsController {
       return res.status(400).json({ error: error.details[0].message });
     }
 
-    //Check if the comment with the specified ID exists
-    let commentExists = await Comment.findById(req.params.id);
+    // Check if the review with the specified ID exists
+    let reviewExists = await Review.findById(req.params.id);
 
-    if (!commentExists) {
+    if (!reviewExists) {
       return res.status(404).json({
-        message: 'The comment with that given ID does not exist.',
+        message: 'The review with that given ID does not exist.',
       });
     }
 
-    let comment = {
+    let review = {
       content: req.body.content,
     };
 
-    //PUT request
-    await Comment.updateOne({ _id: req.params.id }, comment)
-      .then((comment) => {
+    // PUT request
+    await Review.updateOne({ _id: req.params.id }, review)
+      .then((review) => {
         return res.status(204).end();
       })
       .catch((err) => {
@@ -126,22 +121,22 @@ export class CommentsController {
       });
   }
 
-  //Delete Comment by ID
-  public static async deleteComment(req: Request, res: Response) {
-    let commentExists = await Comment.findById(req.params.id);
+  // Delete Review by ID
+  public static async deleteReview(req: Request, res: Response) {
+    let reviewExists = await Review.findById(req.params.id);
 
-    if (!commentExists) {
+    if (!reviewExists) {
       return res.status(404).json({
-        message: 'The requested comment does not exist.',
+        message: 'The requested review does not exist.',
       });
     }
 
-    await Comment.deleteOne({ _id: req.params.id })
-      .then(async (comment) => {
-        //Remove the comment ID from the course
+    await Review.deleteOne({ _id: req.params.id })
+      .then(async (review) => {
+        // Remove the review ID from the course
         await Course.findOneAndUpdate(
-          { _id: commentExists.courseId },
-          { $pull: { comments: commentExists._id } }
+          { _id: reviewExists.courseId },
+          { $pull: { reviews: reviewExists._id } }
         );
         return res.status(204).end();
       })
