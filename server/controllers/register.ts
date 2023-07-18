@@ -25,7 +25,7 @@ export class RegisterController {
     if (userExists) {
       return res.status(409).json({
         message:
-          'Oops! It seems that an account with that email already exists. Please log in using your existing credentials',
+          'Oops! It seems that an account with that email already exists. Please log in using your existing credentials.',
       });
     }
 

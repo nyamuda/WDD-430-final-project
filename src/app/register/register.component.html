@@ -103,11 +103,12 @@
     <!-- Submit button -->
     <button
       [ngClass]="{ disabled: registerFormGroup.invalid }"
-      (click)="(submitForm)"
+      (click)="submitForm()"
       type="submit"
       class="btn btn-primary btn-block mb-3"
     >
       Register
     </button>
+    <button (click)="hello()" class="btn btn-danger">Toast</button>
   </form>
 </div>

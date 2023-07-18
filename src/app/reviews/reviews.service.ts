@@ -2,6 +2,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Review } from './review.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class ReviewsService {
   public reviewListSignal: WritableSignal<Review[]> = signal(this._reviews);
   public courseIdSignal: WritableSignal<string> = signal('');
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
   // CREATE
   addReview(courseId: string, newReview: Review) {
@@ -30,9 +31,17 @@ export class ReviewsService {
       this.http.post(url, reviewDto, { headers }).subscribe(
         (response) => {
           this.getReviewsForCourse(this.courseIdSignal());
+          //show toast
+          this.showSuccess(
+            'We appreciate your valuable feedback!',
+            'Thank you for your review'
+          );
         },
         (error) => {
-          console.error(error);
+          this.showFailure(
+            "We're sorry, but there was an error submitting your review. Please try again later.",
+            'Review submission failed'
+          );
         }
       );
     }
@@ -73,9 +82,16 @@ export class ReviewsService {
         .subscribe(
           (response) => {
             this.getReviewsForCourse(this.courseIdSignal());
+            this.showSuccess(
+              'Thank you for your revised feedback!',
+              'Review updated'
+            );
           },
           (error) => {
-            console.error(error);
+            this.showFailure(
+              "We're sorry, but there was an error updating your review. Please try again later.",
+              'Review update failed'
+            );
           }
         );
     }
@@ -89,15 +105,22 @@ export class ReviewsService {
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getReviewsForCourse(this.courseIdSignal());
+        this.showSuccess(
+          'Your review has been successfully removed.',
+          'Review deleted successfully'
+        );
       },
       (error) => {
-        console.error(error);
+        this.showFailure(
+          "We're sorry, but there was an error deleting your review. Please try again later.",
+          'Failed to delete review'
+        );
       }
     );
   }
 
   getAccessToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NTM4NDY1LCJleHAiOjE2ODk2MjQ4NjV9.hsfuGrQfV9G90K0dfExl2rHlynnU9nWnvIF4UoCbv-4';
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5Njk5NzIwLCJleHAiOjE2ODk3ODYxMjB9.MLtavDLJ15XfYmTfdnJls92NZAF_2-fRlMND6K_lgPQ';
   }
 
   headers(): HttpHeaders {
@@ -107,5 +130,23 @@ export class ReviewsService {
       .set('Authorization', `Bearer ${token}`);
 
     return headers;
+  }
+
+  //Toast
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(`${message}`, `${title}`, {
+      timeOut: 10000,
+      progressAnimation: 'increasing',
+      progressBar: true,
+    });
+  }
+
+  //Toast
+  showFailure(message: string, title: string) {
+    this.toastrService.error(`${message}`, `${title}`, {
+      timeOut: 10000,
+      progressAnimation: 'increasing',
+      progressBar: true,
+    });
   }
 }

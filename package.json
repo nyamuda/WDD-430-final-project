@@ -30,6 +30,7 @@
     "moment": "^2.29.4",
     "mongoose": "^6.6.5",
     "ngx-moment": "^6.0.2",
+    "ngx-toastr": "^17.0.2",
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "ts-node": "^10.9.1",

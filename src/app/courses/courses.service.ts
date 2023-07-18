@@ -2,6 +2,7 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class CoursesService {
 
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastrService: ToastrService) {}
 
   //CREATE
   addCourse(newCourse: Course) {
@@ -103,7 +104,7 @@ export class CoursesService {
   }
 
   getAccessToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5NTM4NDY1LCJleHAiOjE2ODk2MjQ4NjV9.hsfuGrQfV9G90K0dfExl2rHlynnU9nWnvIF4UoCbv-4';
+    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5Njk5NzIwLCJleHAiOjE2ODk3ODYxMjB9.MLtavDLJ15XfYmTfdnJls92NZAF_2-fRlMND6K_lgPQ';
   }
 
   headers(): HttpHeaders {
@@ -118,5 +119,27 @@ export class CoursesService {
   //a getter for _courses
   public get courses(): Array<Course> {
     return this._courses;
+  }
+
+  //Toast
+  showSuccess() {
+    this.toastrService.success(
+      `You can now log in with your credentials.`,
+      'Registration Successful',
+      {
+        timeOut: 5000,
+        progressAnimation: 'increasing',
+        progressBar: true,
+      }
+    );
+  }
+
+  //Toast
+  showFailure(message: string) {
+    this.toastrService.error(`${message}`, 'Registration failed', {
+      timeOut: 5000,
+      progressAnimation: 'increasing',
+      progressBar: true,
+    });
   }
 }
