@@ -8,9 +8,12 @@ import { ReviewEditComponent } from './reviews/review-edit/review-edit.component
 import { ReviewItemComponent } from './reviews/review-item/review-item.component';
 import { ReviewListComponent } from './reviews/review-list/review-list.component';
 import { ReviewsComponent } from './reviews/reviews.component';
+import { UsersComponent } from './users/users.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'courses', pathMatch: 'full' },
+  { path: '', redirectTo: 'register', pathMatch: 'full' },
   {
     path: 'courses',
     component: CoursesComponent,
@@ -27,5 +30,13 @@ export const routes: Routes = [
       },
       { path: ':id/edit', component: CourseEditComponent },
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
 ];

@@ -25,7 +25,7 @@ export class ReviewItemComponent {
   deleteReview(id: string) {
     this.reviewService.deleteReview(id);
     this.router.navigateByUrl(
-      `courses/${this.reviewService.courseIdSignal()}/#reviews`
+      `courses/${this.reviewService.courseIdSignal()}#reviews`
     );
   }
 

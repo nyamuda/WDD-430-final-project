@@ -38,6 +38,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { MomentPipe } from './pipes/moment.pipe';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
+import { RegisterComponent } from './register/register.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +57,8 @@ import { ConfirmationModalComponent } from './confirmation-modal/confirmation-mo
     UsersComponent,
     MomentPipe,
     ConfirmationModalComponent,
+    RegisterComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
