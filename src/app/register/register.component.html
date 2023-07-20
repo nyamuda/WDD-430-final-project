@@ -22,8 +22,7 @@
     <p class="text-center">or:</p>
 
     <!-- Name input -->
-    <div class="mb-2">
-      <label class="form-label" for="registerName">Name</label>
+    <div class="form-floating mb-3">
       <input
         [ngClass]="{
           'is-invalid':
@@ -34,8 +33,9 @@
         id="registerName"
         class="form-control"
         formControlName="name"
+        placeholder="Name"
       />
-
+      <label class="form-label" for="registerName">Name</label>
       <div
         *ngIf="
           registerFormGroup.get('name').invalid &&
@@ -48,8 +48,7 @@
     </div>
 
     <!-- Email input -->
-    <div class="mb-2">
-      <label class="form-label" for="registerEmail">Email</label>
+    <div class="form-floating mb-3">
       <input
         [ngClass]="{
           'is-invalid':
@@ -60,8 +59,9 @@
         id="registerEmail"
         class="form-control"
         formControlName="email"
+        placeholder="name@example.com"
       />
-
+      <label class="form-label" for="registerEmail">Email</label>
       <div
         *ngIf="
           registerFormGroup.get('email').invalid &&
@@ -74,8 +74,7 @@
     </div>
 
     <!-- Password input -->
-    <div class="mb-4">
-      <label class="form-label" for="registerPassword">Password</label>
+    <div class="form-floating mb-3">
       <input
         [ngClass]="{
           'is-invalid':
@@ -86,8 +85,9 @@
         id="registerPassword"
         class="form-control"
         formControlName="password"
+        placeholder="Password"
       />
-
+      <label class="form-label" for="registerPassword">Password</label>
       <div
         *ngIf="
           registerFormGroup.get('password').invalid &&
@@ -103,12 +103,25 @@
     <!-- Submit button -->
     <button
       [ngClass]="{ disabled: registerFormGroup.invalid }"
+      *ngIf="!registering(); else loadingBtn"
       (click)="submitForm()"
       type="submit"
       class="btn btn-primary btn-block mb-3"
     >
       Register
     </button>
-    <button (click)="hello()" class="btn btn-danger">Toast</button>
+    <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+    <!-- Loading button -->
+    <ng-template #loadingBtn>
+      <button class="btn btn-primary btn-block" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <span class="ms-1">Please wait...</span>
+      </button>
+    </ng-template>
   </form>
 </div>

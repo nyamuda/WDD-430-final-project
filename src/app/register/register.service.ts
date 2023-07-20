@@ -9,8 +9,11 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class RegisterService {
   constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  isRegistering: WritableSignal<boolean> = signal(false); // show loading button;
 
   register(newUser: User) {
+    this.isRegistering.set(true);
+
     let userDto = {
       name: newUser.name.trim(),
       email: newUser.email.trim(),
@@ -23,14 +26,20 @@ export class RegisterService {
         console.log(response['token']);
         //show toast
         this.showSuccess();
+
+        //disable loading button
+        this.isRegistering.set(false);
       },
       (error) => {
         //show toast
-
         this.showFailure(error['error']['message']);
+        //disable loading button
+        this.isRegistering.set(false);
       }
     );
   }
+
+  //show success toast
   showSuccess() {
     this.toastrService.success(
       `You can now log in with your credentials.`,
@@ -43,6 +52,7 @@ export class RegisterService {
     );
   }
 
+  //show failure toast
   showFailure(message: string) {
     this.toastrService.error(`${message}`, 'Registration failed', {
       timeOut: 10000,

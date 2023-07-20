@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RegisterService } from './register.service';
 import { User } from '../users/user.model';
@@ -49,4 +49,9 @@ export class RegisterComponent implements OnInit {
   hello() {
     this.registerService.showSuccess();
   }
+
+  //show the loading button when registration is in progress
+  registering: Signal<boolean> = computed(() =>
+    this.registerService.isRegistering()
+  );
 }
