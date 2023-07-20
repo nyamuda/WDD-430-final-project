@@ -3,13 +3,19 @@ import { User } from '../users/user.model';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegisterService {
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
   isRegistering: WritableSignal<boolean> = signal(false); // show loading button;
+
+  constructor(
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private router: Router
+  ) {}
 
   register(newUser: User) {
     this.isRegistering.set(true);
@@ -29,10 +35,17 @@ export class RegisterService {
 
         //disable loading button
         this.isRegistering.set(false);
+
+        //take the user to the login page
+        this.router.navigateByUrl('/login');
       },
       (error) => {
         //show toast
-        this.showFailure(error['error']['message']);
+        //show toast
+        let message = error['error']['message']
+          ? error['error']['message']
+          : error['error']['error'];
+        this.showFailure(message);
         //disable loading button
         this.isRegistering.set(false);
       }

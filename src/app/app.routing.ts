@@ -11,6 +11,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { AuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'register', pathMatch: 'full' },
@@ -19,16 +20,28 @@ export const routes: Routes = [
     component: CoursesComponent,
     children: [
       { path: '', component: CourseListComponent },
-      { path: 'new', component: CourseEditComponent },
+      { path: 'new', component: CourseEditComponent, canActivate: [AuthGuard] },
       {
         path: ':id',
         component: CourseDetailsComponent,
         children: [
-          { path: 'reviews/:reviewId/edit', component: ReviewEditComponent },
-          { path: 'reviews/new', component: ReviewEditComponent },
+          {
+            path: 'reviews/:reviewId/edit',
+            component: ReviewEditComponent,
+            canActivate: [AuthGuard],
+          },
+          {
+            path: 'reviews/new',
+            component: ReviewEditComponent,
+            canActivate: [AuthGuard],
+          },
         ],
       },
-      { path: ':id/edit', component: CourseEditComponent },
+      {
+        path: ':id/edit',
+        component: CourseEditComponent,
+        canActivate: [AuthGuard],
+      },
     ],
   },
   {

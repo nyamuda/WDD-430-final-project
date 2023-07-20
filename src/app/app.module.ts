@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth/auth.guard';
 
 // MDB Modules
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
@@ -41,6 +42,8 @@ import { MomentPipe } from './pipes/moment.pipe';
 import { ConfirmationModalComponent } from './confirmation-modal/confirmation-modal.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { JwtModule, JWT_OPTIONS } from '@auth0/angular-jwt';
 
 @NgModule({
   declarations: [
@@ -88,7 +91,11 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    AuthGuard,
+    { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },
+    JwtHelperService,
+  ],
   bootstrap: [AppComponent],
   exports: [RouterModule],
 })

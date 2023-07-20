@@ -104,7 +104,15 @@ export class CoursesService {
   }
 
   getAccessToken(): string {
-    return 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRhdGVuZGFAZ21haWwuY29tIiwiaXNBZG1pbiI6dHJ1ZSwidXNlcklkIjoiNjRiMmU5ODM4NTkyMWViZTIwMDIxMjgxIiwiaWF0IjoxNjg5Njk5NzIwLCJleHAiOjE2ODk3ODYxMjB9.MLtavDLJ15XfYmTfdnJls92NZAF_2-fRlMND6K_lgPQ';
+    //check if there is a token in session storage
+    let sessionToken = sessionStorage.getItem('jwt_token');
+    //check if there is a token in local storage
+    let localToken = localStorage.getItem('jwt_token');
+
+    //the current token
+    let token = sessionToken ? sessionToken : localToken;
+
+    return token;
   }
 
   headers(): HttpHeaders {
