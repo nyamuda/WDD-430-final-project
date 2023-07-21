@@ -32,8 +32,8 @@ export class ReviewEditComponent implements OnInit {
     }); //Grab the course ID
     this.activatedRoute.parent.params.subscribe((params) => {
       this.courseId = params['id'];
-    }); //Grab the review ID
-
+    });
+    //Grab the review ID
     this.activatedRoute.params.subscribe((params) => {
       let reviewId = params['reviewId']; //if the id is not null //then it's editing mode
 

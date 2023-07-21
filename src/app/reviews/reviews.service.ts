@@ -1,8 +1,16 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import {
+  Injectable,
+  WritableSignal,
+  signal,
+  computed,
+  Signal,
+} from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Review } from './review.model';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../users/users.service';
+import { User } from '../users/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,8 +19,14 @@ export class ReviewsService {
   private _reviews = new Array<Review>();
   public reviewListSignal: WritableSignal<Review[]> = signal(this._reviews);
   public courseIdSignal: WritableSignal<string> = signal('');
+  //information about the logged in user
+  public loggedInUser: Signal<User> = computed(() => this.userService.user());
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private userService: UsersService
+  ) {}
 
   // CREATE
   addReview(courseId: string, newReview: Review) {
@@ -20,11 +34,9 @@ export class ReviewsService {
       const url = 'http://localhost:8000/reviews';
       const headers = this.headers();
 
-      console.log(newReview.content);
-
       let reviewDto = {
         content: newReview.content,
-        userId: '64b2e98385921ebe20021281',
+        userId: this.loggedInUser()['_id'],
         courseId: courseId,
       };
 
@@ -48,9 +60,8 @@ export class ReviewsService {
   }
 
   getReviewById(id: string): Observable<Review> {
-    const headers = this.headers();
     const url = `http://localhost:8000/reviews/${id}`;
-    return this.http.get<Review>(url, { headers });
+    return this.http.get<Review>(url);
   }
 
   // READ
@@ -119,20 +130,8 @@ export class ReviewsService {
     );
   }
 
-  getAccessToken(): string {
-    //check if there is a token in session storage
-    let sessionToken = sessionStorage.getItem('jwt_token');
-    //check if there is a token in local storage
-    let localToken = localStorage.getItem('jwt_token');
-
-    //the current token
-    let token = sessionToken ? sessionToken : localToken;
-
-    return token;
-  }
-
   headers(): HttpHeaders {
-    let token = this.getAccessToken();
+    let token = this.userService.getJwtToken();
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);

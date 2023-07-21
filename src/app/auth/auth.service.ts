@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, WritableSignal, Signal } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,16 +9,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AuthService {
   constructor(
     private loginService: LoginService,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private userService: UsersService
   ) {}
   isAuthenticated(): boolean {
-    //check if there is a token in session storage
-    let sessionToken = sessionStorage.getItem('jwt_token');
-    //check if there is a token in local storage
-    let localToken = localStorage.getItem('jwt_token');
+    //get the current access token
+    let token = this.userService.getJwtToken();
 
-    //the current token
-    let token = sessionToken ? sessionToken : localToken;
+    //if token doesn't' exist
+    //the user is not logged in
 
     if (!token) {
       return false;

@@ -22,7 +22,7 @@ router
       UsersController.deleteUser(req, res);
     }
   )
-  .get(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
+  .get((req: Request, res: Response) => {
     UsersController.getUser(req, res);
   });
 

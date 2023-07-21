@@ -8,9 +8,9 @@ dotenv.config();
 export class UserUtils {
   public static createAccessToken = (payload: TokenPayload): string => {
     let SECRET: Secret = process.env.SECRET!;
-    console.log(SECRET);
+
     let accessToken: string = jwt.sign(payload, SECRET, { expiresIn: '24h' });
-    console.log(accessToken);
+
     return accessToken;
   };
 
@@ -51,25 +51,26 @@ export class UserUtils {
             error: error,
           });
         }
+
         //get the the review the user is trying to edit/delete
         let review = await Review.findById(req.params.id);
 
         //if the user ID of the token matches the userId of the review
-        if (token.userId === review.userId) {
+        if (token.userId === review.userId.toString()) {
           return next();
         }
         //if it's an admin
         if (token.isAdmin) {
           return next();
         }
-
-        //else the the user does not have the authority
-        throw new JsonWebTokenError("Invalid or expired token'");
+        return res.status(401).json({
+          message: 'You do not have the authority to carry out this action.',
+        });
       });
-    } catch (JsonWebTokenError) {
+    } catch (error) {
       return res.status(401).json({
         message: 'You do not have the authority to carry out this action.',
-        error: JsonWebTokenError,
+        error: error,
       });
     }
   };
@@ -88,6 +89,7 @@ export class UserUtils {
       let token: any = jwt.verify(clientToken, SECRET);
 
       //if the user ID of the token matches the user ID from the request
+
       if (token.userId === req.params.id) {
         return next();
       }

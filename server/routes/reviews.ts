@@ -28,11 +28,8 @@ router
       ReviewsController.deleteReview(req, res);
     }
   )
-  .get(
-    UserUtils.ensureReviewRightUserMiddleware,
-    (req: Request, res: Response) => {
-      ReviewsController.getReview(req, res);
-    }
-  );
+  .get((req: Request, res: Response) => {
+    ReviewsController.getReview(req, res);
+  });
 
 export { router as ReviewRouter };

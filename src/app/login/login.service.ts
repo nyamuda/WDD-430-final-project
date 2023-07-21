@@ -3,7 +3,7 @@ import { User } from '../users/user.model';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +11,14 @@ import { Router } from '@angular/router';
 export class LoginService {
   isLoggingIn: WritableSignal<boolean> = signal(false); // show loading button;
   rememberMe: WritableSignal<boolean> = signal(false); // remember me on log in
-
+  //redirect URL if log in is a success
+  //default is the homepage
+  redirectUrl: WritableSignal<string> = signal('/courses');
   constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   login(newUser: User) {
@@ -46,6 +49,9 @@ export class LoginService {
 
         //disable loading button
         this.isLoggingIn.set(false);
+        alert(this.redirectUrl());
+        //navigate the user
+        this.router.navigateByUrl(this.redirectUrl());
       },
       (error) => {
         //show toast
