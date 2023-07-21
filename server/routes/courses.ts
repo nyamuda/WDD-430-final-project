@@ -3,8 +3,6 @@ import { Request, Response } from 'express';
 import { CoursesController } from '../controllers';
 import { UserUtils } from '../utils/userUtils';
 
-import Joi from 'joi';
-
 const router = express.Router();
 
 router

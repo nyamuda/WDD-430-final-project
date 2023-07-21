@@ -16,17 +16,23 @@ router
 
 router
   .route('/:id')
-  .put(UserUtils.ensureRightUserMiddleware, (req: Request, res: Response) => {
-    ReviewsController.updateReview(req, res);
-  })
+  .put(
+    UserUtils.ensureReviewRightUserMiddleware,
+    (req: Request, res: Response) => {
+      ReviewsController.updateReview(req, res);
+    }
+  )
   .delete(
-    UserUtils.ensureRightUserMiddleware,
+    UserUtils.ensureReviewRightUserMiddleware,
     (req: Request, res: Response) => {
       ReviewsController.deleteReview(req, res);
     }
   )
-  .get(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
-    ReviewsController.getReview(req, res);
-  });
+  .get(
+    UserUtils.ensureReviewRightUserMiddleware,
+    (req: Request, res: Response) => {
+      ReviewsController.getReview(req, res);
+    }
+  );
 
 export { router as ReviewRouter };
