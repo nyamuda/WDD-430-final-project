@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
 import { ToastrService } from 'ngx-toastr';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,7 +13,11 @@ export class CoursesService {
 
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
-  constructor(private http: HttpClient, private toastrService: ToastrService) {}
+  constructor(
+    private http: HttpClient,
+    private toastrService: ToastrService,
+    private userService: UsersService
+  ) {}
 
   //CREATE
   addCourse(newCourse: Course) {
@@ -103,20 +108,8 @@ export class CoursesService {
     );
   }
 
-  getAccessToken(): string {
-    //check if there is a token in session storage
-    let sessionToken = sessionStorage.getItem('jwt_token');
-    //check if there is a token in local storage
-    let localToken = localStorage.getItem('jwt_token');
-
-    //the current token
-    let token = sessionToken ? sessionToken : localToken;
-
-    return token;
-  }
-
   headers(): HttpHeaders {
-    let token = this.getAccessToken();
+    let token = this.userService.getJwtToken();
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);

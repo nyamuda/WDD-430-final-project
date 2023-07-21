@@ -11,7 +11,7 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { authGuard } from './auth/auth.guard';
+import { authGuard, adminAuthGuard } from './auth/auth.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'register', pathMatch: 'full' },
@@ -20,7 +20,11 @@ export const routes: Routes = [
     component: CoursesComponent,
     children: [
       { path: '', component: CourseListComponent },
-      { path: 'new', component: CourseEditComponent, canActivate: [authGuard] },
+      {
+        path: 'new',
+        component: CourseEditComponent,
+        canActivate: [adminAuthGuard],
+      }, //only admins can add new courses
       {
         path: ':id',
         component: CourseDetailsComponent,
@@ -40,7 +44,7 @@ export const routes: Routes = [
       {
         path: ':id/edit',
         component: CourseEditComponent,
-        canActivate: [authGuard],
+        canActivate: [adminAuthGuard], //only admins can edit courses
       },
     ],
   },
