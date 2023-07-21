@@ -1,9 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ReviewsService } from '../reviews.service';
 import { Review } from '../review.model';
 import { MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
 
 @Component({
   selector: 'app-review-item',
@@ -19,7 +21,8 @@ export class ReviewItemComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private reviewService: ReviewsService,
-    private modalService: MdbModalService
+    private modalService: MdbModalService,
+    private userService: UsersService
   ) {}
 
   deleteReview(id: string) {
@@ -51,5 +54,13 @@ export class ReviewItemComponent {
         this.deleteReview(id);
       }
     });
+  }
+  //current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //Check if the current logged in user
+  //is the author or associated with the review
+  isCurrentUserReviewAuthor(): boolean {
+    return this.review.userId['_id'] === this.currentUser()['_id'];
   }
 }

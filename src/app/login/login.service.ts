@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from '../users/users.service';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +19,8 @@ export class LoginService {
     private http: HttpClient,
     private toastrService: ToastrService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private userService: UsersService
   ) {}
 
   login(newUser: User) {
@@ -49,7 +51,7 @@ export class LoginService {
 
         //disable loading button
         this.isLoggingIn.set(false);
-        alert(this.redirectUrl());
+
         //navigate the user
         this.router.navigateByUrl(this.redirectUrl());
       },
@@ -87,6 +89,9 @@ export class LoginService {
   logout() {
     localStorage.removeItem('jwt_token');
     sessionStorage.removeItem('jwt_token');
+    //clear the stored information about the user
+    this.userService.user.set(new User());
+
     this.showSuccess(
       "You've been logged out",
       'We hope to see you again soon!'
