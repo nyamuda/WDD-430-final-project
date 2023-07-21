@@ -43,6 +43,7 @@ import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { JWT_OPTIONS } from '@auth0/angular-jwt';
+import { HeaderComponent } from './header.component';
 
 @NgModule({
   declarations: [
@@ -62,6 +63,7 @@ import { JWT_OPTIONS } from '@auth0/angular-jwt';
     ConfirmationModalComponent,
     RegisterComponent,
     LoginComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

@@ -45,7 +45,7 @@ export class LoginService {
         }
 
         //show toast
-        this.showSuccess();
+        this.showSuccess("You're now logged in.", 'Success!');
 
         //disable loading button
         this.isLoggingIn.set(false);
@@ -66,8 +66,8 @@ export class LoginService {
   }
 
   //show success toast
-  showSuccess() {
-    this.toastrService.success(`Happy to see you again!`, 'Welcome Back', {
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(`${message}`, `${title}`, {
       timeOut: 10000,
       // progressAnimation: 'increasing',
       // progressBar: true,
@@ -81,5 +81,17 @@ export class LoginService {
       // progressAnimation: 'increasing',
       // progressBar: true,
     });
+  }
+
+  // When the user logs out
+  logout() {
+    localStorage.removeItem('jwt_token');
+    sessionStorage.removeItem('jwt_token');
+    this.showSuccess(
+      "You've been logged out",
+      'We hope to see you again soon!'
+    );
+
+    this.router.navigateByUrl('/courses');
   }
 }
