@@ -6,7 +6,7 @@ import { Course } from '../course.model';
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.scss'],
 })
-export class CourseItemComponent {
+export class CourseItemComponent implements OnInit {
   @Input('course-detail') course: Course;
 
   ngOnInit() {}

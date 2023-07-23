@@ -19,7 +19,7 @@
 
       <h3 class="fs-4 text-info">${{ course.price }}</h3>
 
-      <div class="d-flex mt-4">
+      <div *ngIf="isAdmin()" class="d-flex mt-4">
         <a (click)="updateCourse(course['_id'])" class="btn btn-primary me-2"
           >Edit</a
         >

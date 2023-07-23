@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
 
 @Component({
   selector: 'app-course-edit',
   templateUrl: './course-edit.component.html',
   styleUrls: ['./course-edit.component.scss'],
 })
-export class CourseEditComponent {
+export class CourseEditComponent implements OnInit {
   courseFormGroup!: FormGroup;
   editMode = false;
   courseToEdit: Course = new Course();
@@ -18,7 +20,8 @@ export class CourseEditComponent {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
@@ -82,5 +85,13 @@ export class CourseEditComponent {
   onCancel(event: Event) {
     event.preventDefault();
     this.router.navigateByUrl('/courses');
+  }
+
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //only admins have the authority to edit or delete courses
+  isAdmin(): boolean {
+    return this.currentUser().isAdmin;
   }
 }

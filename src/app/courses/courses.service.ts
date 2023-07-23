@@ -34,10 +34,16 @@ export class CoursesService {
       this.http.post(url, courseDto, { headers }).subscribe(
         (response) => {
           this.getCourses();
-          console.log(response);
+          this.showSuccess(
+            'The course has been added to the database.',
+            'Success!'
+          );
         },
         (error) => {
-          console.error(error);
+          this.showFailure(
+            'Please review your data and try again.',
+            'Failed to add course'
+          );
         }
       );
     }
@@ -84,10 +90,13 @@ export class CoursesService {
         .put(`http://localhost:8000/courses/${id}`, courseDto, { headers })
         .subscribe(
           (response) => {
-            this.getCourses();
+            this.showSuccess('The course has been updated', 'Success!');
           },
           (error) => {
-            console.error(error);
+            this.showFailure(
+              'Please review your changes and try again.',
+              'Course update failed'
+            );
           }
         );
     }
@@ -101,9 +110,13 @@ export class CoursesService {
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getCourses();
+        this.showSuccess('The course has been deleted.', 'Success!');
       },
       (error) => {
-        console.error(error);
+        this.showFailure(
+          'There was an error during the course deletion process.',
+          'Course deletion failed'
+        );
       }
     );
   }
@@ -123,22 +136,18 @@ export class CoursesService {
   }
 
   //Toast
-  showSuccess() {
-    this.toastrService.success(
-      `You can now log in with your credentials.`,
-      'Registration Successful',
-      {
-        timeOut: 5000,
-        progressAnimation: 'increasing',
-        progressBar: true,
-      }
-    );
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(`${message}`, `${title}`, {
+      timeOut: 10000,
+      progressAnimation: 'increasing',
+      progressBar: true,
+    });
   }
 
   //Toast
-  showFailure(message: string) {
-    this.toastrService.error(`${message}`, 'Registration failed', {
-      timeOut: 5000,
+  showFailure(message: string, title: string) {
+    this.toastrService.error(`${message}`, `${title}`, {
+      timeOut: 10000,
       progressAnimation: 'increasing',
       progressBar: true,
     });

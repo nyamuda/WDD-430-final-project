@@ -5,6 +5,8 @@ import { CoursesService } from '../courses.service';
 import { ReviewsService } from '../../reviews/reviews.service';
 import { Review } from '../../reviews/review.model';
 import { ViewportScroller } from '@angular/common';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
 
 @Component({
   selector: 'app-course-details',
@@ -18,7 +20,8 @@ export class CourseDetailsComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
-    private reviewService: ReviewsService
+    private reviewService: ReviewsService,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
@@ -49,5 +52,13 @@ export class CourseDetailsComponent implements OnInit {
 
   updateCourse(id: string) {
     this.router.navigate(['courses', id, 'edit']);
+  }
+
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //only admins have the authority to edit or delete courses
+  isAdmin(): boolean {
+    return this.currentUser().isAdmin;
   }
 }
