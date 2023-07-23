@@ -58,5 +58,5 @@ export const adminAuthGuard: CanActivateFn = (
   // User is not admin redirect to the login page
   //and preserve the attempted URL by saving it
   loginService.redirectUrl.set(state.url);
-  return router.createUrlTree(['/login']);
+  return router.navigateByUrl('/login');
 };

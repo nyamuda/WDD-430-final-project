@@ -61,6 +61,14 @@ export class ReviewItemComponent {
   //Check if the current logged in user
   //is the author or associated with the review
   isCurrentUserReviewAuthor(): boolean {
-    return this.review.userId['_id'] === this.currentUser()['_id'];
+    if (this.review.userId['_id'] === this.currentUser()['_id']) {
+      return true;
+    }
+    //if its the admin
+    else if (this.currentUser().isAdmin) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

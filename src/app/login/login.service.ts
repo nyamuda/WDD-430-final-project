@@ -34,8 +34,6 @@ export class LoginService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {
-        console.log();
-
         //if the user wants to be be remembered on log in
         //save the JWT token to local storage
         if (this.rememberMe) {

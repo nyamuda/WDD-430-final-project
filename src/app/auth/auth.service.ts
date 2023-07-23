@@ -23,7 +23,7 @@ export class AuthService {
       return false;
     }
 
-    return !this.jwtHelper.isTokenExpired(token);
+    return true;
   }
   //check if its the admin
   isAdmin(): boolean {

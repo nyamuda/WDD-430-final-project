@@ -42,6 +42,14 @@ export class UsersService {
     //the current token
     let token = sessionToken ? sessionToken : localToken ? localToken : '';
 
-    return token;
+    if (token) {
+      //if the token has not expired
+      if (!this.jwtHelper.isTokenExpired(token)) {
+        return token;
+      }
+      return '';
+    }
+
+    return '';
   }
 }

@@ -3,6 +3,7 @@ export class User {
   private _name: string;
   private _email: string;
   private _password: string;
+  private _isAdmin: boolean;
 
   constructor() {
     // Initialize any default values or perform other operations
@@ -42,5 +43,14 @@ export class User {
 
   set password(value: string) {
     this._password = value;
+  }
+
+  // Getter and Setter for isAdmin
+  get isAdmin(): boolean {
+    return this._isAdmin;
+  }
+
+  set isAdmin(value: boolean) {
+    this._isAdmin = value;
   }
 }

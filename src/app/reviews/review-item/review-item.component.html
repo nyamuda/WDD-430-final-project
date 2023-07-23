@@ -64,7 +64,9 @@
   <div class="card w-100">
     <div class="card-body p-4">
       <div class="">
-        <h5 class="text-primary">{{ review.userId.name }}</h5>
+        <h5 class="text-primary">
+          {{ review.userId.name }}{{ isCurrentUserReviewAuthor() }}
+        </h5>
 
         <p class="small text-muted">
           {{ review.updatedAt | moment }}
