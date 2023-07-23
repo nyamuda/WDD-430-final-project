@@ -141,6 +141,7 @@ export class CoursesService {
       timeOut: 10000,
       progressAnimation: 'increasing',
       progressBar: true,
+      positionClass: 'toast-bottom-right',
     });
   }
 
@@ -150,6 +151,7 @@ export class CoursesService {
       timeOut: 10000,
       progressAnimation: 'increasing',
       progressBar: true,
+      positionClass: 'toast-bottom-right',
     });
   }
 }
