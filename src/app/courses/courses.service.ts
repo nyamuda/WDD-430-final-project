@@ -90,6 +90,7 @@ export class CoursesService {
         .put(`http://localhost:8000/courses/${id}`, courseDto, { headers })
         .subscribe(
           (response) => {
+            this.getCourses();
             this.showSuccess('The course has been updated', 'Success!');
           },
           (error) => {

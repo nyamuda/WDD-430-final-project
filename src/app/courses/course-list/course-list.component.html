@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-lg">
   <div class="container-sm text-center my-5">
     <p
       class="border border-2 border-danger m-auto rounded"
@@ -11,11 +11,35 @@
   <div class="d-flex justify-content-end">
     <a routerLink="new" class="btn btn-primary mb-3">Add new</a>
   </div>
-  <div class="row">
-    <app-course-item
-      class="col-md-4"
-      *ngFor="let course of courses()"
-      [course-detail]="course"
-    ></app-course-item>
+  <!-- Courses list -->
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let course of courses()">
+      <app-course-item [course-detail]="course"></app-course-item>
+    </div>
+  </div>
+
+  <!-- Placeholder courses -->
+  <div *ngIf="courses().length == 0" class="row row-cols-1 row-cols-md-3 g-4">
+    <div *ngFor="let item of placeholderCards" class="col">
+      <div class="card">
+        <img
+          src="../../../assets/img/placeholder/placeholder1.png"
+          class="card-img-top img-fluid"
+          alt="placeholder image"
+        />
+        <div class="card-body">
+          <h5 class="card-title placeholder-wave">
+            <span class="placeholder col-6"></span>
+          </h5>
+          <p class="card-text placeholder-wave">
+            <span class="placeholder col-7"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-4"></span>
+            <span class="placeholder col-6"></span>
+            <span class="placeholder col-8"></span>
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

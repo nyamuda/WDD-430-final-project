@@ -9,9 +9,7 @@ import { Course } from '../course.model';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit, OnDestroy {
-  // courses: Course[] = new Array<Course>();
-
-  // subscription: Subscription = new Subscription();
+  placeholderCards: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
 
   constructor(private courseService: CoursesService) {}
 
