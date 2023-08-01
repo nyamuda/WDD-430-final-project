@@ -1,0 +1,73 @@
+@import "../../../sass/variables";
+.carousel-caption {
+  top: 15%;
+  bottom: auto;
+}
+
+.carousel-caption h5 {
+  text-transform: capitalize;
+}
+.caption-bold {
+  color: $tertiary-color;
+}
+
+.btn-outline-light {
+  border-color: $tertiary-color;
+  color: $tertiary-color;
+  transition: all 0.3s ease-in;
+}
+.btn-outline-light:hover {
+  border-color: $secondary-color;
+  color: $secondary-color;
+}
+
+.display-4 {
+  font-family: $heading-font;
+}
+.carousel-item.active {
+  position: relative;
+}
+
+.carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item.active img {
+  object-fit: cover;
+}
+
+/* Adding the dark overlay on the images because of the text */
+@media (min-width: 728px) {
+  .carousel-item::before {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* The animations for the captions - END */
+
+/* The images */
+
+.the_slide {
+  width: 100%;
+  height: 20rem;
+  object-fit: cover;
+}
+
+@media (min-width: 728px) {
+  .the_slide {
+    height: 25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .the_slide {
+    height: 30rem;
+  }
+}
+/* The images - END */

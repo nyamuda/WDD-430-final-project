@@ -1,21 +1,93 @@
-<!-- Background image -->
-<div
-  class="p-5 text-center bg-image"
-  style="
-    background-image: url('https://mdbootstrap.com/img/new/slides/041.webp');
-    height: 400px;
-  "
->
-  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6)">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <div class="text-white">
-        <h1 class="mb-3">Heading</h1>
-        <h4 class="mb-3">Subheading</h4>
-        <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-          >Call to action</a
+<div id="container">
+  <mdb-carousel
+    id="carouselExampleIndicators"
+    class="carousel slide carousel-fade"
+    data-bs-ride="carousel"
+    [controls]="true"
+    [indicators]="true"
+    [animation]="'fade'"
+  >
+    <mdb-carousel-item class="carousel-item">
+      <div class="carousel-image">
+        <img
+          src="https://images.unsplash.com/photo-1616805111699-0e52fa62f779?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          class="the_slide w-100"
+          alt="..."
+        />
+        <div class="carousel-image-overlay"></div>
+      </div>
+      <div class="text-start carousel-caption slide1">
+        <h5 class="display-4 display-lg-1 fw-bold">
+          Learn to <span class="caption-bold">drive with experts</span>
+        </h5>
+        <p class="d-none d-md-block fs-4">
+          We provide comprehensive training to help you pass your driving test
+          with ease.
+        </p>
+        <a
+          class="btn btn-outline-light btn-lg m-2 fw-bold"
+          href="https://www.youtube.com/watch?v=c9B4TPnak1A"
+          role="button"
+          rel="nofollow"
+          target="_blank"
+          >Book Now</a
         >
       </div>
-    </div>
-  </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item class="carousel-item">
+      <div class="carousel-image">
+        <img
+          src="https://images.unsplash.com/photo-1616805111699-0e52fa62f779?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+          class="the_slide w-100"
+          alt="..."
+        />
+        <div class="carousel-image-overlay"></div>
+      </div>
+      <div class="text-start carousel-caption slide2">
+        <h5 class="display-4 display-lg-1 fw-bold">
+          From beginner to pro,
+          <span class="caption-bold">we have you covered</span>
+        </h5>
+        <p class="d-none d-md-block fs-4">
+          Whether you're a beginner or an experienced driver, we have a course
+          that's right for you.
+        </p>
+        <a
+          class="btn btn-outline-light btn-lg m-2 fw-bold"
+          href="https://www.youtube.com/watch?v=c9B4TPnak1A"
+          role="button"
+          rel="nofollow"
+          target="_blank"
+          >Book Now</a
+        >
+      </div>
+    </mdb-carousel-item>
+    <mdb-carousel-item class="carousel-item">
+      <div class="carousel-image">
+        <img
+          src="https://images.unsplash.com/photo-1482029255085-35a4a48b7084?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1031&q=80"
+          class="the_slide w-100"
+          alt="..."
+        />
+        <div class="carousel-image-overlay"></div>
+      </div>
+      <div class="text-start carousel-caption slide3">
+        <h5 class="display-4 display-lg-1 fw-bold">
+          Pass your <span class="caption-bold">driving test with ease</span>
+        </h5>
+        <p class="d-none d-md-block fs-4">
+          Our state-of-the-art driving simulators allow you to practice in a
+          safe and controlled environment.
+        </p>
+        <a
+          class="btn btn-outline-light btn-lg m-2 fw-bold"
+          href="https://www.youtube.com/watch?v=c9B4TPnak1A"
+          role="button"
+          rel="nofollow"
+          target="_blank"
+          >Book Now</a
+        >
+      </div>
+    </mdb-carousel-item>
+  </mdb-carousel>
 </div>
-<!-- Background image -->
