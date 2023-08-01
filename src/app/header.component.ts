@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from './login/login.service';
+import { AuthService } from './auth/auth.service';
+import { RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -7,11 +9,17 @@ import { LoginService } from './login/login.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  constructor(private loginService: LoginService) {}
+  isOpen: boolean = false;
+  constructor(
+    private loginService: LoginService,
+    private authService: AuthService
+  ) {}
 
-
-  
   logout() {
     this.loginService.logout();
+  }
+
+  isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 }

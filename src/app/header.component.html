@@ -1,83 +1,171 @@
 <header>
+  <!--TOP SMALL HEADER-->
+  <div
+    class="top-header container-fluid py-1 px-3 px-lg-5 flex-column flex-lg-row d-flex justify-content-between align-items-start align-items-lg-center"
+  >
+    <div
+      class="flex-column flex-lg-row d-flex justify-content-between align-items-start align-items-lg-center"
+    >
+      <span>
+        <i class="icon fas fa-map-marker-alt"></i>
+        <span class="text-light ms-2">379 Hudson St Cape Town</span></span
+      >
+
+      <span class="ms-lg-3"
+        ><i class="icon far fa-clock"></i>
+        <span class="text-light ms-2">09:30 am - 06:00 pm</span></span
+      >
+    </div>
+    <div
+      class="flex-column flex-lg-row d-flex justify-content-between align-items-start align-items-lg-center"
+    >
+      <span
+        ><i class="icon fas fa-phone"></i>
+        <span class="text-light ms-2">+27 81 589 6615</span></span
+      >
+
+      <div
+        class="mt-1 mt-lg-0 ms-lg-4 d-flex justify-content-evenly align-items-center"
+      >
+        <a target="_blank" href="https://github.com/nyamuda"
+          ><i class="icon fab fa-facebook-f social-icon me-2"></i
+        ></a>
+        <a target="_blank" href="https://www.linkedin.com/in/nyamuda"
+          ><i class="icon fab fa-instagram social-icon ms-2"></i
+        ></a>
+      </div>
+    </div>
+    <!-- <div
+      class="row text-nowrap justify-content-lg-end align-items-lg-center pt-lg-2 text-light fs-6"
+    >
+      <p class="col-lg-auto d-flex">
+        <span class="material-icons pe-1 text-danger"> phone </span> +27 123
+        6889
+      </p>
+      <p class="col-lg-auto d-flex">
+        <span class="material-icons pe-1 text-danger"> place </span> 8th floor
+        379 Hudson St Cape Town
+      </p>
+      <p class="col-lg-auto d-flex">
+        <span class="material-icons pe-1 text-danger"> schedule </span> 09:30 am
+        – 06:00 pm
+      </p>
+    </div> -->
+  </div>
+  <!--TOP SMALL HEADER END-->
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Container wrapper -->
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <!-- Navbar brand -->
+      <a class="navbar-brand me-2" href="https://mdbgo.com/">
+        <img
+          src="https://mdbootstrap.com/img/logo/mdb-transaprent-noshadows.webp"
+          height="16"
+          alt=""
+          loading="lazy"
+          style="margin-top: -1px"
+        />
+      </a>
+
+      <!-- Toggle button -->
       <button
+        id="nav-icon2"
+        [ngClass]="{ open: isOpen }"
         class="navbar-toggler"
         type="button"
-        (click)="basicNav.toggle()"
+        (click)="isOpen = !isOpen"
+        (click)="buttonsNav.toggle()"
         aria-expanded="false"
         aria-label="Toggle navigation"
       >
-        <i class="fas fa-bars"></i>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
+
+      <!-- Collapsible wrapper -->
       <div
         class="collapse navbar-collapse"
-        id="navbarNav"
+        id="navbarButtonsExample"
         mdbCollapse
-        #basicNav="mdbCollapse"
+        #buttonsNav="mdbCollapse"
       >
-        <ul class="navbar-nav">
+        <!-- Left links -->
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" routerLink="/courses"
+            <a class="nav-link" routerLink="" routerLinkActive="active-link"
               >Home</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
+            <a
+              class="nav-link"
+              aria-current="page"
+              routerLinkActive="active-link"
+              routerLink="courses"
+              >Courses</a
+            >
           </li>
           <li class="nav-item">
             <a
-              class="nav-link disabled"
-              href="#"
-              tabindex="-1"
-              aria-disabled="true"
-              >Disabled</a
+              class="nav-link"
+              routerLinkActive="active-link"
+              routerLink="gallery"
+              >Gallery</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active-link"
+              routerLink="contact"
+              >Contact</a
             >
           </li>
         </ul>
+        <!-- Left links -->
 
-        <div class="d-flex align-items-center">
-          <button type="button" class="btn btn-link px-3 me-2">Login</button>
-          <button (click)="logout()" type="button" class="btn btn-primary me-3">
-            Logout
-          </button>
+        <div class="d-flex align-items-start align-items-lg-center">
           <a
-            class="btn btn-dark px-3"
-            href="https://github.com/mdbootstrap/mdb-ui-kit"
-            role="button"
-            ><i class="fab fa-github"></i
-          ></a>
+            routerLink="login"
+            *ngIf="!isAuthenticated(); else elseBlock"
+            type="button"
+            class="btn btn-link btn-secondary px-3 me-2"
+          >
+            Login <i class="fas fa-long-arrow-alt-right"></i>
+          </a>
+          <ng-template #elseBlock>
+            <div mdbDropdown class="dropdown">
+              <a
+                class="btn btn-link dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                aria-expanded="false"
+                mdbDropdownToggle
+              >
+                <i class="fas fa-user-alt"></i>
+              </a>
+              <ul
+                mdbDropdownMenu
+                class="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
+              >
+                <li>
+                  <a (click)="logout()" class="dropdown-item">Logout</a>
+                </li>
+                <li><a class="dropdown-item" href="#">Account</a></li>
+              </ul>
+            </div>
+          </ng-template>
         </div>
       </div>
+      <!-- Collapsible wrapper -->
     </div>
+    <!-- Container wrapper -->
   </nav>
   <!-- Navbar -->
-
-  <!-- Background image -->
-  <div
-    class="p-5 text-center bg-image"
-    style="
-      background-image: url('https://mdbootstrap.com/img/new/slides/041.webp');
-      height: 400px;
-      margin-top: 58px;
-    "
-  >
-    <div class="mask" style="background-color: rgba(0, 0, 0, 0.6)">
-      <div class="d-flex justify-content-center align-items-center h-100">
-        <div class="text-white">
-          <h1 class="mb-3">Heading</h1>
-          <h4 class="mb-3">Subheading</h4>
-          <a class="btn btn-outline-light btn-lg" href="#!" role="button"
-            >Call to action</a
-          >
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Background image -->
 </header>
