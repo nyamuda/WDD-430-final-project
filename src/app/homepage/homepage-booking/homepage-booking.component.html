@@ -1,0 +1,149 @@
+<!-- Jumbotron -->
+<div
+  class="bg-image p-5 text-center shadow-1-strong container-fluid text-white mt-5 row row-cols-1 row-cols-md-2"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1476067897447-d0c5df27b5df?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fHJvYWR8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=500&q=60');
+  "
+>
+  <!-- Booking Form -->
+  <div class="col d-flex flex-column align-items-start text-start">
+    <p class="heading-line rounded"></p>
+    <p class="text-capitalize fs-4">Form to fill</p>
+    <p class="fs-1 text-uppercase">
+      Schedule an Appointment and Begin Your Learning Journey
+    </p>
+  </div>
+  <div class="col bg-light py-4 px-4">
+    <p class="fs-2 text-dark">Book a Lesson</p>
+    <form [formGroup]="bookFormGroup" class="needs-validation" novalidate>
+      <!-- Name input -->
+      <div class="form-floating mb-3">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('name').invalid &&
+              bookFormGroup.get('name').touched
+          }"
+          type="text"
+          id="bookName"
+          class="form-control"
+          formControlName="name"
+          placeholder="Name"
+        />
+        <label class="form-label" for="bookName">Full name</label>
+        <div
+          *ngIf="
+            bookFormGroup.get('name').invalid &&
+            bookFormGroup.get('name').touched
+          "
+          class="invalid-feedback text-start"
+        >
+          Please enter your name.
+        </div>
+      </div>
+
+      <!-- Email input -->
+      <div class="form-floating mb-3">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('email').invalid &&
+              bookFormGroup.get('email').touched
+          }"
+          type="email"
+          id="bookEmail"
+          class="form-control"
+          formControlName="email"
+          placeholder="name@example.com"
+        />
+        <label class="form-label" for="bookEmail">Email</label>
+        <div
+          *ngIf="
+            bookFormGroup.get('email').invalid &&
+            bookFormGroup.get('email').touched
+          "
+          class="invalid-feedback"
+        >
+          Please enter a valid email address.
+        </div>
+      </div>
+
+      <!-- Phone number input -->
+      <div class="form-floating mb-3">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('phone').invalid &&
+              bookFormGroup.get('phone').touched
+          }"
+          type="phone"
+          id="bookPhone"
+          class="form-control"
+          formControlName="phone"
+          placeholder="Phone number"
+        />
+        <label class="form-label" for="bookPhone">Phone</label>
+        <div
+          *ngIf="
+            bookFormGroup.get('phone').invalid &&
+            bookFormGroup.get('phone').touched
+          "
+          class="invalid-feedback"
+        >
+          Please enter a valid phone number
+        </div>
+      </div>
+
+       <!-- Date input -->
+       <div class="form-floating mb-3">
+        <input
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('phone').invalid &&
+              bookFormGroup.get('phone').touched
+          }"
+          type="phone"
+          id="bookPhone"
+          class="form-control"
+          formControlName="phone"
+          placeholder="Phone number"
+        />
+        <label class="form-label" for="bookPhone">Phone</label>
+        <div
+          *ngIf="
+            bookFormGroup.get('phone').invalid &&
+            bookFormGroup.get('phone').touched
+          "
+          class="invalid-feedback"
+        >
+          Please enter a valid phone number
+        </div>
+      </div>
+
+      <!-- Submit button -->
+      <button
+        [ngClass]="{ disabled: bookFormGroup.invalid }"
+        *ngIf="!booking(); else loadingBtn"
+        (click)="submitForm()"
+        type="submit"
+        class="btn btn-primary btn-block mb-3"
+      >
+        book
+      </button>
+      <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+      <!-- Loading button -->
+      <ng-template #loadingBtn>
+        <button class="btn btn-primary btn-block" type="button" disabled>
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          <span class="ms-1">Please wait...</span>
+        </button>
+      </ng-template>
+    </form>
+  </div>
+</div>
+<!-- Jumbotron -->

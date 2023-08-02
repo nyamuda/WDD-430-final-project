@@ -51,6 +51,7 @@ import { HomepageStatisticsComponent } from './homepage/homepage-statistics/home
 import { NgxAnimatedCounterModule } from '@bugsplat/ngx-animated-counter';
 import { HomepageCoursesComponent } from './homepage/homepage-courses/homepage-courses.component';
 import { HomepageTestimonialsComponent } from './homepage/homepage-testimonials/homepage-testimonials.component';
+import { HomepageBookingComponent } from './homepage/homepage-booking/homepage-booking.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { HomepageTestimonialsComponent } from './homepage/homepage-testimonials/
     HomepageStatisticsComponent,
     HomepageCoursesComponent,
     HomepageTestimonialsComponent,
+    HomepageBookingComponent,
   ],
   imports: [
     BrowserModule,
