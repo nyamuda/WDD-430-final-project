@@ -48,6 +48,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageBackgroundImageComponent } from './homepage/homepage-background-image/homepage-background-image.component';
 import { HomepageIntroductionComponent } from './homepage/homepage-introduction/homepage-introduction.component';
 import { HomepageStatisticsComponent } from './homepage/homepage-statistics/homepage-statistics.component';
+import { NgxAnimatedCounterModule } from '@bugsplat/ngx-animated-counter';
 
 @NgModule({
   declarations: [
@@ -91,6 +92,7 @@ import { HomepageStatisticsComponent } from './homepage/homepage-statistics/home
     MdbTabsModule,
     MdbTooltipModule,
     MdbValidationModule,
+    NgxAnimatedCounterModule,
     RouterModule.forRoot(routes, {
       scrollPositionRestoration: 'enabled',
       anchorScrolling: 'enabled',
