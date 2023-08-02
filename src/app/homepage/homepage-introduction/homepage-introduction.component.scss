@@ -3,6 +3,17 @@
   border: 2px solid $primary-color;
 }
 
+.btn-outline-light {
+  border-color: $tertiary-color;
+  color: $tertiary-color;
+  transition: all 0.3s ease-in;
+  width: fit-content;
+}
+.btn-outline-light:hover {
+  border-color: $secondary-color;
+  color: $secondary-color;
+}
+
 .colored-text {
   color: $primary-color;
 }

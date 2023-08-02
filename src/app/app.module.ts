@@ -47,6 +47,7 @@ import { HeaderComponent } from './header.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageBackgroundImageComponent } from './homepage/homepage-background-image/homepage-background-image.component';
 import { HomepageIntroductionComponent } from './homepage/homepage-introduction/homepage-introduction.component';
+import { HomepageStatisticsComponent } from './homepage/homepage-statistics/homepage-statistics.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { HomepageIntroductionComponent } from './homepage/homepage-introduction/
     HomepageComponent,
     HomepageBackgroundImageComponent,
     HomepageIntroductionComponent,
+    HomepageStatisticsComponent,
   ],
   imports: [
     BrowserModule,

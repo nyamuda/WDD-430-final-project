@@ -1,0 +1,9 @@
+@import "../../../sass/variables";
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 4rem;
+  margin-bottom: 0rem;
+}
+.colored-title {
+  color: $primary-color;
+}
