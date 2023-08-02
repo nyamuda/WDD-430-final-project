@@ -1,13 +1,13 @@
 @import "../../../sass/variables";
 .heading-line {
   border: 2px solid $primary-color;
-  width: 2rem; 
+  width: 2rem;
   margin-bottom: 0rem;
 }
 
 .btn-outline-light {
-  border-color: $tertiary-color;
-  color: $tertiary-color;
+  border-color: $primary-color;
+  color: $primary-color;
   transition: all 0.3s ease-in;
   width: fit-content;
 }

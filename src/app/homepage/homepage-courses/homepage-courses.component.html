@@ -1,11 +1,11 @@
-<div class="container-fluid">
-  <div class="container-sm d-flex flex-column align-items-center mt-5">
+<div class="container-lg mt-5">
+  <div class="container-fluid d-flex flex-column align-items-center">
     <p class="heading-line rounded"></p>
     <p class="text-capitalize fs-4">Courses We Offer</p>
     <p class="display-5 text-dark text-uppercase">Our Driving Courses</p>
   </div>
   <!-- Courses list -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 container-lg m-auto">
+  <div class="row row-cols-1 row-cols-md-3 g-4 container-fluid m-auto">
     <div class="col" *ngFor="let course of courses()">
       <app-course-item [course-detail]="course"></app-course-item>
     </div>
@@ -14,7 +14,7 @@
   <!-- Placeholder courses -->
   <div
     *ngIf="courses().length == 0"
-    class="row row-cols-1 row-cols-md-3 g-4 container-lg m-auto"
+    class="row row-cols-1 row-cols-md-3 g-4 m-auto"
   >
     <div *ngFor="let item of placeholderCards" class="col">
       <div class="card">
@@ -38,4 +38,12 @@
       </div>
     </div>
   </div>
+  <a
+    class="btn btn-outline-light btn-lg mt-3 fw-bold py-1 d-flex align-items-center text-uppercase"
+    routerLink="courses"
+    role="button"
+    rel="nofollow"
+    target="_blank"
+    ><span>See more courses</span></a
+  >
 </div>

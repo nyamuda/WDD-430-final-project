@@ -4,3 +4,14 @@
   width: 2rem;
   margin-bottom: 0rem;
 }
+
+.btn-outline-light {
+  border-color: $primary-color;
+  color: $primary-color;
+  transition: all 0.3s ease-in;
+  width: fit-content;
+}
+.btn-outline-light:hover {
+  border-color: $secondary-color;
+  color: $secondary-color;
+}
