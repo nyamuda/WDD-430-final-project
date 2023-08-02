@@ -13,7 +13,7 @@ export class HomepageStatisticsComponent {
       start: 0,
       end: 1000,
       interval: 50,
-      increment: 10,
+      increment: 20,
     },
     {
       start: 0,

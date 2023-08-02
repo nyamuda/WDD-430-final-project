@@ -9,7 +9,7 @@ import { Course } from '../course.model';
   styleUrls: ['./course-list.component.scss'],
 })
 export class CourseListComponent implements OnInit, OnDestroy {
-  placeholderCards: number[] = [0, 1, 2, 3, 4, 5, 6, 7];
+  placeholderCards: number[] = [0, 1, 2];
 
   constructor(private courseService: CoursesService) {}
 
