@@ -46,6 +46,7 @@ import { JWT_OPTIONS } from '@auth0/angular-jwt';
 import { HeaderComponent } from './header.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { HomepageBackgroundImageComponent } from './homepage/homepage-background-image/homepage-background-image.component';
+import { HomepageIntroductionComponent } from './homepage/homepage-introduction/homepage-introduction.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { HomepageBackgroundImageComponent } from './homepage/homepage-background
     HeaderComponent,
     HomepageComponent,
     HomepageBackgroundImageComponent,
+    HomepageIntroductionComponent,
   ],
   imports: [
     BrowserModule,
