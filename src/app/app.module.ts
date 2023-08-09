@@ -52,6 +52,7 @@ import { NgxAnimatedCounterModule } from '@bugsplat/ngx-animated-counter';
 import { HomepageCoursesComponent } from './homepage/homepage-courses/homepage-courses.component';
 import { HomepageTestimonialsComponent } from './homepage/homepage-testimonials/homepage-testimonials.component';
 import { HomepageBookingComponent } from './homepage/homepage-booking/homepage-booking.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -107,6 +108,7 @@ import { HomepageBookingComponent } from './homepage/homepage-booking/homepage-b
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    NgxMaterialTimepickerModule,
   ],
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },

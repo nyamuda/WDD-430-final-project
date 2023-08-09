@@ -16,8 +16,11 @@ export class HomepageBookingComponent {
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       date: ['', [Validators.required]],
+      time: ['', [Validators.required]],
+
       address: ['', [Validators.required]],
       phone: ['', [Validators.required, Validators.minLength(8)]],
+      service: ['', [Validators.required]],
     });
   }
 
@@ -27,6 +30,9 @@ export class HomepageBookingComponent {
       let name = this.bookFormGroup.get('name').value;
       let email = this.bookFormGroup.get('email').value;
       let phone = this.bookFormGroup.get('phone').value;
+      let service = this.bookFormGroup.get('service').value;
+      let address = this.bookFormGroup.get('address').value;
+      let date = this.bookFormGroup.get('date').value;
 
       // let user = new User();
       // user.name = name;
@@ -37,10 +43,10 @@ export class HomepageBookingComponent {
     }
   }
 
-  //show the loading button when registration is in progress
+  //show the loading button when booking is in progress
   booking: Signal<boolean> = computed(
     () =>
       // this.registerService.isRegistering()
-      true
+      false
   );
 }

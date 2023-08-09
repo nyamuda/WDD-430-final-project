@@ -1,11 +1,14 @@
 .form-control,
+.form-select,
 .btn {
   border-radius: 0px;
 }
-.form-control:focus {
+.form-control:focus,
+.form-select:focus {
   box-shadow: none;
 }
-.form-control.is-invalid:focus {
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus {
   box-shadow: none;
 }
 .btn {
