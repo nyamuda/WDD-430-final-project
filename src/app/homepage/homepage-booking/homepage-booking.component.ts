@@ -1,5 +1,7 @@
 import { Component, Signal, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Booking } from './booking.model';
+import { BookingService } from './booking.service';
 
 @Component({
   selector: 'app-homepage-booking',
@@ -9,7 +11,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class HomepageBookingComponent {
   bookFormGroup: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private bookingService: BookingService
+  ) {}
 
   ngOnInit(): void {
     this.bookFormGroup = this.formBuilder.group({
@@ -33,20 +38,19 @@ export class HomepageBookingComponent {
       let service = this.bookFormGroup.get('service').value;
       let address = this.bookFormGroup.get('address').value;
       let date = this.bookFormGroup.get('date').value;
+      let time = this.bookFormGroup.get('time').value;
 
-      // let user = new User();
-      // user.name = name;
-      // user.email = email;
-      // user.password = password;
-
-      // this.registerService.register(user);
+      let booking = new Booking();
+      booking.name = name;
+      booking.email = email;
+      booking.phone = phone;
+      booking.service = service;
+      booking.address = address;
+      booking.date = date;
+      booking.time = time;
     }
   }
 
   //show the loading button when booking is in progress
-  booking: Signal<boolean> = computed(
-    () =>
-      // this.registerService.isRegistering()
-      false
-  );
+  booking: Signal<boolean> = computed(() => this.bookingService.isBooking());
 }
