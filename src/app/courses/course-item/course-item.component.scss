@@ -3,6 +3,8 @@
   object-fit: cover; /* This ensures that the image maintains its aspect ratio and covers the entire container */
   border-radius: 0;
 }
-.card {
-  border-radius: 0;
+
+.card,
+.bg-image {
+  border-radius: 0 !important;
 }
