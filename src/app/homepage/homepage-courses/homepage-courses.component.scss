@@ -6,13 +6,19 @@
 }
 
 .btn-outline-light {
-  border-color: $primary-color;
-  color: $primary-color;
+  border-color: $secondary-color;
+  color: $secondary-color;
   transition: all 0.3s ease-in;
   width: fit-content;
   margin: auto;
 }
 .btn-outline-light:hover {
-  border-color: $secondary-color;
-  color: $secondary-color;
+  border-color: $tertiary-color;
+  color: $tertiary-color;
+}
+.card {
+  border-radius: 0;
+}
+.card-img-top {
+  border-radius: 0;
 }

@@ -54,6 +54,8 @@ import { HomepageTestimonialsComponent } from './homepage/homepage-testimonials/
 import { HomepageBookingComponent } from './homepage/homepage-booking/homepage-booking.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HomepageChooseUsComponent } from './homepage/homepage-choose-us/homepage-choose-us.component';
+import { HomepageCallToActionComponent } from './homepage/homepage-call-to-action/homepage-call-to-action.component';
+import { FooterComponent } from './footer.component';
 
 @NgModule({
   declarations: [
@@ -82,6 +84,8 @@ import { HomepageChooseUsComponent } from './homepage/homepage-choose-us/homepag
     HomepageTestimonialsComponent,
     HomepageBookingComponent,
     HomepageChooseUsComponent,
+    HomepageCallToActionComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,14 +6,14 @@
 }
 
 .btn-outline-light {
-  border-color: $primary-color;
-  color: $primary-color;
+  border-color: $secondary-color;
+  color: $secondary-color;
   transition: all 0.3s ease-in;
   width: fit-content;
 }
 .btn-outline-light:hover {
-  border-color: $secondary-color;
-  color: $secondary-color;
+  border-color: $tertiary-color;
+  color: $tertiary-color;
 }
 
 .colored-text {
