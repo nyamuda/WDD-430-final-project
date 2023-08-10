@@ -20,5 +20,9 @@
   color: $primary-color;
 }
 .icon {
-  color: $primary-color;
+  color: $secondary-color;
+}
+.card {
+  border: 1px solid $secondary-color;
+  border-radius: 0;
 }
