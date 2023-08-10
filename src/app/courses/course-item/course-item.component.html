@@ -69,7 +69,7 @@
       {{ course.reviews.length == 1 ? "review" : "reviews" }}</small
     >
 
-    <a [routerLink]="course['_id']" class="btn btn-danger w-100"
+    <a [routerLink]="'/courses/' + course['_id']" class="btn btn-danger w-100"
       >COURSE DETAIL</a
     >
   </div>

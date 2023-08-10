@@ -4,10 +4,23 @@
   width: 2rem;
   margin-bottom: 0rem;
 }
-/* Custom styles for the date input */
+
 .custom-input {
   height: 3rem;
 }
+.btn-primary {
+  background-color: $secondary-color;
+}
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+.colored-text {
+  color: $primary-color;
+}
+
+/* Custom styles for the time input */
 ::ng-deep ngx-material-timepicker-content {
   --body-background-color: #fff;
   --primary-font-family: "Roboto", sans-serif;

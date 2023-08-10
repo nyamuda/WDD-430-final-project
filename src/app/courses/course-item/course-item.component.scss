@@ -1,3 +1,4 @@
+@import "../../../sass/variables";
 .card-img-top {
   height: 13rem; /* Set the desired height for the card images */
   object-fit: cover; /* This ensures that the image maintains its aspect ratio and covers the entire container */
@@ -7,4 +8,12 @@
 .card,
 .bg-image {
   border-radius: 0 !important;
+}
+
+.btn-danger {
+  background-color: $secondary-color;
+}
+
+.btn-danger:hover {
+  background-color: $tertiary-color;
 }

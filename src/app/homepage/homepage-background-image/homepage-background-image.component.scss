@@ -3,7 +3,7 @@
   top: 15%;
   bottom: auto;
 }
-.carouse {
+.carousel {
   position: relative;
   z-index: 1;
 }
@@ -16,7 +16,7 @@
   border-radius: 0;
 }
 .icon {
-  color: $secondary-color;
+  color: $background-color;
 }
 .carousel-caption h5 {
   text-transform: capitalize;
