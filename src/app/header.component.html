@@ -36,15 +36,6 @@
           ><i class="fab fa-facebook-f"></i
         ></a>
 
-        <!-- Twitter -->
-        <a
-          mdbRipple
-          class="btn btn-outline-light btn-floating m-1"
-          href="#!"
-          role="button"
-          ><i class="fab fa-twitter"></i
-        ></a>
-
         <!-- Instagram -->
         <a
           mdbRipple
@@ -126,13 +117,16 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="" routerLinkActive="active-link"
+            <a
+              class="nav-link px-2 text-dark"
+              routerLink="home"
+              routerLinkActive="active-link"
               >Home</a
             >
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link px-2 text-dark"
               aria-current="page"
               routerLinkActive="active-link"
               routerLink="courses"
@@ -141,7 +135,7 @@
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link px-2 text-dark"
               routerLinkActive="active-link"
               routerLink="gallery"
               >Gallery</a
@@ -149,10 +143,10 @@
           </li>
           <li class="nav-item">
             <a
-              class="nav-link"
+              class="nav-link px-2 text-dark"
               routerLinkActive="active-link"
               routerLink="contact"
-              >Contact</a
+              >Contact Us</a
             >
           </li>
         </ul>
@@ -163,7 +157,7 @@
             routerLink="login"
             *ngIf="!isAuthenticated(); else elseBlock"
             type="button"
-            class="btn btn-link btn-secondary px-3 me-2"
+            class="btn btn-link btn-secondary text-light px-3 me-2 login-btn"
           >
             Login <i class="fas fa-long-arrow-alt-right"></i>
           </a>

@@ -21,27 +21,20 @@
 a {
   cursor: pointer;
 }
+
 .active-link {
-  position: relative; /* Required for the ::before pseudo-element */
-  transition: color 0.3s ease;
+  background-image: linear-gradient(to right, $primary-color, $secondary-color);
+  background-size: 200% auto;
+  color: #fff !important;
+  transition: background-position 0.3s ease-out;
 }
 
-.active-link::before {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background-color: $primary-color; /* Animation color */
-  border-radius: 5px;
-  transform: scaleX(0); /* Start with no width */
-  transform-origin: left; /* Expand from left to right */
-  transition: transform 0.3s ease-out;
+.active-link:hover {
+  background-position: right center;
 }
 
-.active-link:focus::before {
-  transform: scaleX(1); /* Expand to full width */
+.login-btn {
+  background-color: rgba($color: $secondary-color, $alpha: 1);
 }
 
 //Hamburger Icon
