@@ -1,10 +1,8 @@
 <!-- Footer -->
-<footer
-  class="text-center text-lg-start bg-light text-muted mt-5 container-fluid"
->
+<footer class="text-center text-lg-start text-light mt-5 container-fluid">
   <!-- Section: Social media -->
   <section
-    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom"
+    class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom social-links"
   >
     <!-- Left -->
     <div class="me-5 d-none d-lg-block">
@@ -55,7 +53,7 @@
         <!-- Grid column -->
         <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Courses</h6>
+          <h6 class="text-uppercase fw-bold mb-4 colored-text">Courses</h6>
           <p *ngFor="let course of courses()">
             <a [routerLink]="'courses/' + course['_id']" class="text-reset">{{
               course.title
@@ -67,7 +65,7 @@
         <!-- Grid column -->
         <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Navigation</h6>
+          <h6 class="text-uppercase fw-bold mb-4 colored-text">Navigation</h6>
           <p>
             <a routerLink="/" class="text-reset">Home</a>
           </p>
@@ -86,7 +84,7 @@
         <!-- Grid column -->
         <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
           <!-- Links -->
-          <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+          <h6 class="text-uppercase fw-bold mb-4 colored-text">Contact</h6>
           <p><i class="fas fa-home me-3"></i>379 Hudson St, Cape Town</p>
           <p>
             <i class="fas fa-envelope me-3"></i>
@@ -102,9 +100,124 @@
   </section>
   <!-- Section: Links  -->
 
+  <!-- Section: Images -->
+  <section class="">
+    <div class="row">
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/113.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/111.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/112.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/114.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/115.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+      <div class="col-lg-2 col-md-12 mb-4 mb-md-0">
+        <div
+          mdbRipple
+          rippleColor="light"
+          class="bg-image hover-overlay ripple shadow-1-strong rounded"
+        >
+          <img
+            src="https://mdbootstrap.com/img/new/fluid/city/116.webp"
+            class="w-100"
+          />
+          <a href="#!">
+            <div
+              class="mask"
+              style="background-color: rgba(251, 251, 251, 0.2)"
+            ></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- Section: Images -->
+
   <!-- Copyright -->
   <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05)">
-    © 2023 Copyright:
+    © 2023 Copyright
   </div>
   <!-- Copyright -->
 </footer>

@@ -1,0 +1,11 @@
+@import "../sass/_variables";
+
+.colored-text {
+  color: $primary-color;
+}
+footer {
+  background-color: $background-color;
+}
+.social-links {
+  border-bottom-color: $primary-color !important;
+}
