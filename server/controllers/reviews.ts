@@ -48,7 +48,7 @@ export class ReviewsController {
         );
 
         //update the course rating
-        await this.updateCourseRating(newReview.courseId, newReview.stars);
+        await this.updateCourseRating(newReview.courseId);
 
         //return a response
         return res
@@ -112,11 +112,15 @@ export class ReviewsController {
 
     let review = {
       content: req.body.content,
+      stars: req.body.stars ? req.body.stars : 0,
     };
 
     // PUT request
     await Review.updateOne({ _id: req.params.id }, review)
-      .then((review) => {
+      .then(async (review) => {
+        //update the course rating
+        await this.updateCourseRating(req.body.courseId);
+
         return res.status(204).end();
       })
       .catch((err) => {
@@ -156,7 +160,7 @@ export class ReviewsController {
 
   //Update the rating of a course
   //if a new review is added
-  private static async updateCourseRating(courseId: string, stars: number) {
+  private static async updateCourseRating(courseId: string) {
     try {
       //get all reviews the course
       let reviews = await Review.find({ courseId: courseId });

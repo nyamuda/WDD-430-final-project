@@ -38,6 +38,7 @@ export class ReviewsService {
         content: newReview.content,
         userId: this.loggedInUser()['_id'],
         courseId: courseId,
+        stars: newReview.stars,
       };
 
       this.http.post(url, reviewDto, { headers }).subscribe(
@@ -86,6 +87,7 @@ export class ReviewsService {
 
       let reviewDto = {
         content: newReview.content,
+        stars: newReview.stars,
       };
 
       this.http

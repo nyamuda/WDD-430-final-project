@@ -40,13 +40,14 @@
     <p class="card-title fs-5 mt-n3 fw-bold">
       <a>{{ course.title }}</a>
     </p>
-    <div class="d-flex justify-content-start mt-n2 mb-3 align-items-start">
-      <span class="text-dark fw-bold">{{ course.rating }}</span>
+    <div class="d-flex justify-content-start mt-n2 mb-3 align-items-center">
+      <span class="text-dark fw-bold course-rating">{{ course.rating }}</span>
       <!-- Move the stars a bit to the left if the course does have have any reviews -->
       <star-rating
         [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
         [readOnly]="true"
         [starType]="'svg'"
+        [size]="'medium'"
         [rating]="course.rating"
       ></star-rating>
 

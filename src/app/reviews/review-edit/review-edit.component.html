@@ -59,7 +59,8 @@
               height="65"
             />
             <div class="w-100">
-              <h5>Add a review</h5>
+              <h5 *ngIf="!editMode; else elseBlock">Add a review</h5>
+              <ng-template #elseBlock><h5>Update review</h5></ng-template>
               <!-- Star rating -->
               <div class="d-flex justify-content-start mb-2">
                 <star-rating-control

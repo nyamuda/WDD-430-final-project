@@ -38,8 +38,8 @@ export class ReviewEditComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       let reviewId = params['reviewId'];
 
-      //if the id is not null //then it's editing mode
-
+      //if the id is not null
+      //then it's editing mode
       if (!!reviewId) {
         this.reviewId = reviewId;
         this.reviewService
@@ -48,15 +48,16 @@ export class ReviewEditComponent implements OnInit {
             //if the review exists
             if (!!review) {
               this.editMode = true;
-              this.reviewToEdit = review; //populate the form
+              this.reviewToEdit = review;
 
+              //populate the form
               this.reviewFormGroup.patchValue({
                 content: review.content,
                 stars: review.stars,
               });
             }
           });
-      } //else it's add new review mode
+      } //else it's add 'new review' mode
       return;
     });
   }
