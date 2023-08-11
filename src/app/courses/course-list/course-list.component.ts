@@ -1,17 +1,22 @@
-import { Component, OnInit, OnDestroy, Signal, computed } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnInit, Signal, computed } from '@angular/core';
+
 import { CoursesService } from '../courses.service';
 import { Course } from '../course.model';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
 
 @Component({
   selector: 'app-course-list',
   templateUrl: './course-list.component.html',
   styleUrls: ['./course-list.component.scss'],
 })
-export class CourseListComponent implements OnInit, OnDestroy {
+export class CourseListComponent implements OnInit {
   placeholderCards: number[] = [0, 1, 2];
 
-  constructor(private courseService: CoursesService) {}
+  constructor(
+    private courseService: CoursesService,
+    private userService: UsersService
+  ) {}
 
   ngOnInit() {
     //if there are no current courses in the store
@@ -28,5 +33,11 @@ export class CourseListComponent implements OnInit, OnDestroy {
     event.preventDefault();
   }
 
-  ngOnDestroy() {}
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //only admins have the authority to add courses
+  isAdmin(): boolean {
+    return this.currentUser().isAdmin;
+  }
 }

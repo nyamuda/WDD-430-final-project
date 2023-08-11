@@ -56,6 +56,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 import { HomepageChooseUsComponent } from './homepage/homepage-choose-us/homepage-choose-us.component';
 import { HomepageCallToActionComponent } from './homepage/homepage-call-to-action/homepage-call-to-action.component';
 import { FooterComponent } from './footer.component';
+import { CourseFilterComponent } from './courses/course-list/course-filter/course-filter.component';
+import { StarRatingModule } from 'angular-star-rating';
 
 @NgModule({
   declarations: [
@@ -86,6 +88,7 @@ import { FooterComponent } from './footer.component';
     HomepageChooseUsComponent,
     HomepageCallToActionComponent,
     FooterComponent,
+    CourseFilterComponent,
   ],
   imports: [
     BrowserModule,
@@ -115,6 +118,7 @@ import { FooterComponent } from './footer.component';
     ReactiveFormsModule,
     ToastrModule.forRoot(),
     NgxMaterialTimepickerModule,
+    StarRatingModule.forRoot(),
   ],
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },

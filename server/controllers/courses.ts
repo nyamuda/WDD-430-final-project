@@ -41,14 +41,18 @@ export class CoursesController {
   }
 
   // Get all the Courses
-  public static async getCourses(res: Response) {
+  public static async getCourses(req: Request, res: Response) {
     try {
-      let courses = await Course.find({}).populate({
-        path: 'reviews',
-        populate: {
-          path: 'userId',
-        },
-      });
+      //Get the query parameter for sorting
+      let sortBy = req.query.sort ? req.query.sort : 'rating';
+      let courses = await Course.find({})
+        .populate({
+          path: 'reviews',
+          populate: {
+            path: 'userId',
+          },
+        })
+        .sort({ sortBy: 'desc' });
       return res.json(courses);
     } catch (err) {
       return res.status(500).json({

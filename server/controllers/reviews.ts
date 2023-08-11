@@ -14,7 +14,7 @@ export class ReviewsController {
 
     let { error, value } = schema.validate(req.body);
     if (error) {
-      return res.status(400).json({ error: error.details[0].message });
+      return res.status(400).json({ message: error.details[0].message });
     }
 
     // Check if the user and course with the specified ID exists
@@ -36,6 +36,7 @@ export class ReviewsController {
       content: req.body.content,
       userId: req.body.userId,
       courseId: req.body.courseId,
+      stars: req.body.stars ? req.body.stars : 0,
     };
     // Post request
     await Review.create(newReview)
@@ -45,6 +46,11 @@ export class ReviewsController {
           { _id: review.courseId },
           { $push: { reviews: review._id } }
         );
+
+        //update the course rating
+        await this.updateCourseRating(newReview.courseId, newReview.stars);
+
+        //return a response
         return res
           .status(201)
           .json({ message: 'The review was successfully created.' });
@@ -146,5 +152,28 @@ export class ReviewsController {
           error: err,
         });
       });
+  }
+
+  //Update the rating of a course
+  //if a new review is added
+  private static async updateCourseRating(courseId: string, stars: number) {
+    try {
+      //get all reviews the course
+      let reviews = await Review.find({ courseId: courseId });
+
+      //calculate the total stars for the course
+      let totalStars: number = reviews.reduce((acc, next) => {
+        return acc + next.stars;
+      }, 0);
+      //calculate the new rating
+      //and round to 1 d.p
+      let newRating: number =
+        Math.round((totalStars / reviews.length) * 10) / 10;
+
+      //update the course rating
+      await Course.findByIdAndUpdate(courseId, { rating: newRating });
+    } catch (error) {
+      console.log('Error updating course rating');
+    }
   }
 }

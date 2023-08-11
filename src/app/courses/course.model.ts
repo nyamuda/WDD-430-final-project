@@ -7,6 +7,7 @@ export class Course {
   private _imageUrl: string;
   private _reviews: Array<Review> = new Array<Review>();
   private _updatedAt: string;
+  private _rating: number;
 
   constructor() {}
 
@@ -60,5 +61,9 @@ export class Course {
 
   public get updatedAt(): string {
     return this._updatedAt;
+  }
+
+  public get rating(): number {
+    return this._rating;
   }
 }

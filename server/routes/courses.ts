@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .get((req: Request, res: Response) => {
-    CoursesController.getCourses(res);
+    CoursesController.getCourses(req, res);
   })
   .post(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     CoursesController.createCourse(req, res);

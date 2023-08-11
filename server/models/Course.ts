@@ -6,6 +6,7 @@ interface ICourse {
   price: number;
   imageUrl: string;
   reviews: [object];
+  rating: number;
 }
 
 let courseSchema = new Schema<ICourse>(
@@ -15,6 +16,7 @@ let courseSchema = new Schema<ICourse>(
     price: Number,
     imageUrl: String,
     reviews: [{ type: mongoose.Types.ObjectId, ref: 'Review' }],
+    rating: Number,
   },
   {
     timestamps: true,

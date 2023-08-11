@@ -40,37 +40,33 @@
     <p class="card-title fs-5 mt-n3 fw-bold">
       <a>{{ course.title }}</a>
     </p>
-    <ul class="list-unstyled list-inline mt-n2 mb-0">
-      <li class="list-inline-item me-0">
-        <i class="fas fa-star text-warning fa-xs"> </i>
-      </li>
-      <li class="list-inline-item me-0">
-        <i class="fas fa-star text-warning fa-xs"></i>
-      </li>
-      <li class="list-inline-item me-0">
-        <i class="fas fa-star text-warning fa-xs"></i>
-      </li>
-      <li class="list-inline-item me-0">
-        <i class="fas fa-star text-warning fa-xs"></i>
-      </li>
-      <li class="list-inline-item">
-        <i class="fas fa-star-half-alt text-warning fa-xs"></i>
-      </li>
-      <li class="list-inline-item">
-        <p class="text-muted">4.5 (413)</p>
-      </li>
-    </ul>
-    <p class="mt-n3 fw-bold mb-0">
+    <div class="d-flex justify-content-start mt-n2 mb-3 align-items-start">
+      <span class="text-dark fw-bold">{{ course.rating }}</span>
+      <!-- Move the stars a bit to the left if the course does have have any reviews -->
+      <star-rating
+        [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
+        class="ms-n2"
+        [readOnly]="true"
+        [starType]="'svg'"
+        [rating]="course.rating"
+      ></star-rating>
+
+      <span>({{ course.reviews.length }})</span>
+    </div>
+
+    <p class="mt-n3 mb-2 fw-bold mb-0">
       {{ course.price | currency : "ZAR" : "R" }}
     </p>
-    <hr class="my-1" />
+    <!-- <hr class="my-1" />
     <small class="text-muted d-flex align-items-center gap-2 mb-1"
       ><span><i class="far fa-comment"></i></span>{{ course.reviews.length }}
       {{ course.reviews.length == 1 ? "review" : "reviews" }}</small
-    >
+    > -->
 
-    <a [routerLink]="'/courses/' + course['_id']" class="btn btn-danger w-100"
-      >COURSE DETAIL</a
+    <a
+      [routerLink]="'/courses/' + course['_id']"
+      class="btn btn-danger w-100 mb-0"
+      >More Info</a
     >
   </div>
 </div>
