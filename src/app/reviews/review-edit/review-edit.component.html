@@ -1,20 +1,7 @@
-<div class="rounded-top px-0 my-2 px-4 py-3">
+<!-- <div class="rounded-top px-0 my-2 px-4 py-3">
   <form [formGroup]="reviewFormGroup">
-    <!-- <div class="mb-3">
-      <label class="form-label" for="review-content">Review</label>
-      <textarea
-        [ngClass]="{
-          'is-invalid': reviewFormGroup.invalid && reviewFormGroup.touched
-        }"
-        class="form-control"
-        rows="3"
-        formControlName="content"
-        id="review-content"
-      ></textarea>
-    </div> -->
-
-    <!-- Test 1 -->
-    <!-- Message input -->
+   
+   
     <mdb-form-control class="mb-4">
       <textarea
         mdbValidate
@@ -33,11 +20,7 @@
       >
     </mdb-form-control>
 
-    <!-- Test 1 end -->
-
-    <!-- <div *ngIf="reviewFormGroup.invalid">
-      <p class="alert alert-danger text-start">The field is required.</p>
-    </div> -->
+   
 
     <div class="d-flex justify-content-start pt-2">
       <a
@@ -60,4 +43,80 @@
       >
     </div>
   </form>
-</div>
+</div> -->
+
+<section>
+  <div class="py-5 text-dark rounded-top px-0">
+    <form [formGroup]="reviewFormGroup">
+      <div class="card">
+        <div class="card-body p-4">
+          <div class="d-flex flex-start w-100">
+            <img
+              class="rounded-circle shadow-1-strong me-3"
+              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
+              alt="avatar"
+              width="65"
+              height="65"
+            />
+            <div class="w-100">
+              <h5>Add a review</h5>
+              <!-- Star rating -->
+              <div class="d-flex justify-content-start mb-2">
+                <star-rating-control
+                  formControlName="stars"
+                  [starType]="'svg'"
+                  [rating]=""
+                ></star-rating-control>
+              </div>
+
+              <!-- Text area -->
+              <mdb-form-control class="mb-4">
+                <textarea
+                  mdbValidate
+                  [ngClass]="{
+                    'is-invalid':
+                      reviewFormGroup.invalid && reviewFormGroup.touched
+                  }"
+                  mdbInput
+                  class="form-control bg-light"
+                  id="textForm"
+                  rows="4"
+                  formControlName="content"
+                ></textarea>
+                <label mdbLabel class="form-label" for="textForm">Review</label>
+                <mdb-error
+                  *ngIf="
+                    reviewFormGroup.get('content').invalid &&
+                    reviewFormGroup.get('content').touched
+                  "
+                >
+                  The field is required.</mdb-error
+                >
+              </mdb-form-control>
+              <div class="d-flex justify-content-start pt-2">
+                <a
+                  (click)="submitForm($event)"
+                  [routerLink]="'/courses/' + courseId"
+                  fragment="reviews"
+                  [ngClass]="{ disabled: reviewFormGroup.invalid }"
+                  class="btn btn-success btn-sm d-flex justify-content-center align-items-center px-3"
+                  href=""
+                  >Add</a
+                >
+
+                <a
+                  [routerLink]="'/courses/' + courseId"
+                  fragment="reviews"
+                  (click)="onCancel($event)"
+                  class="btn btn-primary btn-sm d-flex justify-content-center align-items-center ms-2 px-3"
+                  href=""
+                  >Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

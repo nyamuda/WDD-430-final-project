@@ -7,6 +7,7 @@ export class Review {
   private _userId: User;
   private _courseId: Course;
   private _updatedAt: string;
+  private _stars: number;
 
   constructor() {}
 
@@ -47,5 +48,12 @@ export class Review {
   }
   public get updatedAt(): string {
     return this._updatedAt;
+  }
+
+  set stars(value: number) {
+    this._stars = value;
+  }
+  public get stars(): number {
+    return this._stars;
   }
 }

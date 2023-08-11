@@ -45,7 +45,6 @@
       <!-- Move the stars a bit to the left if the course does have have any reviews -->
       <star-rating
         [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
-        class="ms-n2"
         [readOnly]="true"
         [starType]="'svg'"
         [rating]="course.rating"

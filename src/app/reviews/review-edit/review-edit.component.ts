@@ -29,13 +29,16 @@ export class ReviewEditComponent implements OnInit {
   ngOnInit() {
     this.reviewFormGroup = this.formBuilder.group({
       content: ['', Validators.required],
+      stars: [1],
     }); //Grab the course ID
     this.activatedRoute.parent.params.subscribe((params) => {
       this.courseId = params['id'];
     });
     //Grab the review ID
     this.activatedRoute.params.subscribe((params) => {
-      let reviewId = params['reviewId']; //if the id is not null //then it's editing mode
+      let reviewId = params['reviewId'];
+
+      //if the id is not null //then it's editing mode
 
       if (!!reviewId) {
         this.reviewId = reviewId;
@@ -49,6 +52,7 @@ export class ReviewEditComponent implements OnInit {
 
               this.reviewFormGroup.patchValue({
                 content: review.content,
+                stars: review.stars,
               });
             }
           });
@@ -62,8 +66,10 @@ export class ReviewEditComponent implements OnInit {
     if (this.reviewFormGroup.valid) {
       let newReview = new Review();
 
-      newReview.content = this.reviewFormGroup.controls['content'].value; //if in edit mode
+      newReview.content = this.reviewFormGroup.controls['content'].value;
+      newReview.stars = this.reviewFormGroup.controls['stars'].value;
 
+      //if in edit mode
       if (this.editMode) {
         this.reviewService.updateReview(this.reviewId, newReview);
       } //else if in new document mode
