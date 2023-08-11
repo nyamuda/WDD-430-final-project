@@ -24,5 +24,9 @@ export class CourseListComponent implements OnInit, OnDestroy {
     this.courseService.courseListSignal()
   );
 
+  onEnter(event) {
+    event.preventDefault();
+  }
+
   ngOnDestroy() {}
 }

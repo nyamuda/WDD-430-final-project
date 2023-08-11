@@ -1,3 +1,13 @@
+@import "../../../sass/variables";
+.container-fluid {
+  width: 90%;
+}
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
 .card {
   border-radius: 0;
 }
