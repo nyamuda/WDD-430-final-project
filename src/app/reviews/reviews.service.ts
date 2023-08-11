@@ -86,6 +86,7 @@ export class ReviewsService {
       const headers = this.headers();
 
       let reviewDto = {
+        courseId: newReview.courseId,
         content: newReview.content,
         stars: newReview.stars,
       };

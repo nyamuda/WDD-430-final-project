@@ -69,6 +69,7 @@ export class ReviewEditComponent implements OnInit {
 
       newReview.content = this.reviewFormGroup.controls['content'].value;
       newReview.stars = this.reviewFormGroup.controls['stars'].value;
+      newReview.courseId = this.reviewToEdit.courseId;
 
       //if in edit mode
       if (this.editMode) {
