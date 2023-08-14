@@ -7,13 +7,17 @@ import { CoursesService } from '../../courses.service';
   styleUrls: ['./course-filter.component.scss'],
 })
 export class CourseFilterComponent {
+  sortingField = 'rating';
+
   constructor(private courseService: CoursesService) {}
 
-  sortBy(sort: string) {
-    this.courseService.getCourses(sort);
+  sortBy() {
+    this.courseService.getCourses(this.sortingField);
   }
 
   onEnter(event) {
     event.preventDefault();
+
+    this.courseService.searchCourses(event.target.value.trim());
   }
 }

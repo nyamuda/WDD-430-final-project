@@ -45,6 +45,7 @@ export class CoursesController {
     try {
       //Get the query parameter for sorting
       let sortBy = req.query.sort ? req.query.sort : 'rating';
+
       let courses = await Course.find({})
         .populate({
           path: 'reviews',
@@ -172,7 +173,8 @@ export class CoursesController {
   public static async searchCourses(req: Request, res: Response) {
     try {
       let searchName = req.query.title;
-      let courses = Course.find({
+
+      let courses = await Course.find({
         title: { $regex: searchName, $options: 'i' },
       });
 

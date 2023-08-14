@@ -122,6 +122,20 @@ export class CoursesService {
     );
   }
 
+  //Search courses by title
+  searchCourses(title: string): void {
+    const url = `http://localhost:8000/courses/search?title=${title}`;
+
+    this.http.get<Course[]>(url).subscribe(
+      (courses: Course[]) => {
+        this._courses = courses;
+        this.courseListSignal.set(this._courses);
+      },
+      (error) => {
+        console.error(error);
+      }
+    );
+  }
   headers(): HttpHeaders {
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders()
