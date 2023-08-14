@@ -167,4 +167,21 @@ export class CoursesController {
         });
       });
   }
+  // Search for courses by name
+
+  public static async searchCourses(req: Request, res: Response) {
+    try {
+      let searchName = req.query.title;
+      let courses = Course.find({
+        title: { $regex: searchName, $options: 'i' },
+      });
+
+      return res.json(courses);
+    } catch (err) {
+      return res.status(500).json({
+        message: 'An unexpected error occurred on the server.',
+        error: err,
+      });
+    }
+  }
 }

@@ -29,5 +29,8 @@ router
 router.route('/:id/reviews').get((req: Request, res: Response) => {
   CoursesController.getCourseReviews(req, res);
 });
+router.route('/search').get((req: Request, res: Response) => {
+  CoursesController.searchCourses(req, res);
+});
 
 export { router as CourseRouter };

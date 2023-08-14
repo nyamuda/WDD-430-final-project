@@ -29,9 +29,7 @@ export class CourseListComponent implements OnInit {
     this.courseService.courseListSignal()
   );
 
-  onEnter(event) {
-    event.preventDefault();
-  }
+
 
   //information about the current logged in user
   currentUser: Signal<User> = computed(() => this.userService.user());

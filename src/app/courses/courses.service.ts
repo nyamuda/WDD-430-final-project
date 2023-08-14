@@ -62,8 +62,8 @@ export class CoursesService {
   }
 
   //READ
-  getCourses(): void {
-    const url = `http://localhost:8000/courses`;
+  getCourses(sort = 'rating'): void {
+    const url = `http://localhost:8000/courses?sort=${sort}`;
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {

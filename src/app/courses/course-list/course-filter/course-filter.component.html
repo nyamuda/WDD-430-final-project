@@ -1,1 +1,33 @@
-<p>course-filter works!</p>
+<!-- Search for course -->
+<div class="row mt-5">
+  <div class="col-md-8 mb-3 mb-md-0">
+    <mdb-form-control class="rounded">
+      <input
+        mdbInput
+        id="formControlLg"
+        (keyup.enter)="onEnter($event)"
+        type="search"
+        class="form-control rounded form-control-lg"
+        aria-label="Search"
+        aria-describedby="search-addon"
+      />
+      <label mdbLabel class="form-label" for="formControlLg">Search</label>
+      <!-- <span class="input-group-text border-0" id="search-addon">
+          <i class="fas fa-search"></i>
+        </span> -->
+    </mdb-form-control>
+  </div>
+
+  <!-- Sort By -->
+  <div class="col-md-4">
+    <select
+      class="form-select form-select-lg rounded"
+      aria-label=".form-select-lg example"
+    >
+      <option selected hidden>Sort By</option>
+      <option value="review">Most Reviewed</option>
+      <option value="rate">Highest Rated</option>
+      <option value="name">Name</option>
+    </select>
+  </div>
+</div>
