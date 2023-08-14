@@ -11,6 +11,14 @@ import { UsersService } from '../users/users.service';
 export class CoursesService {
   private _courses = new Array<Course>();
 
+  //display placeholder courses
+  //in case its fetching courses
+  public isFetchingCourses: WritableSignal<boolean> = signal(false);
+
+  //display number of search results
+  //in case the user searches for courses
+  public displayNumSearchResults: WritableSignal<boolean> = signal(false);
+
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
   constructor(
@@ -64,11 +72,13 @@ export class CoursesService {
   //READ
   getCourses(sort = 'rating'): void {
     const url = `http://localhost:8000/courses?sort=${sort}`;
+    this.isFetchingCourses.set(true);
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {
         this._courses = courses;
         this.courseListSignal.set(this._courses);
+        this.isFetchingCourses.set(false);
       },
       (error) => {
         console.error(error);
@@ -130,6 +140,8 @@ export class CoursesService {
       (courses: Course[]) => {
         this._courses = courses;
         this.courseListSignal.set(this._courses);
+
+        this.displayNumSearchResults.set(true);
       },
       (error) => {
         console.error(error);

@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Signal, computed } from '@angular/core';
 import { CoursesService } from '../../courses.service';
+import { Course } from '../../course.model';
 
 @Component({
   selector: 'app-course-filter',
@@ -20,4 +21,14 @@ export class CourseFilterComponent {
 
     this.courseService.searchCourses(event.target.value.trim());
   }
+
+  courses: Signal<Course[]> = computed(() =>
+    this.courseService.courseListSignal()
+  );
+
+  //display number of filtered results
+  //in case the user searches for courses
+  public displayNumSearchResults: Signal<boolean> = computed(() =>
+    this.courseService.displayNumSearchResults()
+  );
 }

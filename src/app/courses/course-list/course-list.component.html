@@ -19,16 +19,9 @@
 
   <app-course-filter></app-course-filter>
 
-  <!-- Courses list -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
-    <div class="col" *ngFor="let course of courses()">
-      <app-course-item [course-detail]="course"></app-course-item>
-    </div>
-  </div>
-
   <!-- Placeholder courses -->
   <div
-    *ngIf="courses().length == 0"
+    *ngIf="isFetchingCourses(); else elseBlock"
     class="mt-3 row row-cols-1 row-cols-md-3 g-4"
   >
     <div *ngFor="let item of placeholderCards" class="col">
@@ -53,6 +46,14 @@
       </div>
     </div>
   </div>
+  <ng-template #elseBlock>
+    <!-- Courses list -->
+    <div class="row row-cols-1 row-cols-md-3 g-4 mt-3">
+      <div class="col" *ngFor="let course of courses()">
+        <app-course-item [course-detail]="course"></app-course-item>
+      </div>
+    </div>
+  </ng-template>
 
   <nav class="mt-5" aria-label="...">
     <ul class="pagination pagination-lg justify-content-center">

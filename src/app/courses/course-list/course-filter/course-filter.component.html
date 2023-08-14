@@ -33,3 +33,10 @@
     </select>
   </div>
 </div>
+
+<!-- Number of searched search results -->
+<p class="text-start" *ngIf="displayNumSearchResults()">
+  {{ courses().length }}
+  <span *ngIf="courses().length == 1; else elseBlock">Result</span>
+  <ng-template #elseBlock>Results</ng-template>
+</p>

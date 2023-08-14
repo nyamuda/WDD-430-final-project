@@ -29,10 +29,14 @@ export class CourseListComponent implements OnInit {
     this.courseService.courseListSignal()
   );
 
-
-
   //information about the current logged in user
   currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //display placeholder courses
+  //in case its fetching courses
+  isFetchingCourses: Signal<boolean> = computed(() =>
+    this.courseService.isFetchingCourses()
+  );
 
   //only admins have the authority to add courses
   isAdmin(): boolean {
