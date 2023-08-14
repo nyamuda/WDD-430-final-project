@@ -50,6 +50,10 @@ export class LoginService {
         //disable loading button
         this.isLoggingIn.set(false);
 
+        //load the user information to the user service
+        //by decoding the access token
+        this.userService.decodeJwtToken();
+
         //navigate the user
         this.router.navigateByUrl(this.redirectUrl());
       },

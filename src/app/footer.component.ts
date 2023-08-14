@@ -1,6 +1,7 @@
 import { Component, OnInit, computed, Signal } from '@angular/core';
-import { CoursesService } from './courses/courses.service';
 import { Course } from './courses/course.model';
+
+import { AppService } from './app.service';
 
 @Component({
   selector: 'app-footer',
@@ -8,15 +9,13 @@ import { Course } from './courses/course.model';
   styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent implements OnInit {
-  constructor(private courseService: CoursesService) {}
+  constructor(private appService: AppService) {}
 
   ngOnInit(): void {}
-
-  //Get the the first 3 courses from
-  //a list of all courses
+  //display the top 5 rated courses on the homepage
   courses: Signal<Course[]> = computed(() =>
-    this.courseService
+    this.appService
       .courseListSignal()
-      .filter((val: Course, index: number) => index < 3)
+      .filter((val: Course, index: number) => index < 5)
   );
 }

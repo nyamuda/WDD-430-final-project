@@ -44,7 +44,10 @@ export class CoursesController {
   public static async getCourses(req: Request, res: Response) {
     try {
       //Get the query parameter for sorting
-      let sortBy = req.query.sort ? req.query.sort : 'rating';
+      let sortBy = req.query.sort ? req.query.sort.toString() : 'rating';
+
+      let sortObject = {};
+      sortObject[sortBy] = -1;
 
       let courses = await Course.find({})
         .populate({
@@ -53,7 +56,7 @@ export class CoursesController {
             path: 'userId',
           },
         })
-        .sort({ sortBy: 'desc' });
+        .sort(sortObject);
       return res.json(courses);
     } catch (err) {
       return res.status(500).json({

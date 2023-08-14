@@ -12,14 +12,41 @@ export class CourseFilterComponent {
 
   constructor(private courseService: CoursesService) {}
 
+  //Sort the courses by a given field
   sortBy() {
-    this.courseService.getCourses(this.sortingField);
+    //if there are no courses available
+    if (this.courses().length == 0) {
+      this.courseService.getCourses(this.sortingField);
+    }
+    //else sort the currently available courses
+    else {
+      switch (this.sortingField) {
+        //sort by title
+        case 'title':
+          this.courseService.courseListSignal.set(
+            this.sortByTitle(this.courses())
+          );
+          break;
+        //sort by reviews
+        case 'reviews':
+          this.courseService.courseListSignal.set(
+            this.sortByReviewsCount(this.courses())
+          );
+          break;
+        //else sort by rating
+        default:
+          this.courseService.courseListSignal.set(
+            this.sortByRating(this.courses())
+          );
+          break;
+      }
+    }
   }
 
   onEnter(event) {
     event.preventDefault();
-
     this.courseService.searchCourses(event.target.value.trim());
+    this.sortingField = 'rating';
   }
 
   courses: Signal<Course[]> = computed(() =>
@@ -31,4 +58,17 @@ export class CourseFilterComponent {
   public displayNumSearchResults: Signal<boolean> = computed(() =>
     this.courseService.displayNumSearchResults()
   );
+
+  //sort the courses
+  sortByTitle(courses: Course[]): Course[] {
+    return courses.slice().sort((a, b) => a.title.localeCompare(b.title));
+  }
+
+  sortByRating(courses: Course[]): Course[] {
+    return courses.slice().sort((a, b) => b.rating - a.rating);
+  }
+
+  sortByReviewsCount(courses: Course[]): Course[] {
+    return courses.slice().sort((a, b) => b.reviews.length - a.reviews.length);
+  }
 }

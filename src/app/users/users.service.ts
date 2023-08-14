@@ -24,7 +24,6 @@ export class UsersService {
       //get all the full information about the user
       this.getUser(userId).subscribe((user: User) => {
         this.user.set(user);
-        console.log(user);
       });
     }
   }

@@ -13,7 +13,7 @@
   </div>
 
   <!-- Add new course -->
-  <div *ngIf="isAdmin()" class="d-flex justify-content-end mb-4">
+  <div *ngIf="currentUser().isAdmin" class="d-flex justify-content-end mb-4">
     <a routerLink="new" class="btn btn-primary">Add new</a>
   </div>
 

@@ -27,15 +27,18 @@
       aria-label=".form-select-lg example"
     >
       <option selected hidden>Sort By</option>
-      <option value="review">Most Reviewed</option>
+      <option value="reviews">Most Reviewed</option>
       <option value="rating">Highest Rated</option>
-      <option value="name">Name</option>
+      <option value="title">Name</option>
     </select>
   </div>
 </div>
 
 <!-- Number of searched search results -->
-<p class="text-start" *ngIf="displayNumSearchResults()">
+<p
+  class="text-start position-absolute fw-bold"
+  *ngIf="displayNumSearchResults()"
+>
   {{ courses().length }}
   <span *ngIf="courses().length == 1; else elseBlock">Result</span>
   <ng-template #elseBlock>Results</ng-template>

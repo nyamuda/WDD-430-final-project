@@ -1,6 +1,6 @@
 import { Component, Signal, computed, OnInit } from '@angular/core';
+import { AppService } from 'src/app/app.service';
 import { Course } from 'src/app/courses/course.model';
-import { CoursesService } from 'src/app/courses/courses.service';
 
 @Component({
   selector: 'app-homepage-courses',
@@ -9,17 +9,13 @@ import { CoursesService } from 'src/app/courses/courses.service';
 })
 export class HomepageCoursesComponent implements OnInit {
   placeholderCards: number[] = [0, 1, 2];
-  constructor(private courseService: CoursesService) {}
 
-  ngOnInit(): void {
-    if (this.courses.length == 0) {
-      this.courseService.getCourses();
-    }
-  }
-  //Get the the first 3 courses from
-  //a list of all courses
+  constructor(private appService: AppService) {}
+
+  ngOnInit(): void {}
+  //display the top 3 rated courses on the homepage
   courses: Signal<Course[]> = computed(() =>
-    this.courseService
+    this.appService
       .courseListSignal()
       .filter((val: Course, index: number) => index < 3)
   );

@@ -37,9 +37,4 @@ export class CourseListComponent implements OnInit {
   isFetchingCourses: Signal<boolean> = computed(() =>
     this.courseService.isFetchingCourses()
   );
-
-  //only admins have the authority to add courses
-  isAdmin(): boolean {
-    return this.currentUser().isAdmin;
-  }
 }
