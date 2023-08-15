@@ -1,35 +1,3 @@
-<!-- <nav class="mt-5" aria-label="...">
-  <ul class="pagination pagination-lg justify-content-center">
-    <li class="page-item disabled">
-      <a
-        [ngClass]="{ disabled: !metaData().hasPreviousPage }"
-        class="page-link"
-        href="#"
-        tabindex="-1"
-        >Previous</a
-      >
-    </li>
-    <li class="page-item active">
-      <a class="page-link" href="#">{{ metaData().currentPage }}</a>
-    </li>
-    <li class="page-item">
-      <a *ngIf="metaData().hasNextPage" class="page-link" href="#">{{
-        metaData().currentPage + 1
-      }}</a>
-    </li>
-    <li *ngIf="metaData().hasNextNextPage" class="page-item">
-      <a class="page-link" href="#">{{ metaData().currentPage + 2 }}</a>
-    </li>
-    <li class="page-item">
-      <a
-        [ngClass]="{ disabled: !metaData().hasNextPage }"
-        class="page-link"
-        href="#"
-        >Next</a
-      >
-    </li>
-  </ul>
-</nav> -->
 <app-review-item
   *ngFor="
     let review of reviews()
