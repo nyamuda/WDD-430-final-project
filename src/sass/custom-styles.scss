@@ -1,5 +1,15 @@
 @import "./_variables";
 
+.container-fluid.custom {
+  width: 98%;
+  margin: auto;
+}
+@media (min-width: 768px) {
+  .container-fluid.custom {
+    width: 90%;
+  }
+}
+
 .form-control,
 .form-select,
 .btn {
@@ -17,11 +27,11 @@
   text-transform: none;
   font-size: 1rem;
 }
-.btn-primary {
+.btn.custom {
   background-color: $secondary-color;
   transition: all 0.3s ease-out;
 }
 
-.btn-primary:hover {
+.btn.custom:hover {
   background-color: $primary-color;
 }

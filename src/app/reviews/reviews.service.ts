@@ -24,6 +24,9 @@ export class ReviewsService {
   public reviewListSignal: WritableSignal<Review[]> = signal(this._reviews);
   public metaDataSignal: WritableSignal<MetaData> = signal(this._metaData);
   public courseIdSignal: WritableSignal<string> = signal('');
+  //display placeholder reviews
+  //in case its fetching reviews
+  public isFetchingReviews: WritableSignal<boolean> = signal(false);
   //information about the logged in user
   public loggedInUser: Signal<User> = computed(() => this.userService.user());
 
@@ -72,6 +75,8 @@ export class ReviewsService {
 
   // READ
   getReviewsForCourse(courseId: string, page: number = 1) {
+    //show placeholder reviews
+    this.isFetchingReviews.set(true);
     const url = `http://localhost:8000/courses/${courseId}/reviews?page=${page}`;
 
     //get the reviews
@@ -85,6 +90,9 @@ export class ReviewsService {
         //save the meta data
         this._metaData = reviewsMetaDto.meta;
         this.metaDataSignal.set(reviewsMetaDto.meta);
+
+        //stop placeholder reviews
+        this.isFetchingReviews.set(false);
       },
       (error) => {
         console.error(error);

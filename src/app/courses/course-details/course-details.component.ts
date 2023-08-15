@@ -14,7 +14,7 @@ import { User } from 'src/app/users/user.model';
   styleUrls: ['./course-details.component.scss'],
 })
 export class CourseDetailsComponent implements OnInit {
-  course: Course = new Course();
+  course: Course;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -34,6 +34,9 @@ export class CourseDetailsComponent implements OnInit {
         this.reviewService.courseIdSignal.set(courseId);
         //Get the reviews for the course
         this.reviewService.getReviewsForCourse(courseId);
+
+        //stop displaying a placeholder image
+        this.courseService.isFetchingCourse.set(false);
       });
     });
   }
@@ -53,6 +56,11 @@ export class CourseDetailsComponent implements OnInit {
 
   //information about the current logged in user
   currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //information about whether the course information is being fetched
+  isFetchingCourse: Signal<boolean> = computed(() =>
+    this.courseService.isFetchingCourse()
+  );
 
   //only admins have the authority to edit or delete courses
   isAdmin(): boolean {

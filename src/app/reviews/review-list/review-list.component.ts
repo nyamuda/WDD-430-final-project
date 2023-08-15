@@ -8,6 +8,7 @@ import { MetaData, Review } from '../review.model';
   styleUrls: ['./review-list.component.scss'],
 })
 export class ReviewListComponent implements OnInit, OnDestroy {
+  placeholderReviews = [0, 1, 2];
   constructor(private reviewService: ReviewsService) {}
 
   ngOnInit() {}
@@ -16,7 +17,9 @@ export class ReviewListComponent implements OnInit, OnDestroy {
     this.reviewService.reviewListSignal()
   );
 
- 
+  isFetchingReviews: Signal<boolean> = computed(() =>
+    this.reviewService.isFetchingReviews()
+  );
 
   ngOnDestroy() {}
 }

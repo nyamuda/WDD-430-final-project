@@ -1,87 +1,181 @@
-<div class="container mt-5">
-  <div class="row">
+<!-- Placeholder Content Start -->
+<div
+  *ngIf="!course && isFetchingCourse(); else courseInfo"
+  class="w-100 bg-dark pt-3 pb-0"
+>
+  <div class="container-fluid custom row row-cols-1 row-cols-lg-2 start">
     <!-- Course Image -->
 
-    <div class="col-lg-6">
+    <div class="col">
       <img
-        [src]="course.imageUrl"
-        [alt]="course.title + 'course image'"
-        class="img-fluid mb-3 rounded w-100"
+        src="../../../assets/img/placeholder/placeholder1.png"
+        alt="placeholder image"
+        class="img-fluid mb-3 rounded-3 w-100 placeholder col-6"
       />
     </div>
 
-    <div class="col-lg-6 d-flex flex-column align-items-start mb-3">
-      <!-- Course Details -->
+    <div class="col placeholder-wave">
+      <div class="d-flex flex-column align-items-start mb-3 text-light">
+        <!-- Course Details -->
 
-      <h2 class="display-4 fw-bold">{{ course.title }}</h2>
+        <h2 class="fw-bold placeholder col-8"></h2>
+        <p class="placeholder col-6">
+          Lorem ipsum dolor sit amet. Cum facilis sunt et placeat perferendis
+        </p>
 
-      <p class="fs-2">Category</p>
+        <p class="placeholder col-5">
+          {{ course.price | currency : "ZAR" : "R" }}
+        </p>
 
-      <p class="fs-4">
-        {{ course.price | currency : "ZAR" : "R" }}
-      </p>
-      <p>Rating: 5 stars</p>
+        <a href="" class="btn custom text-light placeholder col-4"></a>
 
-      <a href="" class="btn btn-dark">Book course now</a>
+        <div *ngIf="isAdmin()" class="d-flex mt-4">
+          <a (click)="updateCourse(course['_id'])" class="btn btn-primary me-2"
+            >Edit</a
+          >
 
-      <div *ngIf="isAdmin()" class="d-flex mt-4">
-        <a (click)="updateCourse(course['_id'])" class="btn btn-primary me-2"
-          >Edit</a
-        >
-
-        <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
-          >Delete</a
-        >
+          <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
+            >Delete</a
+          >
+        </div>
       </div>
     </div>
   </div>
+</div>
+<!-- Placeholder Content End -->
 
-  <!-- Description -->
+<!-- Course Information Heading Start -->
+<ng-template #courseInfo>
+  <div class="w-100 bg-dark pt-3 pb-0">
+    <div class="container-fluid custom row row-cols-1 row-cols-lg-2 start">
+      <!-- Course Image -->
+
+      <div class="col">
+        <img
+          [src]="course.imageUrl"
+          [alt]="course.title + 'course image'"
+          class="img-fluid mb-3 rounded-3 w-100"
+        />
+      </div>
+
+      <div class="col">
+        <div class="d-flex flex-column align-items-start mb-3 text-light">
+          <!-- Course Details -->
+
+          <h2 class="display-4 fw-bold">{{ course.title }}</h2>
+          <p>
+            Lorem ipsum dolor sit amet. Cum facilis sunt et placeat perferendis
+            sit architecto deserunt eum ipsum veniam id fugiat quos ab impedit
+            omnis sed doloribus possimus.
+          </p>
+          <div class="d-flex justify-content-start align-items-center">
+            <p class="course-rating fs-5">{{ course.rating }}</p>
+            <!-- Move the stars a bit to the left if the course does have have any reviews -->
+            <star-rating
+              class="title-star-rating"
+              [readOnly]="true"
+              [starType]="'svg'"
+              [size]="'medium'"
+              [rating]="course.rating"
+              [showHalfStars]="true"
+            ></star-rating>
+
+            <p>({{ course.reviews.length }})</p>
+          </div>
+
+          <p class="fs-4">
+            {{ course.price | currency : "ZAR" : "R" }}
+          </p>
+
+          <a href="" class="btn custom text-light">Book course now</a>
+
+          <div *ngIf="isAdmin()" class="d-flex mt-4">
+            <a
+              (click)="updateCourse(course['_id'])"
+              class="btn btn-primary me-2"
+              >Edit</a
+            >
+
+            <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
+              >Delete</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Course Information Heading Start -->
+
+<!-- Course Description Placeholder Start -->
+
+<div
+  *ngIf="!course && isFetchingCourse(); else courseDescription"
+  class="container-fluid custom mt-5 px-4 placeholder-wave"
+>
   <div class="mb-3">
-    <p class="h2">Course Overview</p>
-    <p class="">{{ course.description }}</p>
+    <p class="h2 placeholder col-5"></p>
+    <p class="placeholder col-12"></p>
   </div>
   <hr />
   <div class="review-headline mt-3">
-    <h3 class="">Reviews</h3>
-    <div class="d-flex justify-content-start mt-n2 mb-3 align-items-center">
-      <p class="text-dark fw-bold course-rating fs-1">{{ course.rating }}</p>
+    <h3 class="placeholder col-4"></h3>
+  </div>
 
-      <div
-        class="d-flex flex-column align-items-start justify-content-start ms-2"
-      >
-        <star-rating
-          class="ms-n2"
-          [readOnly]="true"
-          [starType]="'svg'"
-          [size]="'medium'"
-          [rating]="course.rating"
-          [showHalfStars]="true"
-        ></star-rating>
+  <div class="d-flex justify-content-start justify-content-lg-end mb-5">
+    <a class="btn custom placeholder col-3"></a>
+  </div>
+</div>
+<!-- Course Description Placeholder End -->
 
-        <!-- If there is only one review -->
-        <p *ngIf="reviewCount() == 1; else elseBlock">
-          {{ reviewCount() }} Review
-        </p>
-        <!-- If there is more than one review-->
-        <ng-template #elseBlock>
-          <p>{{ reviewCount() }} Reviews</p>
-        </ng-template>
+<ng-template #courseDescription>
+  <div class="container-fluid custom custom mt-5 px-4">
+    <!-- Course Description Start -->
+
+    <div class="mb-3">
+      <p class="h2">Course Overview</p>
+      <p class="">{{ course.description }}</p>
+    </div>
+    <hr />
+    <div class="review-headline mt-3">
+      <h3 class="">Reviews</h3>
+      <div class="d-flex justify-content-start mt-n2 mb-2 align-items-center">
+        <p class="text-dark fw-bold course-rating fs-1">{{ course.rating }}</p>
+
+        <div
+          class="d-flex flex-column align-items-start justify-content-start ms-2"
+        >
+          <star-rating
+            class="ms-n2"
+            [readOnly]="true"
+            [starType]="'svg'"
+            [size]="'medium'"
+            [rating]="course.rating"
+            [showHalfStars]="true"
+          ></star-rating>
+
+          <!-- If there is only one review -->
+          <p *ngIf="reviewCount() == 1; else elseBlock">
+            {{ reviewCount() }} Review
+          </p>
+          <!-- If there is more than one review-->
+          <ng-template #elseBlock>
+            <p>{{ reviewCount() }} Reviews</p>
+          </ng-template>
+        </div>
       </div>
     </div>
-  </div>
+    <!-- Course Description End -->
 
-  <div class="d-flex justify-content-end">
-    <a
-      routerLink="reviews/new"
-      fragment="reviewForm"
-      class="btn btn-primary mb-3"
-      >Write review</a
-    >
-  </div>
+    <div class="d-flex justify-content-start justify-content-lg-end mb-5">
+      <a routerLink="reviews/new" fragment="reviewForm" class="btn btn-primary"
+        >Write review</a
+      >
+    </div>
 
-  <!-- Review edit or new form -->
-  <router-outlet id="reviewForm"></router-outlet>
-  <!-- Reviews for the course -->
-  <app-reviews id="reviews"></app-reviews>
-</div>
+    <!-- Review edit or new form -->
+    <router-outlet id="reviewForm"></router-outlet>
+    <!-- Reviews for the course -->
+    <app-reviews id="reviews"></app-reviews>
+  </div>
+</ng-template>

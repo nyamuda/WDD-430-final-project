@@ -16,6 +16,10 @@ export class CoursesService {
   //in case its fetching courses
   public isFetchingCourses: WritableSignal<boolean> = signal(false);
 
+  //display placeholder course info
+  //in case its fetching a particular course
+  public isFetchingCourse: WritableSignal<boolean> = signal(false);
+
   //display number of search results
   //in case the user searches for courses
   public displayNumSearchResults: WritableSignal<boolean> = signal(false);
@@ -58,11 +62,14 @@ export class CoursesService {
     }
   }
   getCourseById(id: string): Observable<Course> {
+    this.isFetchingCourse.set(true);
+
     if (this._courses.length != 0) {
       let course = this._courses.filter(
         (course: Course) => course['_id'] == id
       )[0];
       if (!!course) {
+        this.isFetchingCourse.set(false);
         return of(course);
       }
     }
