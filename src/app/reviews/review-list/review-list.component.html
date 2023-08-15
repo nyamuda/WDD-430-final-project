@@ -1,25 +1,25 @@
 <!-- Placeholder reviews -->
-<div *ngIf="isFetchingReviews() && reviews.length == 0; else showReviews">
+<div
+  *ngIf="isFetchingReviews() && reviews.length == 0; else showReviews"
+  class="container-fluid bg-light px-3 px-lg-4 py-3"
+>
   <div
     *ngFor="let item of placeholderReviews"
-    class="card mb-3 comments px-2 py-3 container-fluid bg-light px-3 px-lg-4"
+    class="mb-4 d-flex flex-start align-items-start"
   >
-    <div class="d-flex flex-start align-items-center">
-      <!-- Comment Image Placeholder -->
-      <div class="">
-        <img
-          class="rounded-circle shadow-1-strong me-3"
-          src="../../../assets/img/placeholder/placeholder1.png"
-          alt="avatar"
-          width="60"
-          height="60"
-        />
-      </div>
+    <img
+      class="rounded-circle shadow-1-strong me-3"
+      src="../../../assets/img/placeholder/placeholder1.png"
+      alt="avatar"
+      width="60"
+      height="60"
+    />
+    <div class="px-2 card w-100">
       <div class="card-body placeholder-wave">
-        <h5 class="card-title placeholder col-9"></h5>
-        <p class="card-text placeholder col-6"></p>
-        <p class="card-text placeholder col-3"></p>
-        <p class="card-text placeholder col-12"></p>
+        <h5 class="placeholder placeholder-lg col-8"></h5>
+        <p class="placeholder col-8"></p>
+        <p class="placeholder placeholder-sm col-6"></p>
+        <p class="placeholder col-12"></p>
       </div>
     </div>
   </div>

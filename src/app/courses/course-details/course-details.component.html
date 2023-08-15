@@ -22,6 +22,7 @@
         <p class="placeholder col-12"></p>
 
         <p class="placeholder col-8"></p>
+        <p class="placeholder col-4"></p>
         <p class="placeholder col-2"></p>
 
         <a href="" class="btn custom text-light placeholder col-4"></a>
@@ -34,10 +35,10 @@
 <!-- Course Information Heading Start -->
 <ng-template #courseInfo>
   <div class="w-100 bg-dark pt-3 pb-0">
-    <div class="container-fluid custom row row-cols-1 row-cols-lg-2 start">
+    <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
       <!-- Course Image -->
 
-      <div class="col">
+      <div class="col-lg-5">
         <img
           [src]="course.imageUrl"
           [alt]="course.title + 'course image'"
@@ -45,7 +46,7 @@
         />
       </div>
 
-      <div class="col">
+      <div class="col-lg-7">
         <div class="d-flex flex-column align-items-start mb-3 text-light">
           <!-- Course Details -->
 
