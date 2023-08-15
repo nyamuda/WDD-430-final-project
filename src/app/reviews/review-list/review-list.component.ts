@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  Input,
-  Signal,
-  computed,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, Signal, computed } from '@angular/core';
 import { ReviewsService } from '../reviews.service';
 import { MetaData, Review } from '../review.model';
 
@@ -23,10 +16,7 @@ export class ReviewListComponent implements OnInit, OnDestroy {
     this.reviewService.reviewListSignal()
   );
 
-  //Reviews meta data for pagination
-  metaData: Signal<MetaData> = computed(() =>
-    this.reviewService.metaDataSignal()
-  );
+ 
 
   ngOnDestroy() {}
 }

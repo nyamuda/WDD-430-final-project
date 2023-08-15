@@ -1,5 +1,6 @@
-import { Component, Input } from '@angular/core';
-import { MetaData } from '../../review.model';
+import { Component, Signal, computed } from '@angular/core';
+import { MetaData, Review } from '../../review.model';
+import { ReviewsService } from '../../reviews.service';
 
 @Component({
   selector: 'app-review-pagination',
@@ -7,5 +8,20 @@ import { MetaData } from '../../review.model';
   styleUrls: ['./review-pagination.component.scss'],
 })
 export class ReviewPaginationComponent {
-  @Input('metaData') metaData: MetaData;
+  constructor(private reviewService: ReviewsService) {}
+
+  //Reviews meta data for pagination
+  metaData: Signal<MetaData> = computed(() =>
+    this.reviewService.metaDataSignal()
+  );
+  reviews: Signal<Review[]> = computed(() =>
+    this.reviewService.reviewListSignal()
+  );
+
+  //Change reviews pagination number
+  pageChanged(newPage) {
+    let courseId = this.reviewService.courseIdSignal();
+    //get reviews for the new page
+    this.reviewService.getReviewsForCourse(courseId, newPage);
+  }
 }

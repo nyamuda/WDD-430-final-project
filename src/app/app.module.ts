@@ -59,6 +59,7 @@ import { FooterComponent } from './footer.component';
 import { CourseFilterComponent } from './courses/course-list/course-filter/course-filter.component';
 import { StarRatingModule } from 'angular-star-rating';
 import { ReviewPaginationComponent } from './reviews/review-list/review-pagination/review-pagination.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -121,6 +122,7 @@ import { ReviewPaginationComponent } from './reviews/review-list/review-paginati
     ToastrModule.forRoot(),
     NgxMaterialTimepickerModule,
     StarRatingModule.forRoot(),
+    NgxPaginationModule,
   ],
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },

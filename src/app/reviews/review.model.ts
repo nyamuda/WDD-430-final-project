@@ -76,6 +76,10 @@ export class MetaData {
   get hasPreviousPage(): boolean {
     return this.currentPage > 1;
   }
+  //has next page after the next page
+  get hasNextNextPage(): boolean {
+    return this.currentPage < this.totalPages - 1;
+  }
 }
 
 export class ReviewMetaDto {

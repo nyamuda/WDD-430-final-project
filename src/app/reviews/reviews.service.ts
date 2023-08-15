@@ -71,8 +71,8 @@ export class ReviewsService {
   }
 
   // READ
-  getReviewsForCourse(courseId: string) {
-    const url = `http://localhost:8000/courses/${courseId}/reviews`;
+  getReviewsForCourse(courseId: string, page: number = 1) {
+    const url = `http://localhost:8000/courses/${courseId}/reviews?page=${page}`;
 
     //get the reviews
     //and meta data for pagination
