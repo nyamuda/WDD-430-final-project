@@ -39,7 +39,7 @@ export class CourseDetailsComponent implements OnInit {
   }
 
   reviewCount: Signal<number> = computed(
-    () => this.reviewService.reviewListSignal().length
+    () => this.reviewService.metaDataSignal().totalItems
   );
 
   deleteCourse(id: string) {

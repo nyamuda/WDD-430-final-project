@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./review-pagination.component.scss'],
 })
 export class ReviewPaginationComponent {
+  maxSize: number = 10;
   constructor(private reviewService: ReviewsService, private router: Router) {}
 
   //Reviews meta data for pagination

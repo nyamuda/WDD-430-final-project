@@ -1,0 +1,6 @@
+@import "/src/styles";
+
+
+.pagination-controls ::ng-deep .current {
+  background: $primary-color;
+}

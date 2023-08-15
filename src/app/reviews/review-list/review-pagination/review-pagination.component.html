@@ -11,4 +11,8 @@
   [review-details]="review"
 ></app-review-item>
 
-<pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+<pagination-controls
+  class="text-center pagination-controls"
+  [maxSize]="maxSize"
+  (pageChange)="pageChanged($event)"
+></pagination-controls>
