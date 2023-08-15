@@ -52,7 +52,10 @@
         <!-- Grid column -->
 
         <!-- Grid column -->
-        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+        <div
+          *ngIf="courses().length > 0"
+          class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"
+        >
           <!-- Links -->
           <h6 class="text-uppercase fw-bold mb-4 colored-text">Courses</h6>
           <p *ngFor="let course of courses()">
