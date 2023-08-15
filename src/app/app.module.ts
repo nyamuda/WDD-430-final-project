@@ -58,6 +58,7 @@ import { HomepageCallToActionComponent } from './homepage/homepage-call-to-actio
 import { FooterComponent } from './footer.component';
 import { CourseFilterComponent } from './courses/course-list/course-filter/course-filter.component';
 import { StarRatingModule } from 'angular-star-rating';
+import { ReviewPaginationComponent } from './reviews/review-list/review-pagination/review-pagination.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { StarRatingModule } from 'angular-star-rating';
     HomepageCallToActionComponent,
     FooterComponent,
     CourseFilterComponent,
+    ReviewPaginationComponent,
   ],
   imports: [
     BrowserModule,

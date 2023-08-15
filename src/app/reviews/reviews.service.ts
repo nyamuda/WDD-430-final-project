@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Review } from './review.model';
+import { MetaData, Review, ReviewMetaDto } from './review.model';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
@@ -17,7 +17,12 @@ import { User } from '../users/user.model';
 })
 export class ReviewsService {
   private _reviews = new Array<Review>();
+  //meta data for pagination
+  private _metaData = new MetaData(0, 0, 0);
+
+  //Signals
   public reviewListSignal: WritableSignal<Review[]> = signal(this._reviews);
+  public metaDataSignal: WritableSignal<MetaData> = signal(this._metaData);
   public courseIdSignal: WritableSignal<string> = signal('');
   //information about the logged in user
   public loggedInUser: Signal<User> = computed(() => this.userService.user());
@@ -69,10 +74,17 @@ export class ReviewsService {
   getReviewsForCourse(courseId: string) {
     const url = `http://localhost:8000/courses/${courseId}/reviews`;
 
-    this.http.get<Review[]>(url).subscribe(
-      (reviews: Review[]) => {
-        this._reviews = reviews;
-        this.reviewListSignal.set(reviews);
+    //get the reviews
+    //and meta data for pagination
+    this.http.get<ReviewMetaDto>(url).subscribe(
+      (reviewsMetaDto: ReviewMetaDto) => {
+        //save the reviews
+        this._reviews = reviewsMetaDto.reviews;
+        this.reviewListSignal.set(reviewsMetaDto.reviews);
+
+        //save the meta data
+        this._metaData = reviewsMetaDto.meta;
+        this.metaDataSignal.set(reviewsMetaDto.meta);
       },
       (error) => {
         console.error(error);

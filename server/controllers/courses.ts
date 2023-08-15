@@ -84,18 +84,36 @@ export class CoursesController {
     }
   }
 
-  // Get reviews for a particular course
+  // Get all the Reviews for a given course
   public static async getCourseReviews(req: Request, res: Response) {
     try {
-      let course = await Course.findById(req.params.id)
-        .select('reviews')
-        .populate({
-          path: 'reviews',
-          populate: {
-            path: 'userId',
-          },
-        });
-      return res.json(course.reviews);
+      //PAGINATION
+
+      //items per page
+      let itemsPerPage = 2;
+      //current page
+      let currentPage = Number(req.query.page) || 1;
+
+      //reviews to skip
+      let itemsToSkip = (currentPage - 1) * itemsPerPage;
+
+      let reviews = await Review.find({ courseId: req.params.id })
+        .skip(itemsToSkip)
+        .limit(itemsPerPage)
+        .populate('userId');
+
+      //total reviews for the course
+      let totalItems = await Review.find({
+        courseId: req.params.id,
+      }).countDocuments();
+
+      let meta = {
+        totalItems,
+        currentPage,
+        pageSize: itemsPerPage,
+      };
+
+      return res.json({ reviews, meta });
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',

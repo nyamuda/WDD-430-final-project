@@ -57,3 +57,27 @@ export class Review {
     return this._stars;
   }
 }
+
+export class MetaData {
+  constructor(
+    public totalItems: number,
+    public currentPage: number,
+    public pageSize: number
+  ) {}
+
+  get totalPages(): number {
+    return Math.ceil(this.totalItems / this.pageSize);
+  }
+
+  get hasNextPage(): boolean {
+    return this.currentPage < this.totalPages;
+  }
+
+  get hasPreviousPage(): boolean {
+    return this.currentPage > 1;
+  }
+}
+
+export class ReviewMetaDto {
+  constructor(public reviews: Review[], public meta: MetaData) {}
+}

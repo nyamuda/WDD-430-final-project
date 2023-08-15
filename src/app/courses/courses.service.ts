@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '../users/users.service';
+import { Review } from '../reviews/review.model';
 
 @Injectable({
   providedIn: 'root',
@@ -66,6 +67,7 @@ export class CoursesService {
       }
     }
     const url = `http://localhost:8000/courses/${id}`;
+
     return this.http.get<Course>(url);
   }
 

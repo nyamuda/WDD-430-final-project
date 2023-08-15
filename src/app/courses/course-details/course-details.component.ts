@@ -30,13 +30,10 @@ export class CourseDetailsComponent implements OnInit {
 
       this.courseService.getCourseById(courseId).subscribe((course: Course) => {
         this.course = course;
-
-        // The reviews for the course
-        let reviews: Review[] = course.reviews;
         // Save the ID of the course to the review service
         this.reviewService.courseIdSignal.set(courseId);
-        // Show the reviews for the course
-        this.reviewService.reviewListSignal.set(reviews);
+        //Get the reviews for the course
+        this.reviewService.getReviewsForCourse(courseId);
       });
     });
   }
