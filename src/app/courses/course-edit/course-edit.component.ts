@@ -5,6 +5,10 @@ import { CoursesService } from '../courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
+import {
+  FileUploadControl,
+  FileUploadValidators,
+} from '@iplab/ngx-file-upload';
 
 @Component({
   selector: 'app-course-edit',
@@ -15,6 +19,11 @@ export class CourseEditComponent implements OnInit {
   courseFormGroup!: FormGroup;
   editMode = false;
   courseToEdit: Course = new Course();
+  //control for image upload
+  fileUploadControl = new FileUploadControl(
+    null,
+    FileUploadValidators.filesLimit(1)
+  );
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,9 +36,11 @@ export class CourseEditComponent implements OnInit {
   ngOnInit() {
     this.courseFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
-      description: ['', Validators.required],
-      imageUrl: ['', Validators.required],
+      shortDescription: ['', Validators.required],
+      fullDescription: ['', Validators.required],
       price: ['', Validators.required],
+      //image upload control
+      file: this.fileUploadControl,
     });
 
     this.activatedRoute.params.subscribe((params) => {
@@ -46,7 +57,8 @@ export class CourseEditComponent implements OnInit {
             //populate the form
             this.courseFormGroup.patchValue({
               title: course.title,
-              description: course.description,
+              fullDescription: course.fullDescription,
+              shortDescription: course.shortDescription,
               price: course.price,
               imageUrl: course.imageUrl,
             });
@@ -64,9 +76,11 @@ export class CourseEditComponent implements OnInit {
       let newCourse = new Course();
 
       newCourse.title = this.courseFormGroup.controls['title'].value;
-      newCourse.description =
-        this.courseFormGroup.controls['description'].value;
-      newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
+      newCourse.fullDescription =
+        this.courseFormGroup.controls['fullDescription'].value;
+      newCourse.shortDescription =
+        this.courseFormGroup.controls['shortDescription'].value;
+      // newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
       //if in edit mode

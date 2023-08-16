@@ -2,7 +2,8 @@ import { Review } from '../reviews/review.model';
 export class Course {
   private _id: string;
   private _title: string;
-  private _description: string;
+  private _fullDescription: string;
+  private _shortDescription: string;
   private _price: number;
   private _imageUrl: string;
   private _reviews: Array<Review> = new Array<Review>();
@@ -27,12 +28,20 @@ export class Course {
     this._title = title;
   }
 
-  public get description(): string {
-    return this._description;
+  public get fullDescription(): string {
+    return this._fullDescription;
   }
 
-  public set description(description: string) {
-    this._description = description;
+  public set fullDescription(description: string) {
+    this._fullDescription = description;
+  }
+
+  public get shortDescription(): string {
+    return this._shortDescription;
+  }
+
+  public set shortDescription(description: string) {
+    this._shortDescription = description;
   }
 
   public get price(): number {

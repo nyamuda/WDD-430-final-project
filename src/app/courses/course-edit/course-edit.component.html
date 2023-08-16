@@ -1,4 +1,4 @@
-<div class="container border rounded-top px-0 mt-5 ms-md-5 px-4 py-3">
+<div class="container border rounded-top px-0 mt-5 m-auto px-4 py-3">
   <div class="container-sm text-center my-5">
     <p *ngIf="editMode; else new" class="display-6 text-uppercase">
       Edit course
@@ -13,55 +13,120 @@
       <input
         [ngClass]="{
           'is-invalid':
-            courseFormGroup.get('title')?.value == '' ||
-            courseFormGroup.get('title')?.invalid
+            courseFormGroup.get('title').invalid &&
+            courseFormGroup.get('title').touched,
+          'is-valid':
+            courseFormGroup.get('title').valid &&
+            courseFormGroup.get('title').touched
         }"
         class="form-control"
         type="text"
         id="course-title"
         formControlName="title"
       />
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          courseFormGroup.get('title').invalid &&
+          courseFormGroup.get('title').touched
+        "
+      >
+        Required
+      </div>
     </div>
     <div class="mb-3">
-      <label for="course-description">Course description:</label>
-      <input
+      <label for="short-description">Short description:</label>
+      <textarea
         [ngClass]="{
-          'invalid-input':
-            courseFormGroup.get('description')?.value == '' ||
-            courseFormGroup.get('description')?.invalid
+          'is-invalid':
+            courseFormGroup.get('shortDescription').invalid &&
+            courseFormGroup.get('shortDescription').touched,
+          'is-valid':
+            courseFormGroup.get('shortDescription').valid &&
+            courseFormGroup.get('shortDescription').touched
         }"
         class="form-control"
+        rows="2"
         type="text"
-        id="course-description"
-        formControlName="description"
-      />
+        id="short-description"
+        formControlName="shortDescription"
+      ></textarea>
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          courseFormGroup.get('shortDescription').invalid &&
+          courseFormGroup.get('shortDescription').touched
+        "
+      >
+        Required
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="full-description">Full description:</label>
+      <!-- <textarea
+        [ngClass]="{
+          'invalid-input':
+            courseFormGroup.get('fullDescription').invalid &&
+            courseFormGroup.get('fullDescription').touched
+        }"
+        class="form-control"
+        rows="4"
+        type="text"
+        id="full-description"
+        formControlName="fullDescription"
+      ></textarea> -->
+      <quill-editor
+        [placeholder]="'Enter full description here'"
+        [required]="true"
+        [ngClass]="{
+          'full-description-invalid':
+            courseFormGroup.get('fullDescription').invalid &&
+            courseFormGroup.get('fullDescription').touched,
+          'full-description-valid':
+            courseFormGroup.get('fullDescription').valid &&
+            courseFormGroup.get('fullDescription').touched
+        }"
+        formControlName="fullDescription"
+      ></quill-editor>
+      <div
+        class="invalid-feedback"
+        *ngIf="
+          courseFormGroup.get('fullDescription').invalid &&
+          courseFormGroup.get('fullDescription').touched
+        "
+      >
+        Required
+      </div>
     </div>
     <div class="mb-3">
       <label for="price">Course price:</label>
       <input
         [ngClass]="{
           'is-invalid':
-            courseFormGroup.get('price')?.value == '' ||
-            courseFormGroup.get('price')?.invalid
+            courseFormGroup.get('price').invalid &&
+            courseFormGroup.get('price').touched,
+          'is-valid':
+            courseFormGroup.get('price').valid &&
+            courseFormGroup.get('price').touched
         }"
         class="form-control"
-        type="text"
+        type="number"
         id="price"
         formControlName="price"
       />
-      <!-- <div
+      <div
+        class="invalid-feedback"
         *ngIf="
-          courseFormGroup.get('price').touched &&
-          courseFormGroup.get('price').invalid
+          courseFormGroup.get('price').invalid &&
+          courseFormGroup.get('price').touched
         "
-        class="form-text alert alert-danger"
       >
-        Price must be a number
-      </div> -->
+        Required
+      </div>
     </div>
     <div class="mb-3">
-      <label for="course-url">Image URL</label>
-      <input
+      <label for="course-image">Course image:</label>
+      <!-- <input
         [ngClass]="{
           'invalid-input':
             courseFormGroup.get('imageUrl')?.value == '' ||
@@ -71,10 +136,14 @@
         type="text"
         id="course-url"
         formControlName="imageUrl"
-      />
-    </div>
-    <div *ngIf="courseFormGroup.invalid">
-      <p class="alert alert-danger text-start">All fields are required.</p>
+      /> -->
+      <file-upload
+        id="course-image"
+        accept="image/*"
+        formControlName="file"
+        [multiple]="false"
+        [animation]="true"
+      ></file-upload>
     </div>
 
     <div class="d-flex justify-content-start">

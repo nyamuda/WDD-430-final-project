@@ -52,9 +52,7 @@
 
           <h2 class="display-4 fw-bold">{{ course.title }}</h2>
           <p>
-            Lorem ipsum dolor sit amet. Cum facilis sunt et placeat perferendis
-            sit architecto deserunt eum ipsum veniam id fugiat quos ab impedit
-            omnis sed doloribus possimus.
+            {{ course.shortDescription }}
           </p>
           <div class="d-flex justify-content-start align-items-center">
             <p class="course-rating fs-5">{{ course.rating }}</p>
@@ -128,7 +126,7 @@
 
     <div class="mb-3">
       <p class="h2">Course Overview</p>
-      <p class="">{{ course.description }}</p>
+      <p class="">{{ course.fullDescription }}</p>
     </div>
     <hr />
     <div class="review-headline mt-3">

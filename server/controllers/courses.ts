@@ -90,7 +90,7 @@ export class CoursesController {
       //PAGINATION
 
       //items per page
-      let itemsPerPage = 2;
+      let itemsPerPage = 5;
       //current page
       let currentPage = Number(req.query.page) || 1;
 

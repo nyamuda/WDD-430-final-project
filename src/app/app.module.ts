@@ -60,6 +60,8 @@ import { CourseFilterComponent } from './courses/course-list/course-filter/cours
 import { StarRatingModule } from 'angular-star-rating';
 import { ReviewPaginationComponent } from './reviews/review-list/review-pagination/review-pagination.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { FileUploadModule } from '@iplab/ngx-file-upload';
+import { QuillModule } from 'ngx-quill';
 
 @NgModule({
   declarations: [
@@ -123,6 +125,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
     NgxMaterialTimepickerModule,
     StarRatingModule.forRoot(),
     NgxPaginationModule,
+    FileUploadModule,
+    QuillModule.forRoot(),
   ],
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },

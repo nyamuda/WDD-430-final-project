@@ -39,7 +39,8 @@ export class CoursesService {
       const headers = this.headers();
       let courseDto = {
         title: newCourse.title,
-        description: newCourse.description,
+        fullDescription: newCourse.fullDescription,
+        shortDescription: newCourse.shortDescription,
         imageUrl: newCourse.imageUrl,
         price: newCourse.price,
       };
@@ -101,7 +102,8 @@ export class CoursesService {
       let headers = this.headers();
       let courseDto = {
         title: newCourse.title,
-        description: newCourse.description,
+        fullDescription: newCourse.fullDescription,
+        shortDescription: newCourse.shortDescription,
         imageUrl: newCourse.imageUrl,
         price: newCourse.price,
       };
