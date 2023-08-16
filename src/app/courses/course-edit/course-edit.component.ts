@@ -83,16 +83,18 @@ export class CourseEditComponent implements OnInit {
       // newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
+      alert(newCourse.fullDescription);
+
       //if in edit mode
-      if (this.editMode) {
-        this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
-        this.router.navigateByUrl('/courses');
-      }
+      // if (this.editMode) {
+      //   this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
+      //   this.router.navigateByUrl('/courses');
+      // }
       //else if in new document mode
-      else {
-        this.courseService.addCourse(newCourse);
-        this.router.navigateByUrl('/courses');
-      }
+      // else {
+      //   this.courseService.addCourse(newCourse);
+      //   this.router.navigateByUrl('/courses');
+      // }
     }
   }
 

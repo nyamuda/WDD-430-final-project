@@ -1,4 +1,6 @@
-<div class="container border rounded-top px-0 mt-5 m-auto px-4 py-3">
+<div
+  class="container border rounded-top px-0 mt-5 m-auto px-4 py-3 editor-container"
+>
   <div class="container-sm text-center my-5">
     <p *ngIf="editMode; else new" class="display-6 text-uppercase">
       Edit course
@@ -88,15 +90,6 @@
         }"
         formControlName="fullDescription"
       ></quill-editor>
-      <div
-        class="invalid-feedback"
-        *ngIf="
-          courseFormGroup.get('fullDescription').invalid &&
-          courseFormGroup.get('fullDescription').touched
-        "
-      >
-        Required
-      </div>
     </div>
     <div class="mb-3">
       <label for="price">Course price:</label>

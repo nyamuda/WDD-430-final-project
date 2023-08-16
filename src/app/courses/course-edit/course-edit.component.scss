@@ -1,8 +1,12 @@
+.editor-container {
+  position: relative;
+}
+
 .full-description-invalid {
-  border: 1px solid red;
+  border: 1px solid #ff0000;
 }
 .full-description-valid {
-  border: 1px solid green;
+  border: 1px solid #008000;
 }
 .invalid-feedback {
   position: absolute;
