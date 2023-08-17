@@ -39,6 +39,7 @@
     <div class="mb-3">
       <label for="short-description">Short description:</label>
       <textarea
+        maxlength="200"
         [ngClass]="{
           'is-invalid':
             courseFormGroup.get('shortDescription').invalid &&
@@ -136,7 +137,8 @@
         formControlName="file"
         [multiple]="false"
         [animation]="true"
-      ></file-upload>
+      >
+      </file-upload>
     </div>
 
     <div class="d-flex justify-content-start">

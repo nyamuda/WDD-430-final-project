@@ -9,6 +9,7 @@ import {
   CourseRouter,
   LoginRouter,
   RegisterRouter,
+  FilesRouter,
 } from './server/routes/';
 
 let app = express();
@@ -30,5 +31,6 @@ app.use('/courses', CourseRouter);
 app.use('/reviews', ReviewRouter);
 app.use('/login', LoginRouter);
 app.use('/register', RegisterRouter);
+app.use('/files', FilesRouter);
 
 export default app;

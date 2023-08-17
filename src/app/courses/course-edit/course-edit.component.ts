@@ -20,10 +20,10 @@ export class CourseEditComponent implements OnInit {
   editMode = false;
   courseToEdit: Course = new Course();
   //control for image upload
-  fileUploadControl = new FileUploadControl(
-    null,
-    FileUploadValidators.filesLimit(1)
-  );
+  fileUploadControl = new FileUploadControl(null, [
+    FileUploadValidators.filesLimit(1),
+    FileUploadValidators.accept(['image/*']),
+  ]);
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -83,18 +83,18 @@ export class CourseEditComponent implements OnInit {
       // newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
-      alert(newCourse.fullDescription);
+      let imageFile = this.courseFormGroup.controls['file'].value;
 
-      //if in edit mode
-      // if (this.editMode) {
-      //   this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
-      //   this.router.navigateByUrl('/courses');
-      // }
-      //else if in new document mode
-      // else {
-      //   this.courseService.addCourse(newCourse);
-      //   this.router.navigateByUrl('/courses');
-      // }
+      // if in edit mode
+      if (this.editMode) {
+        this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
+        this.router.navigateByUrl('/courses');
+      }
+      // else if in new document mode
+      else {
+        this.courseService.addCourse(newCourse, imageFile);
+        this.router.navigateByUrl('/courses');
+      }
     }
   }
 

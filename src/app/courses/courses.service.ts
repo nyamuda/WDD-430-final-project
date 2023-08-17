@@ -33,15 +33,19 @@ export class CoursesService {
   ) {}
 
   //CREATE
-  addCourse(newCourse: Course) {
+  async addCourse(newCourse: Course, imageFile: File) {
     if (!!newCourse) {
+      //First upload image
+      //and get the URL of the image
+      let imageUrl = await this.uploadCourseImage(imageFile);
+
       const url = 'http://localhost:8000/courses';
       const headers = this.headers();
       let courseDto = {
         title: newCourse.title,
         fullDescription: newCourse.fullDescription,
         shortDescription: newCourse.shortDescription,
-        imageUrl: newCourse.imageUrl,
+        imageUrl,
         price: newCourse.price,
       };
 
@@ -191,5 +195,13 @@ export class CoursesService {
       progressBar: true,
       positionClass: 'toast-bottom-right',
     });
+  }
+
+  //Upload course image
+  //returns image URL
+  uploadCourseImage(file: File): Observable<Course> {
+    const url = `http://localhost:8000/files/courses`;
+
+    return this.http.get<Course>(url);
   }
 }
