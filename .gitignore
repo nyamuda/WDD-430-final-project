@@ -41,7 +41,7 @@ yarn-error.log
 testem.log
 /typings
 .env
-firebasePrivateKey
+firebasePrivateKey.json
 
 # System Files
 .DS_Store

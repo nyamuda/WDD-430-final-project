@@ -1,5 +1,10 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  Validators,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
 import { Course } from '../course.model';
 import { CoursesService } from '../courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -20,7 +25,7 @@ export class CourseEditComponent implements OnInit {
   editMode = false;
   courseToEdit: Course = new Course();
   //control for image upload
-  fileUploadControl = new FileUploadControl(null, [
+  fileUploadControl = new FormControl<File[]>(null, [
     FileUploadValidators.filesLimit(1),
     FileUploadValidators.accept(['image/*']),
   ]);
@@ -83,7 +88,7 @@ export class CourseEditComponent implements OnInit {
       // newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
-      let imageFile = this.courseFormGroup.controls['file'].value;
+      let imageFile = this.courseFormGroup.controls['file'].value[0];
 
       // if in edit mode
       if (this.editMode) {

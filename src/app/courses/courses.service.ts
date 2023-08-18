@@ -33,37 +33,38 @@ export class CoursesService {
   ) {}
 
   //CREATE
-  async addCourse(newCourse: Course, imageFile: File) {
+  addCourse(newCourse: Course, imageFile: File) {
     if (!!newCourse) {
       //First upload image
       //and get the URL of the image
-      let imageUrl = await this.uploadCourseImage(imageFile);
+      this.uploadCourseImage(imageFile).subscribe((imageUrl) => {
+        console.log(imageUrl);
+        const url = 'http://localhost:8000/courses';
+        const headers = this.headers();
+        let courseDto = {
+          title: newCourse.title,
+          fullDescription: newCourse.fullDescription,
+          shortDescription: newCourse.shortDescription,
+          imageUrl,
+          price: newCourse.price,
+        };
 
-      const url = 'http://localhost:8000/courses';
-      const headers = this.headers();
-      let courseDto = {
-        title: newCourse.title,
-        fullDescription: newCourse.fullDescription,
-        shortDescription: newCourse.shortDescription,
-        imageUrl,
-        price: newCourse.price,
-      };
-
-      this.http.post(url, courseDto, { headers }).subscribe(
-        (response) => {
-          this.getCourses();
-          this.showSuccess(
-            'The course has been added to the database.',
-            'Success!'
-          );
-        },
-        (error) => {
-          this.showFailure(
-            'Please review your data and try again.',
-            'Failed to add course'
-          );
-        }
-      );
+        this.http.post(url, courseDto, { headers }).subscribe(
+          (response) => {
+            this.getCourses();
+            this.showSuccess(
+              'The course has been added to the database.',
+              'Success!'
+            );
+          },
+          (error) => {
+            this.showFailure(
+              'Please review your data and try again.',
+              'Failed to add course'
+            );
+          }
+        );
+      });
     }
   }
   getCourseById(id: string): Observable<Course> {
@@ -199,9 +200,9 @@ export class CoursesService {
 
   //Upload course image
   //returns image URL
-  uploadCourseImage(file: File): Observable<Course> {
+  uploadCourseImage(file: File): Observable<string> {
     const url = `http://localhost:8000/files/courses`;
 
-    return this.http.get<Course>(url);
+    return this.http.get<string>(url);
   }
 }
