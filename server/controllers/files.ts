@@ -8,10 +8,12 @@ export class FilesController {
     try {
       const privatekey = require('../../firebasePrivateKey');
 
-      admin.initializeApp({
-        credential: admin.credential.cert(privatekey),
-        storageBucket: 'drivingschool-7c02e.appspot.com', // Without "gs://"
-      });
+      if (admin.apps.length === 0) {
+        admin.initializeApp({
+          credential: admin.credential.cert(privatekey),
+          storageBucket: 'drivingschool-7c02e.appspot.com', // Without "gs://"
+        });
+      }
 
       const storageBucket = admin.storage().bucket();
 

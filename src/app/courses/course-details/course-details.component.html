@@ -130,7 +130,8 @@
 
     <div class="mb-3">
       <p class="h2">Course Overview</p>
-      <div class="">{{ course.fullDescription }}</div>
+      <!-- Course fullDescription is HTML form -->
+      <div [innerHTML]="course.fullDescription" class=""></div>
     </div>
     <hr />
     <div class="review-headline mt-3">
