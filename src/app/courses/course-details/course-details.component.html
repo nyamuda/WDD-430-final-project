@@ -51,9 +51,9 @@
           <!-- Course Details -->
 
           <h2 class="display-4 fw-bold">{{ course.title }}</h2>
-          <p>
-            {{ course.shortDescription }}
-          </p>
+
+          <p>{{ course.shortDescription }}</p>
+
           <div class="d-flex justify-content-start align-items-center">
             <p class="course-rating fs-5">{{ course.rating }}</p>
             <!-- Move the stars a bit to the left if the course does have have any reviews -->
@@ -73,18 +73,22 @@
             {{ course.price | currency : "ZAR" : "R" }}
           </p>
 
-          <a href="" class="btn custom text-light">Book course now</a>
+          <div class="row row-cols-1 row-cols-lg-2">
+            <div class="col">
+              <a href="" class="btn custom text-light">Book course now</a>
+            </div>
 
-          <div *ngIf="isAdmin()" class="d-flex mt-4">
-            <a
-              (click)="updateCourse(course['_id'])"
-              class="btn btn-primary me-2"
-              >Edit</a
-            >
+            <div *ngIf="isAdmin()" class="col d-flex mt-4 mt-lg-0">
+              <a
+                (click)="updateCourse(course['_id'])"
+                class="btn btn-primary me-2"
+                >Edit</a
+              >
 
-            <a (click)="deleteCourse(course['_id'])" class="btn btn-danger"
-              >Delete</a
-            >
+              <a (click)="openModal(course['_id'])" class="btn btn-danger"
+                >Delete</a
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -126,7 +130,7 @@
 
     <div class="mb-3">
       <p class="h2">Course Overview</p>
-      <p class="">{{ course.fullDescription }}</p>
+      <div class="">{{ course.fullDescription }}</div>
     </div>
     <hr />
     <div class="review-headline mt-3">

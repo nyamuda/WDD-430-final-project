@@ -7,6 +7,8 @@ import { Review } from '../../reviews/review.model';
 import { ViewportScroller } from '@angular/common';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-course-details',
@@ -15,13 +17,16 @@ import { User } from 'src/app/users/user.model';
 })
 export class CourseDetailsComponent implements OnInit {
   course: Course;
+  //the modal
+  modalRef: MdbModalRef<ConfirmationModalComponent>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
     private reviewService: ReviewsService,
-    private userService: UsersService
+    private userService: UsersService,
+    private modalService: MdbModalService
   ) {}
 
   ngOnInit() {
@@ -65,5 +70,25 @@ export class CourseDetailsComponent implements OnInit {
   //only admins have the authority to edit or delete courses
   isAdmin(): boolean {
     return this.currentUser().isAdmin;
+  }
+
+  //Open the modal before deleting a course
+  //its centered
+  openModal(id: string) {
+    this.modalRef = this.modalService.open(ConfirmationModalComponent, {
+      modalClass: 'modal-dialog-centered',
+      data: {
+        title: 'Please confirm deletion',
+        message: 'Do you wish to proceed with deleting this course?',
+        action: 'Delete',
+      },
+    });
+
+    //if the deletion has been confirmed
+    this.modalRef.onClose.subscribe((message) => {
+      if (message === 'confirmed') {
+        this.deleteCourse(id);
+      }
+    });
   }
 }

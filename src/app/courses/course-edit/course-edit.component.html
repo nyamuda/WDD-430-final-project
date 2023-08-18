@@ -141,7 +141,10 @@
       </file-upload>
     </div>
 
-    <div class="d-flex justify-content-start">
+    <div
+      *ngIf="!isProcessingRequest(); else showLoader"
+      class="d-flex justify-content-start"
+    >
       <a
         (click)="submitForm($event)"
         [ngClass]="{ disabled: courseFormGroup.invalid }"
@@ -156,5 +159,17 @@
         >Cancel</a
       >
     </div>
+    <!-- Show a loader during an UPDATE OR POST REQUEST -->
+    <ng-template #showLoader>
+      <div class="d-flex align-items-center">
+        <strong class="fs-5">Please wait...</strong>
+        <div
+          style="width: 3rem; height: 3rem"
+          class="spinner-border ms-auto"
+          role="status"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </ng-template>
   </form>
 </div>

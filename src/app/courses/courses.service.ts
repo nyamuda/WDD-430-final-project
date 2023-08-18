@@ -28,7 +28,7 @@ export class CoursesService {
 
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
-  //show a loader during an HTTP request
+  //show a loader during an HTTP POST OR UPDATE request
   public isProcessingRequest: WritableSignal<boolean> = signal(false);
 
   constructor(
@@ -41,9 +41,14 @@ export class CoursesService {
   //CREATE
   addCourse(newCourse: Course, imageFile: File) {
     if (!!newCourse) {
+      //show loader
+      this.isProcessingRequest.set(true);
+
       //First upload image
       //and get the URL of the image
       this.uploadCourseImage(imageFile).subscribe((imageUrl: string) => {
+        //And then store the course to the database
+        //together with the image URK
         const url = 'http://localhost:8000/courses';
         const headers = this.headers();
         let courseDto = {
@@ -56,6 +61,8 @@ export class CoursesService {
 
         this.http.post(url, courseDto, { headers }).subscribe(
           (response) => {
+            //stop loader
+            this.isProcessingRequest.set(false);
             this.getCourses();
             this.showSuccess(
               'The course has been added to the database.',
@@ -64,6 +71,8 @@ export class CoursesService {
             this.router.navigateByUrl('/courses');
           },
           (error) => {
+            //stop loader
+            this.isProcessingRequest.set(false);
             this.showFailure(
               'Please review your data and try again.',
               'Failed to add course'
