@@ -2,7 +2,9 @@ import mongoose, { Schema, model } from 'mongoose';
 
 interface ICourse {
   title: string;
-  description: string;
+
+  shortDescription: string;
+  fullDescription: string;
   price: number;
   imageUrl: string;
   reviews: [object];
@@ -12,7 +14,8 @@ interface ICourse {
 let courseSchema = new Schema<ICourse>(
   {
     title: String,
-    description: String,
+    shortDescription: String,
+    fullDescription: String,
     price: Number,
     imageUrl: String,
     reviews: [{ type: mongoose.Types.ObjectId, ref: 'Review' }],

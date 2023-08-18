@@ -1,10 +1,12 @@
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of, catchError } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
 import { ToastrService } from 'ngx-toastr';
 import { UsersService } from '../users/users.service';
 import { Review } from '../reviews/review.model';
+import { response } from 'express';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -26,10 +28,14 @@ export class CoursesService {
 
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
 
+  //show a loader during an HTTP request
+  public isProcessingRequest: WritableSignal<boolean> = signal(false);
+
   constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) {}
 
   //CREATE
@@ -37,8 +43,7 @@ export class CoursesService {
     if (!!newCourse) {
       //First upload image
       //and get the URL of the image
-      this.uploadCourseImage(imageFile).subscribe((imageUrl) => {
-        console.log(imageUrl);
+      this.uploadCourseImage(imageFile).subscribe((imageUrl: string) => {
         const url = 'http://localhost:8000/courses';
         const headers = this.headers();
         let courseDto = {
@@ -56,6 +61,7 @@ export class CoursesService {
               'The course has been added to the database.',
               'Success!'
             );
+            this.router.navigateByUrl('/courses');
           },
           (error) => {
             this.showFailure(
@@ -118,6 +124,8 @@ export class CoursesService {
           (response) => {
             this.getCourses();
             this.showSuccess('The course has been updated', 'Success!');
+
+            this.router.navigateByUrl('/courses');
           },
           (error) => {
             this.showFailure(
@@ -201,8 +209,22 @@ export class CoursesService {
   //Upload course image
   //returns image URL
   uploadCourseImage(file: File): Observable<string> {
-    const url = `http://localhost:8000/files/courses`;
+    const formData = new FormData(); // Create a new FormData object
+    formData.append('file', file); // Append the file to the form data
 
-    return this.http.get<string>(url);
+    const url = `http://localhost:8000/files/courses`;
+    let token = this.userService.getJwtToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+    return this.http.post(url, formData, { headers }).pipe(
+      map((response) => {
+        return response['downloadURL']; // Return the response data
+      }),
+      catchError((error) => {
+        // Handle errors if needed
+        console.error('Error uploading course image:', error);
+        return of(null);
+      })
+    );
   }
 }

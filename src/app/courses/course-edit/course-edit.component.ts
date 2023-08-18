@@ -93,12 +93,10 @@ export class CourseEditComponent implements OnInit {
       // if in edit mode
       if (this.editMode) {
         this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
-        this.router.navigateByUrl('/courses');
       }
       // else if in new document mode
       else {
         this.courseService.addCourse(newCourse, imageFile);
-        this.router.navigateByUrl('/courses');
       }
     }
   }

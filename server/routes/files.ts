@@ -6,15 +6,14 @@ import * as multer from 'multer';
 
 const router = express.Router();
 
-//fore the image uploads
-//when creating or updating a course
+//Setting up multer as a middleware to grab photo uploads
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 router.route('/').get((req: Request, res: Response) => {});
 
 router
-  .route('/course')
+  .route('/courses')
   .post(
     UserUtils.ensureIsAdminMiddleware,
     upload.single('file'),

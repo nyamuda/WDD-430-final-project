@@ -8,7 +8,8 @@ export class CoursesController {
     // Validation
     let schema = Joi.object({
       title: Joi.string().required(),
-      description: Joi.string().required(),
+      shortDescription: Joi.string().required(),
+      fullDescription: Joi.string().required(),
       price: Joi.number().required(),
       imageUrl: Joi.string().required(),
     }).unknown(true);
@@ -20,7 +21,8 @@ export class CoursesController {
 
     let course = {
       title: req.body.title,
-      description: req.body.description,
+      shortDescription: req.body.shortDescription,
+      fullDescription: req.body.fullDescription,
       price: req.body.price,
       imageUrl: req.body.imageUrl,
     };
@@ -127,7 +129,8 @@ export class CoursesController {
     // Validation
     let schema = Joi.object({
       title: Joi.string().optional(),
-      description: Joi.string().optional(),
+      shortDescription: Joi.string().optional(),
+      fullDescription: Joi.string().optional(),
       price: Joi.number().optional(),
       imageUrl: Joi.string().optional(),
     }).unknown(true);
@@ -148,7 +151,8 @@ export class CoursesController {
 
     let course = {
       title: req.body.title,
-      description: req.body.description,
+      shortDescription: req.body.shortDescription,
+      fullDescription: req.body.fullDescription,
       price: req.body.price,
       imageUrl: req.body.imageUrl,
     };
