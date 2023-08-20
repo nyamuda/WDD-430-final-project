@@ -58,4 +58,46 @@ export class FilesController {
       res.status(500).json({ error: 'Error initializing Firebase' });
     }
   }
+
+  public static deleteCourseImage(req: Request, res: Response) {
+    try {
+      let imageUrl = req.body['imageUrl'];
+      const privatekey = require('../../firebasePrivateKey');
+
+      if (admin.apps.length === 0) {
+        admin.initializeApp({
+          credential: admin.credential.cert(privatekey),
+          storageBucket: 'drivingschool-7c02e.appspot.com', // Without "gs://"
+        });
+      }
+
+      // Extract the path from the URL
+      const url = new URL(imageUrl);
+      const pathName = url.pathname;
+
+      // Split the path to get the filename
+      const parts = pathName.split('/');
+      const filename = parts[parts.length - 1];
+
+      const storageBucket = admin.storage().bucket();
+
+      //the file to delete
+      let file = storageBucket.file(filename);
+
+      // Delete the file
+      file
+        .delete()
+        .then(() => {
+          console.log('Image deleted successfully');
+          res.status(200).json({ message: 'Image deleted successfully' });
+        })
+        .catch((error) => {
+          console.error('Error deleting image:', error);
+          return res.status(500).json({ error: 'Error deleting image' });
+        });
+    } catch (error) {
+      console.error('Error deleting image:', error);
+      return res.status(500).json({ error: 'Error deleting image' });
+    }
+  }
 }

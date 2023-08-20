@@ -10,16 +10,17 @@ const router = express.Router();
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
-router.route('/').get((req: Request, res: Response) => {});
-
 router
-  .route('/courses')
+  .route('/')
   .post(
     UserUtils.ensureIsAdminMiddleware,
     upload.single('file'),
     (req: Request, res: Response) => {
       FilesController.storeCourseImage(req, res);
     }
-  );
+  )
+  .delete((req: Request, res: Response) => {
+    FilesController.deleteCourseImage(req, res);
+  });
 
 export { router as FilesRouter };
