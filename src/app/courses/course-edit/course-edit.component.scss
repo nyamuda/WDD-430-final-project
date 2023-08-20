@@ -17,3 +17,9 @@
 .upload-invalid {
   background-color: rgba($color: #f3d4d7, $alpha: 0.7);
 }
+.upload-warning {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: bold;
+}

@@ -65,7 +65,6 @@ export class CourseEditComponent implements OnInit {
               fullDescription: course.fullDescription,
               shortDescription: course.shortDescription,
               price: course.price,
-              imageUrl: course.imageUrl,
             });
           }
         });
@@ -85,13 +84,14 @@ export class CourseEditComponent implements OnInit {
         this.courseFormGroup.controls['fullDescription'].value;
       newCourse.shortDescription =
         this.courseFormGroup.controls['shortDescription'].value;
-      // newCourse.imageUrl = this.courseFormGroup.controls['imageUrl'].value;
+
       newCourse.price = this.courseFormGroup.controls['price'].value;
 
       let imageFile = this.courseFormGroup.controls['file'].value[0];
 
       // if in edit mode
       if (this.editMode) {
+        //if the course image has been updated
         this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
       }
       // else if in new document mode

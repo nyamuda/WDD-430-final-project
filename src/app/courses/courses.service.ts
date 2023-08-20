@@ -117,7 +117,7 @@ export class CoursesService {
   }
 
   //UPDATE
-  updateCourse(id: string, newCourse: Course) {
+  updateCourse(id: string, newCourse: Course, newImage = false) {
     if (!!newCourse) {
       let headers = this.headers();
       let courseDto = {

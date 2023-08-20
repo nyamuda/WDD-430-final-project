@@ -118,8 +118,24 @@
         Required
       </div>
     </div>
+
+    <!-- Image file upload start -->
     <div class="mb-4">
       <label for="course-image">Course image:</label>
+      <div class="d-flex flex-column align-items-start" *ngIf="editMode">
+        <div class="row row-cols-1 row-cols-lg-2">
+          <div class="col-lg-5">
+            <img
+              [src]="courseToEdit.imageUrl"
+              alt="Current course image"
+              class="img-fluid"
+            />
+          </div>
+        </div>
+        <p class="upload-warning">
+          Please note: Uploading a new image will replace the current one.
+        </p>
+      </div>
 
       <file-upload
         [ngClass]="{
@@ -144,7 +160,7 @@
         Invalid file format. Please upload an image (e.g., JPG, PNG, GIF).
       </div>
     </div>
-
+    <!-- Image file upload end -->
     <div
       *ngIf="!isProcessingRequest(); else showLoader"
       class="d-flex justify-content-start"
