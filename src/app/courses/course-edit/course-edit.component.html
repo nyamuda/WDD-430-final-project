@@ -118,20 +118,15 @@
         Required
       </div>
     </div>
-    <div class="mb-3">
+    <div class="mb-4">
       <label for="course-image">Course image:</label>
-      <!-- <input
-        [ngClass]="{
-          'invalid-input':
-            courseFormGroup.get('imageUrl')?.value == '' ||
-            courseFormGroup.get('imageUrl')?.invalid
-        }"
-        class="form-control"
-        type="text"
-        id="course-url"
-        formControlName="imageUrl"
-      /> -->
+
       <file-upload
+        [ngClass]="{
+          'upload-invalid':
+            courseFormGroup.get('file').invalid &&
+            courseFormGroup.get('file').touched
+        }"
         id="course-image"
         accept="image/*"
         formControlName="file"
@@ -139,6 +134,15 @@
         [animation]="true"
       >
       </file-upload>
+      <div
+        class="file-error-message text-danger"
+        *ngIf="
+          courseFormGroup.get('file').invalid &&
+          courseFormGroup.get('file').touched
+        "
+      >
+        Invalid file format. Please upload an image (e.g., JPG, PNG, GIF).
+      </div>
     </div>
 
     <div

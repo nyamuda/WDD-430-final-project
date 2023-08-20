@@ -24,7 +24,11 @@
 <div class="card shadow-lg text-dark">
   <div class="bg-image hover-overlay ripple">
     <img
-      [src]="course.imageUrl"
+      [src]="
+        course.imageUrl
+          ? course.imageUrl
+          : '../../../assets/img/placeholder/placeholder1.png'
+      "
       class="img-fluid card-img-top"
       [alt]="course.title + ' course image'"
     />

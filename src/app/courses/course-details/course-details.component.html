@@ -40,7 +40,11 @@
 
       <div class="col-lg-5">
         <img
-          [src]="course.imageUrl"
+          [src]="
+            course.imageUrl
+              ? course.imageUrl
+              : '../../../assets/img/placeholder/placeholder1.png'
+          "
           [alt]="course.title + 'course image'"
           class="img-fluid mb-3 rounded-3 w-100"
         />

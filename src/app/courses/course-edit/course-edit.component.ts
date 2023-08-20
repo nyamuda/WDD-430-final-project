@@ -118,4 +118,8 @@ export class CourseEditComponent implements OnInit {
   isAdmin(): boolean {
     return this.currentUser().isAdmin;
   }
+
+  isInvalid(): boolean {
+    return this.fileUploadControl.invalid;
+  }
 }

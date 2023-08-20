@@ -8,8 +8,12 @@
 .full-description-valid {
   border: 1px solid #008000;
 }
-.invalid-feedback {
+.invalid-feedback,
+.file-error-message {
   position: absolute;
   margin-top: 0;
   font-size: 0.8rem;
+}
+.upload-invalid {
+  background-color: rgba($color: #f3d4d7, $alpha: 0.7);
 }
