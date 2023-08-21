@@ -43,7 +43,7 @@
           [src]="
             course.imageUrl
               ? course.imageUrl
-              : '../../../assets/img/placeholder/placeholder1.png'
+              : 'https://placehold.co/600x400?text=' + course.title[0]
           "
           [alt]="course.title + 'course image'"
           class="img-fluid mb-3 w-100"

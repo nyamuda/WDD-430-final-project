@@ -20,6 +20,7 @@ export class FileImageItemComponent implements OnInit, OnDestroy {
   formGroup!: FormGroup;
   @Input() currentImageUrl = '';
   @Input() editMode = false;
+  @Input() imageName = '';
   imagePreview;
   subscription: Subscription;
   //control for image upload
@@ -38,6 +39,7 @@ export class FileImageItemComponent implements OnInit, OnDestroy {
     this.subscription = this.fileUploadControl.valueChanges.subscribe(
       (values: Array<File>) => {
         this.readImage(values[0]);
+        this.fileService.isFileInvalid.set(this.fileUploadControl.invalid);
         this.fileService.currentUpload.set([values[0]]);
       }
     );
@@ -55,7 +57,6 @@ export class FileImageItemComponent implements OnInit, OnDestroy {
       this.fileUploadControl.valid &&
       this.fileUploadControl.value.length > 0
     ) {
-      this.fileService.isFileInvalid.set(false);
       const reader = new FileReader();
       reader.onload = (event) => {
         this.imagePreview = event.target?.result;
@@ -64,7 +65,6 @@ export class FileImageItemComponent implements OnInit, OnDestroy {
     }
     //else preview the original image
     else {
-      this.fileService.isFileInvalid.set(true);
       this.imagePreview = this.currentImageUrl;
     }
   }

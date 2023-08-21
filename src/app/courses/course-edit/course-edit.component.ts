@@ -85,10 +85,11 @@ export class CourseEditComponent implements OnInit {
         this.courseFormGroup.controls['shortDescription'].value;
 
       newCourse.price = this.courseFormGroup.controls['price'].value;
-      newCourse.imageUrl = this.courseToEdit.imageUrl;
 
       // if in edit mode
       if (this.editMode) {
+        newCourse.imageUrl = this.courseToEdit.imageUrl;
+
         this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
       }
       // else if in new document mode

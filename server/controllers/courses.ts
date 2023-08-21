@@ -11,7 +11,7 @@ export class CoursesController {
       shortDescription: Joi.string().required(),
       fullDescription: Joi.string().required(),
       price: Joi.number().required(),
-      imageUrl: Joi.string().required(),
+      imageUrl: Joi.optional(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);

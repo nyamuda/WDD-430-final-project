@@ -17,7 +17,7 @@ export class FileService {
   //returns image URL
   uploadImage(): Observable<string> {
     //if an image has been uploaded
-    if (this.currentUpload().length > 0) {
+    if (this.currentUpload().length > 0 && !!this.currentUpload()[0]) {
       const formData = new FormData(); // Create a new FormData object
       formData.append('file', this.currentUpload()[0]); // Append the file to the form data
 
@@ -51,7 +51,7 @@ export class FileService {
   //by deleting the old image -- using the imageUrl
   //and returns the downloadURL of the new image
   updateImage(oldImageUrl: string): Observable<string> {
-    if (this.currentUpload().length > 0) {
+    if (this.currentUpload().length > 0 && !!this.currentUpload()[0]) {
       const formData = new FormData(); // Create a new FormData object
       formData.append('file', this.currentUpload()[0]); // Append the file to the form data
       formData.append('imageUrl', oldImageUrl);
@@ -68,6 +68,11 @@ export class FileService {
           imageUrl: oldImageUrl,
         },
       };
+
+      //checking if the imageUrl is not null
+      if (!oldImageUrl) {
+        return this.uploadImage();
+      }
 
       //1. Delete the old image using its URL
       return this.http.delete(url, options).pipe(
@@ -101,6 +106,7 @@ export class FileService {
         imageUrl,
       },
     };
+
     this.http.delete(url, options).subscribe(
       (response) => {
         console.log(response);

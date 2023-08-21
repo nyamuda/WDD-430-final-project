@@ -56,12 +56,12 @@ export class CoursesService {
     if (!!newCourse) {
       //show loader
       this.isProcessingRequest.set(true);
-      let imageFile: File = this.fileService.currentUpload()[0];
+
       //First upload image
       //and get the URL of the image
       this.fileService.uploadImage().subscribe((imageUrl: string) => {
         //And then store the course to the database
-        //together with the image URK
+        //together with the image URL
         const url = 'http://localhost:8000/courses';
         const headers = this.headers();
         let courseDto = {
@@ -84,6 +84,7 @@ export class CoursesService {
             this.router.navigateByUrl('/courses');
           },
           (error) => {
+            console.log(error);
             //stop loader
             this.isProcessingRequest.set(false);
             this.showFailure(

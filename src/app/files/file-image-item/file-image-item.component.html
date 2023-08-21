@@ -5,6 +5,11 @@
       <div class="col-lg-5">
         <img
           [src]="imagePreview ? imagePreview : currentImageUrl"
+          [src]="
+            imagePreview
+              ? imagePreview
+              : 'https://placehold.co/600x400?text=' + imageName[0]
+          "
           alt="Current course image"
           class="img-fluid"
         />
@@ -27,6 +32,7 @@
     formControlName="file"
   >
   </file-upload>
+
   <div
     *ngIf="formGroup.get('file').invalid && formGroup.get('file').touched"
     class="file-error-message text-danger d-flex justify-content-start"

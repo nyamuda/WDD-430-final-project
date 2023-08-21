@@ -123,6 +123,7 @@
     <div class="mb-4">
       <label for="course-image">Course image:</label>
       <app-file-image-item
+        [imageName]="courseToEdit.title"
         [currentImageUrl]="courseToEdit.imageUrl"
         [editMode]="editMode"
       ></app-file-image-item>

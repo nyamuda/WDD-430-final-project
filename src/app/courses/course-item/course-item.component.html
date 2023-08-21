@@ -27,7 +27,7 @@
       [src]="
         course.imageUrl
           ? course.imageUrl
-          : '../../../assets/images/placeholder/placeholder1.png'
+          : 'https://placehold.co/600x400?text=' + course.title[0]
       "
       class="img-fluid card-img-top"
       [alt]="course.title + ' course image'"
