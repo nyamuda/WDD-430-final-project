@@ -4,10 +4,11 @@
     <div class="row row-cols-1 row-cols-lg-2">
       <div class="col-lg-5">
         <img
-          [src]="imagePreview ? imagePreview : currentImageUrl"
           [src]="
             imagePreview
               ? imagePreview
+              : currentImageUrl
+              ? currentImageUrl
               : 'https://placehold.co/600x400?text=' + imageName[0]
           "
           alt="Current course image"

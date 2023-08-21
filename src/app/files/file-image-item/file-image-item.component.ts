@@ -21,13 +21,15 @@ export class FileImageItemComponent implements OnInit, OnDestroy {
   @Input() currentImageUrl = '';
   @Input() editMode = false;
   @Input() imageName = '';
-  imagePreview;
+  imagePreview: any = '';
   subscription: Subscription;
   //control for image upload
   fileUploadControl = new FormControl<File[]>(null, [
     FileUploadValidators.filesLimit(1),
     FileUploadValidators.accept(['image/*']),
   ]);
+
+  //image to display
 
   constructor(
     private formBuilder: FormBuilder,
