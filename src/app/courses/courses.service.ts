@@ -1,4 +1,10 @@
-import { Injectable, signal, WritableSignal } from '@angular/core';
+import {
+  Injectable,
+  signal,
+  WritableSignal,
+  Signal,
+  computed,
+} from '@angular/core';
 import { map, Observable, of, catchError, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
@@ -7,6 +13,7 @@ import { UsersService } from '../users/users.service';
 import { Review } from '../reviews/review.model';
 import { response } from 'express';
 import { Router } from '@angular/router';
+import { FileService } from '../files/file.service';
 
 @Injectable({
   providedIn: 'root',
@@ -31,22 +38,28 @@ export class CoursesService {
   //show a loader during an HTTP POST OR UPDATE request
   public isProcessingRequest: WritableSignal<boolean> = signal(false);
 
+  //is there an uploaded image
+  doesUploadExist: Signal<boolean> = computed(
+    () => this.fileService.currentUpload().length > 0
+  );
+
   constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
     private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private fileService: FileService
   ) {}
 
   //CREATE
-  addCourse(newCourse: Course, imageFile: File) {
+  addCourse(newCourse: Course) {
     if (!!newCourse) {
       //show loader
       this.isProcessingRequest.set(true);
-
+      let imageFile: File = this.fileService.currentUpload()[0];
       //First upload image
       //and get the URL of the image
-      this.uploadCourseImage(imageFile).subscribe((imageUrl: string) => {
+      this.fileService.uploadImage().subscribe((imageUrl: string) => {
         //And then store the course to the database
         //together with the image URK
         const url = 'http://localhost:8000/courses';
@@ -117,7 +130,7 @@ export class CoursesService {
   }
 
   //UPDATE
-  updateCourse(id: string, newCourse: Course, file: File, updateImage = false) {
+  updateCourse(id: string, newCourse: Course) {
     let headers = this.headers();
     //show loader
     this.isProcessingRequest.set(true);
@@ -128,47 +141,24 @@ export class CoursesService {
       imageUrl: newCourse.imageUrl,
       price: newCourse.price,
     };
-    //if an image has been updated
-    //first upload that image and get
-    //the downloadUrl of the new image
-    if (updateImage) {
-      this.updateCourseImage(file, newCourse.imageUrl).subscribe((imageUrl) => {
-        //update the imageUrl
-        courseDto.imageUrl = imageUrl;
 
-        //update the course
-        this.http
-          .put(`http://localhost:8000/courses/${id}`, courseDto, {
-            headers,
-          })
-          .subscribe(
-            (response) => {
-              //stop loader
-              this.isProcessingRequest.set(false);
-              this.getCourses();
+    //first update the image
+    //and get the new imageUrl
+    this.fileService.updateImage(newCourse.imageUrl).subscribe((imageUrl) => {
+      //update the imageUrl
+      courseDto.imageUrl = !!imageUrl ? imageUrl : courseDto.imageUrl;
 
-              this.showSuccess('The course has been updated', 'Success!');
-
-              this.router.navigateByUrl('/courses');
-            },
-            (error) => {
-              //stop loader
-              this.isProcessingRequest.set(false);
-              this.showFailure(
-                'Please review your changes and try again.',
-                'Course update failed'
-              );
-            }
-          );
-      });
-    } else {
+      //update the course
       this.http
-        .put(`http://localhost:8000/courses/${id}`, courseDto, { headers })
+        .put(`http://localhost:8000/courses/${id}`, courseDto, {
+          headers,
+        })
         .subscribe(
           (response) => {
             //stop loader
             this.isProcessingRequest.set(false);
             this.getCourses();
+
             this.showSuccess('The course has been updated', 'Success!');
 
             this.router.navigateByUrl('/courses');
@@ -182,13 +172,13 @@ export class CoursesService {
             );
           }
         );
-    }
+    });
   }
 
   //DELETE
   async deleteCourse(id: string, imageUrl: string) {
     //first delete the course image
-    await this.deleteCourseImage(imageUrl);
+    await this.fileService.deleteImage(imageUrl);
 
     //then delete the course information
     const url = `http://localhost:8000/courses/${id}`;
@@ -233,11 +223,6 @@ export class CoursesService {
     return headers;
   }
 
-  //a getter for _courses
-  public get courses(): Array<Course> {
-    return this._courses;
-  }
-
   //Toast
   showSuccess(message: string, title: string) {
     this.toastrService.success(`${message}`, `${title}`, {
@@ -256,89 +241,5 @@ export class CoursesService {
       progressBar: true,
       positionClass: 'toast-bottom-right',
     });
-  }
-
-  //Upload course image
-  //returns image URL
-  uploadCourseImage(file: File): Observable<string> {
-    const formData = new FormData(); // Create a new FormData object
-    formData.append('file', file); // Append the file to the form data
-
-    const url = `http://localhost:8000/files`;
-
-    let token = this.userService.getJwtToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    let options = {
-      headers: headers,
-    };
-
-    return this.http.post(url, formData, options).pipe(
-      map((response) => {
-        return response['downloadURL']; // Return the response data
-      }),
-      catchError((error) => {
-        // Handle errors if needed
-        console.error('Error uploading course image:', error);
-        return of(null);
-      })
-    );
-  }
-
-  //Update course image
-  //by deleting the old image -- using the imageUrl
-  //and returns the downloadURL of the new image
-  updateCourseImage(file: File, imageUrl: string): Observable<string> {
-    const formData = new FormData(); // Create a new FormData object
-    formData.append('file', file); // Append the file to the form data
-    formData.append('imageUrl', imageUrl);
-
-    const url = `http://localhost:8000/files`;
-
-    // Create the options object with headers and body
-    let token = this.userService.getJwtToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
-    const options = {
-      headers: headers,
-      body: {
-        imageUrl,
-      },
-    };
-
-    //1. Delete the old image using its URL
-    return this.http.delete(url, options).pipe(
-      switchMap((response) => {
-        //2. Store the new image and get its download URL
-        return this.uploadCourseImage(file);
-      }),
-      catchError((error) => {
-        // Handle errors if needed
-        console.error('Error updating course image:', error);
-        return of(null);
-      })
-    );
-  }
-
-  //Delete course image using its URL
-  deleteCourseImage(imageUrl: string) {
-    const url = `http://localhost:8000/files`;
-
-    // Create the options object with headers and body
-    let token = this.userService.getJwtToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const options = {
-      headers: headers,
-      body: {
-        imageUrl,
-      },
-    };
-    this.http.delete(url, options).subscribe(
-      (response) => {
-        console.log(response);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
   }
 }

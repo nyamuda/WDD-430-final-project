@@ -17,11 +17,7 @@ import { CoursesService } from '../courses.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
-import {
-  FileUploadControl,
-  FileUploadValidators,
-} from '@iplab/ngx-file-upload';
-import { Subscription } from 'rxjs';
+import { FileService } from 'src/app/files/file.service';
 
 @Component({
   selector: 'app-course-edit',
@@ -30,35 +26,25 @@ import { Subscription } from 'rxjs';
 })
 export class CourseEditComponent implements OnInit {
   courseFormGroup!: FormGroup;
-  imagePreview;
-  subscription: Subscription;
   editMode = false;
   courseToEdit: Course = new Course();
-  //control for image upload
-  fileUploadControl = new FormControl<File[]>(null, [
-    FileUploadValidators.filesLimit(1),
-    FileUploadValidators.accept(['image/*']),
-  ]);
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private courseService: CoursesService,
     private formBuilder: FormBuilder,
-    private userService: UsersService
+    private userService: UsersService,
+    private fileService: FileService
   ) {}
 
   ngOnInit() {
-    this.subscription = this.fileUploadControl.valueChanges.subscribe(
-      (values: Array<File>) => this.readImage(values[0])
-    );
+    //course edit form group
     this.courseFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
       shortDescription: ['', Validators.required],
       fullDescription: ['', Validators.required],
       price: ['', Validators.required],
-      //image upload control
-      file: this.fileUploadControl,
     });
 
     this.activatedRoute.params.subscribe((params) => {
@@ -71,7 +57,6 @@ export class CourseEditComponent implements OnInit {
           if (!!course) {
             this.editMode = true;
             this.courseToEdit = course;
-            this.imagePreview = course.imageUrl;
 
             //populate the form
             this.courseFormGroup.patchValue({
@@ -102,28 +87,13 @@ export class CourseEditComponent implements OnInit {
       newCourse.price = this.courseFormGroup.controls['price'].value;
       newCourse.imageUrl = this.courseToEdit.imageUrl;
 
-      //checking if the image file exists
-      let imageFile =
-        this.fileUploadControl.value.length > 0
-          ? this.fileUploadControl.value[0]
-          : null;
-
-      // does the image file exists
-      let doesFileExists: boolean = !!imageFile;
-
       // if in edit mode
       if (this.editMode) {
-        //if the course image has been updated
-        this.courseService.updateCourse(
-          this.courseToEdit['_id'],
-          newCourse,
-          imageFile,
-          doesFileExists
-        );
+        this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
       }
       // else if in new document mode
       else {
-        this.courseService.addCourse(newCourse, imageFile);
+        this.courseService.addCourse(newCourse);
       }
     }
   }
@@ -146,27 +116,8 @@ export class CourseEditComponent implements OnInit {
     return this.currentUser().isAdmin;
   }
 
-  isInvalid(): boolean {
-    return this.fileUploadControl.invalid;
-  }
-
-  //Preview the new uploaded image
-  readImage(file: File) {
-    //Make sure its the right file(an image) and it exists
-
-    if (
-      this.fileUploadControl.valid &&
-      this.fileUploadControl.value.length > 0
-    ) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        this.imagePreview = event.target?.result;
-      };
-      reader.readAsDataURL(file);
-    }
-    //else preview the original image
-    else {
-      this.imagePreview = this.courseToEdit.imageUrl;
-    }
-  }
+  //checking if the image file is valid
+  isFileInvalid: Signal<boolean> = computed(() =>
+    this.fileService.isFileInvalid()
+  );
 }

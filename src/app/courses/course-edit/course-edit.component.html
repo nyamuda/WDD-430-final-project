@@ -122,43 +122,10 @@
     <!-- Image file upload start -->
     <div class="mb-4">
       <label for="course-image">Course image:</label>
-      <div class="d-flex flex-column align-items-start" *ngIf="editMode">
-        <div class="row row-cols-1 row-cols-lg-2">
-          <div class="col-lg-5">
-            <img
-              [src]="imagePreview"
-              alt="Current course image"
-              class="img-fluid"
-            />
-          </div>
-        </div>
-        <p class="upload-warning">
-          Please note: Uploading a new image will replace the current one.
-        </p>
-      </div>
-
-      <file-upload
-        [ngClass]="{
-          'upload-invalid':
-            courseFormGroup.get('file').invalid &&
-            courseFormGroup.get('file').touched
-        }"
-        id="course-image"
-        accept="image/*"
-        formControlName="file"
-        [multiple]="false"
-        [animation]="true"
-      >
-      </file-upload>
-      <div
-        class="file-error-message text-danger"
-        *ngIf="
-          courseFormGroup.get('file').invalid &&
-          courseFormGroup.get('file').touched
-        "
-      >
-        Invalid file format. Please upload an image (e.g., JPG, PNG, GIF).
-      </div>
+      <app-file-image-item
+        [currentImageUrl]="courseToEdit.imageUrl"
+        [editMode]="editMode"
+      ></app-file-image-item>
     </div>
     <!-- Image file upload end -->
     <div
@@ -167,7 +134,7 @@
     >
       <a
         (click)="submitForm($event)"
-        [ngClass]="{ disabled: courseFormGroup.invalid }"
+        [ngClass]="{ disabled: courseFormGroup.invalid || isFileInvalid() }"
         class="btn btn-outline-success btn-sm d-flex justify-content-center align-items-center px-3"
         href=""
         >Save</a

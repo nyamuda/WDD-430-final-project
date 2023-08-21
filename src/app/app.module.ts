@@ -62,6 +62,8 @@ import { ReviewPaginationComponent } from './reviews/review-list/review-paginati
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { QuillModule } from 'ngx-quill';
+import { FilesComponent } from './files/files.component';
+import { FileImageItemComponent } from './files/file-image-item/file-image-item.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +96,8 @@ import { QuillModule } from 'ngx-quill';
     FooterComponent,
     CourseFilterComponent,
     ReviewPaginationComponent,
+    FilesComponent,
+    FileImageItemComponent,
   ],
   imports: [
     BrowserModule,

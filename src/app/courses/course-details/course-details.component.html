@@ -1,8 +1,7 @@
 <!-- Placeholder Heading Content Start -->
 <div
-  style="background-color: rgba(0, 0, 0, 0.2)"
   *ngIf="!course && isFetchingCourse(); else courseInfo"
-  class="w-100 pt-3 pb-0"
+  class="w-100 pt-3 bg-dark pb-0"
 >
   <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
     <!-- Course Image -->
@@ -55,7 +54,7 @@
         <div class="d-flex flex-column align-items-start mb-3 text-light">
           <!-- Course Details -->
 
-          <h2 class="display-3 fw-bold mb-0">{{ course.title }}</h2>
+          <h2 class="display-4 fw-bold mb-0">{{ course.title }}</h2>
 
           <p class="mb-0">{{ course.shortDescription }}</p>
 

@@ -20,7 +20,7 @@ export class CourseListComponent implements OnInit {
 
   ngOnInit() {
     //if there are no current courses in the store
-    if (this.courseService.courses.length == 0) {
+    if (this.courseService.courseListSignal().length == 0) {
       this.courseService.getCourses();
     }
   }

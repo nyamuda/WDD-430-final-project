@@ -1,0 +1,40 @@
+<form [formGroup]="formGroup">
+  <!-- Image file upload start -->
+  <div class="d-flex flex-column align-items-start" *ngIf="editMode">
+    <div class="row row-cols-1 row-cols-lg-2">
+      <div class="col-lg-5">
+        <img
+          [src]="imagePreview ? imagePreview : currentImageUrl"
+          alt="Current course image"
+          class="img-fluid"
+        />
+      </div>
+    </div>
+    <p class="upload-warning">
+      Please note: Uploading a new image will replace the current one.
+    </p>
+  </div>
+
+  <file-upload
+    [ngClass]="{
+      'upload-invalid':
+        formGroup.get('file').invalid && formGroup.get('file').touched
+    }"
+    id="course-image"
+    accept="image/*"
+    [multiple]="false"
+    [animation]="true"
+    formControlName="file"
+  >
+  </file-upload>
+  <div
+    *ngIf="formGroup.get('file').invalid && formGroup.get('file').touched"
+    class="file-error-message text-danger d-flex justify-content-start"
+  >
+    <span>Invalid file format.</span>
+    <span class="d-none d-lg-block ms-1"
+      >Please upload an image (e.g., JPG, PNG, GIF).</span
+    >
+  </div>
+  <!-- Image file upload end -->
+</form>
