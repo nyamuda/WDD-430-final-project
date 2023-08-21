@@ -4,7 +4,7 @@ import * as admin from 'firebase-admin';
 export class FilesController {
   //Store course image to Firebase
   //Return --- the image URL
-  public static async storeCourseImage(req: Request, res: Response) {
+  public static async storeImage(req: Request, res: Response) {
     try {
       const privatekey = require('../../firebasePrivateKey');
 
@@ -59,7 +59,7 @@ export class FilesController {
     }
   }
 
-  public static deleteCourseImage(req: Request, res: Response) {
+  public static deleteImage(req: Request, res: Response) {
     try {
       let imageUrl = req.body['imageUrl'];
       const privatekey = require('../../firebasePrivateKey');

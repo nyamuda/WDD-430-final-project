@@ -50,8 +50,8 @@ export class CourseDetailsComponent implements OnInit {
     () => this.reviewService.metaDataSignal().totalItems
   );
 
-  deleteCourse(id: string) {
-    this.courseService.deleteCourse(id);
+  deleteCourse(id: string, imageUrl: string) {
+    this.courseService.deleteCourse(id, imageUrl);
     this.router.navigateByUrl('courses');
   }
 
@@ -74,7 +74,7 @@ export class CourseDetailsComponent implements OnInit {
 
   //Open the modal before deleting a course
   //its centered
-  openModal(id: string) {
+  openModal(id: string, imageUrl: string) {
     this.modalRef = this.modalService.open(ConfirmationModalComponent, {
       modalClass: 'modal-dialog-centered',
       data: {
@@ -87,7 +87,7 @@ export class CourseDetailsComponent implements OnInit {
     //if the deletion has been confirmed
     this.modalRef.onClose.subscribe((message) => {
       if (message === 'confirmed') {
-        this.deleteCourse(id);
+        this.deleteCourse(id, imageUrl);
       }
     });
   }

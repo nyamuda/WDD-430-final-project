@@ -16,11 +16,12 @@ router
     UserUtils.ensureIsAdminMiddleware,
     upload.single('file'),
     (req: Request, res: Response) => {
-      FilesController.storeCourseImage(req, res);
+      FilesController.storeImage(req, res);
     }
   )
   .delete((req: Request, res: Response) => {
-    FilesController.deleteCourseImage(req, res);
-  });
+    FilesController.deleteImage(req, res);
+  })
+  
 
 export { router as FilesRouter };

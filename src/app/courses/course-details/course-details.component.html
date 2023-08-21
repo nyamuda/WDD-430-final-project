@@ -89,7 +89,9 @@
                 >Edit</a
               >
 
-              <a (click)="openModal(course['_id'])" class="btn btn-danger"
+              <a
+                (click)="openModal(course['_id'], course.imageUrl)"
+                class="btn btn-danger"
                 >Delete</a
               >
             </div>

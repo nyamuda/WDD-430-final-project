@@ -86,13 +86,25 @@ export class CourseEditComponent implements OnInit {
         this.courseFormGroup.controls['shortDescription'].value;
 
       newCourse.price = this.courseFormGroup.controls['price'].value;
+      newCourse.imageUrl = this.courseToEdit.imageUrl;
 
-      let imageFile = this.courseFormGroup.controls['file'].value[0];
+      //checking if the image file exists
+      let imageFile = !!this.courseFormGroup.controls['file'].value
+        ? this.courseFormGroup.controls['file'].value[0]
+        : null;
+
+      // does the image file exists
+      let doesFileExists: boolean = !!imageFile;
 
       // if in edit mode
       if (this.editMode) {
         //if the course image has been updated
-        this.courseService.updateCourse(this.courseToEdit['_id'], newCourse);
+        this.courseService.updateCourse(
+          this.courseToEdit['_id'],
+          newCourse,
+          imageFile,
+          doesFileExists
+        );
       }
       // else if in new document mode
       else {
