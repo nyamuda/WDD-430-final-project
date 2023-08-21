@@ -1,14 +1,15 @@
 <!-- Placeholder Heading Content Start -->
 <div
+  style="background-color: rgba(0, 0, 0, 0.2)"
   *ngIf="!course && isFetchingCourse(); else courseInfo"
-  class="w-100 bg-dark pt-3 pb-0"
+  class="w-100 pt-3 pb-0"
 >
   <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
     <!-- Course Image -->
 
     <div class="col-lg-4">
       <img
-        src="../../../assets/img/placeholder/placeholder1.png"
+        src="../../../assets/images/placeholder/placeholder1.png"
         alt="placeholder image"
         class="img-fluid mb-3 rounded-3"
       />
@@ -46,7 +47,7 @@
               : '../../../assets/img/placeholder/placeholder1.png'
           "
           [alt]="course.title + 'course image'"
-          class="img-fluid mb-3 rounded-3 w-100"
+          class="img-fluid mb-3 w-100"
         />
       </div>
 
@@ -54,14 +55,15 @@
         <div class="d-flex flex-column align-items-start mb-3 text-light">
           <!-- Course Details -->
 
-          <h2 class="display-4 fw-bold">{{ course.title }}</h2>
+          <h2 class="display-3 fw-bold mb-0">{{ course.title }}</h2>
 
-          <p>{{ course.shortDescription }}</p>
+          <p class="mb-0">{{ course.shortDescription }}</p>
 
-          <div class="d-flex justify-content-start align-items-center">
+          <div class="d-flex justify-content-start align-items-center mb-n3">
             <p class="course-rating fs-5">{{ course.rating }}</p>
             <!-- Move the stars a bit to the left if the course does have have any reviews -->
             <star-rating
+              [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
               class="title-star-rating"
               [readOnly]="true"
               [starType]="'svg'"
@@ -77,24 +79,22 @@
             {{ course.price | currency : "ZAR" : "R" }}
           </p>
 
-          <div class="row row-cols-1 row-cols-lg-2">
-            <div class="col">
-              <a href="" class="btn custom text-light">Book course now</a>
-            </div>
-
-            <div *ngIf="isAdmin()" class="col d-flex mt-4 mt-lg-0">
-              <a
-                (click)="updateCourse(course['_id'])"
-                class="btn btn-primary me-2"
-                >Edit</a
-              >
-
-              <a
-                (click)="openModal(course['_id'], course.imageUrl)"
-                class="btn btn-danger"
-                >Delete</a
-              >
-            </div>
+          <div class="d-flex flex-column justify-content-evenly flex-lg-row">
+            <a href="" class="btn custom text-light me-2 mb-2"
+              >Book course now</a
+            >
+            <a
+              *ngIf="isAdmin()"
+              (click)="updateCourse(course['_id'])"
+              class="btn btn-primary me-2 mb-2"
+              >Edit</a
+            >
+            <a
+              *ngIf="isAdmin()"
+              (click)="openModal(course['_id'], course.imageUrl)"
+              class="btn btn-danger mb-2"
+              >Delete</a
+            >
           </div>
         </div>
       </div>

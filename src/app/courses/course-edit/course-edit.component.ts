@@ -1,4 +1,11 @@
-import { Component, OnInit, Signal, computed } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Signal,
+  computed,
+  WritableSignal,
+  signal,
+} from '@angular/core';
 import {
   FormBuilder,
   Validators,
@@ -14,6 +21,7 @@ import {
   FileUploadControl,
   FileUploadValidators,
 } from '@iplab/ngx-file-upload';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-course-edit',
@@ -22,6 +30,8 @@ import {
 })
 export class CourseEditComponent implements OnInit {
   courseFormGroup!: FormGroup;
+  imagePreview;
+  subscription: Subscription;
   editMode = false;
   courseToEdit: Course = new Course();
   //control for image upload
@@ -39,6 +49,9 @@ export class CourseEditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.subscription = this.fileUploadControl.valueChanges.subscribe(
+      (values: Array<File>) => this.readImage(values[0])
+    );
     this.courseFormGroup = this.formBuilder.group({
       title: ['', Validators.required],
       shortDescription: ['', Validators.required],
@@ -58,6 +71,7 @@ export class CourseEditComponent implements OnInit {
           if (!!course) {
             this.editMode = true;
             this.courseToEdit = course;
+            this.imagePreview = course.imageUrl;
 
             //populate the form
             this.courseFormGroup.patchValue({
@@ -89,9 +103,10 @@ export class CourseEditComponent implements OnInit {
       newCourse.imageUrl = this.courseToEdit.imageUrl;
 
       //checking if the image file exists
-      let imageFile = !!this.courseFormGroup.controls['file'].value
-        ? this.courseFormGroup.controls['file'].value[0]
-        : null;
+      let imageFile =
+        this.fileUploadControl.value.length > 0
+          ? this.fileUploadControl.value[0]
+          : null;
 
       // does the image file exists
       let doesFileExists: boolean = !!imageFile;
@@ -133,5 +148,25 @@ export class CourseEditComponent implements OnInit {
 
   isInvalid(): boolean {
     return this.fileUploadControl.invalid;
+  }
+
+  //Preview the new uploaded image
+  readImage(file: File) {
+    //Make sure its the right file(an image) and it exists
+
+    if (
+      this.fileUploadControl.valid &&
+      this.fileUploadControl.value.length > 0
+    ) {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        this.imagePreview = event.target?.result;
+      };
+      reader.readAsDataURL(file);
+    }
+    //else preview the original image
+    else {
+      this.imagePreview = this.courseToEdit.imageUrl;
+    }
   }
 }
