@@ -128,12 +128,11 @@ export class CoursesService {
       imageUrl: newCourse.imageUrl,
       price: newCourse.price,
     };
-    //if an image has been update
-    //first update that image and get
+    //if an image has been updated
+    //first upload that image and get
     //the downloadUrl of the new image
     if (updateImage) {
       this.updateCourseImage(file, newCourse.imageUrl).subscribe((imageUrl) => {
-        console.log(imageUrl);
         //update the imageUrl
         courseDto.imageUrl = imageUrl;
 
@@ -266,10 +265,14 @@ export class CoursesService {
     formData.append('file', file); // Append the file to the form data
 
     const url = `http://localhost:8000/files`;
+
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    let options = {
+      headers: headers,
+    };
 
-    return this.http.post(url, formData, { headers }).pipe(
+    return this.http.post(url, formData, options).pipe(
       map((response) => {
         return response['downloadURL']; // Return the response data
       }),
@@ -290,10 +293,11 @@ export class CoursesService {
     formData.append('imageUrl', imageUrl);
 
     const url = `http://localhost:8000/files`;
+
+    // Create the options object with headers and body
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
-    // Create the options object with headers and body
     const options = {
       headers: headers,
       body: {
@@ -318,16 +322,23 @@ export class CoursesService {
   //Delete course image using its URL
   deleteCourseImage(imageUrl: string) {
     const url = `http://localhost:8000/files`;
-    let token = this.userService.getJwtToken();
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     // Create the options object with headers and body
+    let token = this.userService.getJwtToken();
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const options = {
       headers: headers,
       body: {
         imageUrl,
       },
     };
-    this.http.delete(url, options);
+    this.http.delete(url, options).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 }

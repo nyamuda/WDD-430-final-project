@@ -21,7 +21,6 @@ router
   )
   .delete((req: Request, res: Response) => {
     FilesController.deleteImage(req, res);
-  })
-  
+  });
 
 export { router as FilesRouter };

@@ -32,7 +32,7 @@ export class FilesController {
       });
 
       blobStream.on('error', (error) => {
-        console.error('Error uploading file:', error);
+        console.error('Error uploading file');
         res.status(500).json({ error: 'Error uploading file' });
       });
 
@@ -47,14 +47,14 @@ export class FilesController {
 
           res.status(200).json({ downloadURL: downloadURL[0] });
         } catch (error) {
-          console.error('Error getting download URL:', error);
+          console.error('Error getting download URL');
           res.status(500).json({ error: 'No image' });
         }
       });
 
       blobStream.end(file.buffer);
     } catch (error) {
-      console.error('Error initializing Firebase:', error);
+      console.error('Error initializing Firebase');
       res.status(500).json({ error: 'Error initializing Firebase' });
     }
   }
@@ -92,11 +92,11 @@ export class FilesController {
           res.status(200).json({ message: 'Image deleted successfully' });
         })
         .catch((error) => {
-          console.error('Error deleting image:', error);
+          console.error('Error deleting image');
           return res.status(500).json({ error: 'Error deleting image' });
         });
     } catch (error) {
-      console.error('Error deleting image:', error);
+      console.error('Error deleting image');
       return res.status(500).json({ error: 'Error deleting image' });
     }
   }

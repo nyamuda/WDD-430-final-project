@@ -6,10 +6,6 @@ import * as dotenv from 'dotenv';
 dotenv.config();
 
 export class UserUtils {
-
-
-
-  
   public static createAccessToken = (payload: TokenPayload): string => {
     let SECRET: Secret = process.env.SECRET!;
 
