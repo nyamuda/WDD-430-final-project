@@ -1,41 +1,101 @@
-<!-- Placeholder Heading Content Start -->
-<div
-  *ngIf="!course && isFetchingCourse(); else courseInfo"
-  class="w-100 pt-3 bg-dark pb-0"
->
-  <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
-    <!-- Course Image -->
+<!--Heading Placeholder Start -->
+<div *ngIf="!course && isFetchingCourse(); else courseInfo" class="mt-5">
+  <!-- Placeholder Heading Large Screens Content Start -->
+  <div
+    class="d-none d-lg-block container-fluid custom pt-3 pb-0 placeholder-glow"
+  >
+    <div class="container-fluid">
+      <h2 class="display-4 fw-bold mb-0 placeholder col-lg-8"></h2>
+      <div class="row row-cols-2">
+        <div
+          class="container-fluid col-9 bg-light row row-cols-1 row-cols-lg-2 p-3"
+        >
+          <!-- Course Image -->
 
-    <div class="col-lg-4">
-      <img
-        src="../../../assets/images/placeholder/placeholder1.png"
-        alt="placeholder image"
-        class="img-fluid mb-3 rounded-3"
-      />
-    </div>
+          <div class="col-lg-5">
+            <img
+              src=" ../../../assets/images/placeholder/placeholder1.png"
+              [alt]="course.title + 'course image'"
+              class="img-fluid mb-3 w-100"
+            />
+          </div>
 
-    <div class="col-lg-8 placeholder-glow">
-      <div class="d-flex flex-column align-items-start mb-3 text-light">
-        <!-- Course Details -->
+          <div class="col-lg-7">
+            <div class="d-flex flex-column align-items-start mb-3 text-dark">
+              <!-- Course Details -->
 
-        <h2 class="fw-bold placeholder col-lg-8"></h2>
-        <p class="placeholder col-12"></p>
+              <p class="mb-3 placeholder col-12"></p>
+              <p class="mb-3 placeholder col-12"></p>
+              <p class="mb-3 placeholder col-8"></p>
 
-        <p class="placeholder col-8"></p>
-        <p class="placeholder col-4"></p>
-        <p class="placeholder col-2"></p>
-
-        <a href="" class="btn custom text-light placeholder col-4"></a>
+              <a href="" class="btn custom text-light placeholder col-4"></a>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light"
+        >
+          <div
+            class="d-flex flex-column align-items-start justify-content-center"
+          >
+            <p class="fw-bold fs-4 placeholder col-lg-6 mt-2">Rating</p>
+            <p class="course-rating placeholder col-4"></p>
+          </div>
+          <div
+            class="d-flex flex-column align-items-start justify-content-center"
+          >
+            <p class="fw-bold fs-4 placeholder col-lg-6">Price</p>
+            <p class="placeholder col-4"></p>
+          </div>
+          <div
+            class="d-flex flex-column align-items-start justify-content-center"
+          >
+            <p class="fw-bold fs-4 placeholder col-lg-6">Price</p>
+            <p class="placeholder col-4"></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
+  <!-- Placeholder Heading Small Screens Content Start -->
+
+  <!-- Placeholder Heading Small Screens Content Start -->
+  <div class="w-100 pt-3 bg-dark pb-0 d-lg-none">
+    <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
+      <!-- Course Image -->
+
+      <div class="col-lg-4">
+        <img
+          src="../../../assets/images/placeholder/placeholder1.png"
+          alt="placeholder image"
+          class="img-fluid mb-3 rounded-3"
+        />
+      </div>
+
+      <div class="col-lg-8 placeholder-glow">
+        <div class="d-flex flex-column align-items-start mb-3 text-light">
+          <!-- Course Details -->
+
+          <h2 class="fw-bold placeholder col-lg-8"></h2>
+          <p class="placeholder col-12"></p>
+
+          <p class="placeholder col-8"></p>
+          <p class="placeholder col-4"></p>
+          <p class="placeholder col-2"></p>
+
+          <a href="" class="btn custom text-light placeholder col-4"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Placeholder Heading Content End -->
 </div>
-<!-- Placeholder Heading Content End -->
+<!--Heading Placeholder End -->
 
 <ng-template #courseInfo>
   <!-- Course details heading for large screens start -->
-  <div class="d-none d-lg-block container-fluid custom pt-3 pb-0">
-    <div class="">
+  <div class="d-none d-lg-block container-fluid custom pt-3 pb-0 mt-5">
+    <div class="container-fluid">
       <h2 class="display-4 fw-bold mb-0">{{ course.title }}</h2>
       <div class="row row-cols-2">
         <div
@@ -91,7 +151,7 @@
           >
             <p class="fw-bold fs-4 mb-0">Rating</p>
             <div class="d-flex justify-content-start align-items-center mb-n3">
-              <p class="course-rating">{{ course.rating }}</p>
+              <p class="course-rating fw-bold">{{ course.rating }}</p>
               <!-- Move the stars a bit to the left if the course does have have any reviews -->
               <star-rating
                 [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
@@ -257,7 +317,7 @@
     </div>
     <!-- Course Description End -->
 
-    <div class="d-flex justify-content-start justify-content-lg-end mb-5">
+    <div class="d-flex justify-content-start justify-content-lg-end mb-4">
       <a routerLink="reviews/new" fragment="reviewForm" class="btn btn-primary"
         >Write review</a
       >
