@@ -81,19 +81,29 @@ export class FilesController {
 
       const storageBucket = admin.storage().bucket();
 
-      //the file to delete
+      // the file to delete
       let file = storageBucket.file(filename);
 
-      // Delete the file
+      // Check if the file exists before attempting to delete
       file
-        .delete()
+        .getMetadata()
         .then(() => {
-          console.log('Image deleted successfully');
-          res.status(200).json({ message: 'Image deleted successfully' });
+          // File exists, proceed with deletion
+          file
+            .delete()
+            .then(() => {
+              console.log('Image deleted successfully');
+              res.status(200).json({ message: 'Image deleted successfully' });
+            })
+            .catch((error) => {
+              console.error('Error deleting image');
+              return res.status(500).json({ error: 'Error deleting image' });
+            });
         })
-        .catch((error) => {
-          console.error('Error deleting image');
-          return res.status(500).json({ error: 'Error deleting image' });
+        .catch(() => {
+          // File doesn't exist
+          console.error('Image does not exist');
+          return res.status(404).json({ error: 'Image does not exist' });
         });
     } catch (error) {
       console.error('Error deleting image');

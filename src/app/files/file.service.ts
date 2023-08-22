@@ -81,7 +81,11 @@ export class FileService {
           return this.uploadImage();
         }),
         catchError((error) => {
-          // Handle errors if needed
+          //if the image trying to be deleted does not exists
+          //processed with uploading a new image
+          if (error.status === 404) {
+            return this.uploadImage();
+          }
           console.error('Error updating course image:', error);
           return of(null);
         })
