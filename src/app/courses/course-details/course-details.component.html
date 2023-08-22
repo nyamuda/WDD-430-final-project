@@ -33,7 +33,7 @@
           </div>
         </div>
         <div
-          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light"
+          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light px-3 py-2"
         >
           <div
             class="d-flex flex-column align-items-start justify-content-center"
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div
-          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light"
+          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light px-3 py-2"
         >
           <div
             class="d-flex flex-column align-items-start justify-content-center mb-3"
@@ -206,7 +206,7 @@
           <p class="mb-0">{{ course.shortDescription }}</p>
 
           <div class="d-flex justify-content-start align-items-center mb-n3">
-            <p class="course-rating fs-5">{{ course.rating }}</p>
+            <p class="course-rating fw-bold">{{ course.rating }}</p>
             <!-- Move the stars a bit to the left if the course does have have any reviews -->
             <star-rating
               [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
@@ -284,7 +284,10 @@
     <div class="mb-3">
       <p class="h2">Course Overview</p>
       <!-- Course fullDescription is HTML form -->
-      <div [innerHTML]="course.fullDescription" class=""></div>
+      <quill-view-html
+        class="w-100"
+        [content]="course.fullDescription"
+      ></quill-view-html>
     </div>
     <hr />
     <div class="review-headline mt-3">

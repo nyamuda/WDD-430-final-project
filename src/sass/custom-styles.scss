@@ -1,5 +1,9 @@
 @import "./_variables";
-
+.ql-editor {
+  font-family: $main-font; /* Replace with your desired font */
+  font-size: 1rem;
+  color: #212529;
+}
 .container-fluid.custom {
   width: 98%;
   margin: auto;

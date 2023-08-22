@@ -1,20 +1,21 @@
 export class User {
-  private _id: number;
+  private _id: string;
   private _name: string;
   private _email: string;
   private _password: string;
   private _isAdmin: boolean;
+  private _imageUrl: string;
 
   constructor() {
     // Initialize any default values or perform other operations
   }
 
   // Getter and Setter for id
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this._id = value;
   }
 
@@ -52,5 +53,14 @@ export class User {
 
   set isAdmin(value: boolean) {
     this._isAdmin = value;
+  }
+
+  // Getter and Setter for imageUrl
+  get imageUrl(): string {
+    return this._imageUrl;
+  }
+
+  set imageUrl(value: string) {
+    this._imageUrl = value;
   }
 }

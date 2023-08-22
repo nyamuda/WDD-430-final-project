@@ -1,0 +1,82 @@
+<form [formGroup]="userFormGroup">
+  <!-- Image file upload start -->
+  <div class="mb-4">
+    <label for="course-image">Course image:</label>
+    <app-file-image-item
+      [imageName]="user().name"
+      [currentImageUrl]="user().imageUrl"
+      [editMode]="true"
+    ></app-file-image-item>
+  </div>
+  <!-- Image file upload end -->
+  <div class="mb-3">
+    <label for="name">Name:</label>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          userFormGroup.get('name').invalid &&
+          userFormGroup.get('name').touched,
+        'is-valid':
+          userFormGroup.get('name').valid && userFormGroup.get('name').touched
+      }"
+      class="form-control"
+      type="text"
+      id="name"
+      formControlName="name"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        userFormGroup.get('name').invalid && userFormGroup.get('name').touched
+      "
+    >
+      Required
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="email">Email:</label>
+    <input
+      [ngClass]="{
+        'is-invalid':
+          userFormGroup.get('email').invalid &&
+          userFormGroup.get('email').touched,
+        'is-valid':
+          userFormGroup.get('email').valid && userFormGroup.get('email').touched
+      }"
+      class="form-control"
+      type="text"
+      id="email"
+      formControlName="email"
+    />
+    <div
+      class="invalid-feedback"
+      *ngIf="
+        userFormGroup.get('email').invalid && userFormGroup.get('email').touched
+      "
+    >
+      Please enter a valid email address
+    </div>
+  </div>
+
+ <!-- Submit button -->
+ <button
+ [ngClass]="{ disabled: userFormGroup.invalid }"
+ *ngIf="!isProcessingRequest(); else loadingBtn"
+ (click)="submitForm($event)"
+ type="submit"
+ class="btn btn-primary btn-block mb-3"
+>
+ Update
+</button>
+   <!-- Loading button -->
+   <ng-template #loadingBtn>
+    <button class="btn btn-primary btn-block" type="button" disabled>
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="ms-1">Please wait...</span>
+    </button>
+  </ng-template>
+</form>

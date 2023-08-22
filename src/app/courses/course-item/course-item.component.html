@@ -33,7 +33,7 @@
       [alt]="course.title + ' course image'"
     />
 
-    <a [routerLink]="course['_id']">
+    <a [routerLink]="'/courses/' + course['_id']">
       <div
         class="mask"
         style="background-color: rgba(251, 251, 251, 0.15)"

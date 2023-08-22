@@ -79,6 +79,7 @@
         formControlName="fullDescription"
       ></textarea> -->
       <quill-editor
+        [trimOnValidation]="true"
         [placeholder]="'Enter full description here'"
         [required]="true"
         [ngClass]="{

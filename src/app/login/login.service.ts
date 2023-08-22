@@ -98,7 +98,5 @@ export class LoginService {
       "You've been logged out",
       'We hope to see you again soon!'
     );
-
-    this.router.navigateByUrl('/courses');
   }
 }

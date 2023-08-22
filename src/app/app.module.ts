@@ -64,6 +64,9 @@ import { FileUploadModule } from '@iplab/ngx-file-upload';
 import { QuillModule } from 'ngx-quill';
 import { FilesComponent } from './files/files.component';
 import { FileImageItemComponent } from './files/file-image-item/file-image-item.component';
+import { UsersAccountComponent } from './users/users-account/users-account.component';
+import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
+import { UsersAccountDetailsComponent } from './users/users-account-details/users-account-details.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +101,9 @@ import { FileImageItemComponent } from './files/file-image-item/file-image-item.
     ReviewPaginationComponent,
     FilesComponent,
     FileImageItemComponent,
+    UsersAccountComponent,
+    UsersAccountEditComponent,
+    UsersAccountDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -130,7 +136,16 @@ import { FileImageItemComponent } from './files/file-image-item/file-image-item.
     StarRatingModule.forRoot(),
     NgxPaginationModule,
     FileUploadModule,
-    QuillModule.forRoot(),
+    QuillModule.forRoot({
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline'], // Include only the options you want
+          [{ list: 'ordered' }, { list: 'bullet' }],
+          ['link'],
+        ],
+      },
+      theme: 'snow',
+    }),
   ],
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },
