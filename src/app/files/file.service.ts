@@ -114,9 +114,7 @@ export class FileService {
     };
 
     this.http.delete(url, options).subscribe(
-      (response) => {
-        console.log(response);
-      },
+      (response) => {},
       (error) => {
         console.log(error);
       }

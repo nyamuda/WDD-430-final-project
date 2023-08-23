@@ -13,13 +13,13 @@ const upload = multer({ storage: storage });
 router
   .route('/')
   .post(
-    UserUtils.ensureIsAdminMiddleware,
+    UserUtils.ensureLoggedInMiddleware,
     upload.single('file'),
     (req: Request, res: Response) => {
       FilesController.storeImage(req, res);
     }
   )
-  .delete((req: Request, res: Response) => {
+  .delete(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
     FilesController.deleteImage(req, res);
   });
 
