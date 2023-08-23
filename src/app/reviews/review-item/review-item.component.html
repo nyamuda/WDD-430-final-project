@@ -3,8 +3,12 @@
   <div class="card-body">
     <div class="d-flex flex-start align-items-center">
       <img
-        class="rounded-circle shadow-1-strong me-3"
-        src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(19).webp"
+        class="rounded-circle shadow-1-strong me-3 reviewer-image"
+        [src]="
+          review.userId.imageUrl
+            ? review.userId.imageUrl
+            : placeholderImageUrl()
+        "
         alt="avatar"
         width="60"
         height="60"
@@ -54,8 +58,10 @@
 <!-- For large screens start -->
 <div class="d-none d-lg-flex flex-start mb-4">
   <img
-    class="rounded-circle shadow-1-strong me-3"
-    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"
+    class="rounded-circle shadow-1-strong me-3 reviewer-image"
+    [src]="
+      review.userId.imageUrl ? review.userId.imageUrl : placeholderImageUrl()
+    "
     alt="avatar"
     width="65"
     height="65"

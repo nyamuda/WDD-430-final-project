@@ -71,4 +71,10 @@ export class ReviewItemComponent {
       return false;
     }
   }
+
+  //placeholder image in case the reviewer
+  //does not have a profile picture
+  placeholderImageUrl: Signal<string> = computed(() =>
+    this.userService.imagePlaceholderUrl(this.review.userId.name)
+  );
 }
