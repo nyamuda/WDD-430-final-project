@@ -1,5 +1,6 @@
 <div class="container mt-5">
-  <p class="display-5">Login</p>
+  <p class="heading-line m-auto rounded"></p>
+  <p class="display-6 text-uppercase text-center">Login</p>
   <form [formGroup]="loginFormGroup" class="needs-validation" novalidate>
     <!-- Email input -->
     <div class="form-floating mb-3">
@@ -73,7 +74,7 @@
       *ngIf="!logging(); else loadingBtn"
       (click)="submitForm()"
       type="submit"
-      class="btn btn-primary btn-block mb-3"
+      class="btn custom text-light btn-block mb-3"
     >
       Login
     </button>
@@ -81,7 +82,7 @@
 
     <!-- Loading button -->
     <ng-template #loadingBtn>
-      <button class="btn btn-primary btn-block" type="button" disabled>
+      <button class="btn custom text-light btn-block" type="button" disabled>
         <span
           class="spinner-border spinner-border-sm"
           role="status"
@@ -90,5 +91,26 @@
         <span class="ms-1">Please wait...</span>
       </button>
     </ng-template>
+
+    <!-- Register buttons -->
+    <div class="text-center">
+      <p>Not a member? <a routerLink="/register">Register</a></p>
+      <p>or sign in with:</p>
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-facebook-f"></i>
+      </button>
+
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-google"></i>
+      </button>
+
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-twitter"></i>
+      </button>
+
+      <button type="button" class="btn btn-link btn-floating mx-1">
+        <i class="fab fa-github"></i>
+      </button>
+    </div>
   </form>
 </div>

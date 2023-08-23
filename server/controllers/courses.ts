@@ -46,9 +46,11 @@ export class CoursesController {
   public static async getCourses(req: Request, res: Response) {
     try {
       //Get the query parameter for sorting
+
       let sortBy = req.query.sort ? req.query.sort.toString() : 'rating';
 
       let sortObject = {};
+      //in descending order -->-1
       sortObject[sortBy] = -1;
 
       let courses = await Course.find({})
@@ -99,9 +101,15 @@ export class CoursesController {
       //reviews to skip
       let itemsToSkip = (currentPage - 1) * itemsPerPage;
 
+      //sort by updatedAt
+      //in descending order -->-1
+      let sortObject = {};
+      sortObject['updatedAt'] = -1;
+
       let reviews = await Review.find({ courseId: req.params.id })
         .skip(itemsToSkip)
         .limit(itemsPerPage)
+        .sort(sortObject)
         .populate('userId');
 
       //total reviews for the course
