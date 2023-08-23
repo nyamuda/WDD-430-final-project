@@ -137,7 +137,7 @@ export class UsersService {
         //add a random color to the initial
         //and add the initial to the image
         let randomColor = this.generateRandomColorHexCode();
-        let fullUrl = `${placeholderUrl}${randomColor}/text=${initials}`;
+        let fullUrl = `${placeholderUrl}${randomColor}?text=${initials}`;
         return fullUrl;
       }
       //get two initials
