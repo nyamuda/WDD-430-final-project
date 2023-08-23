@@ -31,6 +31,7 @@ export class UsersController {
 
   // Update user by ID
   public static async updateUser(req: Request, res: Response) {
+    let userId = req.params['id'];
     // Validation
     let schema = Joi.object({
       name: Joi.string().optional(),
@@ -43,9 +44,23 @@ export class UsersController {
       return res.status(400).json({ error: error.details[0].message });
     }
 
+    //check to see if there is no user already in the database with the new updated email
+    let updatedEmail = req.body['email'];
+    if (updatedEmail) {
+      let doesUserWithEmailExist: boolean = await this.doesUserWithEmailExist(
+        userId,
+        updatedEmail
+      );
+      //if the user with that email exists
+      if (doesUserWithEmailExist) {
+        return res.status(400).json({
+          error:
+            'The email you entered is already taken by another user. Please choose a different email address.',
+        });
+      }
+    }
     // Check if the user exists
     let userExists = await User.findById(req.params.id);
-    console.log(req.params.id);
 
     if (!userExists) {
       return res.status(404).json({
@@ -108,5 +123,23 @@ export class UsersController {
           error: err,
         });
       });
+  }
+
+  //check to see if there is no user already in the database with the new updated email
+  private static async doesUserWithEmailExist(
+    currentUserId: string,
+    updatedEmail: string
+  ): Promise<boolean> {
+    let userExists = await User.findOne({ email: updatedEmail });
+
+    //if the user is already registered
+    if (
+      userExists['_id'].toString() != currentUserId &&
+      userExists['email'] == updatedEmail
+    ) {
+      return true;
+    }
+
+    return false;
   }
 }

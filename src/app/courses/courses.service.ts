@@ -100,15 +100,6 @@ export class CoursesService {
   getCourseById(id: string): Observable<Course> {
     this.isFetchingCourse.set(true);
 
-    if (this._courses.length != 0) {
-      let course = this._courses.filter(
-        (course: Course) => course['_id'] == id
-      )[0];
-      if (!!course) {
-        this.isFetchingCourse.set(false);
-        return of(course);
-      }
-    }
     const url = `http://localhost:8000/courses/${id}`;
 
     return this.http.get<Course>(url);
@@ -169,7 +160,7 @@ export class CoursesService {
               'Success!'
             );
 
-            this.router.navigateByUrl('/courses');
+            this.router.navigateByUrl('/courses/' + id);
           },
           (error) => {
             //stop loader

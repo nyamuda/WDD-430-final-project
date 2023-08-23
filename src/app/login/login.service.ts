@@ -59,13 +59,22 @@ export class LoginService {
         this.router.navigateByUrl(this.redirectUrl());
       },
       (error) => {
-        //show toast
-        let message = error['error']['message']
-          ? error['error']['message']
-          : error['error']['error'];
-        this.appService.showFailureToast(message, '');
         //disable loading button
         this.isLoggingIn.set(false);
+
+        //show toast
+        let errorMessage = error['error']['message']
+          ? error['error']['message']
+          : error['error']['error'];
+
+        if (errorMessage) {
+          this.appService.showFailureToast(errorMessage, '');
+        } else {
+          this.appService.showFailureToast(
+            'Please review your login credentials and try again.',
+            'Login failed'
+          );
+        }
       }
     );
   }

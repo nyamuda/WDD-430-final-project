@@ -107,16 +107,28 @@ export class UsersService {
                 ''
               );
 
+              this.user.set(user);
+
               this.router.navigateByUrl(`/account/${id}`);
             });
           },
           (error) => {
             //stop loader
             this.isProcessingRequest.set(false);
-            this.appService.showFailureToast(
-              'Please review your changes and try again.',
-              'Update failed'
-            );
+
+            //show toast
+            let errorMessage = error['error']['message']
+              ? error['error']['message']
+              : error['error']['error'];
+
+            if (errorMessage) {
+              this.appService.showFailureToast(errorMessage, '');
+            } else {
+              this.appService.showFailureToast(
+                'Please review your changes and try again.',
+                'Update failed'
+              );
+            }
           }
         );
     });
