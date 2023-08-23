@@ -121,4 +121,52 @@ export class UsersService {
         );
     });
   }
+
+  //User placeholder image with the initials
+  //of the user inside the placeholder image
+  imagePlaceholderUrl(userName: string): string {
+    if (userName) {
+      userName = userName.toUpperCase();
+      let placeholderUrl = 'https://placehold.co/600x400/000000/';
+      let initials = '';
+      //get the first initial
+      let words = userName.split(' ');
+      if (words.length == 1) {
+        initials += words[0][0];
+
+        //add a random color to the initial
+        //and add the initial to the image
+        let randomColor = this.generateRandomColorHexCode();
+        let fullUrl = `${placeholderUrl}${randomColor}/text=${initials}`;
+        return fullUrl;
+      }
+      //get two initials
+      if (words.length >= 2) {
+        initials += words[0][0];
+        initials += words[1][0];
+
+        //add a random color to the initials
+        //and add the initials to the image
+        let randomColor = this.generateRandomColorHexCode();
+        let fullUrl = `${placeholderUrl}${randomColor}?text=${initials}`;
+        return fullUrl;
+      }
+    }
+
+    return '../../assets/images/placeholder/placeholder1.png';
+  }
+
+  generateRandomColorHexCode(): string {
+    const hexCodes: string[] = [];
+
+    for (let i = 0; i < 10; i++) {
+      // Generate a random color by creating a random 6-character hex code
+      const randomColor = Math.floor(Math.random() * 16777215)
+        .toString(16)
+        .padStart(6, '0');
+      hexCodes.push(randomColor);
+    }
+
+    return hexCodes[0];
+  }
 }

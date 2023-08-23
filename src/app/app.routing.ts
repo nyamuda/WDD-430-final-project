@@ -11,8 +11,15 @@ import { ReviewsComponent } from './reviews/reviews.component';
 import { UsersComponent } from './users/users.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { authGuard, adminAuthGuard } from './auth/auth.guard';
+import {
+  loggedInAuthGuard,
+  adminAuthGuard,
+  rightUserAuthGuard,
+} from './auth/auth.guard';
 import { HomepageComponent } from './homepage/homepage.component';
+import { UsersAccountComponent } from './users/users-account/users-account.component';
+import { UsersAccountDetailsComponent } from './users/users-account-details/users-account-details.component';
+import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,12 +43,12 @@ export const routes: Routes = [
           {
             path: 'reviews/:reviewId/edit',
             component: ReviewEditComponent,
-            canActivate: [authGuard],
+            canActivate: [loggedInAuthGuard],
           },
           {
             path: 'reviews/new',
             component: ReviewEditComponent,
-            canActivate: [authGuard],
+            canActivate: [loggedInAuthGuard],
           },
         ],
       },
@@ -59,5 +66,21 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'account',
+    component: UsersAccountComponent,
+    children: [
+      {
+        path: ':id',
+        component: UsersAccountDetailsComponent,
+        canActivate: [rightUserAuthGuard], //only logged in users
+      },
+      {
+        path: ':id/edit',
+        component: UsersAccountEditComponent,
+        canActivate: [rightUserAuthGuard], //only logged in users
+      },
+    ],
   },
 ];

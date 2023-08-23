@@ -263,7 +263,13 @@
                 class="dropdown-menu"
                 aria-labelledby="dropdownMenuButton"
               >
-                <li><a class="dropdown-item" href="#">Settings</a></li>
+                <li>
+                  <a
+                    class="dropdown-item"
+                    [routerLink]="'/account/' + user()['_id']"
+                    >Settings</a
+                  >
+                </li>
                 <li>
                   <a (click)="logout()" class="dropdown-item">Logout</a>
                 </li>

@@ -41,4 +41,14 @@ export class AuthService {
 
     return decodedToken.isAdmin;
   }
+
+  //get user access token
+  //check if its the admin
+  getTokenInfo(): string {
+    if (this.isAuthenticated()) {
+      let token = this.userService.getJwtToken();
+      return this.jwtHelper.decodeToken(token);
+    }
+    return '';
+  }
 }

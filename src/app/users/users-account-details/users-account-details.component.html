@@ -1,1 +1,36 @@
-<p>users-account-details works!</p>
+<div *ngIf="user(); else elseBlock" class="container mt-5">
+  <div class="row row-cols-1">
+    <div class="col-lg-4 m-auto mb-2">
+      <img
+        [src]="imageUrl()"
+        alt="User image"
+        class="img-fluid rounded img-thumbnail hover-shadow"
+      />
+    </div>
+    <div class="col text-center">
+      <p class="h3">{{ user().name }}</p>
+      <p>{{ user().email }}</p>
+      <a href="" class="btn custom text-light mt-2">Update profile</a>
+    </div>
+  </div>
+</div>
+
+<!-- Placeholder -->
+<ng-template #elseBlock>
+  <div class="row row-cols-1 placeholder-glow container-fluid custom mt-5">
+    <div class="col-lg-4 m-auto mb-2">
+      <img
+        src="../../../assets/images/placeholder/placeholder1.png"
+        alt="User image"
+        class="img-fluid rounded img-thumbnail hover-shadow"
+      />
+    </div>
+    <div
+      class="col d-flex flex-column align-items-center justify-content-center"
+    >
+      <p class="h2 placeholder col-8 col-lg-6"></p>
+      <p class="placeholder col-6 col-lg-4"></p>
+      <a class="btn custom text-light placeholder col-4 col-lg-2 mt-2"></a>
+    </div>
+  </div>
+</ng-template>
