@@ -1,10 +1,12 @@
 <div *ngIf="user(); else elseBlock" class="container mt-5">
   <div class="row row-cols-1">
-    <div class="col-lg-4 m-auto mb-2">
+    <div class="col d-flex justify-content-center mb-2">
       <img
         [src]="user().imageUrl ? user().imageUrl : placeholderImageUrl()"
         alt="User image"
-        class="img-fluid rounded img-thumbnail hover-shadow"
+        class="rounded-circle hover-shadow"
+        width="300"
+        height="300"
       />
     </div>
     <div class="col text-center">
@@ -18,11 +20,11 @@
 <!-- Placeholder -->
 <ng-template #elseBlock>
   <div class="row row-cols-1 placeholder-glow container-fluid custom mt-5">
-    <div class="col-lg-4 m-auto mb-2">
+    <div class="col d-flex justify-content-center mb-2">
       <img
         src="../../../assets/images/placeholder/placeholder1.png"
         alt="User image"
-        class="img-fluid rounded img-thumbnail hover-shadow"
+        class="rounded-circle hover-shadow"
       />
     </div>
     <div

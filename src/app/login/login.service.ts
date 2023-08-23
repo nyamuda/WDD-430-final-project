@@ -77,5 +77,6 @@ export class LoginService {
     //clear the stored information about the user
     this.userService.user.set(new User());
     this.appService.showSuccessToast("You've been logged out", '');
+    this.router.navigateByUrl('/home');
   }
 }
