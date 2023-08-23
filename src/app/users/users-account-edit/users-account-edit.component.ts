@@ -11,6 +11,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class UsersAccountEditComponent implements OnInit {
   userFormGroup: FormGroup;
+  userId: string;
   constructor(
     private userService: UsersService,
     private formBuilder: FormBuilder,
@@ -19,14 +20,15 @@ export class UsersAccountEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      let userId = params['id'];
+      this.userId = params['id'];
+
       this.userFormGroup = this.formBuilder.group({
         name: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
       });
 
       //file the form with the user details
-      this.userService.getUser(userId).subscribe((user: User) => {
+      this.userService.getUser(this.userId).subscribe((user: User) => {
         this.userFormGroup.patchValue({
           name: user.name,
           email: user.email,
@@ -42,19 +44,19 @@ export class UsersAccountEditComponent implements OnInit {
     this.userService.isProcessingRequest()
   );
 
-  imageUrl: Signal<string> = computed(() =>
+  placeholderImageUrl: Signal<string> = computed(() =>
     this.userService.imagePlaceholderUrl(this.user().name)
   );
 
   submitForm(event: Event) {
     event.preventDefault();
     if (this.userFormGroup.valid) {
-      let userId: string = this.user()['_id'];
       let newUser = new User();
 
       newUser.name = this.userFormGroup.controls['name'].value;
       newUser.email = this.userFormGroup.controls['email'].value;
-      this.userService.updateUser(userId, newUser);
+      newUser.imageUrl = this.user().imageUrl;
+      this.userService.updateUser(this.userId, newUser);
     }
   }
 }

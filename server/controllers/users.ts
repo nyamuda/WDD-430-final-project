@@ -35,6 +35,7 @@ export class UsersController {
     let schema = Joi.object({
       name: Joi.string().optional(),
       email: Joi.string().email().optional(),
+      imageUrl: Joi.optional(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
@@ -55,6 +56,7 @@ export class UsersController {
     let user = {
       name: req.body.name,
       email: req.body.email,
+      imageUrl: req.body.imageUrl,
     };
 
     // PUT request

@@ -2,7 +2,7 @@
   <div class="row row-cols-1">
     <div class="col-lg-4 m-auto mb-2">
       <img
-        [src]="imageUrl()"
+        [src]="user().imageUrl ? user().imageUrl : placeholderImageUrl()"
         alt="User image"
         class="img-fluid rounded img-thumbnail hover-shadow"
       />

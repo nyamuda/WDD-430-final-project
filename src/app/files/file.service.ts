@@ -55,6 +55,7 @@ export class FileService {
     if (this.currentUpload().length > 0 && !!this.currentUpload()[0]) {
       const formData = new FormData(); // Create a new FormData object
       formData.append('file', this.currentUpload()[0]); // Append the file to the form data
+
       formData.append('imageUrl', oldImageUrl);
 
       const url = `http://localhost:8000/files`;
@@ -70,7 +71,7 @@ export class FileService {
         },
       };
 
-      //checking if the imageUrl is not null
+      //checking if the imageUrl is null
       if (!oldImageUrl) {
         return this.uploadImage();
       }

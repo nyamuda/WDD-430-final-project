@@ -12,7 +12,7 @@ export class UsersAccountDetailsComponent {
 
   user: Signal<User> = computed(() => this.userService.user());
 
-  imageUrl: Signal<string> = computed(() =>
+  placeholderImageUrl: Signal<string> = computed(() =>
     this.userService.imagePlaceholderUrl(this.user().name)
   );
 }

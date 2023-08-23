@@ -78,7 +78,7 @@ export class UsersService {
     let userDto = {
       name: newUser.name,
       email: newUser.email,
-      imageUrl: this.user().imageUrl,
+      imageUrl: newUser.imageUrl,
     };
 
     //first update the image
@@ -103,8 +103,8 @@ export class UsersService {
             //get the new user details
             this.getUser(id).subscribe((user: User) => {
               this.appService.showSuccessToast(
-                'The course has been updated',
-                'Success!'
+                'Your profile has been updated',
+                ''
               );
 
               this.router.navigateByUrl(`/account/${id}`);
@@ -115,7 +115,7 @@ export class UsersService {
             this.isProcessingRequest.set(false);
             this.appService.showFailureToast(
               'Please review your changes and try again.',
-              'Course update failed'
+              'Update failed'
             );
           }
         );
