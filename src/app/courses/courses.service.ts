@@ -8,12 +8,13 @@ import {
 import { map, Observable, of, catchError, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Course } from './course.model';
-import { ToastrService } from 'ngx-toastr';
+
 import { UsersService } from '../users/users.service';
 import { Review } from '../reviews/review.model';
 import { response } from 'express';
 import { Router } from '@angular/router';
 import { FileService } from '../files/file.service';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -45,7 +46,7 @@ export class CoursesService {
 
   constructor(
     private http: HttpClient,
-    private toastrService: ToastrService,
+    private appService: AppService,
     private userService: UsersService,
     private router: Router,
     private fileService: FileService
@@ -77,7 +78,7 @@ export class CoursesService {
             //stop loader
             this.isProcessingRequest.set(false);
             this.getCourses();
-            this.showSuccess(
+            this.appService.showSuccessToast(
               'The course has been added to the database.',
               'Success!'
             );
@@ -87,7 +88,7 @@ export class CoursesService {
             console.log(error);
             //stop loader
             this.isProcessingRequest.set(false);
-            this.showFailure(
+            this.appService.showFailureToast(
               'Please review your data and try again.',
               'Failed to add course'
             );
@@ -147,6 +148,9 @@ export class CoursesService {
     //and get the new imageUrl
     this.fileService.updateImage(newCourse.imageUrl).subscribe((imageUrl) => {
       //update the imageUrl
+      //if the returned imageUrl is null
+      //in case the user did not upload a new image
+      //assign the original imageUrl
       courseDto.imageUrl = !!imageUrl ? imageUrl : courseDto.imageUrl;
 
       //update the course
@@ -160,14 +164,17 @@ export class CoursesService {
             this.isProcessingRequest.set(false);
             this.getCourses();
 
-            this.showSuccess('The course has been updated', 'Success!');
+            this.appService.showSuccessToast(
+              'The course has been updated',
+              'Success!'
+            );
 
             this.router.navigateByUrl('/courses');
           },
           (error) => {
             //stop loader
             this.isProcessingRequest.set(false);
-            this.showFailure(
+            this.appService.showFailureToast(
               'Please review your changes and try again.',
               'Course update failed'
             );
@@ -188,10 +195,13 @@ export class CoursesService {
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getCourses();
-        this.showSuccess('The course has been deleted.', 'Success!');
+        this.appService.showSuccessToast(
+          'The course has been deleted.',
+          'Success!'
+        );
       },
       (error) => {
-        this.showFailure(
+        this.appService.showFailureToast(
           'There was an error during the course deletion process.',
           'Course deletion failed'
         );
@@ -222,25 +232,5 @@ export class CoursesService {
       .set('Authorization', `Bearer ${token}`);
 
     return headers;
-  }
-
-  //Toast
-  showSuccess(message: string, title: string) {
-    this.toastrService.success(`${message}`, `${title}`, {
-      timeOut: 10000,
-      progressAnimation: 'increasing',
-      progressBar: true,
-      positionClass: 'toast-bottom-right',
-    });
-  }
-
-  //Toast
-  showFailure(message: string, title: string) {
-    this.toastrService.error(`${message}`, `${title}`, {
-      timeOut: 10000,
-      progressAnimation: 'increasing',
-      progressBar: true,
-      positionClass: 'toast-bottom-right',
-    });
   }
 }

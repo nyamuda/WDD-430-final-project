@@ -1,6 +1,8 @@
 @import "./_variables";
+
+//Quill Editor Start
 .ql-editor {
-  font-family: $main-font; /* Replace with your desired font */
+  font-family: $main-font;
   font-size: 1rem;
   color: #212529;
 }
@@ -8,6 +10,9 @@
   width: 98%;
   margin: auto;
 }
+//Quill Editor End
+
+//Bootstrap Start
 @media (min-width: 768px) {
   .container-fluid.custom {
     width: 90%;
@@ -40,3 +45,15 @@
 .btn.custom:hover {
   background-color: $primary-color;
 }
+// Bootstrap End
+
+//Toastr Start
+.toast-title {
+  font-weight: bold !important;
+  font-family: $main-font !important;
+}
+.toast-message {
+  font-family: $main-font !important;
+}
+
+//Toastr End

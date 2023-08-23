@@ -2,8 +2,9 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { User } from '../users/user.model';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
+
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,7 @@ export class RegisterService {
 
   constructor(
     private http: HttpClient,
-    private toastrService: ToastrService,
+    private appService: AppService,
     private router: Router
   ) {}
 
@@ -31,7 +32,10 @@ export class RegisterService {
       (response) => {
         console.log(response['token']);
         //show toast
-        this.showSuccess();
+        this.appService.showSuccessToast(
+          `You can now log in with your credentials.`,
+          'Registration Successful'
+        );
 
         //disable loading button
         this.isRegistering.set(false);
@@ -45,32 +49,10 @@ export class RegisterService {
         let message = error['error']['message']
           ? error['error']['message']
           : error['error']['error'];
-        this.showFailure(message);
+        this.appService.showFailureToast(message, 'Registration failed');
         //disable loading button
         this.isRegistering.set(false);
       }
     );
-  }
-
-  //show success toast
-  showSuccess() {
-    this.toastrService.success(
-      `You can now log in with your credentials.`,
-      'Registration Successful',
-      {
-        timeOut: 10000,
-        // progressAnimation: 'increasing',
-        // progressBar: true,
-      }
-    );
-  }
-
-  //show failure toast
-  showFailure(message: string) {
-    this.toastrService.error(`${message}`, 'Registration failed', {
-      timeOut: 10000,
-      // progressAnimation: 'increasing',
-      // progressBar: true,
-    });
   }
 }

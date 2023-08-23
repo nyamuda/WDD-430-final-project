@@ -4,6 +4,7 @@ import { CoursesService } from '../courses.service';
 import { Course } from '../course.model';
 import { UsersService } from 'src/app/users/users.service';
 import { User } from 'src/app/users/user.model';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-course-list',
@@ -15,7 +16,8 @@ export class CourseListComponent implements OnInit {
 
   constructor(
     private courseService: CoursesService,
-    private userService: UsersService
+    private userService: UsersService,
+    private appService: AppService
   ) {}
 
   ngOnInit() {
@@ -37,4 +39,10 @@ export class CourseListComponent implements OnInit {
   isFetchingCourses: Signal<boolean> = computed(() =>
     this.courseService.isFetchingCourses()
   );
+  success() {
+    this.appService.showSuccessToast('Course has been updated', '');
+  }
+  failure() {
+    this.appService.showFailureToast('Course has been updated', 'Failure');
+  }
 }

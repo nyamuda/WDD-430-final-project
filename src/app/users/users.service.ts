@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileService } from '../files/file.service';
 import { Router } from '@angular/router';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,7 +17,13 @@ export class UsersService {
   //show a loader during an HTTP POST OR UPDATE request
   public isProcessingRequest: WritableSignal<boolean> = signal(false);
 
-  constructor(private jwtHelper: JwtHelperService, private http: HttpClient, private fileService:FileService, private router:Router) {}
+  constructor(
+    private jwtHelper: JwtHelperService,
+    private http: HttpClient,
+    private fileService: FileService,
+    private router: Router,
+    private appService: AppService
+  ) {}
 
   public async decodeJwtToken() {
     //if the token exists
@@ -38,6 +45,7 @@ export class UsersService {
     return this.http.get<User>(url);
   }
 
+  //Get access token from local storage
   public getJwtToken(): string {
     //check if there is a token in session storage
     let sessionToken = sessionStorage.getItem('jwt_token');
@@ -68,16 +76,16 @@ export class UsersService {
     //show loader
     this.isProcessingRequest.set(true);
     let userDto = {
-      name:newUser.name,
-      email:newUser.email,
-      imageUrl:this.user().imageUrl
+      name: newUser.name,
+      email: newUser.email,
+      imageUrl: this.user().imageUrl,
     };
 
     //first update the image
     //and get the new imageUrl
     this.fileService.updateImage(newUser.imageUrl).subscribe((imageUrl) => {
       //update the imageUrl
-      //if if the returned imageUrl is null
+      //if the returned imageUrl is null
       //in case the user did not upload a new image
       //assign the original imageUrl
       userDto.imageUrl = !!imageUrl ? imageUrl : userDto.imageUrl;
@@ -93,18 +101,19 @@ export class UsersService {
             this.isProcessingRequest.set(false);
 
             //get the new user details
-            this.getUser(id).subscribe((user:User)=>{
-              this.showSuccess('The course has been updated', 'Success!');
+            this.getUser(id).subscribe((user: User) => {
+              this.appService.showSuccessToast(
+                'The course has been updated',
+                'Success!'
+              );
 
               this.router.navigateByUrl(`/account/${id}`);
-            })
-
-            
+            });
           },
           (error) => {
             //stop loader
             this.isProcessingRequest.set(false);
-            this.showFailure(
+            this.appService.showFailureToast(
               'Please review your changes and try again.',
               'Course update failed'
             );

@@ -46,9 +46,6 @@ export class RegisterComponent implements OnInit {
       this.registerService.register(user);
     }
   }
-  hello() {
-    this.registerService.showSuccess();
-  }
 
   //show the loading button when registration is in progress
   registering: Signal<boolean> = computed(() =>

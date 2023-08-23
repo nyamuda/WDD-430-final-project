@@ -5,6 +5,7 @@ interface IUser {
   email: string;
   password: string;
   isAdmin: boolean;
+  imageUrl:string
 }
 
 let userSchema = new Schema<IUser>(
@@ -13,6 +14,7 @@ let userSchema = new Schema<IUser>(
     email: { type: String, unique: true },
     password: String,
     isAdmin: { type: Boolean },
+    imageUrl: String,
   },
   {
     timestamps: true,

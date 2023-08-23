@@ -8,9 +8,10 @@ import {
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MetaData, Review, ReviewMetaDto } from './review.model';
-import { ToastrService } from 'ngx-toastr';
+
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -32,7 +33,7 @@ export class ReviewsService {
 
   constructor(
     private http: HttpClient,
-    private toastrService: ToastrService,
+    private appService: AppService,
     private userService: UsersService
   ) {}
 
@@ -53,13 +54,13 @@ export class ReviewsService {
         (response) => {
           this.getReviewsForCourse(this.courseIdSignal());
           //show toast
-          this.showSuccess(
+          this.appService.showSuccessToast(
             'We appreciate your valuable feedback!',
             'Thank you for your review'
           );
         },
         (error) => {
-          this.showFailure(
+          this.appService.showFailureToast(
             "We're sorry, but there was an error submitting your review. Please try again later.",
             'Review submission failed'
           );
@@ -116,13 +117,13 @@ export class ReviewsService {
         .subscribe(
           (response) => {
             this.getReviewsForCourse(this.courseIdSignal());
-            this.showSuccess(
+            this.appService.showSuccessToast(
               'Thank you for your revised feedback!',
               'Review updated'
             );
           },
           (error) => {
-            this.showFailure(
+            this.appService.showFailureToast(
               "We're sorry, but there was an error updating your review. Please try again later.",
               'Review update failed'
             );
@@ -139,13 +140,13 @@ export class ReviewsService {
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getReviewsForCourse(this.courseIdSignal());
-        this.showSuccess(
+        this.appService.showSuccessToast(
           'Your review has been successfully removed.',
           'Review deleted successfully'
         );
       },
       (error) => {
-        this.showFailure(
+        this.appService.showFailureToast(
           "We're sorry, but there was an error deleting your review. Please try again later.",
           'Failed to delete review'
         );
@@ -160,23 +161,5 @@ export class ReviewsService {
       .set('Authorization', `Bearer ${token}`);
 
     return headers;
-  }
-
-  //Toast
-  showSuccess(message: string, title: string) {
-    this.toastrService.success(`${message}`, `${title}`, {
-      timeOut: 10000,
-      progressAnimation: 'increasing',
-      progressBar: true,
-    });
-  }
-
-  //Toast
-  showFailure(message: string, title: string) {
-    this.toastrService.error(`${message}`, `${title}`, {
-      timeOut: 10000,
-      progressAnimation: 'increasing',
-      progressBar: true,
-    });
   }
 }

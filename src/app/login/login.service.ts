@@ -2,9 +2,10 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { User } from '../users/user.model';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -14,13 +15,14 @@ export class LoginService {
   rememberMe: WritableSignal<boolean> = signal(false); // remember me on log in
   //redirect URL if log in is a success
   //default is the homepage
-  redirectUrl: WritableSignal<string> = signal('/courses');
+  redirectUrl: WritableSignal<string> = signal('');
   constructor(
     private http: HttpClient,
-    private toastrService: ToastrService,
+
     private router: Router,
     private route: ActivatedRoute,
-    private userService: UsersService
+    private userService: UsersService,
+    private appService: AppService
   ) {}
 
   login(newUser: User) {
@@ -44,15 +46,14 @@ export class LoginService {
           sessionStorage.setItem('jwt_token', response['token']);
         }
 
-        //show toast
-        this.showSuccess("You're now logged in.", 'Success!');
-
         //disable loading button
         this.isLoggingIn.set(false);
 
         //load the user information to the user service
         //by decoding the access token
         this.userService.decodeJwtToken();
+
+        this.appService.showSuccessToast('Login successful!', '');
 
         //navigate the user
         this.router.navigateByUrl(this.redirectUrl());
@@ -62,29 +63,11 @@ export class LoginService {
         let message = error['error']['message']
           ? error['error']['message']
           : error['error']['error'];
-        this.showFailure(message);
+        this.appService.showFailureToast(message, '');
         //disable loading button
         this.isLoggingIn.set(false);
       }
     );
-  }
-
-  //show success toast
-  showSuccess(message: string, title: string) {
-    this.toastrService.success(`${message}`, `${title}`, {
-      timeOut: 10000,
-      // progressAnimation: 'increasing',
-      // progressBar: true,
-    });
-  }
-
-  //show failure toast
-  showFailure(message: string) {
-    this.toastrService.error(`${message}`, 'Login failed', {
-      timeOut: 10000,
-      // progressAnimation: 'increasing',
-      // progressBar: true,
-    });
   }
 
   // When the user logs out
@@ -93,10 +76,6 @@ export class LoginService {
     sessionStorage.removeItem('jwt_token');
     //clear the stored information about the user
     this.userService.user.set(new User());
-
-    this.showSuccess(
-      "You've been logged out",
-      'We hope to see you again soon!'
-    );
+    this.appService.showSuccessToast("You've been logged out", '');
   }
 }

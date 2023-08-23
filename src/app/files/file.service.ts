@@ -2,6 +2,7 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 import { map, Observable, of, catchError, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +12,7 @@ export class FileService {
   currentUpload: WritableSignal<File[]> = signal([]);
   isFileInvalid: WritableSignal<boolean> = signal(false);
 
-  constructor(private http: HttpClient, private userService: UsersService) {}
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
   //Upload image
   //returns image URL
@@ -23,7 +24,7 @@ export class FileService {
 
       const url = `http://localhost:8000/files`;
 
-      let token = this.userService.getJwtToken();
+      let token = this.getJwtToken();
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
       let options = {
         headers: headers,
@@ -59,7 +60,7 @@ export class FileService {
       const url = `http://localhost:8000/files`;
 
       // Create the options object with headers and body
-      let token = this.userService.getJwtToken();
+      let token = this.getJwtToken();
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
       const options = {
@@ -102,7 +103,7 @@ export class FileService {
     const url = `http://localhost:8000/files`;
 
     // Create the options object with headers and body
-    let token = this.userService.getJwtToken();
+    let token = this.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
     const options = {
       headers: headers,
@@ -119,5 +120,26 @@ export class FileService {
         console.log(error);
       }
     );
+  }
+
+  //Get access token from local storage
+  public getJwtToken(): string {
+    //check if there is a token in session storage
+    let sessionToken = sessionStorage.getItem('jwt_token');
+    //check if there is a token in local storage
+    let localToken = localStorage.getItem('jwt_token');
+
+    //the current token
+    let token = sessionToken ? sessionToken : localToken ? localToken : '';
+
+    if (token) {
+      //if the token has not expired
+      if (!this.jwtHelper.isTokenExpired(token)) {
+        return token;
+      }
+      return '';
+    }
+
+    return '';
   }
 }
