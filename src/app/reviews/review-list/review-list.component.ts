@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy, Signal, computed } from '@angular/core';
 import { ReviewsService } from '../reviews.service';
-import { MetaData, Review } from '../review.model';
+import { Review } from '../review.model';
 
 @Component({
   selector: 'app-review-list',

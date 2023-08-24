@@ -1,7 +1,8 @@
 import { Component, Signal, computed } from '@angular/core';
-import { MetaData, Review } from '../../review.model';
+import { Review } from '../../review.model';
 import { ReviewsService } from '../../reviews.service';
 import { Router } from '@angular/router';
+import { MetaData } from '../../../app.meta';
 
 @Component({
   selector: 'app-review-pagination',

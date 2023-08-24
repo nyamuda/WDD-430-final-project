@@ -1,3 +1,4 @@
+import { MetaData } from '../app.meta';
 import { Course } from '../courses/course.model';
 import { User } from '../users/user.model';
 
@@ -55,30 +56,6 @@ export class Review {
   }
   public get stars(): number {
     return this._stars;
-  }
-}
-
-export class MetaData {
-  constructor(
-    public totalItems: number,
-    public currentPage: number,
-    public pageSize: number
-  ) {}
-
-  get totalPages(): number {
-    return Math.ceil(this.totalItems / this.pageSize);
-  }
-
-  get hasNextPage(): boolean {
-    return this.currentPage < this.totalPages;
-  }
-
-  get hasPreviousPage(): boolean {
-    return this.currentPage > 1;
-  }
-  //has next page after the next page
-  get hasNextNextPage(): boolean {
-    return this.currentPage < this.totalPages - 1;
   }
 }
 

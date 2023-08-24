@@ -5,7 +5,13 @@
 }
 
 .img-fluid {
-  width: 23rem; /* You can set the dimensions to whatever you want */
+  width: 100%;
   height: 16rem;
   object-fit: cover;
+}
+
+@media (min-width: 768px) {
+  .img-fluid {
+    width: 23rem;
+  }
 }

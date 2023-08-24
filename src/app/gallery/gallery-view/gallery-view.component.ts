@@ -1,7 +1,8 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { GalleryItem, Gallery, ImageItem, VideoItem } from 'ng-gallery';
 import { GalleryService } from '../gallery.service';
-import { MetaData, SchoolGalleryItem } from '../schoolGalleryItem.model';
+import { SchoolGalleryItem } from '../schoolGalleryItem.model';
+import { MetaData } from '../../app.meta';
 
 @Component({
   selector: 'app-gallery-view',

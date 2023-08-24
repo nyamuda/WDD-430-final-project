@@ -7,11 +7,12 @@ import {
 } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { MetaData, Review, ReviewMetaDto } from './review.model';
+import { Review, ReviewMetaDto } from './review.model';
 
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
 import { AppService } from '../app.service';
+import { MetaData } from '../app.meta';
 
 @Injectable({
   providedIn: 'root',
@@ -83,14 +84,19 @@ export class ReviewsService {
     //get the reviews
     //and meta data for pagination
     this.http.get<ReviewMetaDto>(url).subscribe(
-      (reviewsMetaDto: ReviewMetaDto) => {
+      (response: ReviewMetaDto) => {
         //save the reviews
-        this._reviews = reviewsMetaDto.reviews;
-        this.reviewListSignal.set(reviewsMetaDto.reviews);
+        this._reviews = response.reviews;
+        this.reviewListSignal.set(response.reviews);
 
         //save the meta data
-        this._metaData = reviewsMetaDto.meta;
-        this.metaDataSignal.set(reviewsMetaDto.meta);
+        //meta data for pagination
+        let meta = new MetaData(
+          response.meta.totalItems,
+          response.meta.currentPage,
+          response.meta.pageSize
+        );
+        this.metaDataSignal.set(meta);
 
         //stop placeholder reviews
         this.isFetchingReviews.set(false);

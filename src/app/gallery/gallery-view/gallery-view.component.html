@@ -1,4 +1,7 @@
 <!-- View Images Tab Start  -->
+
+<!-- Pagination information -->
+<p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
 <div class="text-center mb-4" gallerize>
   <img
     *ngFor="
@@ -13,7 +16,7 @@
     [src]="item.data.thumb"
     [attr.imageSrc]="item.data.src"
     [attr.thumbSrc]="item.data.thumb"
-    class="img-fluid mx-lg-1 my-lg-1"
+    class="img-fluid mx-lg-1 my-1"
   />
 </div>
 

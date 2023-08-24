@@ -1,8 +1,9 @@
 import { Component, Signal, computed } from '@angular/core';
 import { GalleryService } from '../gallery.service';
-import { MetaData, SchoolGalleryItem } from '../schoolGalleryItem.model';
+import { SchoolGalleryItem } from '../schoolGalleryItem.model';
 import { MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+import { MetaData } from '../../app.meta';
 
 @Component({
   selector: 'app-gallery-delete',

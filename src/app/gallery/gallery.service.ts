@@ -3,12 +3,9 @@ import { FileService } from '../files/file.service';
 import { AppService } from '../app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
-import {
-  GalleryMetaDto,
-  MetaData,
-  SchoolGalleryItem,
-} from './schoolGalleryItem.model';
+import { GalleryMetaDto, SchoolGalleryItem } from './schoolGalleryItem.model';
 import { Router } from '@angular/router';
+import { MetaData } from '../app.meta';
 
 @Injectable({
   providedIn: 'root',
@@ -77,7 +74,12 @@ export class GalleryService {
         this.galleryListSignal.set(this._gallery);
 
         //meta data for pagination
-        this.metaDataSignal.set(response.meta);
+        let meta = new MetaData(
+          response.meta.totalItems,
+          response.meta.currentPage,
+          response.meta.pageSize
+        );
+        this.metaDataSignal.set(meta);
       },
       (error) => {
         console.log(error);
