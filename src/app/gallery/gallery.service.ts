@@ -3,7 +3,11 @@ import { FileService } from '../files/file.service';
 import { AppService } from '../app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
-import { SchoolGalleryItem } from './schoolGalleryItem.model';
+import {
+  GalleryMetaDto,
+  MetaData,
+  SchoolGalleryItem,
+} from './schoolGalleryItem.model';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,6 +19,11 @@ export class GalleryService {
     this._gallery
   );
   public isUploadingItemSignal: WritableSignal<boolean> = signal(false);
+  public metaDataSignal: WritableSignal<MetaData> = signal(
+    new MetaData(1, 1, 1)
+  );
+
+  public pageNumberSignal: WritableSignal<number> = signal(1);
 
   constructor(
     private fileService: FileService,
@@ -61,12 +70,14 @@ export class GalleryService {
   }
 
   getGalleryItems() {
-    const url = `http://localhost:8000/gallery`;
-    this.http.get<SchoolGalleryItem[]>(url).subscribe(
-      (galleryItems: SchoolGalleryItem[]) => {
-        this._gallery = galleryItems;
-        console.log(galleryItems);
+    const url = `http://localhost:8000/gallery/?page=${this.pageNumberSignal()}`;
+    this.http.get<GalleryMetaDto>(url).subscribe(
+      (response: GalleryMetaDto) => {
+        this._gallery = response.items;
         this.galleryListSignal.set(this._gallery);
+
+        //meta data for pagination
+        this.metaDataSignal.set(response.meta);
       },
       (error) => {
         console.log(error);

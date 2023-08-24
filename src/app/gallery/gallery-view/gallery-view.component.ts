@@ -1,7 +1,7 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { GalleryItem, Gallery, ImageItem, VideoItem } from 'ng-gallery';
 import { GalleryService } from '../gallery.service';
-import { SchoolGalleryItem } from '../schoolGalleryItem.model';
+import { MetaData, SchoolGalleryItem } from '../schoolGalleryItem.model';
 
 @Component({
   selector: 'app-gallery-view',
@@ -9,16 +9,14 @@ import { SchoolGalleryItem } from '../schoolGalleryItem.model';
   styleUrls: ['./gallery-view.component.scss'],
 })
 export class GalleryViewComponent implements OnInit {
-  galleryId = 'myLightbox';
+  maxSize = 10;
 
   constructor(
     private gallery: Gallery,
     private galleryService: GalleryService
   ) {}
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   //Generate gallery items
   items: Signal<GalleryItem[]> = computed(() => {
@@ -37,4 +35,21 @@ export class GalleryViewComponent implements OnInit {
 
     return generatedItems;
   });
+
+  //Gallery meta data for pagination
+  metaData: Signal<MetaData> = computed(() =>
+    this.galleryService.metaDataSignal()
+  );
+
+  //Change gallery pagination number
+  pageChanged(newPage) {
+    //change the page number
+    this.galleryService.pageNumberSignal.set(newPage);
+    this.galleryService.getGalleryItems();
+    //scroll up to the top of the gallery list
+    const element = document.getElementById('gallery');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }

@@ -1,5 +1,11 @@
+@import "../../../sass/variables";
+
+.pagination-controls ::ng-deep .current {
+  background: $primary-color;
+}
+
 .img-fluid {
-    width: 23rem; /* You can set the dimensions to whatever you want */
-    height: 16rem;
-    object-fit: cover;
-  }
+  width: 23rem; /* You can set the dimensions to whatever you want */
+  height: 16rem;
+  object-fit: cover;
+}

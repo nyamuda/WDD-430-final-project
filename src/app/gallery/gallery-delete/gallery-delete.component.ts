@@ -1,6 +1,6 @@
 import { Component, Signal, computed } from '@angular/core';
 import { GalleryService } from '../gallery.service';
-import { SchoolGalleryItem } from '../schoolGalleryItem.model';
+import { MetaData, SchoolGalleryItem } from '../schoolGalleryItem.model';
 import { MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
 
@@ -12,6 +12,7 @@ import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmat
 export class GalleryDeleteComponent {
   //the modal
   modalRef: MdbModalRef<ConfirmationModalComponent>;
+  maxSize = 10;
 
   constructor(
     private galleryService: GalleryService,
@@ -46,5 +47,21 @@ export class GalleryDeleteComponent {
         this.deleteImage(id, imageUrl);
       }
     });
+  }
+  //Gallery meta data for pagination
+  metaData: Signal<MetaData> = computed(() =>
+    this.galleryService.metaDataSignal()
+  );
+
+  //Change gallery pagination number
+  pageChanged(newPage) {
+    //change the page number
+    this.galleryService.pageNumberSignal.set(newPage);
+    this.galleryService.getGalleryItems();
+    //scroll up to the top of the gallery list
+    const element = document.getElementById('gallery');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   }
 }

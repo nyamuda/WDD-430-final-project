@@ -1,15 +1,26 @@
 <!-- View Images Tab Start  -->
-
-<gallery class="d-lg-none" [items]="items()" thumbPosition="bottom" gallerize>
-</gallery>
-<div class="text-center d-none d-lg-block" gallerize>
+<div class="text-center mb-4" gallerize>
   <img
-    *ngFor="let item of items()"
+    *ngFor="
+      let item of items()
+        | paginate
+          : {
+              itemsPerPage: metaData().pageSize,
+              currentPage: metaData().currentPage,
+              totalItems: metaData().totalItems
+            }
+    "
     [src]="item.data.thumb"
     [attr.imageSrc]="item.data.src"
     [attr.thumbSrc]="item.data.thumb"
     class="img-fluid mx-lg-1 my-lg-1"
   />
 </div>
+
+<pagination-controls
+  class="text-center pagination-controls"
+  [maxSize]="maxSize"
+  (pageChange)="pageChanged($event)"
+></pagination-controls>
 
 <!-- View Images Tab End  -->

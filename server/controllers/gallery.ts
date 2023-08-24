@@ -39,6 +39,15 @@ export class GalleryController {
   // Get all the Gallery Items
   public static async getItems(req: Request, res: Response) {
     try {
+      //PAGINATION
+      //items per page
+      let itemsPerPage = 9;
+      //current page
+      let currentPage = Number(req.query.page) || 1;
+
+      //reviews to skip
+      let itemsToSkip = (currentPage - 1) * itemsPerPage;
+
       //Get the query parameter for sorting
       let sortBy = req.query.sort ? req.query.sort.toString() : 'updatedAt';
 
@@ -46,8 +55,21 @@ export class GalleryController {
       //in descending order -->-1
       sortObject[sortBy] = -1;
 
-      let items = await Gallery.find({}).sort(sortObject);
-      return res.json(items);
+      let items = await Gallery.find({})
+        .skip(itemsToSkip)
+        .limit(itemsPerPage)
+        .sort(sortObject);
+
+      //total items
+      let totalItems = await Gallery.find({}).countDocuments();
+
+      let meta = {
+        totalItems,
+        currentPage,
+        pageSize: itemsPerPage,
+      };
+
+      return res.json({ items, meta });
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
