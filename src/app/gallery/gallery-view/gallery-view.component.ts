@@ -11,6 +11,7 @@ import { MetaData } from '../../app.meta';
 })
 export class GalleryViewComponent implements OnInit {
   maxSize = 10;
+  numPlaceholderImages = [0, 1, 2, 3, 4, 5];
 
   constructor(
     private gallery: Gallery,

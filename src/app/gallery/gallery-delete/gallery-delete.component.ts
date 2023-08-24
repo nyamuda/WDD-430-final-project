@@ -14,6 +14,7 @@ export class GalleryDeleteComponent {
   //the modal
   modalRef: MdbModalRef<ConfirmationModalComponent>;
   maxSize = 10;
+  numPlaceholderImages = [0, 1, 2, 3, 4, 5];
 
   constructor(
     private galleryService: GalleryService,

@@ -1,29 +1,49 @@
 <!-- View Images Tab Start  -->
 
-<!-- Pagination information -->
-<p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
-<div class="text-center mb-4" gallerize>
-  <img
-    *ngFor="
-      let item of items()
-        | paginate
-          : {
-              itemsPerPage: metaData().pageSize,
-              currentPage: metaData().currentPage,
-              totalItems: metaData().totalItems
-            }
-    "
-    [src]="item.data.thumb"
-    [attr.imageSrc]="item.data.src"
-    [attr.thumbSrc]="item.data.thumb"
-    class="img-fluid mx-lg-1 my-1"
-  />
+<div *ngIf="items().length > 0; else placeholderImages">
+  <!-- Pagination information -->
+  <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
+  <div class="text-center mb-4" gallerize>
+    <img
+      *ngFor="
+        let item of items()
+          | paginate
+            : {
+                itemsPerPage: metaData().pageSize,
+                currentPage: metaData().currentPage,
+                totalItems: metaData().totalItems
+              }
+      "
+      [src]="item.data.thumb"
+      [attr.imageSrc]="item.data.src"
+      [attr.thumbSrc]="item.data.thumb"
+      class="img-fluid mx-lg-1 my-1 rounded"
+      alt="Gallery image"
+    />
+  </div>
+
+  <pagination-controls
+    class="text-center pagination-controls"
+    [maxSize]="maxSize"
+    (pageChange)="pageChanged($event)"
+  ></pagination-controls>
 </div>
 
-<pagination-controls
-  class="text-center pagination-controls"
-  [maxSize]="maxSize"
-  (pageChange)="pageChanged($event)"
-></pagination-controls>
-
 <!-- View Images Tab End  -->
+
+<!-- Placeholder images Start -->
+
+<ng-template #placeholderImages>
+  <div
+    class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1 mb-4 placeholder-wave"
+  >
+    <div *ngFor="let item of numPlaceholderImages" class="col bg-image">
+      <img
+        src="../../../assets/images/placeholder/placeholder1.png"
+        class="img-fluid rounded img-delete w-100"
+        alt="Gallery placeholder image"
+      />
+    </div>
+  </div>
+</ng-template>
+<!-- Placeholder images End -->

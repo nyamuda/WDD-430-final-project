@@ -1,35 +1,58 @@
 <!-- Delete Images Tab Start  -->
-<!-- Pagination information -->
-<p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
-<div class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1 mb-4">
-  <div
-    *ngFor="
-      let item of items()
-        | paginate
-          : {
-              itemsPerPage: metaData().pageSize,
-              currentPage: metaData().currentPage,
-              totalItems: metaData().totalItems
-            }
-    "
-    class="col bg-image"
-  >
-    <img [src]="item.url" class="img-fluid img-delete" alt="Gallery Image" />
+<div *ngIf="items().length > 0; else placeholderImages">
+  <!-- Pagination information -->
+  <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
+  <div class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1 mb-4">
+    <div
+      *ngFor="
+        let item of items()
+          | paginate
+            : {
+                itemsPerPage: metaData().pageSize,
+                currentPage: metaData().currentPage,
+                totalItems: metaData().totalItems
+              }
+      "
+      class="col bg-image"
+    >
+      <img
+        [src]="item.url"
+        class="img-fluid rounded img-delete"
+        alt="Gallery image"
+      />
 
-    <div class="mask d-flex justify-content-center align-items-center h-100">
-      <button
-        (click)="openModal(item['_id'], item.url)"
-        class="btn custom text-light"
-      >
-        Delete
-      </button>
+      <div class="mask d-flex justify-content-center align-items-center h-100">
+        <button
+          (click)="openModal(item['_id'], item.url)"
+          class="btn custom text-light"
+        >
+          Delete
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<pagination-controls
-  class="text-center pagination-controls"
-  [maxSize]="maxSize"
-  (pageChange)="pageChanged($event)"
-></pagination-controls>
+  <pagination-controls
+    class="text-center pagination-controls"
+    [maxSize]="maxSize"
+    (pageChange)="pageChanged($event)"
+  ></pagination-controls>
+</div>
 <!-- Delete Images Tab End  -->
+
+<!-- Placeholder images Start -->
+
+<ng-template #placeholderImages>
+  <div
+    class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1 mb-4 placeholder-wave"
+  >
+    <div *ngFor="let item of numPlaceholderImages" class="col bg-image">
+      <img
+        src="../../../assets/images/placeholder/placeholder1.png"
+        class="img-fluid rounded img-delete"
+        alt="Gallery placeholder image"
+      />
+    </div>
+  </div>
+</ng-template>
+<!-- Placeholder images End -->
