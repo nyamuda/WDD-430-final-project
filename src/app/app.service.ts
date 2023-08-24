@@ -28,7 +28,7 @@ export class AppService {
   }
 
   //Toast
-  showSuccessToast(message: string, title: string, position = 'top-right') {
+  showSuccessToast(message: string, title = '', position = 'top-right') {
     this.toastr.success(`${message}`, `${title}`, {
       timeOut: 5000,
       // progressAnimation: 'increasing',
@@ -38,7 +38,7 @@ export class AppService {
   }
 
   //Toast
-  showFailureToast(message: string, title: string, position = 'top-right') {
+  showFailureToast(message: string, title = '', position = 'top-right') {
     this.toastr.error(`${message}`, `${title}`, {
       timeOut: 10000,
       // progressAnimation: 'increasing',

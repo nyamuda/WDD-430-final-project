@@ -70,6 +70,9 @@ import { UsersAccountDetailsComponent } from './users/users-account-details/user
 import { GalleryModule } from 'ng-gallery';
 import { LightboxModule } from 'ng-gallery/lightbox';
 import { GalleryComponent } from './gallery/gallery.component';
+import { GalleryViewComponent } from './gallery/gallery-view/gallery-view.component';
+import { GalleryDeleteComponent } from './gallery/gallery-delete/gallery-delete.component';
+import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component';
 
 @NgModule({
   declarations: [
@@ -108,6 +111,9 @@ import { GalleryComponent } from './gallery/gallery.component';
     UsersAccountEditComponent,
     UsersAccountDetailsComponent,
     GalleryComponent,
+    GalleryViewComponent,
+    GalleryDeleteComponent,
+    GalleryAddComponent,
   ],
   imports: [
     BrowserModule,
