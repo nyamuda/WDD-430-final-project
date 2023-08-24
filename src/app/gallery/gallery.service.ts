@@ -48,7 +48,6 @@ export class GalleryService {
           this.getGalleryItems();
           //stop the loader
           this.isUploadingItemSignal.set(false);
-          this.router.navigateByUrl('/gallery');
         },
         (error) => {
           this.appService.showFailureToast(
@@ -83,7 +82,7 @@ export class GalleryService {
     //set headers
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const url = `http://localhost:8000/files/${id}`;
+    const url = `http://localhost:8000/gallery/${id}`;
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getGalleryItems();

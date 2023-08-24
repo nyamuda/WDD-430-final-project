@@ -13,7 +13,9 @@ export class ConfirmationModalComponent {
 
   constructor(public modalRef: MdbModalRef<ConfirmationModalComponent>) {}
 
-  //action confirmed
+  //close the modal
+  //by passing value called 'confirmed'
+  //to the component that called the modal
   confirmed() {
     this.modalRef.close('confirmed');
   }
