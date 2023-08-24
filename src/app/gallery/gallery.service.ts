@@ -3,14 +3,14 @@ import { FileService } from '../files/file.service';
 import { AppService } from '../app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
-import { GalleryItem } from './galleryItem.model';
+import { SchoolGalleryItem } from './schoolGalleryItem.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GalleryService {
-  private _gallery: GalleryItem[] = [];
-  public galleryListSignal: WritableSignal<GalleryItem[]> = signal(
+  private _gallery: SchoolGalleryItem[] = [];
+  public galleryListSignal: WritableSignal<SchoolGalleryItem[]> = signal(
     this._gallery
   );
 
@@ -33,6 +33,7 @@ export class GalleryService {
       let url = 'http://localhost:8000/gallery';
       let galleryImageDto = {
         url: imageUrl,
+        type: 'image',
       };
 
       this.http.post(url, galleryImageDto, { headers }).subscribe(
@@ -51,8 +52,8 @@ export class GalleryService {
 
   getGalleryItems() {
     const url = `http://localhost:8000/gallery`;
-    this.http.get<GalleryItem[]>(url).subscribe(
-      (galleryItems: GalleryItem[]) => {
+    this.http.get<SchoolGalleryItem[]>(url).subscribe(
+      (galleryItems: SchoolGalleryItem[]) => {
         this._gallery = galleryItems;
       },
       (error) => {
@@ -61,15 +62,15 @@ export class GalleryService {
     );
   }
 
-  async deleteGalleryItem(id: string, url: string) {
+  async deleteGalleryItem(id: string, itemUrl: string) {
     //first delete the image from Firebase
-    await this.fileService.deleteImage(url);
+    await this.fileService.deleteImage(itemUrl);
 
     //then delete its url from MongoDB
     //set headers
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-
+    const url = `http://localhost:8000/files/${id}`;
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getGalleryItems();

@@ -1,24 +1,17 @@
 <!-- View Images Tab Start  -->
-<mdb-tab
-  ><ng-template mdbTabTitle>
-    <div class="d-flex flex-column flex-lg-row align-items-center">
-      <span>
-        <i class="far fa-eye fa-2x me-lg-2"></i>
-      </span>
-      <span class="fs-6 fs-lg-5 fw-bold">View images</span>
-    </div>
-  </ng-template>
 
-  <gallery class="d-lg-none" [items]="items" thumbPosition="bottom" gallerize>
-  </gallery>
-  <div class="text-center d-none d-lg-block" gallerize>
-    <img
-      *ngFor="let image of items"
-      [src]="image.data.thumb"
-      [attr.imageSrc]="image.data.src"
-      [attr.thumbSrc]="image.data.thumb"
-      class="img-fluid mx-lg-1 my-lg-1"
-    />
-  </div>
-</mdb-tab>
+
+
+<gallery class="d-lg-none" [items]="items()" thumbPosition="bottom" gallerize>
+</gallery>
+<div class="text-center d-none d-lg-block" gallerize>
+  <img
+    *ngFor="let item of items()"
+    [src]="item.data.thumb"
+    [attr.imageSrc]="item.data.src"
+    [attr.thumbSrc]="item.data.thumb"
+    class="img-fluid mx-lg-1 my-lg-1"
+  />
+</div>
+
 <!-- View Images Tab End  -->

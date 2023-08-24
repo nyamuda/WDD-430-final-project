@@ -1,30 +1,18 @@
 <!-- Delete Images Tab Start  -->
-<mdb-tab
-  ><ng-template mdbTabTitle>
-    <div class="d-flex flex-column flex-lg-row align-items-center">
-      <span>
-        <i class="fas fa-trash-alt fa-2x me-lg-2"></i>
-      </span>
-      <span class="fs-6 fs-lg-5 fw-bold">Delete an image</span>
-    </div>
-  </ng-template>
-  <div class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1">
-    <div *ngFor="let image of items" class="col bg-image">
-      <img
-        [src]="image.data.thumb"
-        class="img-fluid img-delete"
-        alt="Gallery Image"
-      />
 
-      <div class="mask d-flex justify-content-center align-items-center h-100">
-        <button
-          (click)="deleteImage(image.data.thumb)"
-          class="btn custom text-light"
-        >
-          Delete
-        </button>
-      </div>
+<div class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1">
+  <div *ngFor="let item of items()" class="col bg-image">
+    <img [src]="item.url" class="img-fluid img-delete" alt="Gallery Image" />
+
+    <div class="mask d-flex justify-content-center align-items-center h-100">
+      <button
+        (click)="deleteImage(item.id, item.url)"
+        class="btn custom text-light"
+      >
+        Delete
+      </button>
     </div>
   </div>
-</mdb-tab>
+</div>
+
 <!-- Delete Images Tab End  -->

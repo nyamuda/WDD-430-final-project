@@ -10,6 +10,7 @@ import {
   LoginRouter,
   RegisterRouter,
   FilesRouter,
+  GalleryRouter,
 } from './server/routes/';
 
 let app = express();
@@ -31,5 +32,6 @@ app.use('/reviews', ReviewRouter);
 app.use('/login', LoginRouter);
 app.use('/register', RegisterRouter);
 app.use('/files', FilesRouter);
+app.use('/gallery', GalleryRouter);
 
 export default app;

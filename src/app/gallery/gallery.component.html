@@ -4,15 +4,46 @@
 
   <mdb-tabs [fill]="true" [justified]="true">
     <!-- View Images Tab Start  -->
-    <app-gallery-view></app-gallery-view>
+    <mdb-tab>
+      <ng-template mdbTabTitle>
+        <div class="d-flex flex-column flex-lg-row align-items-center">
+          <span>
+            <i class="far fa-eye fa-2x me-lg-2"></i>
+          </span>
+          <span class="fs-6 fs-lg-5 fw-bold">View images</span>
+        </div>
+      </ng-template>
+
+      <app-gallery-view></app-gallery-view>
+    </mdb-tab>
     <!-- View Images Tab End  -->
 
     <!-- Add Images Tab Start  -->
-    <app-gallery-add></app-gallery-add>
+    <mdb-tab>
+      <ng-template mdbTabTitle>
+        <div class="d-flex flex-column flex-lg-row align-items-center">
+          <span>
+            <i class="fas fa-plus fa-2x me-lg-2"></i>
+          </span>
+          <span class="fs-6 fs-lg-5 fw-bold">Add a new image</span>
+        </div>
+      </ng-template>
+      <app-gallery-add></app-gallery-add>
+    </mdb-tab>
     <!-- Add Images Tab End  -->
 
     <!-- Delete Images Tab Start  -->
-    <app-gallery-delete></app-gallery-delete>
+    <mdb-tab>
+      <ng-template mdbTabTitle>
+        <div class="d-flex flex-column flex-lg-row align-items-center">
+          <span>
+            <i class="fas fa-trash-alt fa-2x me-lg-2"></i>
+          </span>
+          <span class="fs-6 fs-lg-5 fw-bold">Delete an image</span>
+        </div>
+      </ng-template>
+      <app-gallery-delete></app-gallery-delete>
+    </mdb-tab>
     <!-- Delete Images Tab End  -->
   </mdb-tabs>
 </div>
