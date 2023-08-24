@@ -67,17 +67,17 @@
 
     <!-- Submit button -->
     <button
-      [ngClass]="{ disabled: userFormGroup.invalid }"
+      [ngClass]="{ disabled: userFormGroup.invalid || isFileInvalid() }"
       *ngIf="!isProcessingRequest(); else loadingBtn"
       (click)="submitForm($event)"
       type="submit"
-      class="btn btn-primary btn-block mb-3"
+      class="btn custom text-light btn-block mb-3"
     >
       Update
     </button>
     <!-- Loading button -->
     <ng-template #loadingBtn>
-      <button class="btn btn-primary btn-block" type="button" disabled>
+      <button class="btn custom text-light btn-block" type="button" disabled>
         <span
           class="spinner-border spinner-border-sm"
           role="status"

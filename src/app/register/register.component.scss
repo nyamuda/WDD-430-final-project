@@ -1,5 +1,17 @@
+@import "../../sass/_variables";
+
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
 .btn {
   height: 3rem;
+}
+.container {
+  margin: auto;
+  width: 95%;
 }
 
 @media (min-width: 768px) {

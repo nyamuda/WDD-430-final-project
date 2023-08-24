@@ -1,0 +1,16 @@
+<div class="container-fluid custom mt-5">
+  <p class="heading-line m-auto rounded text-center"></p>
+  <p class="display-6 text-uppercase text-center">Our Gallery</p>
+  <gallery class="d-lg-none" [items]="items" thumbPosition="bottom" gallerize>
+  </gallery>
+
+  <div class="text-center d-none d-lg-block" gallerize>
+    <img
+      *ngFor="let image of items"
+      [src]="image.data.thumb"
+      [attr.imageSrc]="image.data.src"
+      [attr.thumbSrc]="image.data.thumb"
+      class="img-fluid"
+    />
+  </div>
+</div>

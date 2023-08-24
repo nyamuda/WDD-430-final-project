@@ -67,6 +67,9 @@ import { FileImageItemComponent } from './files/file-image-item/file-image-item.
 import { UsersAccountComponent } from './users/users-account/users-account.component';
 import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
 import { UsersAccountDetailsComponent } from './users/users-account-details/users-account-details.component';
+import { GalleryModule } from 'ng-gallery';
+import { LightboxModule } from 'ng-gallery/lightbox';
+import { GalleryComponent } from './gallery/gallery.component';
 
 @NgModule({
   declarations: [
@@ -104,6 +107,7 @@ import { UsersAccountDetailsComponent } from './users/users-account-details/user
     UsersAccountComponent,
     UsersAccountEditComponent,
     UsersAccountDetailsComponent,
+    GalleryComponent,
   ],
   imports: [
     BrowserModule,
@@ -135,6 +139,9 @@ import { UsersAccountDetailsComponent } from './users/users-account-details/user
     NgxMaterialTimepickerModule,
     StarRatingModule.forRoot(),
     NgxPaginationModule,
+    GalleryModule,
+    LightboxModule,
+
     FileUploadModule,
     QuillModule.forRoot({
       modules: {

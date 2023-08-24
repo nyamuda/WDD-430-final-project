@@ -20,6 +20,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { UsersAccountComponent } from './users/users-account/users-account.component';
 import { UsersAccountDetailsComponent } from './users/users-account-details/users-account-details.component';
 import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
+import { GalleryComponent } from './gallery/gallery.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -66,6 +67,10 @@ export const routes: Routes = [
   {
     path: 'register',
     component: RegisterComponent,
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent,
   },
   {
     path: 'account',

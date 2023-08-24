@@ -3,6 +3,7 @@ import { UsersService } from '../users.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../user.model';
 import { ActivatedRoute } from '@angular/router';
+import { FileService } from 'src/app/files/file.service';
 
 @Component({
   selector: 'app-users-account-edit',
@@ -15,7 +16,8 @@ export class UsersAccountEditComponent implements OnInit {
   constructor(
     private userService: UsersService,
     private formBuilder: FormBuilder,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private fileService: FileService
   ) {}
 
   ngOnInit(): void {
@@ -46,6 +48,10 @@ export class UsersAccountEditComponent implements OnInit {
 
   placeholderImageUrl: Signal<string> = computed(() =>
     this.userService.imagePlaceholderUrl(this.user().name)
+  );
+  //checking if the image file is valid
+  isFileInvalid: Signal<boolean> = computed(() =>
+    this.fileService.isFileInvalid()
   );
 
   submitForm(event: Event) {

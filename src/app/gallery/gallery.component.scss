@@ -1,0 +1,12 @@
+@import "../../sass/variables";
+
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+.img-fluid {
+  width: 350px; /* You can set the dimensions to whatever you want */
+  height: 250px;
+  object-fit: cover;
+}
