@@ -1,16 +1,72 @@
 <div class="container-fluid custom mt-5">
   <p class="heading-line m-auto rounded text-center"></p>
-  <p class="display-6 text-uppercase text-center">Our Gallery</p>
-  <gallery class="d-lg-none" [items]="items" thumbPosition="bottom" gallerize>
-  </gallery>
+  <p class="display-6 text-uppercase text-center mb-5">Our Gallery</p>
 
-  <div class="text-center d-none d-lg-block" gallerize>
-    <img
-      *ngFor="let image of items"
-      [src]="image.data.thumb"
-      [attr.imageSrc]="image.data.src"
-      [attr.thumbSrc]="image.data.thumb"
-      class="img-fluid"
-    />
-  </div>
+  <mdb-tabs [fill]="true" [justified]="true">
+    <!-- View Images Tab Start  -->
+    <mdb-tab
+      ><ng-template mdbTabTitle
+        ><span class="fs-5 fw-bold"
+          ><i class="far fa-eye me-2"></i>View images</span
+        ></ng-template
+      >
+      <gallery
+        class="d-lg-none"
+        [items]="items"
+        thumbPosition="bottom"
+        gallerize
+      >
+      </gallery>
+      <div class="text-center d-none d-lg-block" gallerize>
+        <img
+          *ngFor="let image of items"
+          [src]="image.data.thumb"
+          [attr.imageSrc]="image.data.src"
+          [attr.thumbSrc]="image.data.thumb"
+          class="img-fluid"
+        />
+      </div>
+    </mdb-tab>
+    <!-- View Images Tab End  -->
+
+    <!-- Add Images Tab Start  -->
+    <mdb-tab
+      ><ng-template mdbTabTitle
+        ><span class="fs-5 fw-bold"
+          ><i class="fas fa-plus me-2"></i>Add a new image</span
+        ></ng-template
+      >Tab content 2</mdb-tab
+    >
+    <!-- Add Images Tab End  -->
+
+    <!-- Delete Images Tab Start  -->
+    <mdb-tab
+      ><ng-template mdbTabTitle
+        ><span class="fs-5 fw-bold"
+          ><i class="fas fa-trash-alt me-2"></i>Delete an image</span
+        ></ng-template
+      >
+      <div class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1">
+        <div *ngFor="let image of items" class="col bg-image">
+          <img
+            [src]="image.data.thumb"
+            class="img-fluid img-delete"
+            alt="Gallery Image"
+          />
+
+          <div
+            class="mask d-flex justify-content-center align-items-center h-100"
+          >
+            <button
+              (click)="deleteImage(image.data.thumb)"
+              class="btn custom text-light"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </mdb-tab>
+    <!-- Delete Images Tab End  -->
+  </mdb-tabs>
 </div>

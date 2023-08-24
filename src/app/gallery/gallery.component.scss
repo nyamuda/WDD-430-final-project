@@ -6,7 +6,13 @@
   margin-bottom: 0rem;
 }
 .img-fluid {
-  width: 350px; /* You can set the dimensions to whatever you want */
-  height: 250px;
+  width: 22rem; /* You can set the dimensions to whatever you want */
+  height: 15rem;
   object-fit: cover;
+}
+.img-delete {
+  width: 100%;
+}
+.mask {
+  background-color: hsla(0, 0%, 0%, 0.2);
 }
