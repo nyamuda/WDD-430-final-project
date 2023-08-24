@@ -4,6 +4,7 @@ import { AppService } from '../app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
 import { SchoolGalleryItem } from './schoolGalleryItem.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,8 @@ export class GalleryService {
     private fileService: FileService,
     private appService: AppService,
     private http: HttpClient,
-    private userService: UsersService
+    private userService: UsersService,
+    private router: Router
   ) {}
 
   uploadGalleryItem() {
@@ -46,11 +48,14 @@ export class GalleryService {
           this.getGalleryItems();
           //stop the loader
           this.isUploadingItemSignal.set(false);
+          this.router.navigateByUrl('/gallery');
         },
         (error) => {
           this.appService.showFailureToast(
             'Something went wrong. Please try again later.'
           );
+          //stop the loader
+          this.isUploadingItemSignal.set(false);
         }
       );
     });
@@ -61,6 +66,8 @@ export class GalleryService {
     this.http.get<SchoolGalleryItem[]>(url).subscribe(
       (galleryItems: SchoolGalleryItem[]) => {
         this._gallery = galleryItems;
+        console.log(galleryItems);
+        this.galleryListSignal.set(this._gallery);
       },
       (error) => {
         console.log(error);

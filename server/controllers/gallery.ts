@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
-import { Gallery } from 'server/models/Gallery';
+import { Gallery } from '../models';
 
 export class GalleryController {
   // Create a new Gallery Item
