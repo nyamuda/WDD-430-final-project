@@ -6,11 +6,11 @@
     <div class="mb-4">
       <label for="course-image">Photo:</label>
       <app-file-image-item
+        [editMode]="true"
         [imageName]="user().name"
         [currentImageUrl]="
           user().imageUrl ? user().imageUrl : placeholderImageUrl()
         "
-        [editMode]="true"
       ></app-file-image-item>
     </div>
     <!-- Image file upload end -->

@@ -13,6 +13,7 @@ export class GalleryService {
   public galleryListSignal: WritableSignal<SchoolGalleryItem[]> = signal(
     this._gallery
   );
+  public isUploadingItemSignal: WritableSignal<boolean> = signal(false);
 
   constructor(
     private fileService: FileService,
@@ -22,13 +23,15 @@ export class GalleryService {
   ) {}
 
   uploadGalleryItem() {
+    //show the loader
+    this.isUploadingItemSignal.set(true);
     //set headers
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Authorization', `Bearer ${token}`);
 
-    //upload the image and get the firebase image Url
+    //upload the image and get the Firebase image Url
     this.fileService.uploadImage().subscribe((imageUrl: string) => {
       let url = 'http://localhost:8000/gallery';
       let galleryImageDto = {
@@ -36,10 +39,13 @@ export class GalleryService {
         type: 'image',
       };
 
+      //the save the image url to MongoDB database
       this.http.post(url, galleryImageDto, { headers }).subscribe(
         (response) => {
           this.appService.showSuccessToast('Image successfully uploaded!');
           this.getGalleryItems();
+          //stop the loader
+          this.isUploadingItemSignal.set(false);
         },
         (error) => {
           this.appService.showFailureToast(

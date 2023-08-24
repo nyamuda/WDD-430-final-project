@@ -1,45 +1,44 @@
 <form [formGroup]="formGroup">
   <!-- Image file upload start -->
-  <div class="d-flex flex-column align-items-start" *ngIf="editMode">
-    <div class="row row-cols-1 row-cols-lg-2">
-      <div class="col-lg-5">
-        <img
-          [src]="
-            imagePreview
-              ? imagePreview
-              : currentImageUrl
-              ? currentImageUrl
-              : 'https://placehold.co/600x400?text=' + imageName[0]
-          "
-          alt="Current course image"
-          class="rounded hover-shadow img-fluid"
-        />
-        <p class="upload-warning">
-          Please note: Uploading a new image will replace the current one.
-        </p>
-      </div>
-      <div class="col-lg-7 image-upload-container">
-        <file-upload
-          [ngClass]="{
-            'upload-invalid':
-              formGroup.get('file').invalid && formGroup.get('file').touched
-          }"
-          id="course-image"
-          accept="image/*"
-          [multiple]="false"
-          [animation]="true"
-          formControlName="file"
-        >
-        </file-upload>
-        <div
-          *ngIf="formGroup.get('file').invalid && formGroup.get('file').touched"
-          class="file-error-message text-danger d-flex justify-content-start"
-        >
-          <span>Invalid file format.</span>
-          <!-- <span class="d-none d-lg-block ms-1"
+
+  <div class="row row-cols-1 row-cols-lg-2">
+    <div class="col-lg-5">
+      <img
+        [src]="
+          imagePreview
+            ? imagePreview
+            : currentImageUrl
+            ? currentImageUrl
+            : 'https://placehold.co/600x400?text=' + imageName
+        "
+        alt="Current course image"
+        class="rounded hover-shadow img-fluid upload-image"
+      />
+      <p *ngIf="editMode" class="upload-warning">
+        Please note: Uploading a new image will replace the current one.
+      </p>
+    </div>
+    <div class="col-lg-7 image-upload-container">
+      <file-upload
+        [ngClass]="{
+          'upload-invalid':
+            formGroup.get('file').invalid && formGroup.get('file').touched
+        }"
+        id="course-image"
+        accept="image/*"
+        [multiple]="false"
+        [animation]="true"
+        formControlName="file"
+      >
+      </file-upload>
+      <div
+        *ngIf="formGroup.get('file').invalid && formGroup.get('file').touched"
+        class="file-error-message text-danger d-flex justify-content-start"
+      >
+        <span>Invalid file format.</span>
+        <!-- <span class="d-none d-lg-block ms-1"
             >Please upload an image (e.g., JPG, PNG, GIF).</span
           > -->
-        </div>
       </div>
     </div>
   </div>

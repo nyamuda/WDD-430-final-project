@@ -1,4 +1,25 @@
 <!-- Add Images Tab Start  -->
-
-Tab content 2
+<div>
+  <app-file-image-item [imageName]="'img'"></app-file-image-item>
+  <div
+    *ngIf="!isUploadingItem(); else showLoader"
+    class="mt-3 d-flex justify-content-center"
+  >
+    <button [ngClass]="{ disabled: isFileInvalid() }" (click)="addImage()" class="btn custom text-light col-lg-4">
+      Add image
+    </button>
+  </div>
+  <!-- Show a loader during an UPDATE OR POST REQUEST -->
+  <ng-template #showLoader>
+    <div class="d-flex align-items-center">
+      <strong class="fs-5">Please wait...</strong>
+      <div
+        style="width: 3rem; height: 3rem"
+        class="spinner-border ms-auto"
+        role="status"
+        aria-hidden="true"
+      ></div>
+    </div>
+  </ng-template>
+</div>
 <!-- Add Images Tab End  -->
