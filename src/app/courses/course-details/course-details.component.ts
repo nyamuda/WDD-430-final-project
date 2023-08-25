@@ -59,13 +59,13 @@ export class CourseDetailsComponent implements OnInit {
     this.router.navigate(['courses', id, 'edit']);
   }
 
-  //information about the current logged in user
-  currentUser: Signal<User> = computed(() => this.userService.user());
-
   //information about whether the course information is being fetched
   isFetchingCourse: Signal<boolean> = computed(() =>
     this.courseService.isFetchingCourse()
   );
+
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
 
   //only admins have the authority to edit or delete courses
   isAdmin(): boolean {
