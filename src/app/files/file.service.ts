@@ -3,6 +3,7 @@ import { map, Observable, of, catchError, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +11,13 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class FileService {
   //current uploaded image
   currentUpload: WritableSignal<File[]> = signal([]);
+  //validity of the file
   isFileInvalid: WritableSignal<boolean> = signal(false);
+
+  //clear the file form once a request is successful
+  clearUploadForm: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
 
@@ -33,6 +40,7 @@ export class FileService {
       return this.http.post(url, formData, options).pipe(
         map((response) => {
           this.currentUpload.set([]); //clear the uploaded image
+          this.clearUploadForm.next(true); //clear upload form
           return response['downloadURL']; // Return the response data
         }),
         catchError((error) => {
@@ -114,7 +122,10 @@ export class FileService {
     };
 
     this.http.delete(url, options).subscribe(
-      (response) => {},
+      (response) => {
+        //the the upload form
+        this.clearUploadForm.next(true);
+      },
       (error) => {
         console.log(error);
       }

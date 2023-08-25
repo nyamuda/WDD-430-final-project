@@ -1,8 +1,8 @@
 <form [formGroup]="formGroup">
   <!-- Image file upload start -->
 
-  <div class="row row-cols-1 row-cols-lg-2">
-    <div class="col-lg-5">
+  <div class="row row-cols-1 row-cols-lg-2 gy-1">
+    <div class="col-lg-5 order-lg-last">
       <img
         [src]="
           imagePreview
@@ -18,8 +18,9 @@
         Please note: Uploading a new image will replace the current one.
       </p>
     </div>
-    <div class="col-lg-7 image-upload-container">
+    <div class="col-lg-7 order-lg-first image-upload-container">
       <file-upload
+        class="h-100"
         [ngClass]="{
           'upload-invalid':
             formGroup.get('file').invalid && formGroup.get('file').touched
@@ -27,9 +28,18 @@
         id="course-image"
         accept="image/*"
         [multiple]="false"
-        [animation]="true"
+        [animation]="false"
         formControlName="file"
       >
+        <ng-template #placeholder>
+          <div class="d-flex align-items-center placeholder-text">
+            <i class="fas fa-file-upload fa-3x me-2"></i
+            ><span
+              *ngIf="!doesUploadExist()"
+              [innerHTML]="placeholderText"
+            ></span>
+          </div>
+        </ng-template>
       </file-upload>
       <div
         *ngIf="formGroup.get('file').invalid && formGroup.get('file').touched"

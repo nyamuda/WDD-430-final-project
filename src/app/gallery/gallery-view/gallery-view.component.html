@@ -17,7 +17,7 @@
       [src]="item.data.thumb"
       [attr.imageSrc]="item.data.src"
       [attr.thumbSrc]="item.data.thumb"
-      class="img-fluid mx-lg-1 my-1 rounded"
+      class="img-fluid mx-sm-1 my-1 rounded shadow-2-strong"
       alt="Gallery image"
     />
   </div>
@@ -35,7 +35,7 @@
 
 <ng-template #placeholderImages>
   <div
-    class="text-center row row-cols-1 row-cols-lg-3 gx-1 gy-1 mb-4 placeholder-wave"
+    class="text-center row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-1 gy-1 mb-4 placeholder-wave"
   >
     <div *ngFor="let item of numPlaceholderImages" class="col bg-image">
       <img
