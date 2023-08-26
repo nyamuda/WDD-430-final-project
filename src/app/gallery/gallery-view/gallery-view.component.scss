@@ -2,6 +2,10 @@
 
 .pagination-controls ::ng-deep .current {
   background: $primary-color;
+  border-radius: 50%;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
 }
 
 .img-fluid {
@@ -17,5 +21,11 @@
   .img-fluid {
     width: auto;
     height: 16rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .top-pagination-controls {
+    margin-left: -2.5rem;
   }
 }

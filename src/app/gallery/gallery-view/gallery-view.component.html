@@ -13,10 +13,12 @@
     "
   ></div>
 
-  <div class="d-flex justify-content-between flex-wrap">
+  <div
+    class="d-flex flex-column align-items-start flex-md-row align-items-md-center justify-content-md-between flex-wrap"
+  >
     <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
     <pagination-controls
-      class="text-start pagination-controls"
+      class="pagination-controls top-pagination-controls"
       [maxSize]="maxSize"
       (pageChange)="pageChanged($event)"
     ></pagination-controls>
