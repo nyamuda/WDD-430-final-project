@@ -73,6 +73,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { GalleryViewComponent } from './gallery/gallery-view/gallery-view.component';
 import { GalleryDeleteComponent } from './gallery/gallery-delete/gallery-delete.component';
 import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component';
+import { GalleryLoaderComponent } from './gallery/gallery-loader/gallery-loader.component';
 
 @NgModule({
   declarations: [
@@ -114,6 +115,7 @@ import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component
     GalleryViewComponent,
     GalleryDeleteComponent,
     GalleryAddComponent,
+    GalleryLoaderComponent,
   ],
   imports: [
     BrowserModule,

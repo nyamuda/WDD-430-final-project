@@ -1,8 +1,27 @@
 <!-- View Images Tab Start  -->
+<div *ngIf="items().length > 0; else placeholderItem">
+  <!-- Pagination information Start -->
+  <div
+    *ngFor="
+      let item of items()
+        | paginate
+          : {
+              itemsPerPage: metaData().pageSize,
+              currentPage: metaData().currentPage,
+              totalItems: metaData().totalItems
+            }
+    "
+  ></div>
 
-<div *ngIf="items().length > 0; else placeholderImages">
-  <!-- Pagination information -->
-  <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
+  <div class="d-flex justify-content-between flex-wrap">
+    <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
+    <pagination-controls
+      class="text-start pagination-controls"
+      [maxSize]="maxSize"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </div>
+  <!-- Pagination information End-->
   <div class="text-center mb-4" gallerize>
     <img
       *ngFor="
@@ -17,33 +36,27 @@
       [src]="item.data.thumb"
       [attr.imageSrc]="item.data.src"
       [attr.thumbSrc]="item.data.thumb"
-      class="img-fluid mx-sm-1 my-1 rounded shadow-2-strong"
+      class="img-fluid mx-1 my-1 rounded shadow-2-strong"
       alt="Gallery image"
     />
   </div>
 
-  <pagination-controls
-    class="text-center pagination-controls"
-    [maxSize]="maxSize"
-    (pageChange)="pageChanged($event)"
-  ></pagination-controls>
+  <!-- Bottom pagination controls start-->
+  <div class="d-flex justify-content-start mt-3">
+    <pagination-controls
+      class="pagination-controls bottom-pagination-controls"
+      [maxSize]="maxSize"
+      (pageChange)="pageChanged($event)"
+    ></pagination-controls>
+  </div>
+  <!-- Bottom pagination controls end-->
 </div>
 
 <!-- View Images Tab End  -->
 
-<!-- Placeholder images Start -->
+<!-- Placeholder Start -->
 
-<ng-template #placeholderImages>
-  <div
-    class="text-center row row-cols-1 row-cols-sm-2 row-cols-lg-3 gx-1 gy-1 mb-4 placeholder-wave"
-  >
-    <div *ngFor="let item of numPlaceholderImages" class="col bg-image">
-      <img
-        src="../../../assets/images/placeholder/placeholder1.png"
-        class="img-fluid rounded img-delete w-100"
-        alt="Gallery placeholder image"
-      />
-    </div>
-  </div>
+<ng-template #placeholderItem>
+  <app-gallery-loader></app-gallery-loader>
 </ng-template>
-<!-- Placeholder images End -->
+<!-- Placeholder End -->

@@ -9,10 +9,13 @@
   height: 20rem;
   object-fit: cover;
 }
+.bottom-pagination-controls {
+  margin-left: -2.5rem;
+}
 
-@media (min-width: 768px) {
+@media (min-width: 512px) {
   .img-fluid {
-    width: 23rem;
+    width: auto;
     height: 16rem;
   }
 }

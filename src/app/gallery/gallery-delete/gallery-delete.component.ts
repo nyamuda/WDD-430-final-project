@@ -1,9 +1,12 @@
-import { Component, Signal, computed } from '@angular/core';
+import { Component, Signal, computed, Input } from '@angular/core';
 import { GalleryService } from '../gallery.service';
 import { SchoolGalleryItem } from '../schoolGalleryItem.model';
 import { MdbModalService, MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
 import { MetaData } from '../../app.meta';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from 'src/app/users/user.model';
+import { GalleryItem, Gallery, ImageItem, VideoItem } from 'ng-gallery';
 
 @Component({
   selector: 'app-gallery-delete',
@@ -14,22 +17,17 @@ export class GalleryDeleteComponent {
   //the modal
   modalRef: MdbModalRef<ConfirmationModalComponent>;
   maxSize = 10;
-  numPlaceholderImages = [0, 1, 2, 3, 4, 5];
 
   constructor(
     private galleryService: GalleryService,
-    private modalService: MdbModalService
+    private modalService: MdbModalService,
+    private userService: UsersService
   ) {}
 
   //delete gallery item
   deleteImage(id: string, imageUrl: any) {
     this.galleryService.deleteGalleryItem(id, imageUrl);
   }
-
-  //Generate gallery items
-  items: Signal<SchoolGalleryItem[]> = computed(() =>
-    this.galleryService.galleryListSignal()
-  );
 
   //Open the modal before deleting an image
   //its centered
@@ -66,4 +64,35 @@ export class GalleryDeleteComponent {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //only admins have the authority to edit or gallery items
+  isAdmin(): boolean {
+    return this.currentUser().isAdmin;
+  }
+
+  //Generate gallery items
+  items: Signal<GalleryItem[]> = computed(() => {
+    let generatedItems: GalleryItem[] = [];
+
+    this.galleryService
+      .galleryListSignal()
+      .forEach((item: SchoolGalleryItem) => {
+        let imageItem = new ImageItem({
+          /*"ImageItem" does not have an ID field, so instead, 
+          we put the ID of the image in the "type" field. 
+          We want the ID of the image to be able 
+          to delete the image from the gallery.  
+          */
+          type: item['_id'],
+          src: item.url,
+          thumb: item.url,
+        });
+        generatedItems.push(imageItem);
+      });
+
+    return generatedItems;
+  });
 }

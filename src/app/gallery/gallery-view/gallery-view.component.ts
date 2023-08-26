@@ -13,10 +13,7 @@ export class GalleryViewComponent implements OnInit {
   maxSize = 10;
   numPlaceholderImages = [0, 1, 2, 3, 4, 5];
 
-  constructor(
-    private gallery: Gallery,
-    private galleryService: GalleryService
-  ) {}
+  constructor(private galleryService: GalleryService) {}
 
   ngOnInit(): void {}
 
@@ -28,7 +25,12 @@ export class GalleryViewComponent implements OnInit {
       .galleryListSignal()
       .forEach((item: SchoolGalleryItem) => {
         let imageItem = new ImageItem({
-          type: item.type,
+          /*"ImageItem" does not have an ID field, so instead, 
+          we put the ID of the image in the "type" field. 
+          We want the ID of the image to be able 
+          to delete the image from the gallery.  
+          */
+          type: item['_id'],
           src: item.url,
           thumb: item.url,
         });

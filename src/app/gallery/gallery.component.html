@@ -4,11 +4,7 @@
 
   <div id="gallery">
     <!-- Admin only view start -->
-    <mdb-tabs
-      *ngIf="isAdmin(); else normalUserView"
-      [fill]="true"
-      [justified]="true"
-    >
+    <mdb-tabs *ngIf="isAdmin(); else normalUserView">
       <!-- View Images Tab Start  -->
       <mdb-tab>
         <ng-template mdbTabTitle>

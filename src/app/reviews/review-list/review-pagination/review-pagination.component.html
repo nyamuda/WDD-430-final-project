@@ -1,5 +1,13 @@
-<!-- Pagination information -->
-<p [innerHTML]="metaData().printPaginationInfo('Reviews')"></p>
+<!-- Pagination information Start -->
+<div class="d-flex justify-content-between flex-wrap">
+  <p [innerHTML]="metaData().printPaginationInfo('Reviews')"></p>
+  <pagination-controls
+    class="text-start pagination-controls"
+    [maxSize]="maxSize"
+    (pageChange)="pageChanged($event)"
+  ></pagination-controls>
+</div>
+<!-- Pagination information End-->
 <app-review-item
   *ngFor="
     let review of reviews()
@@ -13,8 +21,12 @@
   [review-details]="review"
 ></app-review-item>
 
-<pagination-controls
-  class="text-center pagination-controls"
-  [maxSize]="maxSize"
-  (pageChange)="pageChanged($event)"
-></pagination-controls>
+<!-- Bottom pagination controls start-->
+<div class="d-flex justify-content-start mt-3">
+  <pagination-controls
+    class="pagination-controls bottom-pagination-controls"
+    [maxSize]="maxSize"
+    (pageChange)="pageChanged($event)"
+  ></pagination-controls>
+</div>
+<!-- Bottom pagination controls end-->
