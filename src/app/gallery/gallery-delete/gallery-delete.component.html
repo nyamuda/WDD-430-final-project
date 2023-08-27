@@ -2,18 +2,6 @@
 <div *ngIf="items().length > 0; else placeholderImages">
   <!-- Pagination information Start -->
   <div
-    *ngFor="
-      let item of items()
-        | paginate
-          : {
-              itemsPerPage: metaData().pageSize,
-              currentPage: metaData().currentPage,
-              totalItems: metaData().totalItems
-            }
-    "
-  ></div>
-
-  <div
     class="d-flex flex-column align-items-start flex-md-row align-items-md-center justify-content-md-between flex-wrap"
   >
     <p [innerHTML]="metaData().printPaginationInfo('Images')"></p>
@@ -24,11 +12,13 @@
     ></pagination-controls>
   </div>
   <!-- Pagination information End-->
-  <div>
+
+  <!-- Gallery Start -->
+
+  <!-- <div>
     <gallery [items]="items()" thumbPosition="right" [dots]="true">
       <ng-container *galleryImageDef="let item; let active = active">
         <div *ngIf="active" class="item-text">
-          <!-- Delete Image Overlay Start  -->
           <div *ngIf="isAdmin()" class="mask">
             <div class="d-flex justify-content-center align-items-center h-100">
               <button
@@ -39,11 +29,47 @@
               </button>
             </div>
           </div>
-          <!-- Delete Image Overlay End  -->
         </div>
       </ng-container>
     </gallery>
+  </div> -->
+
+  <div class="d-flex justify-content-center flex-wrap">
+    <div
+      class="hover-overlay bg-image"
+      *ngFor="
+        let item of items()
+          | paginate
+            : {
+                itemsPerPage: metaData().pageSize,
+                currentPage: metaData().currentPage,
+                totalItems: metaData().totalItems
+              }
+      "
+    >
+      <img
+        class="img-fluid mx-1 my-1 rounded shadow-2-strong"
+        [src]="item.data.src"
+      />
+      <!-- Delete Image Overlay Start  -->
+      <div
+        *ngIf="isAdmin()"
+        class="mask d-flex justify-content-center align-items-center h-100"
+      >
+        <button
+          (click)="
+            openModal(item.data.type.toString(), item.data.src.toString())
+          "
+          class="btn text-light delete-btn"
+        >
+          <i class="fas fa-trash fa-3x"></i>
+        </button>
+      </div>
+      <!-- Delete Image Overlay End  -->
+    </div>
   </div>
+  <!-- Gallery End -->
+
   <!-- Bottom pagination controls start-->
   <div class="d-flex justify-content-start mt-3">
     <pagination-controls

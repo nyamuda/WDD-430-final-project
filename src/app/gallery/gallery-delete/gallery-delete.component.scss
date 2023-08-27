@@ -10,8 +10,14 @@
 .mask {
   background-color: hsla(0, 0%, 0%, 0.4);
 }
+
+.img-fluid {
+  width: auto;
+  height: 16rem;
+  object-fit: cover;
+}
 .delete-btn {
-  transition: all 0.2s ease-in-out !important;
+  transition: all 0.3s ease-out !important;
 }
 .delete-btn:hover {
   color: $secondary-color !important;

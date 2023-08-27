@@ -2,13 +2,15 @@
   <p class="heading-line m-auto rounded text-center"></p>
   <p class="display-6 text-uppercase text-center mb-4">Our Gallery</p>
 
-  <div class="gallery-container rounded-3 p-4" id="gallery">
+  <div class="gallery-container rounded-2 p-4" id="gallery">
     <!-- Admin only view start -->
     <mdb-tabs *ngIf="isAdmin(); else normalUserView">
       <!-- View Images Tab Start  -->
       <mdb-tab>
         <ng-template mdbTabTitle>
-          <div class="d-flex flex-column flex-lg-row align-items-center">
+          <div
+            class="d-flex flex-column flex-lg-row align-items-center gallery-tab-item"
+          >
             <span>
               <i class="far fa-eye fa-2x me-lg-2"></i>
             </span>

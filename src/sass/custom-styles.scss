@@ -55,5 +55,13 @@
 .toast-message {
   font-family: $main-font !important;
 }
-
 //Toastr End
+
+//MDBootstrap Tabs Start
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: $secondary-color;
+  border-color: $light-background;
+  background: $light-background;
+}
+//MDBootstrap Tabs End

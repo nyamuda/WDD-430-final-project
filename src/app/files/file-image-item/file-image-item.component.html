@@ -32,7 +32,9 @@
         formControlName="file"
       >
         <ng-template #placeholder>
-          <div class="d-flex align-items-center placeholder-text">
+          <div
+            class="d-flex justify-content-start align-items-center placeholder-text"
+          >
             <i class="fas fa-file-upload fa-3x me-2"></i
             ><span
               *ngIf="!doesUploadExist()"
