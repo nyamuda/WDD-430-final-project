@@ -5,3 +5,4 @@ export * from './login';
 export * from './register';
 export * from './files';
 export * from './gallery';
+export * from './bookings';

@@ -11,6 +11,7 @@ import {
   RegisterRouter,
   FilesRouter,
   GalleryRouter,
+  BookingRouter,
 } from './server/routes/';
 
 let app = express();
@@ -33,5 +34,6 @@ app.use('/login', LoginRouter);
 app.use('/register', RegisterRouter);
 app.use('/files', FilesRouter);
 app.use('/gallery', GalleryRouter);
+app.use('/booking', BookingRouter);
 
 export default app;

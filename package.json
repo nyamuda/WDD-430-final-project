@@ -44,6 +44,7 @@
     "ngx-pagination": "^6.0.3",
     "ngx-quill": "^22.0.0",
     "ngx-toastr": "^17.0.2",
+    "nodemailer": "^6.9.4",
     "path": "^0.12.7",
     "rxjs": "~7.5.0",
     "ts-node": "^10.9.1",
