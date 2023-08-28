@@ -1,0 +1,241 @@
+<p class="fs-2 text-dark">Book a Lesson</p>
+<form [formGroup]="bookFormGroup" class="needs-validation" novalidate>
+  <!-- Name input -->
+  <div class="form-floating mb-3">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          bookFormGroup.get('name').invalid &&
+          bookFormGroup.get('name').touched,
+        'is-valid':
+          bookFormGroup.get('name').valid && bookFormGroup.get('name').touched
+      }"
+      type="text"
+      id="bookName"
+      class="form-control"
+      formControlName="name"
+      placeholder="Name"
+    />
+    <label class="form-label" for="bookName">Full name</label>
+    <div
+      *ngIf="
+        bookFormGroup.get('name').invalid && bookFormGroup.get('name').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter your name.
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-floating mb-3">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          bookFormGroup.get('email').invalid &&
+          bookFormGroup.get('email').touched,
+        'is-valid':
+          bookFormGroup.get('email').valid && bookFormGroup.get('email').touched
+      }"
+      type="email"
+      id="bookEmail"
+      class="form-control"
+      formControlName="email"
+      placeholder="name@example.com"
+    />
+    <label class="form-label" for="bookEmail">Email</label>
+    <div
+      *ngIf="
+        bookFormGroup.get('email').invalid && bookFormGroup.get('email').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter a valid email address.
+    </div>
+  </div>
+
+  <!-- Phone number input -->
+  <div class="form-floating mb-3">
+    <input
+      mdbValidate
+      [ngClass]="{
+        'is-invalid':
+          bookFormGroup.get('phone').invalid &&
+          bookFormGroup.get('phone').touched,
+        'is-valid':
+          bookFormGroup.get('phone').valid && bookFormGroup.get('phone').touched
+      }"
+      type="phone"
+      id="bookPhone"
+      class="form-control"
+      formControlName="phone"
+      placeholder="Phone number"
+    />
+    <label class="form-label" for="bookPhone">Phone</label>
+    <div
+      *ngIf="
+        bookFormGroup.get('phone').invalid && bookFormGroup.get('phone').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter a valid phone number.
+    </div>
+  </div>
+
+  <!-- Date and time inputs -->
+  <div class="row row-cols-1 row-cols-lg-2">
+    <!-- Date -->
+    <div class="col mb-3">
+      <mdb-form-control>
+        <input
+          mdbInput
+          mdbValidate
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('date').invalid &&
+              bookFormGroup.get('date').touched
+          }"
+          type="date"
+          id="date"
+          class="form-control custom-input"
+          formControlName="date"
+        />
+        <label mdbLabel class="form-label" for="date">Pickup date</label>
+        <!-- <mdb-error
+        *ngIf="
+          bookFormGroup.get('date').invalid &&
+          bookFormGroup.get('date').touched
+        "
+        class="invalid-feedback text-start my-2"
+      >
+        Please enter pickup date
+      </mdb-error> -->
+      </mdb-form-control>
+    </div>
+    <!-- Time -->
+    <div class="col mb-3">
+      <mdb-form-control class="d-flex align-items-center">
+        <!-- NgxTimePicker start -->
+        <input
+          [ngxTimepicker]="picker"
+          mdbInput
+          mdbValidate
+          [ngClass]="{
+            'is-invalid':
+              bookFormGroup.get('time').invalid &&
+              bookFormGroup.get('time').touched
+          }"
+          type="text"
+          id="time"
+          class="form-control custom-input"
+          formControlName="time"
+        />
+        <ngx-material-timepicker
+          [timepickerClass]="'time-picker'"
+          #picker
+        ></ngx-material-timepicker>
+        <!-- icon -->
+        <ngx-material-timepicker-toggle [for]="toggleIcon">
+          <i class="fas fa-clock"></i>
+        </ngx-material-timepicker-toggle>
+        <ngx-material-timepicker #toggleIcon></ngx-material-timepicker>
+        <!-- NgxTimePicker end -->
+        <label mdbLabel class="form-label" for="time">Pickup time</label>
+        <!-- <mdb-error
+        *ngIf="
+          bookFormGroup.get('time').invalid &&
+          bookFormGroup.get('time').touched
+        "
+        class="invalid-feedback text-start"
+      >
+        Please enter pickup date
+      </mdb-error> -->
+      </mdb-form-control>
+    </div>
+  </div>
+
+  <!-- Select service -->
+  <div class="mb-3">
+    <select
+      class="form-select form-select-lg"
+      aria-label=".form-select-lg example"
+      [ngClass]="{
+        'is-invalid':
+          bookFormGroup.get('service').invalid &&
+          bookFormGroup.get('service').touched,
+        'is-valid':
+          bookFormGroup.get('service').valid &&
+          bookFormGroup.get('service').touched
+      }"
+      formControlName="service"
+    >
+      <option value="">Select service</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select>
+    <div
+      *ngIf="
+        bookFormGroup.get('service').invalid &&
+        bookFormGroup.get('service').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please select service.
+    </div>
+  </div>
+
+  <!-- Pickup address -->
+
+  <div class="form-floating mb-3">
+    <textarea
+      [ngClass]="{
+        'is-invalid':
+          bookFormGroup.get('address').invalid &&
+          bookFormGroup.get('address').touched,
+        'is-valid':
+          bookFormGroup.get('address').valid &&
+          bookFormGroup.get('address').touched
+      }"
+      placeholder="Pickup address"
+      class="form-control"
+      id="address"
+      formControlName="address"
+      style="height: 5rem"
+    ></textarea>
+    <label class="form-label" for="address">Pickup address</label>
+    <div
+      *ngIf="
+        bookFormGroup.get('address').invalid &&
+        bookFormGroup.get('address').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      The pickup address is required.
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button
+    [ngClass]="{ disabled: bookFormGroup.invalid }"
+    *ngIf="!booking(); else loadingBtn"
+    (click)="submitForm()"
+    type="submit"
+    class="btn custom text-light btn-block mb-3 text-uppercase"
+  >
+    Book Lesson
+  </button>
+  <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+  <!-- Loading button -->
+  <ng-template #loadingBtn>
+    <button class="btn custom text-light btn-block" type="button" disabled>
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="ms-1">Please wait...</span>
+    </button>
+  </ng-template>
+</form>

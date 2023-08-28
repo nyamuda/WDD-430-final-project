@@ -74,6 +74,8 @@ import { GalleryViewComponent } from './gallery/gallery-view/gallery-view.compon
 import { GalleryDeleteComponent } from './gallery/gallery-delete/gallery-delete.component';
 import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component';
 import { GalleryLoaderComponent } from './gallery/gallery-loader/gallery-loader.component';
+import { BookingComponent } from './booking/booking.component';
+import { BookingItemComponent } from './booking/booking-item/booking-item.component';
 
 @NgModule({
   declarations: [
@@ -116,6 +118,8 @@ import { GalleryLoaderComponent } from './gallery/gallery-loader/gallery-loader.
     GalleryDeleteComponent,
     GalleryAddComponent,
     GalleryLoaderComponent,
+    BookingComponent,
+    BookingItemComponent,
   ],
   imports: [
     BrowserModule,

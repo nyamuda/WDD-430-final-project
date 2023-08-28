@@ -21,6 +21,7 @@ import { UsersAccountComponent } from './users/users-account/users-account.compo
 import { UsersAccountDetailsComponent } from './users/users-account-details/users-account-details.component';
 import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
 import { GalleryComponent } from './gallery/gallery.component';
+import { BookingComponent } from './booking/booking.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -71,6 +72,16 @@ export const routes: Routes = [
   {
     path: 'gallery',
     component: GalleryComponent,
+  },
+  {
+    path: 'booking',
+    component: BookingComponent,
+    children: [
+      {
+        path: ':course',
+        component: BookingComponent,
+      },
+    ],
   },
   {
     path: 'account',
