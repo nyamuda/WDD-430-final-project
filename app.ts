@@ -13,6 +13,7 @@ import {
   GalleryRouter,
   BookingRouter,
   ContactRouter,
+  OauthRouter,
 } from './server/routes/';
 
 let app = express();
@@ -21,10 +22,10 @@ app.use(cors());
 
 // Tell express to use the specified director as the
 // root directory for your web site
-app.use(express.static(path.join(__dirname, 'dist/final_project/')));
+app.use(express.static(path.join(__dirname, 'dist/driving-school/')));
 
 app.get('/', (req: Request, res: Response) => {
-  res.render(path.join(__dirname, 'dist/final_project/index.html'));
+  res.render(path.join(__dirname, 'dist/driving-school/index.html'));
 });
 
 //routes
@@ -37,5 +38,6 @@ app.use('/files', FilesRouter);
 app.use('/gallery', GalleryRouter);
 app.use('/booking', BookingRouter);
 app.use('/contact', ContactRouter);
+app.use('/oauth', OauthRouter);
 
 export default app;

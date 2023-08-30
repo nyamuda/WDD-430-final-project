@@ -10,9 +10,10 @@ export class BookingUtils {
         /* Add your CSS styles here */
         body {
             font-family: Arial, sans-serif;
+            margin:auto;
         }
         .container {
-            max-width: 600px;
+            max-width: 38rem;
             margin: 0 auto;
             padding: 20px;
         }

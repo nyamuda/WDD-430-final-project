@@ -26,7 +26,15 @@ export class ContactUsItemComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
 
       phone: ['', [Validators.required, Validators.minLength(8)]],
-      message: ['', [Validators.required]],
+      message: [''],
+    });
+
+    //clear the form once the message is a success
+    this.contactService.isMessageSuccess.subscribe((success: boolean) => {
+      if (success) {
+        this.contactFormGroup.reset();
+        this.contactFormGroup.markAsUntouched();
+      }
     });
   }
 
@@ -37,20 +45,21 @@ export class ContactUsItemComponent implements OnInit {
       let email = this.contactFormGroup.get('email').value;
       let phone = this.contactFormGroup.get('phone').value;
       let message = this.contactFormGroup.get('message').value;
-     
 
       let contact = new Contact();
       contact.name = name;
       contact.email = email;
       contact.phone = phone;
       contact.message = message;
-    
+
       this.contactService.contact(contact);
     }
   }
 
   //show the loading button when booking is in progress
-  contacting: Signal<boolean> = computed(() => this.contactService.isContacting());
+  contacting: Signal<boolean> = computed(() =>
+    this.contactService.isContacting()
+  );
 
   //information about the current logged in user
   currentUser: Signal<User> = computed(() => this.userService.user());

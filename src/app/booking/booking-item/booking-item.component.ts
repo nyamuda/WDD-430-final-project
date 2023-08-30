@@ -30,6 +30,14 @@ export class BookingItemComponent {
       phone: ['', [Validators.required, Validators.minLength(8)]],
       service: ['', [Validators.required]],
     });
+
+    //clear the form once the booking is a success
+    this.bookingService.isBookingSuccess.subscribe((success: boolean) => {
+      if (success) {
+        this.bookFormGroup.reset();
+        this.bookFormGroup.markAsUntouched();
+      }
+    });
   }
 
   submitForm() {

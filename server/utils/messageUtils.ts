@@ -12,27 +12,27 @@ export class MessageUtils {
               body {
                   font-family: Arial, sans-serif;
                   background-color: #f4f4f4;
-                  margin: 0;
-                  padding: 0;
+                  
               }
               .container {
                   background-color: #fff;
-                  margin: 20px;
+                  margin:auto;
                   padding: 20px;
                   border-radius: 5px;
                   box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                  max-width: 38rem;
               }
               h1 {
-                  color: #333;
-                  text-align: center;
+                background-color: #007BFF;
+                color: #fff;
+                text-align: center;
+                padding: 10px;
               }
               p {
                   margin: 0;
                   padding: 5px 0;
               }
-              .message {
-                  margin-top: 20px;
-              }
+            
           </style>
       </head>
       <body>

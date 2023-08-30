@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
-
+import { BehaviorSubject } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Booking } from './booking.model';
 import { Router } from '@angular/router';
@@ -11,6 +11,9 @@ import { AppService } from '../app.service';
 })
 export class BookingService {
   public isBooking: WritableSignal<boolean> = signal(false);
+
+  //clear the form once the booking is a success
+  public isBookingSuccess = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
@@ -41,9 +44,11 @@ export class BookingService {
         this.isBooking.set(false);
         this.appService.showSuccessToast(
           'Your driving lesson booking is confirmed',
-          "You're all set!",
-          'bottom'
+          '',
+          'bottom-center'
         );
+        this.isBookingSuccess.next(true);
+        this.router.navigateByUrl('/booking');
       },
       (error) => {
         //show toast
@@ -56,7 +61,7 @@ export class BookingService {
         this.appService.showFailureToast(
           message,
           'Booking submission failed',
-          'bottom'
+          'bottom-center'
         );
         //disable loading button
         this.isBooking.set(false);

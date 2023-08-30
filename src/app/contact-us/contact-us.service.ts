@@ -3,20 +3,24 @@ import { Injectable, WritableSignal, signal } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 import { Contact } from './contact.model';
-import { Router } from '@angular/router';
+
 import { AppService } from '../app.service';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactUsService {
   public isContacting: WritableSignal<boolean> = signal(false);
+  //clear the form once the booking is a success
+  public isMessageSuccess = new BehaviorSubject<boolean>(false);
 
   constructor(
     private http: HttpClient,
     private toastrService: ToastrService,
-    private router: Router,
-    private appService: AppService
+    private appService: AppService,
+    private router: Router
   ) {}
 
   contact(contact: Contact) {
@@ -38,7 +42,9 @@ export class ContactUsService {
         this.isContacting.set(false);
         let message =
           "Your message has been submitted successfully. We'll get back to you soon.";
-        this.appService.showSuccessToast(message, '', 'bottom');
+        this.appService.showSuccessToast(message, '', 'bottom-center');
+        this.isMessageSuccess.next(true);
+        this.router.navigateByUrl('/contact');
       },
       (error) => {
         //show toast
@@ -51,7 +57,7 @@ export class ContactUsService {
         this.appService.showFailureToast(
           message,
           'Submission failed',
-          'bottom'
+          'bottom-center'
         );
         //disable loading button
         this.isContacting.set(false);

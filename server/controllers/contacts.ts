@@ -4,7 +4,7 @@ import * as Joi from 'joi';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { env } from 'process';
-import { MessageInfo, MessageUtils } from 'server/utils/messageUtils';
+import { MessageInfo, MessageUtils } from '../utils/messageUtils';
 
 dotenv.config();
 
@@ -46,7 +46,7 @@ export class ContactsController {
       const mailOptions = {
         from: 'ptnrlab@gmail.com',
         to: 'ptnmath@gmail.com',
-        subject: '"Driving School Inquiry',
+        subject: 'Inquiry',
         html: MessageUtils.MessageHTMLTemplate(message),
       };
 

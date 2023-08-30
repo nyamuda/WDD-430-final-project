@@ -7,3 +7,4 @@ export * from './files';
 export * from './gallery';
 export * from './bookings';
 export * from './contacts';
+export * from './oauth';

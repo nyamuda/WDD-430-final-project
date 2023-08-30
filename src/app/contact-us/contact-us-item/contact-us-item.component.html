@@ -18,7 +18,7 @@
       placeholder="Name"
       [value]="currentUser().name ? currentUser().name : ''"
     />
-    <label class="form-label" for="contactName">Full name</label>
+    <label class="form-label" for="contactName">Name*</label>
     <div
       *ngIf="
         contactFormGroup.get('name').invalid &&
@@ -48,7 +48,7 @@
       placeholder="name@example.com"
       [value]="currentUser().email ? currentUser().email : ''"
     />
-    <label class="form-label" for="contactEmail">Email</label>
+    <label class="form-label" for="contactEmail">Email*</label>
     <div
       *ngIf="
         contactFormGroup.get('email').invalid &&
@@ -78,7 +78,7 @@
       formControlName="phone"
       placeholder="Phone number"
     />
-    <label class="form-label" for="contactPhone">Phone</label>
+    <label class="form-label" for="contactPhone">Phone*</label>
     <div
       *ngIf="
         contactFormGroup.get('phone').invalid &&
@@ -95,9 +95,6 @@
   <div class="form-floating mb-3">
     <textarea
       [ngClass]="{
-        'is-invalid':
-          contactFormGroup.get('message').invalid &&
-          contactFormGroup.get('message').touched,
         'is-valid':
           contactFormGroup.get('message').valid &&
           contactFormGroup.get('message').touched
@@ -109,15 +106,6 @@
       style="height: 6rem"
     ></textarea>
     <label class="form-label" for="message">Message</label>
-    <div
-      *ngIf="
-        contactFormGroup.get('message').invalid &&
-        contactFormGroup.get('message').touched
-      "
-      class="invalid-feedback text-start"
-    >
-      The message is required.
-    </div>
   </div>
 
   <!-- Submit button -->
