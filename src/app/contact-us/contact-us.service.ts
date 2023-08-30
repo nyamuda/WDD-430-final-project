@@ -2,15 +2,15 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
-import { Booking } from './booking.model';
+import { Contact } from './contact.model';
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BookingService {
-  public isBooking: WritableSignal<boolean> = signal(false);
+export class ContactUsService {
+  public isContacting: WritableSignal<boolean> = signal(false);
 
   constructor(
     private http: HttpClient,
@@ -19,31 +19,26 @@ export class BookingService {
     private appService: AppService
   ) {}
 
-  book(booking: Booking) {
+  contact(contact: Contact) {
     //show loader
-    this.isBooking.set(true);
+    this.isContacting.set(true);
 
-    const url = 'http://localhost:8000/booking';
+    const url = 'http://localhost:8000/contact';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-    let bookingDto = {
-      name: booking.name,
-      email: booking.email,
-      phone: booking.phone,
-      address: booking.address,
-      time: booking.time,
-      date: booking.date,
-      service: booking.service,
+    let contactDto = {
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      message: contact.message,
     };
-    this.http.post(url, bookingDto, { headers }).subscribe(
+    this.http.post(url, contactDto, { headers }).subscribe(
       (response) => {
         //disable loading button
-        this.isBooking.set(false);
-        this.appService.showSuccessToast(
-          'Your driving lesson booking is confirmed',
-          "You're all set!",
-          'bottom'
-        );
+        this.isContacting.set(false);
+        let message =
+          "Your message has been submitted successfully. We'll get back to you soon.";
+        this.appService.showSuccessToast(message, '', 'bottom');
       },
       (error) => {
         //show toast
@@ -52,14 +47,14 @@ export class BookingService {
           ? error['error']['message']
           : error['error']['error']
           ? error['error']['error']
-          : 'Please review your data and try again.';
+          : 'Sorry, your message could not be sent. Please refresh the page and retry.';
         this.appService.showFailureToast(
           message,
-          'Booking submission failed',
+          'Submission failed',
           'bottom'
         );
         //disable loading button
-        this.isBooking.set(false);
+        this.isContacting.set(false);
       }
     );
   }

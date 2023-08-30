@@ -4,6 +4,7 @@ import * as Joi from 'joi';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { env } from 'process';
+import { BookInfo, BookingUtils } from '../utils/bookingUtils';
 dotenv.config();
 
 export class BookingsController {
@@ -123,34 +124,15 @@ export class BookingsController {
       });
 
       const mailOptions = {
-        from: booking.email,
-        to: 'ptnrlab@gmail.com',
+        from: 'ptnrlab@gmail.com',
+        to: 'ptnmath@gmail.com',
         subject: 'Booking Confirmation',
-        text: `<h1>New booking:</h1>
-       <p> ${booking.name}</p>
-       <p> ${booking.phone}</p>
-       <p> ${booking.date}</p>
-       <p> ${booking.time}</p>
-       <p> ${booking.address}</p>
-       <p> ${booking.service}</p>
-        `,
+        html: BookingUtils.BookingHTMLTemplate(booking),
       };
 
       let info = await transporter.sendMail(mailOptions);
-
-      console.log(info);
     } catch (error) {
       console.log(error);
     }
   }
-}
-
-interface BookInfo {
-  name: string;
-  email: string;
-  phone: string;
-  date: string;
-  time: string;
-  address: string;
-  service: string;
 }

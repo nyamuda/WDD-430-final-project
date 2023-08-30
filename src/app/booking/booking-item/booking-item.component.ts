@@ -20,12 +20,9 @@ export class BookingItemComponent {
   ) {}
 
   ngOnInit(): void {
-    //information about the logged in user
-    let name=this.currentUser().name?this.currentUser().name:"";
-    let email=this.currentUser().email?this.currentUser().email:"";
     this.bookFormGroup = this.formBuilder.group({
-      name: [name, Validators.required],
-      email: [email, [Validators.required, Validators.email]],
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
       date: ['', [Validators.required]],
       time: ['', [Validators.required]],
 
@@ -54,6 +51,8 @@ export class BookingItemComponent {
       booking.address = address;
       booking.date = date;
       booking.time = time;
+
+      this.bookingService.book(booking);
     }
   }
 

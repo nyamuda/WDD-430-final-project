@@ -1,0 +1,146 @@
+<p class="fs-2 text-dark">Drop us a message</p>
+<form [formGroup]="contactFormGroup" class="needs-validation" novalidate>
+  <!-- Name input -->
+  <div class="form-floating mb-3">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          contactFormGroup.get('name').invalid &&
+          contactFormGroup.get('name').touched,
+        'is-valid':
+          contactFormGroup.get('name').valid &&
+          contactFormGroup.get('name').touched
+      }"
+      type="text"
+      id="contactName"
+      class="form-control"
+      formControlName="name"
+      placeholder="Name"
+      [value]="currentUser().name ? currentUser().name : ''"
+    />
+    <label class="form-label" for="contactName">Full name</label>
+    <div
+      *ngIf="
+        contactFormGroup.get('name').invalid &&
+        contactFormGroup.get('name').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter your name.
+    </div>
+  </div>
+
+  <!-- Email input -->
+  <div class="form-floating mb-3">
+    <input
+      [ngClass]="{
+        'is-invalid':
+          contactFormGroup.get('email').invalid &&
+          contactFormGroup.get('email').touched,
+        'is-valid':
+          contactFormGroup.get('email').valid &&
+          contactFormGroup.get('email').touched
+      }"
+      type="email"
+      id="contactEmail"
+      class="form-control"
+      formControlName="email"
+      placeholder="name@example.com"
+      [value]="currentUser().email ? currentUser().email : ''"
+    />
+    <label class="form-label" for="contactEmail">Email</label>
+    <div
+      *ngIf="
+        contactFormGroup.get('email').invalid &&
+        contactFormGroup.get('email').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter a valid email address.
+    </div>
+  </div>
+
+  <!-- Phone number input -->
+  <div class="form-floating mb-3">
+    <input
+      mdbValidate
+      [ngClass]="{
+        'is-invalid':
+          contactFormGroup.get('phone').invalid &&
+          contactFormGroup.get('phone').touched,
+        'is-valid':
+          contactFormGroup.get('phone').valid &&
+          contactFormGroup.get('phone').touched
+      }"
+      type="phone"
+      id="contactPhone"
+      class="form-control"
+      formControlName="phone"
+      placeholder="Phone number"
+    />
+    <label class="form-label" for="contactPhone">Phone</label>
+    <div
+      *ngIf="
+        contactFormGroup.get('phone').invalid &&
+        contactFormGroup.get('phone').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      Please enter a valid phone number.
+    </div>
+  </div>
+
+  <!-- Pickup address -->
+
+  <div class="form-floating mb-3">
+    <textarea
+      [ngClass]="{
+        'is-invalid':
+          contactFormGroup.get('message').invalid &&
+          contactFormGroup.get('message').touched,
+        'is-valid':
+          contactFormGroup.get('message').valid &&
+          contactFormGroup.get('message').touched
+      }"
+      placeholder="Message"
+      class="form-control"
+      id="message"
+      formControlName="message"
+      style="height: 6rem"
+    ></textarea>
+    <label class="form-label" for="message">Message</label>
+    <div
+      *ngIf="
+        contactFormGroup.get('message').invalid &&
+        contactFormGroup.get('message').touched
+      "
+      class="invalid-feedback text-start"
+    >
+      The message is required.
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button
+    [ngClass]="{ disabled: contactFormGroup.invalid }"
+    *ngIf="!contacting(); else loadingBtn"
+    (click)="submitForm()"
+    type="submit"
+    class="btn custom text-light btn-block mb-3 text-uppercase"
+  >
+    Send message
+  </button>
+  <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+  <!-- Loading button -->
+  <ng-template #loadingBtn>
+    <button class="btn custom text-light btn-block" type="button" disabled>
+      <span
+        class="spinner-border spinner-border-sm"
+        role="status"
+        aria-hidden="true"
+      ></span>
+      <span class="ms-1">Please wait...</span>
+    </button>
+  </ng-template>
+</form>

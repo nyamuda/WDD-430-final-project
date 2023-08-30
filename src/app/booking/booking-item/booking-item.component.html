@@ -15,6 +15,7 @@
       class="form-control"
       formControlName="name"
       placeholder="Name"
+      [value]="currentUser().name ? currentUser().name : ''"
     />
     <label class="form-label" for="bookName">Full name</label>
     <div
@@ -42,6 +43,7 @@
       class="form-control"
       formControlName="email"
       placeholder="name@example.com"
+      [value]="currentUser().email ? currentUser().email : ''"
     />
     <label class="form-label" for="bookEmail">Email</label>
     <div
@@ -157,7 +159,7 @@
   <!-- Select service -->
   <div class="mb-3">
     <select
-      class="form-select form-select-lg"
+      class="form-select form-select-lg custom-input"
       aria-label=".form-select-lg example"
       [ngClass]="{
         'is-invalid':

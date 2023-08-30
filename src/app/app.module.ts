@@ -76,6 +76,8 @@ import { GalleryAddComponent } from './gallery/gallery-add/gallery-add.component
 import { GalleryLoaderComponent } from './gallery/gallery-loader/gallery-loader.component';
 import { BookingComponent } from './booking/booking.component';
 import { BookingItemComponent } from './booking/booking-item/booking-item.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ContactUsItemComponent } from './contact-us/contact-us-item/contact-us-item.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +122,8 @@ import { BookingItemComponent } from './booking/booking-item/booking-item.compon
     GalleryLoaderComponent,
     BookingComponent,
     BookingItemComponent,
+    ContactUsComponent,
+    ContactUsItemComponent,
   ],
   imports: [
     BrowserModule,

@@ -22,6 +22,7 @@ import { UsersAccountDetailsComponent } from './users/users-account-details/user
 import { UsersAccountEditComponent } from './users/users-account-edit/users-account-edit.component';
 import { GalleryComponent } from './gallery/gallery.component';
 import { BookingComponent } from './booking/booking.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -73,6 +74,11 @@ export const routes: Routes = [
     path: 'gallery',
     component: GalleryComponent,
   },
+  {
+    path: 'contact',
+    component: ContactUsComponent,
+  },
+
   {
     path: 'booking',
     component: BookingComponent,
