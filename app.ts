@@ -12,6 +12,7 @@ import {
   FilesRouter,
   GalleryRouter,
   BookingRouter,
+  ContactRouter,
 } from './server/routes/';
 
 let app = express();
@@ -35,5 +36,6 @@ app.use('/register', RegisterRouter);
 app.use('/files', FilesRouter);
 app.use('/gallery', GalleryRouter);
 app.use('/booking', BookingRouter);
+app.use('/contact', ContactRouter);
 
 export default app;
