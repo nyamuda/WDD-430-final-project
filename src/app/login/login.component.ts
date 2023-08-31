@@ -1,7 +1,9 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { LoginService } from './login.service';
+import { LoginService, OauthUrls } from './login.service';
 import { User } from '../users/user.model';
+import { ActivatedRoute } from '@angular/router';
+import { url } from 'inspector';
 
 @Component({
   selector: 'app-login',
@@ -11,13 +13,17 @@ import { User } from '../users/user.model';
 export class LoginComponent {
   loginFormGroup: FormGroup;
   rememberMe: boolean = false;
+  googleUrl = '';
+  facebookUrl = '';
 
   constructor(
     private formBuilder: FormBuilder,
-    private loginService: LoginService
+    private loginService: LoginService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
+    //FORM GROUP START
     this.loginFormGroup = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: [
@@ -29,6 +35,27 @@ export class LoginComponent {
         ],
       ],
     });
+    //FORM GROUP END
+
+    //PARAMS START
+    this.route.queryParams.subscribe((params) => {
+      let code = params['code'];
+
+      //Google redirect url and code
+      if (window.location.pathname.includes('/oauth/google/callback') && code) {
+        //use the code to get the JWT token
+        //from the server
+        this.loginService.getGoogleUserJwtToken(code);
+      }
+    });
+    //PARAMS END
+
+    //OAUTH URLs START
+    this.loginService.getOauthUrls().subscribe((urls: OauthUrls) => {
+      this.googleUrl = urls.googleUrl;
+      this.facebookUrl = urls.facebookUrl;
+    });
+    //OAUTH URLs END
   }
 
   submitForm() {
@@ -58,6 +85,7 @@ export class LoginComponent {
   }
 
   googleLogin() {
-    this.loginService.googleLogin();
+    // Redirect to the Google OAuth login page
+    window.location.href = this.googleUrl;
   }
 }

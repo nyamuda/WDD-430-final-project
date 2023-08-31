@@ -67,6 +67,10 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'login/oauth/google/callback',
+    component: LoginComponent,
+  },
+  {
     path: 'register',
     component: RegisterComponent,
   },
