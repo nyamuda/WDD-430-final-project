@@ -7,7 +7,7 @@ import axios from 'axios';
 
 dotenv.config();
 
-export class OauthUtils {
+export class GoogleOauthUtils {
   //Get the Google access token using the code
   public static async getGoogleAccessToken(code: string): Promise<string> {
     try {

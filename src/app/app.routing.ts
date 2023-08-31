@@ -71,6 +71,10 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
+    path: 'login/oauth/facebook/callback',
+    component: LoginComponent,
+  },
+  {
     path: 'register',
     component: RegisterComponent,
   },

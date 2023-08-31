@@ -47,6 +47,16 @@ export class LoginComponent {
         //from the server
         this.loginService.getGoogleUserJwtToken(code);
       }
+
+      //Facebook redirect url and code
+      if (
+        window.location.pathname.includes('/oauth/facebook/callback') &&
+        code
+      ) {
+        //use the code to get the JWT token
+        //from the server
+        this.loginService.getFacebookUserJwtToken(code);
+      }
     });
     //PARAMS END
 
@@ -87,5 +97,10 @@ export class LoginComponent {
   googleLogin() {
     // Redirect to the Google OAuth login page
     window.location.href = this.googleUrl;
+  }
+
+  facebookLogin() {
+    // Redirect to the Google OAuth login page
+    window.location.href = this.facebookUrl;
   }
 }

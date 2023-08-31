@@ -110,6 +110,40 @@ export class LoginService {
       );
   }
 
+  //Login with Facebook
+  getFacebookUserJwtToken(code: string) {
+    this.http
+      .get(`http://localhost:8000/oauth/facebook/callback?code=${code}`)
+      .subscribe(
+        (response) => {
+          //save the JWT token to local storage
+          localStorage.setItem('jwt_token', response['token']);
+
+          //load the user information to the user service
+          //by decoding the access token from local storage
+          this.userService.decodeJwtToken();
+
+          this.appService.showSuccessToast('Login successful!', '');
+
+          //navigate the user
+          this.router.navigateByUrl(this.redirectUrl());
+        },
+        (error) => {
+          //disable loading button
+          this.isLoggingIn.set(false);
+
+          //show toast
+          let errorMessage = error['error']['message']
+            ? error['error']['message']
+            : error['error']['error']
+            ? error['error']['error']
+            : 'An unexpected error occurred on the server.';
+
+          this.appService.showFailureToast(errorMessage, '');
+        }
+      );
+  }
+
   //Get OAuth URLs
   getOauthUrls(): Observable<OauthUrls> {
     const url = `http://localhost:8000/oauth/url`;
