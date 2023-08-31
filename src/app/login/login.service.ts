@@ -65,16 +65,43 @@ export class LoginService {
         //show toast
         let errorMessage = error['error']['message']
           ? error['error']['message']
-          : error['error']['error'];
+          : error['error']['error']
+          ? error['error']['error']
+          : 'Please review your login credentials and try again.';
 
-        if (errorMessage) {
-          this.appService.showFailureToast(errorMessage, '');
-        } else {
-          this.appService.showFailureToast(
-            'Please review your login credentials and try again.',
-            'Login failed'
-          );
-        }
+        this.appService.showFailureToast(errorMessage, 'Login failed');
+      }
+    );
+  }
+
+  //Login with google
+  googleLogin() {
+    this.http.get('http://localhost:8000/oauth/google').subscribe(
+      (response) => {
+        //save the JWT token to local storage
+        localStorage.setItem('jwt_token', response['token']);
+
+        //load the user information to the user service
+        //by decoding the access token from local storage
+        this.userService.decodeJwtToken();
+
+        this.appService.showSuccessToast('Login successful!', '');
+
+        //navigate the user
+        this.router.navigateByUrl(this.redirectUrl());
+      },
+      (error) => {
+        //disable loading button
+        this.isLoggingIn.set(false);
+
+        //show toast
+        let errorMessage = error['error']['message']
+          ? error['error']['message']
+          : error['error']['error']
+          ? error['error']['error']
+          : 'An unexpected error occurred on the server.';
+
+        this.appService.showFailureToast(errorMessage, '');
       }
     );
   }

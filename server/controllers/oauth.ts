@@ -6,7 +6,7 @@ import { UserUtils } from '../utils/userUtils';
 import { OauthUtils } from '../utils/oauthUtils';
 
 export class OauthController {
-  //Create a new Course
+  //Login Google User
   public static async googleLogin(req: Request, res: Response) {
     try {
       let code = req.query.code;
@@ -15,13 +15,52 @@ export class OauthController {
       let token = await OauthUtils.getGoogleAccessToken(code.toString());
 
       //Get Google user information
-      let user = await OauthUtils.getGoogleUser(token);
+      let { name, email, picture } = await OauthUtils.getGoogleUser(token);
 
-      console.log(user);
-      res.end();
+      //check if the user already exists in the database
+      let userExists = await User.findOne({ email: email });
+
+      //if already user exists
+      ///create a JWT token
+      if (userExists) {
+        //create an access token
+        let accessToken = UserUtils.createAccessToken({
+          email: userExists.email,
+          isAdmin: userExists.isAdmin,
+          userId: userExists._id.toString(),
+        });
+        return res.status(201).json({
+          message: 'Login successful.',
+          token: accessToken,
+        });
+      }
+
+      //else add the new user to the database
+      //and then return a JWT token
+      User.create({ name: name, email: email, imageUrl: picture })
+        .then((user) => {
+          //create an access token
+          let accessToken = UserUtils.createAccessToken({
+            email: user.email,
+            isAdmin: user.isAdmin,
+            userId: user.toObject()._id.toString(),
+          });
+          return res.json({
+            message: 'Login successful.',
+            token: accessToken,
+          });
+        })
+        .catch((err) => {
+          return res.status(500).json({
+            error: err,
+            message: 'An unexpected error occurred on the server.',
+          });
+        });
     } catch (error) {
-      console.log('google login failed');
-      console.log(error);
+      return res.status(500).json({
+        error: error,
+        message: 'An unexpected error occurred on the server.',
+      });
     }
   }
 }

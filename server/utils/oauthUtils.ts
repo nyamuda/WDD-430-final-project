@@ -49,7 +49,7 @@ export class OauthUtils {
   }
 
   //Get the Google user information using the given token
-  public static async getGoogleUser(token: string): Promise<string> {
+  public static async getGoogleUser(token: string): Promise<GoogleUser> {
     let options: object = {
       method: 'GET',
       url: 'https://www.googleapis.com/oauth2/v3/userinfo',
@@ -65,12 +65,12 @@ export class OauthUtils {
     if (responseOK) {
       return response.data;
     }
-    return '';
+    return { name: '', email: '', picture: '' };
   }
 }
 
-type TokenPayload = {
-  email: String;
-  isAdmin: Boolean;
-  userId: String;
+type GoogleUser = {
+  email: string;
+  name: string;
+  picture: string;
 };

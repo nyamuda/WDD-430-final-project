@@ -56,4 +56,8 @@ export class LoginComponent {
   onCheckboxCheck() {
     this.rememberMe = !this.rememberMe;
   }
+
+  googleLogin() {
+    this.loginService.googleLogin();
+  }
 }
