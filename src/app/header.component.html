@@ -103,7 +103,7 @@
     >
       <span
         ><i class="icon fas fa-phone"></i>
-        <span class="text-light ms-2">+27 81 589 6615</span></span
+        <span class="text-light ms-2">+27 78 332 1679</span></span
       >
       <span
         ><i class="icon far fa-envelope ms-lg-3"></i>
@@ -239,6 +239,16 @@
         <!-- Left links -->
 
         <div class="d-flex align-items-start align-items-lg-center">
+          <!-- <div *ngIf="!isAuthenticated(); else elseBlock">
+            <a routerLink="login" class="btn btn-link px-3 me-2">Login</a>
+            <a
+              routerLink="register"
+              type="button"
+              class="btn btn-link btn-secondary text-light px-3 me-2 login-btn"
+            >
+              Register <i class="fas fa-long-arrow-alt-right"></i>
+            </a>
+          </div> -->
           <a
             routerLink="login"
             *ngIf="!isAuthenticated(); else elseBlock"

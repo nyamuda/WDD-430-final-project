@@ -13,7 +13,7 @@ export class GoogleOauthUtils {
     try {
       const clientId = process.env.GOOGLE_CLIENT_ID;
       const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
-      const redirectUri = 'http://localhost:4200/login/oauth/google/callback'; // the redirect URI
+      const redirectUri = process.env.GOOGLE_RETURN_URL; // the redirect URI
       const grantType = 'authorization_code'; // the grant type for code exchange
 
       const response = await axios.post(
@@ -40,12 +40,12 @@ export class GoogleOauthUtils {
           'Token request failed with status code:',
           response.status
         );
+        return '';
       }
     } catch (error) {
-      console.error('Error while fetching Google access token:', error);
+      console.error('Error while fetching Google access token:', error.data);
+      return '';
     }
-
-    return '';
   }
 
   //Get the Google user information using the given token
@@ -71,7 +71,7 @@ export class GoogleOauthUtils {
   //Google OAuth URL
   public static getGoogleUrl(): string {
     const clientId = process.env.GOOGLE_CLIENT_ID;
-    const redirectUri = 'http://localhost:4200/login/oauth/google/callback'; // the redirect URI
+    const redirectUri = process.env.GOOGLE_RETURN_URL; // the redirect URI
     const responseType = 'code'; // the response type as "code"
     // Use full scope URLs or aliases provided by Google for profile and email
     const scope =

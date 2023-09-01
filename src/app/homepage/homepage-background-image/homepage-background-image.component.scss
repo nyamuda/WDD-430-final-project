@@ -26,16 +26,6 @@
   color: $tertiary-color;
 }
 
-.btn-outline-light {
-  border-color: $tertiary-color;
-  color: $tertiary-color;
-  transition: all 0.3s ease-in;
-}
-.btn-outline-light:hover {
-  border-color: $secondary-color;
-  color: $secondary-color;
-}
-
 .display-4 {
   font-family: $heading-font;
 }

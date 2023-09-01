@@ -13,8 +13,7 @@ import { url } from 'inspector';
 export class LoginComponent {
   loginFormGroup: FormGroup;
   rememberMe: boolean = false;
-  googleUrl = '';
-  facebookUrl = '';
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,35 +36,7 @@ export class LoginComponent {
     });
     //FORM GROUP END
 
-    //PARAMS START
-    this.route.queryParams.subscribe((params) => {
-      let code = params['code'];
-
-      //Google redirect url and code
-      if (window.location.pathname.includes('/oauth/google/callback') && code) {
-        //use the code to get the JWT token
-        //from the server
-        this.loginService.getGoogleUserJwtToken(code);
-      }
-
-      //Facebook redirect url and code
-      if (
-        window.location.pathname.includes('/oauth/facebook/callback') &&
-        code
-      ) {
-        //use the code to get the JWT token
-        //from the server
-        this.loginService.getFacebookUserJwtToken(code);
-      }
-    });
-    //PARAMS END
-
-    //OAUTH URLs START
-    this.loginService.getOauthUrls().subscribe((urls: OauthUrls) => {
-      this.googleUrl = urls.googleUrl;
-      this.facebookUrl = urls.facebookUrl;
-    });
-    //OAUTH URLs END
+   
   }
 
   submitForm() {
@@ -94,13 +65,5 @@ export class LoginComponent {
     this.rememberMe = !this.rememberMe;
   }
 
-  googleLogin() {
-    // Redirect to the Google OAuth login page
-    window.location.href = this.googleUrl;
-  }
-
-  facebookLogin() {
-    // Redirect to the Google OAuth login page
-    window.location.href = this.facebookUrl;
-  }
+ 
 }

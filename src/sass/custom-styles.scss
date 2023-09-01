@@ -45,6 +45,16 @@
 .btn.custom:hover {
   background-color: $primary-color;
 }
+.btn.btn-outline-secondary {
+  border-color: $tertiary-color;
+  color: $tertiary-color;
+  transition: all 0.3s ease-out;
+}
+.btn.btn-outline-secondary:hover {
+  border-color: $secondary-color;
+  color: $secondary-color;
+}
+
 // Bootstrap End
 
 //Toastr Start

@@ -1,6 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-@import "./sass/custom-styles.scss";
-@import "./sass/_variables";
+
 @import "@fortawesome/fontawesome-free/scss/fontawesome.scss";
 @import "@fortawesome/fontawesome-free/scss/solid.scss";
 @import "@fortawesome/fontawesome-free/scss/regular.scss";
@@ -9,21 +8,14 @@
 @import "~quill/dist/quill.core.css";
 @import "~quill/dist/quill.bubble.css";
 @import "~quill/dist/quill.snow.css";
+@import "./sass/custom-styles.scss";
+@import "./sass/_variables";
 
 html,
 body {
-  height: 100%;
+  overflow-x: hidden;
 }
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: $main-font;
 }

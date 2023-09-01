@@ -78,6 +78,7 @@ import { BookingComponent } from './booking/booking.component';
 import { BookingItemComponent } from './booking/booking-item/booking-item.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContactUsItemComponent } from './contact-us/contact-us-item/contact-us-item.component';
+import { OauthComponent } from './login/oauth/oauth.component';
 
 @NgModule({
   declarations: [
@@ -124,6 +125,7 @@ import { ContactUsItemComponent } from './contact-us/contact-us-item/contact-us-
     BookingItemComponent,
     ContactUsComponent,
     ContactUsItemComponent,
+    OauthComponent,
   ],
   imports: [
     BrowserModule,

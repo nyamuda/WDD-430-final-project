@@ -1,4 +1,4 @@
-import { Component, OnInit, Signal, computed } from '@angular/core';
+import { Component, OnInit, Signal, computed, Input } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { RegisterService } from './register.service';
 import { User } from '../users/user.model';
@@ -10,6 +10,10 @@ import { User } from '../users/user.model';
 })
 export class RegisterComponent implements OnInit {
   registerFormGroup: FormGroup;
+  /* The top margin varies depending on where the register component is loaded. 
+  If it's loaded as a tab with the login component, the top margin should be zero. 
+  And when it's loaded by itself, the top margin should be there.*/
+  @Input() topMargin = '5';
 
   constructor(
     private formBuilder: FormBuilder,

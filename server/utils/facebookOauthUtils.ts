@@ -13,7 +13,7 @@ export class FacebookOauthUtils {
     try {
       const clientId = process.env.FACEBOOK_APP_ID;
       const clientSecret = process.env.FACEBOOK_APP_SECRET;
-      const redirectUri = 'http://localhost:4200/login/oauth/facebook/callback';
+      const redirectUri = process.env.FACEBOOK_RETURN_URL;
       const grantType = 'authorization_code';
 
       const response = await axios.get(
@@ -30,6 +30,12 @@ export class FacebookOauthUtils {
 
       if (response.status === 200) {
         return response.data.access_token;
+      } else {
+        console.error(
+          'Token request failed with status code:',
+          response.status
+        );
+        return '';
       }
     } catch (error) {
       console.error('Error while fetching Facebook access token:');
@@ -63,7 +69,7 @@ export class FacebookOauthUtils {
   // Function to construct the Facebook OAuth URL
   public static getFacebookUrl(): string {
     const clientId = process.env.FACEBOOK_APP_ID;
-    const redirectUri = 'http://localhost:4200/login/oauth/facebook/callback';
+    const redirectUri = process.env.FACEBOOK_RETURN_URL;
     const responseType = 'code';
 
     const url = `https://www.facebook.com/v13.0/dialog/oauth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&scope=email`;
