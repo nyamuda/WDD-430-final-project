@@ -1,77 +1,50 @@
-<!-- <div class="rounded-top px-0 my-2 px-4 py-3">
-  <form [formGroup]="reviewFormGroup">
-   
-   
-    <mdb-form-control class="mb-4">
-      <textarea
-        mdbValidate
-        [ngClass]="{
-          'is-invalid': reviewFormGroup.invalid && reviewFormGroup.touched
-        }"
-        mdbInput
-        class="form-control bg-light"
-        id="textForm"
-        rows="4"
-        formControlName="content"
-      ></textarea>
-      <label mdbLabel class="form-label" for="textForm">Review</label>
-      <mdb-error *ngIf="reviewFormGroup.invalid && reviewFormGroup.touched">
-        The field is required.</mdb-error
-      >
-    </mdb-form-control>
-
-   
-
-    <div class="d-flex justify-content-start pt-2">
-      <a
-        (click)="submitForm($event)"
-        [routerLink]="'/courses/' + courseId"
-        fragment="reviews"
-        [ngClass]="{ disabled: reviewFormGroup.invalid }"
-        class="btn btn-success btn-sm d-flex justify-content-center align-items-center px-3"
-        href=""
-        >Add</a
-      >
-
-      <a
-        [routerLink]="'/courses/' + courseId"
-        fragment="reviews"
-        (click)="onCancel($event)"
-        class="btn btn-primary btn-sm d-flex justify-content-center align-items-center ms-2 px-3"
-        href=""
-        >Cancel</a
-      >
-    </div>
-  </form>
-</div> -->
-
 <section>
-  <div class="py-5 text-dark rounded-top px-0">
+  <div class="my-3 text-dark rounded-top px-0">
     <form [formGroup]="reviewFormGroup">
       <div class="card">
         <div class="card-body p-4">
-          <div class="d-flex flex-start w-100">
-            <img
-              class="rounded-circle shadow-1-strong me-3"
-              src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(21).webp"
-              alt="avatar"
-              width="65"
-              height="65"
-            />
+          <div class="d-flex flex-column flex-lg-row flex-start w-100">
+            <div class="d-flex flex-start">
+              <img
+                class="rounded-circle shadow-1-strong me-3"
+                [src]="
+                  currentUser().imageUrl
+                    ? currentUser().imageUrl
+                    : placeholderImageUrl()
+                "
+                alt="avatar"
+                width="65"
+                height="65"
+              />
+              <div class="d-lg-none">
+                <h5 *ngIf="!editMode; else elseBlock">Add a review</h5>
+                <ng-template #elseBlock><h5>Update review</h5></ng-template>
+                <!-- Star rating -->
+                <div class="d-flex justify-content-start mb-2">
+                  <star-rating-control
+                    formControlName="stars"
+                    [starType]="'svg'"
+                    [rating]=""
+                  ></star-rating-control>
+                </div>
+              </div>
+            </div>
             <div class="w-100">
-              <h5 *ngIf="!editMode; else elseBlock">Add a review</h5>
-              <ng-template #elseBlock><h5>Update review</h5></ng-template>
-              <!-- Star rating -->
-              <div class="d-flex justify-content-start mb-2">
-                <star-rating-control
-                  formControlName="stars"
-                  [starType]="'svg'"
-                  [rating]=""
-                ></star-rating-control>
+              <div class="d-none d-lg-block">
+                <h5 *ngIf="!editMode; else elseBlock">Add a review</h5>
+                <ng-template #elseBlock><h5>Update review</h5></ng-template>
+                <!-- Star rating -->
+                <div class="d-flex justify-content-start mb-2">
+                  <star-rating-control
+                    formControlName="stars"
+                    [starType]="'svg'"
+                    [rating]=""
+                  ></star-rating-control>
+                </div>
               </div>
 
               <!-- Text area -->
-              <mdb-form-control class="mb-4">
+              <mdb-form-control class="mb-4 mt-3 mt-lg-0">
                 <textarea
                   mdbValidate
                   [ngClass]="{
@@ -100,16 +73,16 @@
                   [routerLink]="'/courses/' + courseId"
                   fragment="reviews"
                   [ngClass]="{ disabled: reviewFormGroup.invalid }"
-                  class="btn btn-success btn-sm d-flex justify-content-center align-items-center px-3"
+                  class="btn custom text-light d-flex justify-content-center align-items-center px-3"
                   href=""
-                  >Add</a
+                  >Add review</a
                 >
 
                 <a
                   [routerLink]="'/courses/' + courseId"
                   fragment="reviews"
                   (click)="onCancel($event)"
-                  class="btn btn-primary btn-sm d-flex justify-content-center align-items-center ms-2 px-3"
+                  class="btn custom text-light d-flex justify-content-center align-items-center ms-2 px-3"
                   href=""
                   >Cancel</a
                 >

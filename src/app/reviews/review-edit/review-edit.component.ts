@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { ReviewsService } from '../reviews.service';
 
@@ -6,6 +6,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Review } from '../review.model';
 
 import { ConfirmationModalComponent } from 'src/app/confirmation-modal/confirmation-modal.component';
+import { UsersService } from 'src/app/users/users.service';
+import { User } from '../../users/user.model';
 
 @Component({
   selector: 'app-review-edit',
@@ -23,7 +25,8 @@ export class ReviewEditComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private reviewService: ReviewsService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
@@ -80,6 +83,15 @@ export class ReviewEditComponent implements OnInit {
       }
     }
   }
+
+  //current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+
+  //placeholder image in case the reviewer
+  //does not have a profile picture
+  placeholderImageUrl: Signal<string> = computed(() =>
+    this.userService.imagePlaceholderUrl(this.currentUser().name)
+  );
 
   onCancel(event: Event) {
     event.preventDefault();
