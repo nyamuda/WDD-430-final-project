@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LoginService, OauthUrls } from '../login.service';
+import { LoginService } from '../login.service';
 import { ActivatedRoute } from '@angular/router';
+import { OauthService, OauthUrls } from './oauth.service';
 
 @Component({
   selector: 'app-oauth',
@@ -20,13 +21,14 @@ export class OauthComponent implements OnInit {
   @Input() runUrlCodeParamFn: boolean = true;
 
   constructor(
-    private loginService: LoginService,
-    private route: ActivatedRoute
+    private oauthService: OauthService,
+    private route: ActivatedRoute,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {
     //OAUTH URLs START
-    this.loginService.getOauthUrls().subscribe((urls: OauthUrls) => {
+    this.oauthService.getOauthUrls().subscribe((urls: OauthUrls) => {
       this.googleUrl = urls.googleUrl;
       this.facebookUrl = urls.facebookUrl;
     });
@@ -35,39 +37,58 @@ export class OauthComponent implements OnInit {
     //PARAMS START
     this.route.queryParams.subscribe((params) => {
       let code = params['code'];
+      let stateFromUrl = params['state'];
 
       //use the 'code' to get the access token from the server
-      if (this.runUrlCodeParamFn) {
-        this.getOauthUserToken(code);
+      if (this.runUrlCodeParamFn && code && stateFromUrl) {
+        this.getOauthUserToken(code, stateFromUrl);
       }
     });
     //PARAMS END
   }
 
   googleLogin() {
+    //Generate the state parameter
+    let stateParameter = this.oauthService.generateRandomState(
+      this.loginService.redirectUrl()
+    );
+
+    let url = `${this.googleUrl}&state=${stateParameter}`;
     // Redirect to the Google OAuth login page
-    window.location.href = this.googleUrl;
+    window.location.href = url;
   }
 
   facebookLogin() {
-    // Redirect to the Google OAuth login page
-    window.location.href = this.facebookUrl;
+    //Generate the state parameter
+    let stateParameter = this.oauthService.generateRandomState(
+      this.loginService.redirectUrl()
+    );
+
+    let url = `${this.facebookUrl}&state=${stateParameter}`;
+    // Redirect to the Facebook OAuth login page
+    window.location.href = url;
   }
 
   //Use the 'code' in to get the access token from the server
-  getOauthUserToken(code: string) {
-    //Google redirect url and code
-    if (window.location.pathname.includes('/oauth/google/callback') && code) {
-      //use the code to get the JWT token
-      //from the server
-      this.loginService.getGoogleUserJwtToken(code);
-    }
+  getOauthUserToken(code: string, urlState: string) {
+    //compare the state parameters
+    if (this.oauthService.compareStates(urlState)) {
+      //Google redirect url and code
+      if (window.location.pathname.includes('/oauth/google/callback') && code) {
+        //use the code to get the JWT token
+        //from the server
+        this.oauthService.getGoogleUserJwtToken(code);
+      }
 
-    //Facebook redirect url and code
-    if (window.location.pathname.includes('/oauth/facebook/callback') && code) {
-      //use the code to get the JWT token
-      //from the server
-      this.loginService.getFacebookUserJwtToken(code);
+      //Facebook redirect url and code
+      if (
+        window.location.pathname.includes('/oauth/facebook/callback') &&
+        code
+      ) {
+        //use the code to get the JWT token
+        //from the server
+        this.oauthService.getFacebookUserJwtToken(code);
+      }
     }
   }
 }

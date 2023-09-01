@@ -1,6 +1,6 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { LoginService, OauthUrls } from './login.service';
+import { LoginService } from './login.service';
 import { User } from '../users/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { url } from 'inspector';
@@ -10,10 +10,9 @@ import { url } from 'inspector';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginFormGroup: FormGroup;
   rememberMe: boolean = false;
-  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,8 +34,6 @@ export class LoginComponent {
       ],
     });
     //FORM GROUP END
-
-   
   }
 
   submitForm() {
@@ -64,6 +61,4 @@ export class LoginComponent {
   onCheckboxCheck() {
     this.rememberMe = !this.rememberMe;
   }
-
- 
 }

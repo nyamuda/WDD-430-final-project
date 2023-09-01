@@ -42,12 +42,12 @@
                 loginFormGroup.get('password').touched
             }"
             type="password"
-            id="registerPassword"
+            id="password"
             class="form-control"
             formControlName="password"
             placeholder="Password"
           />
-          <label class="form-label" for="registerPassword">Password</label>
+          <label class="form-label" for="password">Password</label>
           <div
             *ngIf="
               loginFormGroup.get('password').invalid &&
@@ -81,7 +81,7 @@
           type="submit"
           class="btn custom text-light btn-block mb-3"
         >
-          Login
+          Log in
         </button>
         <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
 
