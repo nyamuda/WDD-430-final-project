@@ -4,7 +4,8 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
-    "outDir": "./dist/out-tsc",
+    // "outDir": "./dist/out-tsc",
+    "outDir": "./build",
     "sourceMap": true,
     "declaration": false,
     "downlevelIteration": true,
@@ -17,6 +18,8 @@
     "useDefineForClassFields": false,
     "module": "commonjs"
   },
+  "include": ["./server/", "./app.ts", "./server.ts"], // Include TypeScript files from this folder
+  "exclude": ["./src/"], // Exclude specific file(s)
   "angularCompilerOptions": {
     "strictMetadataEmit": true,
     "enableI18nLegacyMessageIdFormat": false,
