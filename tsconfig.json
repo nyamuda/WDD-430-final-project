@@ -17,7 +17,7 @@
     "lib": ["es2018", "dom"],
     "useDefineForClassFields": false,
     "module": "commonjs",
-    "strict": true,
+    // "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
   },
