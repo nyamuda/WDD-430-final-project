@@ -15,7 +15,6 @@
           <div class="col-lg-5">
             <img
               src=" ../../../assets/images/placeholder/placeholder1.png"
-              [alt]="course.title + 'course image'"
               class="img-fluid mb-3 w-100"
             />
           </div>
@@ -321,7 +320,10 @@
     <!-- Course Description End -->
 
     <div class="d-flex justify-content-start justify-content-lg-end mb-4">
-      <a routerLink="reviews/new" fragment="reviewForm" class="btn btn-primary"
+      <a
+        routerLink="reviews/new"
+        fragment="reviewForm"
+        class="btn custom text-light"
         >Write review</a
       >
     </div>

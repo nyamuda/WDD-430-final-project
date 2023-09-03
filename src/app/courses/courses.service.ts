@@ -100,6 +100,17 @@ export class CoursesService {
   getCourseById(id: string): Observable<Course> {
     this.isFetchingCourse.set(true);
 
+    //check if the course is not already among the course list
+    let courseExist: Course;
+    if (this._courses.length > 0) {
+      courseExist = this._courses.filter(
+        (course: Course) => course['_id'] == id
+      )[0];
+    }
+    if (courseExist) {
+      return of(courseExist);
+    }
+
     const url = `http://localhost:8000/courses/${id}`;
 
     return this.http.get<Course>(url);
