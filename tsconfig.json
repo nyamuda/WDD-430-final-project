@@ -6,7 +6,7 @@
     "baseUrl": "./",
     // "outDir": "./dist/out-tsc",
     "outDir": "./build",
-    "sourceMap": true,
+    "sourceMap": false,
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,
@@ -16,7 +16,10 @@
     "allowSyntheticDefaultImports": true,
     "lib": ["es2018", "dom"],
     "useDefineForClassFields": false,
-    "module": "commonjs"
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": ["./server/", "./app.ts", "./server.ts"], // Include TypeScript files from this folder
   "exclude": ["./src/"], // Exclude specific file(s)
