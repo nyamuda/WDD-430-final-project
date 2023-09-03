@@ -44,7 +44,7 @@ export class FacebookOauthUtils {
   }
 
   // Function to get Facebook user information using the given token
-  public static async getFacebookUser(token: string): Promise<object> {
+  public static async getFacebookUser(token: string): Promise<FacebookUser> {
     try {
       const response = await axios.get('https://graph.facebook.com/v17.0/me', {
         params: {
@@ -54,15 +54,21 @@ export class FacebookOauthUtils {
       });
 
       if (response.status === 200) {
-        return response.data;
+        return {
+          name: response.data.name,
+          email: response.data.email,
+          picture: response.data.picture.data.url,
+        };
       } else {
         console.error(
           'User info request failed with status code:',
           response.status
         );
+        return { name: '', email: '', picture: '' };
       }
     } catch (error) {
       console.error('Error while fetching Facebook user info:', error);
+      return { name: '', email: '', picture: '' };
     }
   }
 

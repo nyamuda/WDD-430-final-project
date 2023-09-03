@@ -76,8 +76,6 @@ export class ReviewsController {
     }
   }
 
-  
-
   // Get Review by ID
   public static async getReview(req: Request, res: Response) {
     try {
@@ -147,8 +145,8 @@ export class ReviewsController {
       .then(async (review) => {
         // Remove the review ID from the course
         await Course.findOneAndUpdate(
-          { _id: reviewExists.courseId },
-          { $pull: { reviews: reviewExists._id } }
+          { _id: reviewExists!.courseId },
+          { $pull: { reviews: reviewExists!._id } }
         );
         return res.status(204).end();
       })

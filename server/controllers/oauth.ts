@@ -10,7 +10,7 @@ export class OauthController {
   //Login Google User
   public static async googleLogin(req: Request, res: Response) {
     try {
-      let code = req.query.code;
+      let code = req.query.code ? req.query.code : '';
 
       //Get Google access token
       let token = await GoogleOauthUtils.getGoogleAccessToken(code.toString());
@@ -70,7 +70,7 @@ export class OauthController {
   //Login Facebook User
   public static async facebookLogin(req: Request, res: Response) {
     try {
-      let code = req.query.code;
+      let code = req.query.code ? req.query.code : '';
 
       //Get Google access token
       let token = await FacebookOauthUtils.getFacebookAccessToken(
@@ -82,7 +82,7 @@ export class OauthController {
 
       let name = data['name'];
       let email = data['email'];
-      let imageUrl = data['picture']['data']['url'];
+      let imageUrl = data['picture'];
 
       //check if the user already exists in the database
       let userExists = await User.findOne({ email: email });
@@ -131,3 +131,9 @@ export class OauthController {
     }
   }
 }
+
+type OauthUserData = {
+  name: string;
+  email: string;
+  picture: string;
+};

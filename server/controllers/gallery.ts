@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
 import { Gallery } from '../models';
+import { SortOrder } from 'mongoose';
 
 export class GalleryController {
   // Create a new Gallery Item
@@ -51,10 +52,8 @@ export class GalleryController {
       //Get the query parameter for sorting
       let sortBy = req.query.sort ? req.query.sort.toString() : 'updatedAt';
 
-      let sortObject = {};
       //in descending order -->-1
-      sortObject[sortBy] = -1;
-
+      let sortObject: { [key: string]: SortOrder } = { sortBy: -1 }; // -1 for descending order
       let items = await Gallery.find({})
         .skip(itemsToSkip)
         .limit(itemsPerPage)

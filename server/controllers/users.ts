@@ -102,12 +102,12 @@ export class UsersController {
         // Delete any reviews associated with that user
 
         // 1. Get the IDs of the reviews to be deleted
-        let reviewIds = (await Review.find({ userId: userExists._id })).map(
+        let reviewIds = (await Review.find({ userId: userExists!._id })).map(
           (review) => review._id
         );
 
         // 2. Delete the reviews
-        await Review.deleteMany({ userId: userExists._id });
+        await Review.deleteMany({ userId: userExists!._id });
 
         // 3. Remove the reviews from the course
         await Course.updateMany(
@@ -132,12 +132,14 @@ export class UsersController {
   ): Promise<boolean> {
     let userExists = await User.findOne({ email: updatedEmail });
 
-    //if the user is already registered
-    if (
-      userExists['_id'].toString() != currentUserId &&
-      userExists['email'] == updatedEmail
-    ) {
-      return true;
+    if (userExists) {
+      //if the user is already registered
+      if (
+        userExists['_id'].toString() != currentUserId &&
+        userExists['email'] == updatedEmail
+      ) {
+        return true;
+      }
     }
 
     return false;

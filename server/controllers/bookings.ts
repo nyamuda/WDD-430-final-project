@@ -5,6 +5,7 @@ import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { env } from 'process';
 import { BookInfo, BookingUtils } from '../utils/bookingUtils';
+import { SortOrder } from 'mongoose';
 dotenv.config();
 
 export class BookingsController {
@@ -61,9 +62,10 @@ export class BookingsController {
 
       let sortBy = req.query.sort ? req.query.sort.toString() : 'dateCreated';
 
-      let sortObject = {};
+      // let sortObject = {};
       //in descending order -->-1
-      sortObject[sortBy] = -1;
+      // sortObject[sortBy] = -1;
+      let sortObject: { [key: string]: SortOrder } = { sortBy: -1 };
 
       let bookings = await Booking.find({}).sort(sortObject);
       return res.json(bookings);

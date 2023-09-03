@@ -43,7 +43,7 @@ export class GoogleOauthUtils {
         return '';
       }
     } catch (error) {
-      console.error('Error while fetching Google access token:', error.data);
+      console.error('Error while fetching Google access token:', error);
       return '';
     }
   }

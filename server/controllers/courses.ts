@@ -1,6 +1,7 @@
 import { Course, Review } from '../models/';
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
+import { SortOrder } from 'mongoose';
 
 export class CoursesController {
   // Create a new Course
@@ -49,9 +50,11 @@ export class CoursesController {
 
       let sortBy = req.query.sort ? req.query.sort.toString() : 'rating';
 
-      let sortObject = {};
+      // let sortObject = {};
       //in descending order -->-1
-      sortObject[sortBy] = -1;
+      // sortObject[sortBy] = -1;
+      //in descending order -->-1
+      let sortObject: { [key: string]: SortOrder } = { sortBy: -1 }; // -1 for descending order
 
       let courses = await Course.find({})
         .populate({
@@ -103,8 +106,10 @@ export class CoursesController {
 
       //sort by updatedAt
       //in descending order -->-1
-      let sortObject = {};
-      sortObject['updatedAt'] = -1;
+      // let sortObject = {};
+      //sortObject['updatedAt'] = -1;
+      //in descending order -->-1
+      let sortObject: { [key: string]: SortOrder } = { updatedAt: -1 }; // -1 for descending order
 
       let reviews = await Review.find({ courseId: req.params.id })
         .skip(itemsToSkip)
@@ -191,7 +196,7 @@ export class CoursesController {
     await Course.deleteOne({ _id: req.params.id })
       .then(async (course) => {
         // Delete any reviews associated with that course
-        await Review.deleteMany({ courseId: courseExists._id });
+        await Review.deleteMany({ courseId: courseExists!._id });
         return res.status(204).end();
       })
       .catch((err) => {

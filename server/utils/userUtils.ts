@@ -21,7 +21,7 @@ export class UserUtils {
     next: NextFunction
   ) => {
     try {
-      let clientToken = req.headers.authorization.split(' ')[1];
+      let clientToken = req.headers.authorization!.split(' ')[1];
       let SECRET: Secret = process.env.SECRET!;
       let token = jwt.verify(clientToken, SECRET);
       return next();
@@ -41,7 +41,7 @@ export class UserUtils {
     next: NextFunction
   ) => {
     try {
-      let clientToken = req.headers.authorization.split(' ')[1];
+      let clientToken = req.headers.authorization!.split(' ')[1];
       let SECRET: Secret = process.env.SECRET!;
 
       jwt.verify(clientToken, SECRET, async (error: any, token: any) => {
@@ -55,9 +55,11 @@ export class UserUtils {
         //get the the review the user is trying to edit/delete
         let review = await Review.findById(req.params.id);
 
-        //if the user ID of the token matches the userId of the review
-        if (token.userId === review.userId.toString()) {
-          return next();
+        if (review) {
+          //if the user ID of the token matches the userId of the review
+          if (token.userId === review.userId.toString()) {
+            return next();
+          }
         }
         //if it's an admin
         if (token.isAdmin) {
@@ -84,7 +86,7 @@ export class UserUtils {
     next: NextFunction
   ) => {
     try {
-      let clientToken = req.headers.authorization.split(' ')[1];
+      let clientToken = req.headers.authorization!.split(' ')[1];
       let SECRET: Secret = process.env.SECRET!;
       let token: any = jwt.verify(clientToken, SECRET);
 
@@ -116,7 +118,7 @@ export class UserUtils {
     next: NextFunction
   ) => {
     try {
-      let clientToken = req.headers.authorization.split(' ')[1];
+      let clientToken = req.headers.authorization!.split(' ')[1];
       let SECRET: Secret = process.env.SECRET!;
       let token: any = jwt.verify(clientToken, SECRET);
       //if the user is not an admin, or if admin=false
