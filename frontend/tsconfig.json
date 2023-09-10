@@ -1,0 +1,32 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    // "outDir": "./dist/out-tsc",
+    "outDir": "./dist",
+    "sourceMap": false,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "ES2022",
+    "allowSyntheticDefaultImports": true,
+    "lib": ["es2018", "dom"],
+    "useDefineForClassFields": false,
+    "module": "commonjs",
+    // "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true
+  },
+  // "include": ["./server/", "./app.ts", "./server.ts"], // Include TypeScript files from this folder
+  // "exclude": ["frontend/src"], // Exclude specific file(s)
+  "angularCompilerOptions": {
+    "strictMetadataEmit": true,
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
+}

@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import { CoursesController } from '../controllers';
 import { UserUtils } from '../utils/userUtils';
-import * as multer from 'multer';
+import multer from 'multer';
 
 const router = express.Router();
 

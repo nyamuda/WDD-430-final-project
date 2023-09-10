@@ -2,12 +2,12 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import { GalleryController } from '../controllers';
 import { UserUtils } from '../utils/userUtils';
-import * as multer from 'multer';
+import multer from 'multer';
 
 const router = express.Router();
 
-//fore the image uploads
-//when creating or updating a course
+//for the image uploads
+//when creating or updating the gallery
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 

@@ -5,11 +5,15 @@
 /tmp
 /out-tsc
 /build
+/frontend/dist
+/server/build
 # Only exists if Bazel was run
 /bazel-out
 
 # dependencies
 /node_modules
+/frontend/node_modules
+/server/node_modules
 
 # profiling files
 chrome-profiler-events*.json
@@ -41,8 +45,8 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-.env
-firebasePrivateKey.json
+/server/.env
+/server/firebasePrivateKey.json
 
 # System Files
 .DS_Store
