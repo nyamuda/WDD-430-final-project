@@ -5,7 +5,7 @@
 /tmp
 /out-tsc
 /build
-/frontend/dist
+#/frontend/dist
 /server/build
 # Only exists if Bazel was run
 /bazel-out
