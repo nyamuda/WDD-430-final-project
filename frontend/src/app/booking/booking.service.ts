@@ -26,7 +26,7 @@ export class BookingService {
     //show loader
     this.isBooking.set(true);
 
-    const url = 'https://driving-school-5txd.onrender.com/booking';
+    const url = `${this.appService.apiUrl}/booking`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let bookingDto = {

@@ -41,7 +41,7 @@ export class GalleryService {
 
     //upload the image and get the Firebase image Url
     this.fileService.uploadImage().subscribe((imageUrl: string) => {
-      let url = 'http://localhost:8000/gallery';
+      let url = `${this.appService.apiUrl}/gallery`;
       let galleryImageDto = {
         url: imageUrl,
         type: 'image',
@@ -67,7 +67,9 @@ export class GalleryService {
   }
 
   getGalleryItems() {
-    const url = `http://localhost:8000/gallery/?page=${this.pageNumberSignal()}`;
+    const url = `${
+      this.appService.apiUrl
+    }/gallery/?page=${this.pageNumberSignal()}`;
     this.http.get<GalleryMetaDto>(url).subscribe(
       (response: GalleryMetaDto) => {
         this._gallery = response.items;
@@ -95,7 +97,7 @@ export class GalleryService {
     //set headers
     let token = this.userService.getJwtToken();
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-    const url = `http://localhost:8000/gallery/${id}`;
+    const url = `${this.appService.apiUrl}/gallery/${id}`;
     this.http.delete(url, { headers }).subscribe(
       (response) => {
         this.getGalleryItems();

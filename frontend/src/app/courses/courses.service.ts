@@ -63,7 +63,7 @@ export class CoursesService {
       this.fileService.uploadImage().subscribe((imageUrl: string) => {
         //And then store the course to the database
         //together with the image URL
-        const url = 'https://driving-school-5txd.onrender.com/courses';
+        const url = '${this.appService.apiUrl}/courses';
         const headers = this.headers();
         let courseDto = {
           title: newCourse.title,
@@ -111,14 +111,14 @@ export class CoursesService {
       return of(courseExist);
     }
 
-    const url = `https://driving-school-5txd.onrender.com/courses/${id}`;
+    const url = `${this.appService.apiUrl}/courses/${id}`;
 
     return this.http.get<Course>(url);
   }
 
   //READ
   getCourses(sort = 'rating'): void {
-    const url = `https://driving-school-5txd.onrender.com/courses?sort=${sort}`;
+    const url = `${this.appService.apiUrl}/courses?sort=${sort}`;
     this.isFetchingCourses.set(true);
 
     this.http.get<Course[]>(url).subscribe(
@@ -157,7 +157,7 @@ export class CoursesService {
 
       //update the course
       this.http
-        .put(`https://driving-school-5txd.onrender.com/courses/${id}`, courseDto, {
+        .put(`${this.appService.apiUrl}/courses/${id}`, courseDto, {
           headers,
         })
         .subscribe(
@@ -191,7 +191,7 @@ export class CoursesService {
     await this.fileService.deleteImage(imageUrl);
 
     //then delete the course information
-    const url = `https://driving-school-5txd.onrender.com/courses/${id}`;
+    const url = `${this.appService.apiUrl}/courses/${id}`;
     let headers = this.headers();
 
     this.http.delete(url, { headers }).subscribe(
@@ -213,7 +213,7 @@ export class CoursesService {
 
   //Search courses by title
   searchCourses(title: string): void {
-    const url = `https://driving-school-5txd.onrender.com/courses/search?title=${title}`;
+    const url = `${this.appService.apiUrl}/courses/search?title=${title}`;
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {

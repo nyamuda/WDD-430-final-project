@@ -41,7 +41,7 @@ export class UsersService {
   }
 
   public getUser(id: string): Observable<User> {
-    const url = `https://driving-school-5txd.onrender.com/users/${id}`;
+    const url = `${this.appService.apiUrl}/users/${id}`;
     return this.http.get<User>(url);
   }
 
@@ -92,7 +92,7 @@ export class UsersService {
 
       //update the course
       this.http
-        .put(`https://driving-school-5txd.onrender.com/users/${id}`, userDto, {
+        .put(`${this.appService.apiUrl}/users/${id}`, userDto, {
           headers,
         })
         .subscribe(

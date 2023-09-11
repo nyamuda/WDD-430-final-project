@@ -1,9 +1,9 @@
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { map, Observable, of, catchError, switchMap } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UsersService } from '../users/users.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { BehaviorSubject } from 'rxjs';
+import { AppService } from '../app.service';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,11 @@ export class FileService {
     false
   );
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService) {}
+  constructor(
+    private http: HttpClient,
+    private jwtHelper: JwtHelperService,
+    private appService: AppService
+  ) {}
 
   //Upload image
   //returns image URL
@@ -29,7 +33,7 @@ export class FileService {
       const formData = new FormData(); // Create a new FormData object
       formData.append('file', this.currentUpload()[0]); // Append the file to the form data
 
-      const url = `https://driving-school-5txd.onrender.com/files`;
+      const url = `${this.appService.apiUrl}/files`;
 
       let token = this.getJwtToken();
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -66,7 +70,7 @@ export class FileService {
 
       formData.append('imageUrl', oldImageUrl);
 
-      const url = `https://driving-school-5txd.onrender.com/files`;
+      const url = `${this.appService.apiUrl}/files`;
 
       // Create the options object with headers and body
       let token = this.getJwtToken();
@@ -109,7 +113,7 @@ export class FileService {
 
   //Delete image using its URL
   deleteImage(imageUrl: string) {
-    const url = `https://driving-school-5txd.onrender.com/files`;
+    const url = `${this.appService.apiUrl}/files`;
 
     // Create the options object with headers and body
     let token = this.getJwtToken();

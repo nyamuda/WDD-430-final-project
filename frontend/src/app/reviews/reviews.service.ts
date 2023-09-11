@@ -41,7 +41,7 @@ export class ReviewsService {
   // CREATE
   addReview(courseId: string, newReview: Review) {
     if (!!newReview) {
-      const url = 'https://driving-school-5txd.onrender.com/reviews';
+      const url = `${this.appService.apiUrl}/reviews`;
       const headers = this.headers();
 
       let reviewDto = {
@@ -71,7 +71,7 @@ export class ReviewsService {
   }
 
   getReviewById(id: string): Observable<Review> {
-    const url = `https://driving-school-5txd.onrender.com/reviews/${id}`;
+    const url = `${this.appService.apiUrl}/reviews/${id}`;
     return this.http.get<Review>(url);
   }
 
@@ -79,7 +79,7 @@ export class ReviewsService {
   getReviewsForCourse(courseId: string, page: number = 1) {
     //show placeholder reviews
     this.isFetchingReviews.set(true);
-    const url = `https://driving-school-5txd.onrender.com/courses/${courseId}/reviews?page=${page}`;
+    const url = `${this.appService.apiUrl}/courses/${courseId}/reviews?page=${page}`;
 
     //get the reviews
     //and meta data for pagination
@@ -119,7 +119,7 @@ export class ReviewsService {
       };
 
       this.http
-        .put(`https://driving-school-5txd.onrender.com/reviews/${id}`, reviewDto, { headers })
+        .put(`${this.appService.apiUrl}/reviews/${id}`, reviewDto, { headers })
         .subscribe(
           (response) => {
             this.getReviewsForCourse(this.courseIdSignal());
@@ -141,7 +141,7 @@ export class ReviewsService {
   // DELETE
   deleteReview(id: string) {
     const headers = this.headers();
-    const url = `https://driving-school-5txd.onrender.com/reviews/${id}`;
+    const url = `${this.appService.apiUrl}/reviews/${id}`;
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {

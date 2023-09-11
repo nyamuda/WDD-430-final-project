@@ -9,12 +9,14 @@ import { ToastrService } from 'ngx-toastr';
 export class AppService {
   private _courses = new Array<Course>();
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
+  public apiUrl = 'https://driving-school-5txd.onrender.com';
+  // public apiUrl = 'http://localhost:8000/';
 
   constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   //Get a list of courses from from the database
   getCourses(sort = 'rating'): void {
-    const url = `https://driving-school-5txd.onrender.com/courses?sort=${sort}`;
+    const url = `${this.apiUrl}/courses?sort=${sort}`;
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {

@@ -20,7 +20,7 @@ export class OauthService {
 
   //Get OAuth login URLs
   getOauthUrls(): Observable<OauthUrls> {
-    const url = `http://localhost:8000/oauth/url`;
+    const url = `${this.appService.apiUrl}/oauth/url`;
 
     return this.http.get<OauthUrls>(url);
   }
@@ -58,7 +58,7 @@ export class OauthService {
   //Login with google
   getGoogleUserJwtToken(code: string) {
     this.http
-      .get(`http://localhost:8000/oauth/google/callback?code=${code}`)
+      .get(`${this.appService.apiUrl}/oauth/google/callback?code=${code}`)
       .subscribe(
         (response) => {
           //save the JWT token to local storage
@@ -95,7 +95,7 @@ export class OauthService {
   //Login with Facebook
   getFacebookUserJwtToken(code: string) {
     this.http
-      .get(`http://localhost:8000/oauth/facebook/callback?code=${code}`)
+      .get(`${this.appService.apiUrl}/oauth/facebook/callback?code=${code}`)
       .subscribe(
         (response) => {
           //save the JWT token to local storage

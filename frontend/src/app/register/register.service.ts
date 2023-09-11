@@ -26,7 +26,7 @@ export class RegisterService {
       email: newUser.email.trim(),
       password: newUser.password.trim(),
     };
-    const url = 'https://driving-school-5txd.onrender.com/register';
+    const url = `${this.appService.apiUrl}/register`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {
