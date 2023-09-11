@@ -13,9 +13,9 @@
     "importHelpers": true,
     "target": "ES2022",
     "allowSyntheticDefaultImports": true,
-    "lib": ["es2018", "dom"],
+    "lib": ["ES2022", "dom"],
     "useDefineForClassFields": false,
-    "module": "commonjs",
+    "module": "ES2022",
     // "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true
