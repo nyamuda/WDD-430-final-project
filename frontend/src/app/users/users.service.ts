@@ -41,7 +41,7 @@ export class UsersService {
   }
 
   public getUser(id: string): Observable<User> {
-    const url = `http://localhost:8000/users/${id}`;
+    const url = `https://driving-school-5txd.onrender.com/users/${id}`;
     return this.http.get<User>(url);
   }
 
@@ -92,7 +92,7 @@ export class UsersService {
 
       //update the course
       this.http
-        .put(`http://localhost:8000/users/${id}`, userDto, {
+        .put(`https://driving-school-5txd.onrender.com/users/${id}`, userDto, {
           headers,
         })
         .subscribe(

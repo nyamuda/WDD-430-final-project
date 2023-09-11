@@ -27,7 +27,7 @@ export class ContactUsService {
     //show loader
     this.isContacting.set(true);
 
-    const url = 'http://localhost:8000/contact';
+    const url = 'https://driving-school-5txd.onrender.com/contact';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let contactDto = {

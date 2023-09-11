@@ -29,7 +29,7 @@ export class FileService {
       const formData = new FormData(); // Create a new FormData object
       formData.append('file', this.currentUpload()[0]); // Append the file to the form data
 
-      const url = `http://localhost:8000/files`;
+      const url = `https://driving-school-5txd.onrender.com/files`;
 
       let token = this.getJwtToken();
       const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
@@ -66,7 +66,7 @@ export class FileService {
 
       formData.append('imageUrl', oldImageUrl);
 
-      const url = `http://localhost:8000/files`;
+      const url = `https://driving-school-5txd.onrender.com/files`;
 
       // Create the options object with headers and body
       let token = this.getJwtToken();
@@ -109,7 +109,7 @@ export class FileService {
 
   //Delete image using its URL
   deleteImage(imageUrl: string) {
-    const url = `http://localhost:8000/files`;
+    const url = `https://driving-school-5txd.onrender.com/files`;
 
     // Create the options object with headers and body
     let token = this.getJwtToken();

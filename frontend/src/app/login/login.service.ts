@@ -33,7 +33,7 @@ export class LoginService {
       email: newUser.email.trim(),
       password: newUser.password.trim(),
     };
-    const url = 'http://localhost:8000/login';
+    const url = 'https://driving-school-5txd.onrender.com/login';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {

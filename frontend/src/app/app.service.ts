@@ -14,7 +14,7 @@ export class AppService {
 
   //Get a list of courses from from the database
   getCourses(sort = 'rating'): void {
-    const url = `http://localhost:8000/courses?sort=${sort}`;
+    const url = `https://driving-school-5txd.onrender.com/courses?sort=${sort}`;
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {

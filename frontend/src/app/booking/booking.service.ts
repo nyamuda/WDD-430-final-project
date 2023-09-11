@@ -26,7 +26,7 @@ export class BookingService {
     //show loader
     this.isBooking.set(true);
 
-    const url = 'http://localhost:8000/booking';
+    const url = 'https://driving-school-5txd.onrender.com/booking';
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     let bookingDto = {
