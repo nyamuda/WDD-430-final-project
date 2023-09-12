@@ -1,0 +1,18 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.heading-line {
+  border: 2px solid #f24711;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
+.colored-text {
+  color: #f24711;
+}
+
+.reviewer-image {
+  background-size: cover; /* Maintain the aspect ratio of the background image */
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=homepage-testimonials.component.css.map */

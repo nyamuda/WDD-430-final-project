@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.pagination-controls ::ng-deep .current {
+  background: #f24711;
+  border-radius: 50%;
+  text-align: center;
+  width: 2rem;
+  height: 2rem;
+}
+
+.img-fluid {
+  width: auto;
+  height: 16rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.bottom-pagination-controls {
+  margin-left: -2.5rem;
+}
+
+@media (min-width: 512px) {
+  .img-fluid {
+    width: auto;
+    height: 16rem;
+  }
+}
+@media (max-width: 767px) {
+  .top-pagination-controls {
+    margin-left: -2.5rem;
+  }
+}/*# sourceMappingURL=gallery-view.component.css.map */

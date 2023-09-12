@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.heading-line {
+  border: 2px solid #f24711;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
+.btn {
+  height: 3rem;
+}
+
+.container {
+  margin: auto;
+  width: 95%;
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 30rem;
+  }
+}/*# sourceMappingURL=login.component.css.map */

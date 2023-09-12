@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.carousel-caption {
+  top: 15%;
+  bottom: auto;
+}
+
+.carousel {
+  position: relative;
+  z-index: 1;
+}
+
+.cards {
+  position: relative;
+  z-index: 2;
+  margin-top: -3rem !important;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.icon {
+  color: #333333;
+}
+
+.carousel-caption h5 {
+  text-transform: capitalize;
+}
+
+.caption-bold {
+  color: #f2ba11;
+}
+
+.display-4 {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+.carousel-item.active {
+  position: relative;
+}
+
+.carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.carousel-item.active img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+/* Adding the dark overlay on the images because of the text */
+@media (min-width: 728px) {
+  .carousel-item::before {
+    background-color: rgba(0, 0, 0, 0.6);
+  }
+}
+/* The animations for the captions - END */
+/* The images */
+.the_slide {
+  width: 100%;
+  height: 24rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (min-width: 728px) {
+  .the_slide {
+    height: 25rem;
+  }
+}
+@media (min-width: 1024px) {
+  .the_slide {
+    height: 30rem;
+  }
+}
+/* The images - END *//*# sourceMappingURL=homepage-background-image.component.css.map */

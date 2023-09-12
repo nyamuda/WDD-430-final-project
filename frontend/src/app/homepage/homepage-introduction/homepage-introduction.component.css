@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.heading-line {
+  border: 2px solid #f24711;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
+.btn-outline-light {
+  border-color: #e6871c;
+  color: #e6871c;
+  transition: all 0.3s ease-in;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.btn-outline-light:hover {
+  border-color: #f2ba11;
+  color: #f2ba11;
+}
+
+.colored-text {
+  color: #f24711;
+}
+
+.icon {
+  color: #e6871c;
+}
+
+.card {
+  border: 1px solid #e6871c;
+  border-radius: 0;
+}/*# sourceMappingURL=homepage-introduction.component.css.map */

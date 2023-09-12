@@ -1,10 +1,11 @@
 @import "../../../sass/variables";
-.container-fluid {
-  width: 90%;
-}
+
 .colored-text {
   color: $primary-color;
 }
 .icon {
   color: $primary-color;
+}
+.bg-image {
+  height: 10rem;
 }

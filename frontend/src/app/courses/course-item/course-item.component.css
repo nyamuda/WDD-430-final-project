@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.card-img-top {
+  height: 13rem; /* Set the desired height for the card images */
+  -o-object-fit: cover;
+     object-fit: cover; /* This ensures that the image maintains its aspect ratio and covers the entire container */
+  border-radius: 0;
+}
+
+.card,
+.bg-image {
+  border-radius: 0 !important;
+}
+
+.btn-danger {
+  background-color: #e6871c;
+}
+
+.btn-danger:hover {
+  background-color: #f2ba11;
+}
+
+.course-stars-left {
+  margin-left: -0.3rem;
+}/*# sourceMappingURL=course-item.component.css.map */

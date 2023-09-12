@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.colored-text {
+  color: #f24711;
+}
+
+footer {
+  background-color: #333333;
+}
+
+.social-links {
+  border-bottom-color: #f24711 !important;
+}/*# sourceMappingURL=footer.component.css.map */

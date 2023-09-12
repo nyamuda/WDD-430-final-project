@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.top-header {
+  background-color: #333333;
+  font-size: 0.95rem;
+}
+
+.social-icon {
+  font-size: 1.2rem;
+}
+
+.icon {
+  color: #ffffff;
+}
+
+.login-btn {
+  background-color: #f24711;
+}
+
+.nav-link {
+  font-family: "Merriweather Sans", sans-serif;
+  color: "Merriweather Sans", sans-serif;
+}
+
+a {
+  cursor: pointer;
+}
+
+.active-link {
+  background-image: linear-gradient(to right, #f24711, #e6871c);
+  background-size: 200% auto;
+  color: #fff !important;
+  transition: background-position 0.3s ease-out;
+}
+
+.active-link:hover {
+  background-position: right center;
+}
+
+.login-btn {
+  background-color: #e6871c;
+}
+
+#nav-icon2 {
+  width: 3rem;
+  height: 2rem;
+  position: relative;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+#nav-icon2 span {
+  display: block;
+  position: absolute;
+  height: 0.6rem;
+  width: 62%;
+  background: #333333;
+  opacity: 1;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+#nav-icon2 span:nth-child(even) {
+  left: 50%;
+  border-radius: 0 9px 9px 0;
+}
+
+#nav-icon2 span:nth-child(odd) {
+  left: 0px;
+  border-radius: 9px 0 0 9px;
+}
+
+#nav-icon2 span:nth-child(1),
+#nav-icon2 span:nth-child(2) {
+  top: 0px;
+}
+
+#nav-icon2 span:nth-child(3),
+#nav-icon2 span:nth-child(4) {
+  top: 18px;
+}
+
+#nav-icon2 span:nth-child(5),
+#nav-icon2 span:nth-child(6) {
+  top: 36px;
+}
+
+#nav-icon2.open span:nth-child(1),
+#nav-icon2.open span:nth-child(6) {
+  transform: rotate(45deg);
+}
+
+#nav-icon2.open span:nth-child(2),
+#nav-icon2.open span:nth-child(5) {
+  transform: rotate(-45deg);
+}
+
+#nav-icon2.open span:nth-child(1) {
+  left: 5px;
+  top: 7px;
+}
+
+#nav-icon2.open span:nth-child(2) {
+  left: calc(65% - 5px);
+  top: 7px;
+}
+
+#nav-icon2.open span:nth-child(3) {
+  left: -50%;
+  opacity: 0;
+}
+
+#nav-icon2.open span:nth-child(4) {
+  left: 100%;
+  opacity: 0;
+}
+
+#nav-icon2.open span:nth-child(5) {
+  left: 5px;
+  top: 29px;
+}
+
+#nav-icon2.open span:nth-child(6) {
+  left: calc(65% - 5px);
+  top: 29px;
+}/*# sourceMappingURL=header.component.css.map */

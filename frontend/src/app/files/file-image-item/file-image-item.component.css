@@ -1,0 +1,49 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.image-upload-container {
+  position: relative;
+}
+
+.file-error-message {
+  position: absolute;
+  margin-top: 0;
+  font-size: 0.8rem;
+}
+
+.upload-invalid {
+  background-color: rgba(243, 212, 215, 0.7);
+}
+
+.upload-warning {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.upload-image {
+  width: 100%;
+  height: 16rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.placeholder-text {
+  transition: all 0.3s ease-in-out !important;
+}
+
+.placeholder-text:hover {
+  color: #e6871c !important;
+}
+
+@media (min-width: 576px) {
+  .upload-image {
+    width: 20rem;
+  }
+}
+@media (min-width: 768px) {
+  .upload-image {
+    width: 23rem;
+  }
+}/*# sourceMappingURL=file-image-item.component.css.map */

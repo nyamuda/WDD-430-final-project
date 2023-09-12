@@ -1,0 +1,29 @@
+.editor-container {
+  position: relative;
+}
+
+.full-description-invalid {
+  border: 1px solid #ff0000;
+}
+
+.full-description-valid {
+  border: 1px solid #008000;
+}
+
+.invalid-feedback,
+.file-error-message {
+  position: absolute;
+  margin-top: 0;
+  font-size: 0.8rem;
+}
+
+.upload-invalid {
+  background-color: rgba(243, 212, 215, 0.7);
+}
+
+.upload-warning {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: bold;
+}/*# sourceMappingURL=course-edit.component.css.map */

@@ -7,3 +7,12 @@
 .colored-title {
   color: $primary-color;
 }
+.bg-image {
+  height: 80vh;
+}
+
+@media (min-width: 992px) {
+  .bg-image {
+    height: 10rem;
+  }
+}

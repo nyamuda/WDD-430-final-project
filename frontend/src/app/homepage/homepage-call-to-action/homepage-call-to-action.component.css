@@ -1,0 +1,14 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.colored-text {
+  color: #f24711;
+}
+
+.icon {
+  color: #f24711;
+}
+
+.bg-image {
+  height: 10rem;
+}/*# sourceMappingURL=homepage-call-to-action.component.css.map */

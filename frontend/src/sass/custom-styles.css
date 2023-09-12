@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.ql-editor {
+  font-family: "Oxygen", sans-serif;
+  font-size: 1rem;
+  color: #212529;
+}
+
+.container-fluid.custom {
+  width: 100%;
+  margin: auto;
+}
+
+@media (min-width: 768px) {
+  .container-fluid.custom {
+    width: 90%;
+  }
+}
+.form-control,
+.form-select,
+.btn {
+  border-radius: 0px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: none;
+}
+
+.form-control.is-invalid:focus,
+.form-select.is-invalid:focus,
+.form-control.is-valid:focus {
+  box-shadow: none;
+}
+
+.btn {
+  text-transform: none;
+  font-size: 1rem;
+}
+
+.btn.custom {
+  background-color: #e6871c;
+  transition: all 0.3s ease-out;
+}
+
+.btn.custom:hover {
+  background-color: #f24711;
+}
+
+.btn.btn-outline-secondary {
+  border-color: #f2ba11;
+  color: #f2ba11;
+  transition: all 0.3s ease-out;
+}
+
+.btn.btn-outline-secondary:hover {
+  border-color: #e6871c;
+  color: #e6871c;
+}
+
+.toast-title {
+  font-weight: bold !important;
+  font-family: "Oxygen", sans-serif !important;
+}
+
+.toast-message {
+  font-family: "Oxygen", sans-serif !important;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #e6871c;
+  border-color: #f3f2f2;
+  background: #f3f2f2;
+}/*# sourceMappingURL=custom-styles.css.map */
