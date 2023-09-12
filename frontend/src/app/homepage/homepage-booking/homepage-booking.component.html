@@ -1,23 +1,22 @@
-<div class="container-fluid">
-  <!-- Jumbotron -->
-  <div
-    class="bg-image p-5 text-center shadow-1-strong text-white mt-5 row row-cols-1 row-cols-md-2"
-    style="
-      background-image: url('https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFya3xlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=500&q=60');
-    "
-  >
-    <!-- Booking Form -->
-    <div class="col d-flex flex-column align-items-start text-start">
-      <p class="heading-line rounded"></p>
-      <p class="text-capitalize fs-4">Form to fill</p>
-      <p class="fs-1 text-uppercase fw-bold">
-        Schedule an Appointment and Begin Your
-        <span class="colored-text"> Learning Journey </span>
-      </p>
+<div
+  class="container-fluid bg-image pb-5 p-md-5 text-center text-light booking-container"
+>
+  <div class="container-fluid custom">
+    <!-- Jumbotron -->
+    <div class="mt-5 row row-cols-1 row-cols-md-2">
+      <!-- Booking Form -->
+      <div class="col d-flex flex-column align-items-start text-start">
+        <p class="heading-line rounded"></p>
+        <p class="text-capitalize fs-4">Form to fill</p>
+        <p class="fs-1 text-uppercase fw-bold mt-n3">
+          Schedule an Appointment and Begin Your
+          <span class="colored-text"> Learning Journey </span>
+        </p>
+      </div>
+      <div class="col bg-light py-4 px-4">
+        <app-booking-item></app-booking-item>
+      </div>
     </div>
-    <div class="col bg-light py-4 px-4">
-      <app-booking-item></app-booking-item>
-    </div>
+    <!-- Jumbotron -->
   </div>
-  <!-- Jumbotron -->
 </div>
