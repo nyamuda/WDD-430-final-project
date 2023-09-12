@@ -23,9 +23,11 @@ a {
 }
 
 .active-link {
-  background-image: linear-gradient(to right, $primary-color, $secondary-color);
-  background-size: 200% auto;
-  color: #fff !important;
+  // background-image: linear-gradient(to right, $primary-color, $secondary-color);
+  // background-size: 200% auto;
+  // color: #fff !important;
+
+  color: $primary-color !important;
   transition: background-position 0.3s ease-out;
 }
 
@@ -48,10 +50,10 @@ a {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.5s ease-in-out;
-  -moz-transition: 0.5s ease-in-out;
-  -o-transition: 0.5s ease-in-out;
-  transition: 0.5s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
   cursor: pointer;
 }
 
@@ -66,10 +68,10 @@ a {
   -moz-transform: rotate(0deg);
   -o-transform: rotate(0deg);
   transform: rotate(0deg);
-  -webkit-transition: 0.25s ease-in-out;
-  -moz-transition: 0.25s ease-in-out;
-  -o-transition: 0.25s ease-in-out;
-  transition: 0.25s ease-in-out;
+  -webkit-transition: 0.15s ease-in-out;
+  -moz-transition: 0.15s ease-in-out;
+  -o-transition: 0.15s ease-in-out;
+  transition: 0.15s ease-in-out;
 }
 
 #nav-icon2 span:nth-child(even) {

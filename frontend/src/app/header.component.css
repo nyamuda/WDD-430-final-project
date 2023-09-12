@@ -49,7 +49,7 @@ a {
   margin-bottom: 1rem;
   text-decoration: none;
   transform: rotate(0deg);
-  transition: 0.5s ease-in-out;
+  transition: 0.05s ease-in-out;
   cursor: pointer;
 }
 
