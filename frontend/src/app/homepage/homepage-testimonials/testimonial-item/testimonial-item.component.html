@@ -1,0 +1,34 @@
+<div class="container py-5">
+  <!-- For large screens start -->
+  <div class="row text-center">
+    <div *ngFor="let testimonial of testimonials" class="col-md-4 mb-4 mb-md-0">
+      <div class="card">
+        <div class="card-body py-4 mt-2">
+          <div class="d-flex justify-content-center mb-4">
+            <img
+              [src]="testimonial.imageUrl"
+              class="rounded-circle shadow-1-strong reviewer-image"
+              width="150"
+              height="150"
+            />
+          </div>
+          <h5 class="font-weight-bold">{{ testimonial.name }}</h5>
+          <h6 class="font-weight-bold my-3">{{ testimonial.position }}</h6>
+          <div class="d-flex justify-content-center">
+            <star-rating
+              class="ms-n1"
+              [readOnly]="true"
+              [starType]="'svg'"
+              [size]="'medium'"
+              [rating]="5"
+            ></star-rating>
+          </div>
+          <p class="mb-2">
+            <i class="fas fa-quote-left pe-2"></i>{{ testimonial.content }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- For large screens end -->
+</div>

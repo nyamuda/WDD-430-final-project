@@ -1,11 +1,15 @@
-<div class="container-fluid mt-5">
-  <div class="container d-flex flex-column align-items-center">
+<div class="container-fluid custom mt-5">
+  <div class="d-flex flex-column align-items-start align-items-md-center">
     <p class="heading-line rounded"></p>
     <p class="text-capitalize fs-4">Courses We Offer</p>
-    <p class="display-5 text-dark text-uppercase">Our Driving Courses</p>
+    <p class="display-5 fw-bold text-dark text-uppercase mt-n3">
+      Our Driving Courses
+    </p>
   </div>
   <!-- Courses list -->
-  <div class="row row-cols-1 row-cols-md-3 g-4 m-auto">
+  <div
+    class="row row-cols-1 row-cols-md-2 row-cols-lg-3 gy-4 gx-1 gx-md-3 m-auto"
+  >
     <div class="col" *ngFor="let course of courses()">
       <app-course-item [course-detail]="course"></app-course-item>
     </div>
@@ -38,10 +42,12 @@
       </div>
     </div>
   </div>
-  <a
-    class="btn btn-outline-light btn-lg mt-4 fw-bold py-1 d-flex align-items-center text-uppercase"
-    routerLink="/courses"
-    role="button"
-    ><span>See more courses</span></a
-  >
+  <div class="d-flex justify-content-start justify-content-md-center">
+    <a
+      class="btn btn-outline-secondary btn-lg mt-4 fw-bold py-1 d-flex align-items-center text-uppercase"
+      routerLink="/courses"
+      role="button"
+      ><span>See more courses</span></a
+    >
+  </div>
 </div>

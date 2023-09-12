@@ -1,24 +1,11 @@
 @import "../../../sass/variables";
-.container-fluid {
-  width: 90%;
-}
+
 .heading-line {
   border: 2px solid $primary-color;
   width: 2rem;
   margin-bottom: 0rem;
 }
 
-.btn-outline-light {
-  border-color: $secondary-color;
-  color: $secondary-color;
-  transition: all 0.3s ease-in;
-  width: fit-content;
-  margin: auto;
-}
-.btn-outline-light:hover {
-  border-color: $tertiary-color;
-  color: $tertiary-color;
-}
 .card {
   border-radius: 0;
 }
