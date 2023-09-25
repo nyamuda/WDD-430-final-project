@@ -9,6 +9,7 @@ import { Course } from '../../course.model';
 })
 export class CourseFilterComponent {
   sortingField = 'rating';
+  search = '';
 
   constructor(private courseService: CoursesService) {}
 
@@ -43,10 +44,8 @@ export class CourseFilterComponent {
     }
   }
 
-  onEnter(event) {
-    event.preventDefault();
-    this.courseService.searchCourses(event.target.value.trim());
-    this.sortingField = 'rating';
+  onEnter() {
+    this.courseService.searchCourses(this.search.trim());
   }
 
   courses: Signal<Course[]> = computed(() =>
@@ -55,8 +54,13 @@ export class CourseFilterComponent {
 
   //display number of filtered results
   //in case the user searches for courses
-  public displayNumSearchResults: Signal<boolean> = computed(() =>
+  displayNumSearchResults: Signal<boolean> = computed(() =>
     this.courseService.displayNumSearchResults()
+  );
+
+  //display loader when searching for courses
+  displaySearchLoader: Signal<boolean> = computed(() =>
+    this.courseService.isSearching()
   );
 
   //sort the courses

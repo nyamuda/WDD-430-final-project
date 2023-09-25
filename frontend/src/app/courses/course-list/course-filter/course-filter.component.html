@@ -1,21 +1,47 @@
 <!-- Search for course -->
 <div class="row mt-5">
   <div class="col-md-8 mb-3 mb-md-0">
-    <mdb-form-control class="rounded">
+    <div class="input-group input-group-lg">
+      <!-- <mdb-form-control class="rounded">
+        <input
+          mdbInput
+          id="formControlLg"
+          (keyup.enter)="onEnter($event)"
+          type="search"
+          class="form-control rounded form-control-lg"
+          aria-label="Search"
+          aria-describedby="search-addon"
+        />
+        <label mdbLabel class="form-label" for="formControlLg">Search</label>
+      </mdb-form-control> -->
+
       <input
-        mdbInput
-        id="formControlLg"
-        (keyup.enter)="onEnter($event)"
+        (keyup.enter)="onEnter()"
         type="search"
-        class="form-control rounded form-control-lg"
+        class="form-control rounded"
+        placeholder="Search"
         aria-label="Search"
         aria-describedby="search-addon"
+        [(ngModel)]="search"
       />
-      <label mdbLabel class="form-label" for="formControlLg">Search</label>
-      <!-- <span class="input-group-text border-0" id="search-addon">
+      <button (click)="onEnter()" type="button" class="btn btn-primary">
+        <span
+          *ngIf="displaySearchLoader(); else searchIcon"
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <ng-template #searchIcon>
           <i class="fas fa-search"></i>
-        </span> -->
-    </mdb-form-control>
+        </ng-template>
+      </button>
+    </div>
+    <!-- Loader -->
+    <!-- <div class="text-start mt-2">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div> -->
   </div>
 
   <!-- Sort By -->

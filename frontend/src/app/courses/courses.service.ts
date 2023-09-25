@@ -39,6 +39,9 @@ export class CoursesService {
   //show a loader during an HTTP POST OR UPDATE request
   public isProcessingRequest: WritableSignal<boolean> = signal(false);
 
+  //show a loader during a search
+  public isSearching: WritableSignal<boolean> = signal(false);
+
   //is there an uploaded image
   doesUploadExist: Signal<boolean> = computed(
     () => this.fileService.currentUpload().length > 0
@@ -214,6 +217,7 @@ export class CoursesService {
   //Search courses by title
   searchCourses(title: string): void {
     const url = `${this.appService.apiUrl}/courses/search?title=${title}`;
+    this.isSearching.set(true);
 
     this.http.get<Course[]>(url).subscribe(
       (courses: Course[]) => {
@@ -221,9 +225,11 @@ export class CoursesService {
         this.courseListSignal.set(this._courses);
 
         this.displayNumSearchResults.set(true);
+        this.isSearching.set(false);
       },
       (error) => {
         console.error(error);
+        this.isSearching.set(false);
       }
     );
   }
