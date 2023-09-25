@@ -168,7 +168,8 @@ import { TestimonialItemComponent } from './homepage/homepage-testimonials/testi
         toolbar: [
           ['bold', 'italic', 'underline'], // Include only the options you want
           [{ list: 'ordered' }, { list: 'bullet' }],
-          ['link'],
+          ['link', 'video'],
+          [{ header: 1 }, { header: 2 }],
         ],
       },
       theme: 'snow',

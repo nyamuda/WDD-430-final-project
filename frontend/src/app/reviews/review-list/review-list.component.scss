@@ -1,4 +1,7 @@
 @import "../../../sass/_variables";
-.reviews-container {
-  background-color: $light-background;
+
+@media (min-width: 768px) {
+  .reviews-container {
+    background-color: $light-background;
+  }
 }

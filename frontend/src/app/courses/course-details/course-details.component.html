@@ -283,10 +283,8 @@
     <div class="mb-3">
       <p class="h2">Course Overview</p>
       <!-- Course fullDescription is HTML form -->
-      <quill-view-html
-        class="w-100"
-        [content]="course.fullDescription"
-      ></quill-view-html>
+      <quill-view [content]="course.fullDescription"></quill-view>
+      <!-- <div [innerHTML]="course.fullDescription"></div> -->
     </div>
     <hr />
     <div class="review-headline mt-3">
