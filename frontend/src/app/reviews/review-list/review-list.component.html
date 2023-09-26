@@ -1,35 +1,64 @@
-<!-- Placeholder reviews -->
-<div
-  *ngIf="isFetchingReviews() && reviews.length == 0; else showReviews"
-  class="container-fluid reviews-container rounded-1 px-3 px-lg-4 py-3"
->
-  <div
-    *ngFor="let item of placeholderReviews"
-    class="mb-4 d-flex flex-start align-items-start"
-  >
-    <img
-      class="rounded-circle shadow-1-strong me-3"
-      src="../../../assets/images/placeholder/placeholder1.png"
-      alt="avatar"
-      width="60"
-      height="60"
-    />
-    <div class="px-2 card w-100">
-      <div class="card-body placeholder-wave">
-        <h5 class="placeholder placeholder-lg col-8"></h5>
-        <p class="placeholder col-8"></p>
-        <p class="placeholder placeholder-sm col-6"></p>
-        <p class="placeholder col-12"></p>
+<!-- PLACEHOLDER REVIEWS -->
+<div *ngIf="isFetchingReviews() && reviews.length == 0; else showReviews">
+  <!-- Placeholder reviews large screen start -->
+  <div class="reviews-container rounded-1 px-lg-4 py-3 d-none d-lg-block">
+    <div
+      *ngFor="let item of placeholderReviews"
+      class="mb-4 d-flex flex-start align-items-start"
+    >
+      <img
+        class="rounded-circle shadow-1-strong me-3"
+        src="../../../assets/images/placeholder/placeholder1.png"
+        alt="avatar"
+        width="60"
+        height="60"
+      />
+      <div class="px-2 card w-100">
+        <div class="card-body placeholder-wave">
+          <h5 class="placeholder placeholder-lg col-8"></h5>
+
+          <p class="placeholder placeholder-lg col-6"></p>
+          <p class="placeholder col-12"></p>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <!-- Placeholder reviews large screen end-->
 
-<!-- Placeholder reviews end-->
+  <!-- Placeholder reviews small screen start-->
+  <div class="reviews-container rounded-1 px-lg-4 py-3 d-lg-none">
+    <div *ngFor="let item of placeholderReviews" class="card mb-4">
+      <div class="card-body">
+        <div class="d-flex flex-start align-items-center placeholder-wave">
+          <img
+            class="rounded-circle shadow-1-strong me-3"
+            src="../../../assets/images/placeholder/placeholder1.png"
+            alt="avatar"
+            width="60"
+            height="60"
+          />
+
+          <div class="w-100">
+            <h5 class="placeholder placeholder-lg col-6"></h5>
+
+            <p class="placeholder col-12"></p>
+          </div>
+        </div>
+
+        <div class="placeholader-wave py-2">
+          <p class="placeholder col-12"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Placeholder reviews small screen end-->
+</div>
+<!-- PLACEHOLDER REVIEWS -->
+
 <ng-template #showReviews>
   <section
     *ngIf="reviews().length > 0"
-    class="comments container-fluid reviews-container rounded-1 py-3 px-md-3 px-lg-4"
+    class="reviews-container rounded-1 py-3 px-md-3 px-lg-4"
   >
     <app-review-pagination></app-review-pagination>
   </section>

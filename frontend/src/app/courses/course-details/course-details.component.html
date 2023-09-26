@@ -59,11 +59,11 @@
   <!-- Placeholder Heading Small Screens Content Start -->
 
   <!-- Placeholder Heading Small Screens Content Start -->
-  <div class="w-100 pt-3 bg-dark pb-0 d-lg-none">
-    <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
+  <div class="container-fluid custom m-auto pt-3 bg-dark pb-0 d-lg-none">
+    <div class="row row-cols-1">
       <!-- Course Image -->
 
-      <div class="col-lg-4">
+      <div class="col">
         <img
           src="../../../assets/images/placeholder/placeholder1.png"
           alt="placeholder image"
@@ -71,7 +71,7 @@
         />
       </div>
 
-      <div class="col-lg-8 placeholder-glow">
+      <div class="col placeholder-glow">
         <div class="d-flex flex-column align-items-start mb-3 text-light">
           <!-- Course Details -->
 
@@ -94,85 +94,83 @@
 <ng-template #courseInfo>
   <!-- Course details heading for large screens start -->
   <div class="d-none d-lg-block container-fluid custom pt-3 pb-0 mt-5">
-    <div class="container-fluid">
-      <h2 class="display-4 fw-bold mb-0 py-2">{{ course.title }}</h2>
-      <div class="row row-cols-2">
-        <div
-          class="container-fluid col-9 bg-light row row-cols-1 row-cols-lg-2 p-3"
-        >
-          <!-- Course Image -->
+    <h2 class="display-4 fw-bold mb-0 py-2">{{ course.title }}</h2>
+    <div class="row row-cols-2">
+      <div
+        class="container-fluid col-9 bg-light row row-cols-1 row-cols-lg-2 p-3"
+      >
+        <!-- Course Image -->
 
-          <div class="col-lg-5">
-            <img
-              [src]="
-                course.imageUrl
-                  ? course.imageUrl
-                  : 'https://placehold.co/600x400?text=' + course.title[0]
-              "
-              [alt]="course.title + 'course image'"
-              class="img-fluid mb-3 w-100"
-            />
-          </div>
+        <div class="col-lg-5">
+          <img
+            [src]="
+              course.imageUrl
+                ? course.imageUrl
+                : 'https://placehold.co/600x400?text=' + course.title[0]
+            "
+            [alt]="course.title + 'course image'"
+            class="img-fluid mb-3 w-100"
+          />
+        </div>
 
-          <div class="col-lg-7">
-            <div class="d-flex flex-column align-items-start mb-3 text-dark">
-              <!-- Course Details -->
+        <div class="col-lg-7">
+          <div class="d-flex flex-column align-items-start mb-3 text-dark">
+            <!-- Course Details -->
 
-              <p class="mb-3">{{ course.shortDescription }}</p>
+            <p class="mb-3">{{ course.shortDescription }}</p>
 
-              <div
-                class="d-flex flex-column justify-content-start flex-lg-row flex-wrap"
+            <div
+              class="d-flex flex-column justify-content-start flex-lg-row flex-wrap"
+            >
+              <a href="" class="btn custom text-light me-2 mb-2"
+                >Book course now</a
               >
-                <a href="" class="btn custom text-light me-2 mb-2"
-                  >Book course now</a
-                >
-                <a
-                  *ngIf="isAdmin()"
-                  (click)="updateCourse(course['_id'])"
-                  class="btn btn-primary me-2 mb-2"
-                  >Edit</a
-                >
-                <a
-                  *ngIf="isAdmin()"
-                  (click)="openModal(course['_id'], course.imageUrl)"
-                  class="btn btn-danger mb-2"
-                  >Delete</a
-                >
-              </div>
+              <a
+                *ngIf="isAdmin()"
+                (click)="updateCourse(course['_id'])"
+                class="btn btn-primary me-2 mb-2"
+                >Edit</a
+              >
+              <a
+                *ngIf="isAdmin()"
+                (click)="openModal(course['_id'], course.imageUrl)"
+                class="btn btn-danger mb-2"
+                >Delete</a
+              >
             </div>
           </div>
         </div>
+      </div>
+      <div
+        class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light px-3 py-2"
+      >
         <div
-          class="col-3 d-flex flex-column justify-content-start align-items center bg-dark text-light px-3 py-2"
+          class="d-flex flex-column align-items-start justify-content-center mb-3"
         >
-          <div
-            class="d-flex flex-column align-items-start justify-content-center mb-3"
-          >
-            <p class="fw-bold fs-4 mb-0">Rating</p>
-            <div class="d-flex justify-content-start align-items-center mb-n3">
-              <p class="course-rating fw-bold">{{ course.rating }}</p>
-              <!-- Move the stars a bit to the left if the course does have have any reviews -->
-              <star-rating
-                [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
-                class="title-star-rating"
-                [readOnly]="true"
-                [starType]="'svg'"
-                [size]="'medium'"
-                [rating]="course.rating"
-                [showHalfStars]="true"
-              ></star-rating>
+          <p class="fw-bold fs-4 mb-0">Rating</p>
+          <div class="d-flex justify-content-start align-items-center mb-n3">
+            <p class="course-rating fw-bold">{{ course.rating }}</p>
+            <!-- Move the stars a bit to the left if the course does have have any reviews -->
+            <star-rating
+              [ngClass]="{ 'course-stars-left': course.reviews.length == 0 }"
+              class="title-star-rating"
+              [readOnly]="true"
+              [starType]="'svg'"
+              [size]="'medium'"
+              [rating]="course.rating"
+              [showHalfStars]="true"
+            ></star-rating>
 
-              <p>({{ course.reviews.length }})</p>
-            </div>
+            <p>({{ course.reviews.length }})</p>
           </div>
-          <div
-            class="d-flex flex-column align-items-start justify-content-center"
-          >
-            <p class="fw-bold fs-4 mb-0">Price</p>
-            <p>
-              {{ course.price | currency : "ZAR" : "R" }}
-            </p>
-          </div>
+        </div>
+        <div
+          class="d-flex flex-column align-items-start justify-content-center"
+        >
+          <p class="fw-bold fs-4 mb-0">Price</p>
+          <p>
+            {{ course.price | currency : "ZAR" : "R" }}
+          </p>
         </div>
       </div>
     </div>
@@ -180,11 +178,11 @@
   <!-- Course details heading for large screens end -->
 
   <!-- Course details heading for small screens start -->
-  <div class="w-100 d-lg-none bg-dark pt-3 pb-0">
-    <div class="container-fluid custom row row-cols-1 row-cols-lg-2">
+  <div class="container-fluid custom m-auto d-lg-none bg-dark pt-3 pb-0">
+    <div class="row row-cols-1">
       <!-- Course Image -->
 
-      <div class="col-lg-5">
+      <div class="col">
         <img
           [src]="
             course.imageUrl
@@ -196,7 +194,7 @@
         />
       </div>
 
-      <div class="col-lg-7">
+      <div class="col">
         <div class="d-flex flex-column align-items-start mb-3 text-light">
           <!-- Course Details -->
 
@@ -253,7 +251,7 @@
 
 <div
   *ngIf="!course && isFetchingCourse(); else courseDescription"
-  class="container-fluid custom mt-5 px-4"
+  class="container-fluid custom mt-5"
 >
   <div class="mb-3 placeholder-wave">
     <p class="h2 placeholder col-lg-4"></p>
@@ -277,7 +275,7 @@
 <!-- Course Description Placeholder End -->
 
 <ng-template #courseDescription>
-  <div class="container-fluid custom mt-3 px-4">
+  <div class="container-fluid custom mt-3">
     <!-- Course Description Start -->
 
     <div class="mb-3">

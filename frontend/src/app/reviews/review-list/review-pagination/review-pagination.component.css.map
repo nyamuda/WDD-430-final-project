@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../sass/_variables.scss","review-pagination.component.scss","review-pagination.component.css"],"names":[],"mappings":"AAAQ,2EAAA;AACA,sFAAA;AACA,iFAAA;ACAR;EACE,mBDEc;ECDd,kBAAA;EACA,kBAAA;EACA,WAAA;EACA,YAAA;EACA,gCAAA;ACEF;;ADAA;EACE,oBAAA;ACGF;;ADAA;EACE;IACE,oBAAA;ECGF;AACF","file":"review-pagination.component.css"}
