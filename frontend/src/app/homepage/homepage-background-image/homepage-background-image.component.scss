@@ -32,6 +32,26 @@
 .carousel-item.active {
   position: relative;
 }
+.main-title {
+  font-size: 2rem;
+}
+
+@media (min-width: 768px) {
+  .main-title {
+    font-size: 3.5rem;
+  }
+  .sentence {
+    font-size: 1.2rem;
+  }
+}
+@media (min-width: 992px) {
+  .main-title {
+    font-size: 4.5rem;
+  }
+  .sentence {
+    font-size: 1.5rem;
+  }
+}
 
 // .carousel-item::before {
 //   content: "";
