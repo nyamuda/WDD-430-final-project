@@ -4,13 +4,7 @@
   position: relative;
   z-index: 1;
 }
-.carousel-item {
-  // transition: transform 5s ease-in-out;
-}
-.carousel-fade .active.carousel-item-start,
-.carousel-fade .active.carousel-item-end {
-  transition: opacity 0s 5s;
-}
+
 .cards {
   position: relative;
   z-index: 2;
