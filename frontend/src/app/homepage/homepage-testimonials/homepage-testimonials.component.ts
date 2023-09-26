@@ -19,7 +19,7 @@ export class HomepageTestimonialsComponent implements OnInit {
       name: 'Peter Mbeki',
       position: 'Code 08 Student',
       imageUrl:
-        'https://storage.googleapis.com/drivingschool-7c02e.appspot.com/1693050552197-christopher-campbell-rDEOVtE7vOs-unsplash.jpg?GoogleAccessId=firebase-adminsdk-1cajy%40drivingschool-7c02e.iam.gserviceaccount.com&Expires=253402300799&Signature=rsh95NHi1Hwla5h0Wt%2BeOLvrm%2BgmzvHpH3A5kylxxQ2atdw4MPFx%2BM3b9NhXM5rHy%2FtrzQcpwSEAqtMpiVJCiGc%2FHp9emP2k1uTIwQwRKIEtsTMLm%2Bun5Mu8Zacrks7WX6lAbNTSvRrtJnUSmzv7l09Rpqjsk3Kwe2v2IzhsDqOl2f58fpUe83w1Px22ataNMFGwYIPQqfWiwEH0b8%2Bni0Zlby7pc%2FEt23F1TPxsgSNW61IbGPMf%2BGway%2FcxL4ywVKUzpkvpsxIDsQiNafz6AL7OBN%2BPXE87FoqfnCmci2quaQBmt%2F9YKrOpphQowrJ2z95Z8h9Ylx3ilKkxDIB0yA%3D%3D',
+        'https://storage.googleapis.com/drivingschool-7c02e.appspot.com/1693050552197-christopher-campbell-rDEOVtE7vOs-unsplash.jpg?GoogleAccessId=firebase-adminsdk-1cajy%40drivingschool-7c02e.iam.gserviceaccount.com&Expires=253402300799&Signature=rsh95NHi1Hwla5h0Wt%2BeOLvrm%2BgmzvHpH3A5kylxxQ2atdw4MPFx%2BM3b9NhXM5rHy%2FtrzQcpwSEAqtMpiVJCiGc%2FHp9emP2k1uTIwQwRKIEtsTMLm%2Bun5Mu8Zacrks7WX6lAbNTSvRrtJnUSmzv7l09Rpqjsk3Kwe2v2IzhsDqOl2f58fpUe83w1Px22ataNMFGwYIPQqfWiwEH0b8%2Bni0Zlby7pc%2FEt23F1TPxsgSNW61IbGPMf%2BGway%2FcxL4ywVKUzpkvpsxIDsQiNafz6AL7OBN%2BPXE87FoqfnCmci2quaQBmt%2F9YKrOpphQowrJ2z95Z8h9Ylx3ilKkxDIB0yA%3D%3D&fit=crop&w=1470&q=80',
       content: `Lorem ipsum dolor sit
       amet, consectetur adipisicing elit. Quod eos id officiis hic
       tenetur quae quaerat ad velit ab hic tenetur.`,
