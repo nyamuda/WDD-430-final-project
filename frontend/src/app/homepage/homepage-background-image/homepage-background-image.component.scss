@@ -33,26 +33,26 @@
   position: relative;
 }
 
-.carousel-item::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-}
+// .carousel-item::before {
+//   content: "";
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   background-color: rgba(0, 0, 0, 0.5);
+// }
 
 .carousel-item.active img {
   object-fit: cover;
 }
 
 /* Adding the dark overlay on the images because of the text */
-@media (min-width: 728px) {
-  .carousel-item::before {
-    background-color: rgba(0, 0, 0, 0.6);
-  }
-}
+// @media (min-width: 728px) {
+//   .carousel-item::before {
+//     background-color: rgba(0, 0, 0, 0.6);
+//   }
+// }
 
 /* The animations for the captions - END */
 
