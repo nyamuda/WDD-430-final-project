@@ -11,3 +11,6 @@
   background-size: cover !important; /* Maintain the aspect ratio of the background image */
   object-fit: cover !important;
 }
+.small-screen {
+  object-fit: cover;
+}
