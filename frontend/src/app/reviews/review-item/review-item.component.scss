@@ -8,8 +8,7 @@
   color: #007bff !important; /* Apply a blueish color on hover */
 }
 .reviewer-image {
-  background-size: cover !important; /* Maintain the aspect ratio of the background image */
-  object-fit: cover !important;
+  object-fit: cover;
 }
 .small-screen {
   object-fit: cover;
