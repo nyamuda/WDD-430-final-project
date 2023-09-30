@@ -11,9 +11,9 @@ export class HomepageStatisticsComponent {
   params: NgxAnimatedCounterParams[] = [
     {
       start: 0,
-      end: 1000,
+      end: 200,
       interval: 50,
-      increment: 20,
+      increment: 5,
     },
     {
       start: 0,
