@@ -34,11 +34,13 @@ app.use('/contact', ContactRouter);
 app.use('/oauth', OauthRouter);
 
 // Serve static files from the './dist/driving-school/' directory
-// app.use(express.static(path.join(__dirname, './dist/driving-school/')));
+app.use(express.static(path.join(__dirname, '../frontend/dist/')));
 
 // // Catch-all route for Angular application
-// app.get('*', (req: Request, res: Response) => {
-//   res.sendFile(path.join(__dirname, './dist/driving-school/index.html'));
-// });
+app.get('*', (req: Request, res: Response) => {
+  res.sendFile(
+    path.join(__dirname, '../frontend/dist/driving-school/index.html')
+  );
+});
 
 export default app;
