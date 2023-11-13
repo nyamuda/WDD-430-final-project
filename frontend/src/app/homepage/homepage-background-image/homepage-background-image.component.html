@@ -4,7 +4,6 @@
     class="carousel"
     data-bs-ride="carousel"
     [controls]="true"
-    [animation]="'fade'"
   >
     <mdb-carousel-item class="carousel-item">
       <div class="bg-image">
@@ -25,7 +24,9 @@
           <p class="sentence container d-none d-md-block">
             Begin your journey toward becoming a skilled and responsible driver.
           </p>
-          <div class="d-flex flex-wrap justify-content-center">
+          <div
+            class="d-flex flex-column flex-md-row flex-wrap justify-content-center btn-container"
+          >
             <a
               class="btn custom text-light btn-lg m-2 px-3 px-md-5 py-md-3"
               routerLink="/booking"
@@ -61,7 +62,7 @@
             experienced experts.
           </p>
           <div
-            class="d-flex flex-wrap justify-content-center align-items-center"
+            class="d-flex flex-column flex-md-row flex-wrap justify-content-center btn-container"
           >
             <a
               class="btn custom text-light btn-lg m-2 px-3 px-md-5 py-md-3"
@@ -97,7 +98,9 @@
           <p class="sentence container d-none d-md-block">
             We lead you from learner to licensed driver.
           </p>
-          <div class="d-flex flex-wrap justify-content-center">
+          <div
+            class="d-flex flex-column flex-md-row flex-wrap justify-content-center btn-container"
+          >
             <a
               class="btn custom text-light btn-lg m-2 px-3 px-md-5 py-md-3"
               routerLink="/booking"
