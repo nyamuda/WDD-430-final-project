@@ -5,13 +5,13 @@
       <div class="d-flex justify-content-center">
         <img
           class="shadow-1-strong me-3 small-screen img-fluid reviewer-image"
-          style="border-radius: 8px"
+          style="border-radius: 4px"
           [src]="
             review.userId.imageUrl
               ? review.userId.imageUrl
               : placeholderImageUrl()
           "
-          alt="User picture"
+          [alt]="review.userId.name"
           width="75"
           height="75"
         />
@@ -64,7 +64,7 @@
     [src]="
       review.userId.imageUrl ? review.userId.imageUrl : placeholderImageUrl()
     "
-    alt="User picture"
+    [alt]="review.userId.name"
     width="80"
     height="80"
   />
