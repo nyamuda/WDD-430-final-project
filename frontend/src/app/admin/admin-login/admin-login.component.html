@@ -1,0 +1,77 @@
+<div class="container mt-5">
+  <p class="heading-line m-auto rounded"></p>
+  <p class="display-6 text-uppercase text-center">Admin</p>
+  <form [formGroup]="formGroup" class="needs-validation" novalidate>
+    <!-- Email input -->
+    <div class="form-floating mb-3">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup.get('email').invalid && formGroup.get('email').touched
+        }"
+        type="email"
+        id="loginEmail"
+        class="form-control"
+        formControlName="email"
+        placeholder="name@example.com"
+      />
+      <label class="form-label" for="loginEmail">Email</label>
+      <div
+        *ngIf="formGroup.get('email').invalid && formGroup.get('email').touched"
+        class="invalid-feedback"
+      >
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-floating mb-3">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            formGroup.get('password').invalid &&
+            formGroup.get('password').touched
+        }"
+        type="password"
+        id="password"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <label class="form-label" for="password">Password</label>
+      <div
+        *ngIf="
+          formGroup.get('password').invalid && formGroup.get('password').touched
+        "
+        class="invalid-feedback"
+      >
+        Your password should have a minimum length of 8 characters and include a
+        combination of letters, and numbers.
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <button
+      [ngClass]="{ disabled: formGroup.invalid }"
+      *ngIf="!isLoggingIn(); else loadingBtn"
+      (click)="submitForm()"
+      type="submit"
+      class="btn custom text-light btn-block mb-3"
+    >
+      Log in
+    </button>
+    <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+    <!-- Loading button -->
+    <ng-template #loadingBtn>
+      <button class="btn custom text-light btn-block" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <span class="ms-1">Please wait...</span>
+      </button>
+    </ng-template>
+  </form>
+</div>

@@ -80,6 +80,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContactUsItemComponent } from './contact-us/contact-us-item/contact-us-item.component';
 import { OauthComponent } from './login/oauth/oauth.component';
 import { TestimonialItemComponent } from './homepage/homepage-testimonials/testimonial-item/testimonial-item.component';
+import { AdminComponent } from './admin/admin.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -128,6 +130,8 @@ import { TestimonialItemComponent } from './homepage/homepage-testimonials/testi
     ContactUsItemComponent,
     OauthComponent,
     TestimonialItemComponent,
+    AdminComponent,
+    AdminLoginComponent,
   ],
   imports: [
     BrowserModule,

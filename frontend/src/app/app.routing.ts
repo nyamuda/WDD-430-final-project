@@ -23,9 +23,11 @@ import { UsersAccountEditComponent } from './users/users-account-edit/users-acco
 import { GalleryComponent } from './gallery/gallery.component';
 import { BookingComponent } from './booking/booking.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'admin', redirectTo: 'admin/login', pathMatch: 'full' },
 
   { path: 'home', component: HomepageComponent },
 
@@ -65,6 +67,10 @@ export const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent,
+  },
+  {
+    path: 'admin/login',
+    component: AdminLoginComponent,
   },
   {
     path: 'login/oauth/google/callback',
