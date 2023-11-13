@@ -9,3 +9,18 @@
 .bg-image {
   height: 10rem;
 }
+// .car-illustration {
+//   width: 60rem;
+// }
+
+// @media (min-width: 576px) {
+//   .car-illustration {
+//     width: 60rem;
+//   }
+// }
+
+@media (min-width: 768px) {
+  .car-illustration {
+    width: 50rem;
+  }
+}

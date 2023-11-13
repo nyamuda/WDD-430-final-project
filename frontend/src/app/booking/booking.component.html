@@ -10,12 +10,30 @@
     attempt.
   </p>
   <div class="row row-cols-1 row-cols-md-2">
-    <div class="col-md-8">
+    <!-- Image for small screens start -->
+    <div class="d-md-none col-md-6 d-flex align-items-center">
+      <img
+        src="../../assets/images/booking.png"
+        class="img-fluid"
+        alt="Car image"
+      />
+    </div>
+    <!-- Image for small screens end -->
+
+    <!-- Contact form start -->
+    <div class="col-md-6">
       <app-booking-item></app-booking-item>
     </div>
+    <!-- Contact form end -->
 
-    <div class="col-md-4 d-flex align-items-center">
-      <img src="" alt="" class="img-fluid" />
+    <!--Image for large screens start -->
+    <div class="d-none d-md-block col-md-6 d-md-flex align-items-center">
+      <img
+        src="../../assets/images/booking.png"
+        class="img-fluid"
+        alt="Car image"
+      />
     </div>
+    <!--Image for large screens end -->
   </div>
 </div>

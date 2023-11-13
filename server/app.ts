@@ -37,10 +37,8 @@ app.use('/oauth', OauthRouter);
 // app.use(express.static(path.join(__dirname, './dist/driving-school/')));
 
 // // Catch-all route for Angular application
-// app.get('*', (req: Request, res: Response) => {
-//   res.sendFile(path.join(__dirname, './dist/driving-school/index.html'), {
-//     root: path.join(__dirname, './dist/driving-school/'),
-//   });
-// });
+app.get('*', (req: Request, res: Response) => {
+  res.send('Welcome to Lody School of Driving API');
+});
 
 export default app;
