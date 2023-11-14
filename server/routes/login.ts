@@ -8,4 +8,8 @@ router.route('/').post((req: Request, res: Response) => {
   LoginController.loginUser(req, res);
 });
 
+router.route('/admin').post((req: Request, res: Response) => {
+  LoginController.loginAdmin(req, res);
+});
+
 export { router as LoginRouter };

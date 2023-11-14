@@ -30,7 +30,7 @@ export class AdminService {
       email: newUser.email.trim(),
       password: newUser.password.trim(),
     };
-    const url = `${this.appService.apiUrl}/admin/login`;
+    const url = `${this.appService.apiUrl}/login/admin`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {

@@ -24,6 +24,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { BookingComponent } from './booking/booking.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -68,6 +69,11 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
   },
+  {
+    path: 'dashboard',
+    component: AdminDashboardComponent,
+  },
+
   {
     path: 'admin/login',
     component: AdminLoginComponent,

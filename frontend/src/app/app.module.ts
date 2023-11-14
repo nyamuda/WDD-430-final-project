@@ -82,6 +82,7 @@ import { OauthComponent } from './login/oauth/oauth.component';
 import { TestimonialItemComponent } from './homepage/homepage-testimonials/testimonial-item/testimonial-item.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
+import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -132,6 +133,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
     TestimonialItemComponent,
     AdminComponent,
     AdminLoginComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,
