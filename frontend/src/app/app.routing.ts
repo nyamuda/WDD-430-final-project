@@ -72,6 +72,7 @@ export const routes: Routes = [
   {
     path: 'dashboard',
     component: AdminDashboardComponent,
+    canActivate: [adminAuthGuard],
   },
 
   {
