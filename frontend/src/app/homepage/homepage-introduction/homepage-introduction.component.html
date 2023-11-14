@@ -37,9 +37,13 @@
     </div>
     <div class="col-lg-5">
       <img
-        src="../../../assets/images/students/img_01 - Copy.jpg"
+        [src]="
+          '../../../assets/images/illustrations/illustration_' +
+          imageNumber +
+          '.png'
+        "
         alt=""
-        class="img-fluid rounded img-thumbnail mb-4"
+        class="img-fluid rounded mb-4"
       />
 
       <div
