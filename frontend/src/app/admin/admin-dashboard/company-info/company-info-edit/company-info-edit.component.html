@@ -13,7 +13,7 @@
       class="form-control form-control-lg"
       formControlName="title"
     />
-    <label mdbLabel class="form-label" for="title">Title</label>
+    <label mdbLabel class="form-label" for="title">Title </label>
     <mdb-error
       class="mt-1"
       *ngIf="formGroup.get('title').invalid && formGroup.get('title').touched"
@@ -53,12 +53,23 @@
       Cancel
     </button>
     <button
+      *ngIf="editMode; else elseBlock"
       [ngClass]="{ disabled: formGroup.invalid }"
       (click)="confirmed()"
       type="button"
       class="btn custom text-light"
     >
-      Add
+      Update
     </button>
+    <ng-template #elseBlock>
+      <button
+        [ngClass]="{ disabled: formGroup.invalid }"
+        (click)="confirmed()"
+        type="button"
+        class="btn custom text-light"
+      >
+        Add
+      </button>
+    </ng-template>
   </div>
 </form>

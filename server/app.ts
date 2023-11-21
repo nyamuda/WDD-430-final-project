@@ -14,6 +14,7 @@ import {
   BookingRouter,
   ContactRouter,
   OauthRouter,
+  CompanyInfoRouter,
 } from './routes';
 
 const app = express();
@@ -32,6 +33,7 @@ app.use('/gallery', GalleryRouter);
 app.use('/booking', BookingRouter);
 app.use('/contact', ContactRouter);
 app.use('/oauth', OauthRouter);
+app.use('/company-info', CompanyInfoRouter);
 
 // Serve static files from the './dist/driving-school/' directory
 // app.use(express.static(path.join(__dirname, './dist/driving-school/')));

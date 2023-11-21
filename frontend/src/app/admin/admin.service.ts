@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
 import { AppService } from '../app.service';
+import { Observable } from 'rxjs';
+import { CompanyInfo } from './admin-dashboard/company-info/company-info.model';
 
 @Injectable({
   providedIn: 'root',
@@ -15,6 +17,9 @@ export class AdminService {
   //redirect URL if log in is a success
   //default is the homepage
   redirectUrl: WritableSignal<string> = signal('dashboard');
+  companyInfoList: WritableSignal<CompanyInfo[]> = signal(
+    new Array<CompanyInfo>()
+  );
 
   constructor(
     private http: HttpClient,
@@ -63,5 +68,20 @@ export class AdminService {
         this.appService.showFailureToast(errorMessage, 'Login failed');
       }
     );
+  }
+
+  //get the company information by id
+  getCompanyInfoById(id: string): Observable<CompanyInfo> {
+    const url = `${this.appService.apiUrl}/company-info/${id}`;
+    return this.http.get<CompanyInfo>(url);
+  }
+
+  //get all the company information
+  getCompanyInformation(): void {
+    const url = `${this.appService.apiUrl}/company-info/`;
+
+    this.http.get<CompanyInfo[]>(url).subscribe((info: CompanyInfo[]) => {
+      this.companyInfoList.set(info);
+    });
   }
 }

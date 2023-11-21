@@ -1,29 +1,34 @@
-<table class="table align-middle mb-0 bg-white">
-  <thead class="bg-light">
-    <tr>
-      <th>Info</th>
-      <th>Value</th>
-      <th>Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p class="fw-bold mb-1">John Doe</p>
-      </td>
-      <td>
-        <p class="fw-normal mb-1">10</p>
-      </td>
+<div>
+  <div class="d-flex justify-content-end my-3">
+    <a class="btn custom text-light" (click)="editInfo('10')">Add</a>
+  </div>
+  <table class="table align-middle mb-0 bg-white">
+    <thead class="bg-light">
+      <tr>
+        <th>Info</th>
+        <th>Value</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let info of companyInfoList()">
+        <td>
+          <p class="fw-bold mb-1">{{ info.title }}</p>
+        </td>
+        <td>
+          <p class="fw-normal mb-1">{{ info.value }}</p>
+        </td>
 
-      <td>
-        <div class="d-flex justify-content-start align-items-center">
-          <i
-            (click)="editInfo('hello')"
-            class="fas fa-pen fa-lg me-3 action-icon"
-          ></i>
-          <i class="fas fa-trash fa-lg ms-3 action-icon"></i>
-        </div>
-      </td>
-    </tr>
-  </tbody>
-</table>
+        <td>
+          <div class="d-flex justify-content-start align-items-center">
+            <i
+              (click)="editInfo(info.id)"
+              class="fas fa-pen fa-lg me-3 action-icon"
+            ></i>
+            <i class="fas fa-trash fa-lg ms-3 action-icon"></i>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
