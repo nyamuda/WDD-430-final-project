@@ -44,7 +44,10 @@
   </mdb-form-control>
 
   <!-- Submit button -->
-  <div class="modal-footer bg-light">
+  <div
+    *ngIf="isProcessingRequest; else showLoader"
+    class="modal-footer bg-light"
+  >
     <button
       type="button"
       class="btn btn-secondary text-dark"
@@ -55,7 +58,7 @@
     <button
       *ngIf="editMode; else elseBlock"
       [ngClass]="{ disabled: formGroup.invalid }"
-      (click)="confirmed()"
+      (click)="submit()"
       type="button"
       class="btn custom text-light"
     >
@@ -64,7 +67,7 @@
     <ng-template #elseBlock>
       <button
         [ngClass]="{ disabled: formGroup.invalid }"
-        (click)="confirmed()"
+        (click)="submit()"
         type="button"
         class="btn custom text-light"
       >
@@ -72,4 +75,19 @@
       </button>
     </ng-template>
   </div>
+
+  <ng-template #showLoader>
+    <!-- Show a loader during a CRUD REQUEST -->
+    <ng-template #showLoader>
+      <div class="d-flex align-items-center">
+        <strong class="fs-5">Please wait...</strong>
+        <div
+          style="width: 3rem; height: 3rem"
+          class="spinner-border ms-auto"
+          role="status"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </ng-template>
+  </ng-template>
 </form>

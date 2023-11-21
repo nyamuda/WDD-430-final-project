@@ -66,7 +66,7 @@ export class CoursesService {
       this.fileService.uploadImage().subscribe((imageUrl: string) => {
         //And then store the course to the database
         //together with the image URL
-        const url = '${this.appService.apiUrl}/courses';
+        const url = `${this.appService.apiUrl}/courses`;
         const headers = this.headers();
         let courseDto = {
           title: newCourse.title,

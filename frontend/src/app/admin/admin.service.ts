@@ -17,15 +17,13 @@ export class AdminService {
   //redirect URL if log in is a success
   //default is the homepage
   redirectUrl: WritableSignal<string> = signal('dashboard');
-  companyInfoList: WritableSignal<CompanyInfo[]> = signal(
-    new Array<CompanyInfo>()
-  );
+  
 
   constructor(
     private http: HttpClient,
     private router: Router,
     private userService: UsersService,
-    private appService: AppService
+    private appService: AppService,
   ) {}
 
   login(newUser: User) {
@@ -70,18 +68,5 @@ export class AdminService {
     );
   }
 
-  //get the company information by id
-  getCompanyInfoById(id: string): Observable<CompanyInfo> {
-    const url = `${this.appService.apiUrl}/company-info/${id}`;
-    return this.http.get<CompanyInfo>(url);
-  }
-
-  //get all the company information
-  getCompanyInformation(): void {
-    const url = `${this.appService.apiUrl}/company-info/`;
-
-    this.http.get<CompanyInfo[]>(url).subscribe((info: CompanyInfo[]) => {
-      this.companyInfoList.set(info);
-    });
-  }
+  
 }

@@ -16,6 +16,9 @@ router
 
 router
   .route('/:id')
+  .get((req: Request, res: Response) => {
+    CompanyInfoController.getInfoById(req, res);
+  })
   .put(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     CompanyInfoController.updateInfo(req, res);
   })

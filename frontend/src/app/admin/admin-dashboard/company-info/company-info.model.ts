@@ -3,15 +3,17 @@ export class CompanyInfo {
   private _title: string;
   private _value: number;
 
+  constructor() {}
+
   get id(): string {
-    return this.id;
+    return this._id;
   }
   set id(id: string) {
     this._id = id;
   }
 
   get title(): string {
-    return this.title;
+    return this._title;
   }
   set title(title: string) {
     this._title = title;

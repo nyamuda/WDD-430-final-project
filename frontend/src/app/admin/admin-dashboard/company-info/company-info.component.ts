@@ -1,8 +1,9 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
 import { CompanyInfoEditComponent } from './company-info-edit/company-info-edit.component';
-import { AdminService } from '../../admin.service';
+
 import { CompanyInfo } from './company-info.model';
+import { CompanyInfoService } from './company-info.service';
 
 @Component({
   selector: 'app-company-info',
@@ -14,11 +15,11 @@ export class CompanyInfoComponent implements OnInit {
 
   constructor(
     private modalService: MdbModalService,
-    private adminService: AdminService
+    private companyInfoService: CompanyInfoService
   ) {}
 
   ngOnInit(): void {
-    this.adminService.getCompanyInformation();
+    this.companyInfoService.getCompanyInformation();
   }
 
   editInfo(id: string) {
@@ -30,6 +31,7 @@ export class CompanyInfoComponent implements OnInit {
         editMode: true,
       },
     });
+    this.companyInfoService.closeModal.next(false);
   }
 
   addInfo() {
@@ -40,9 +42,10 @@ export class CompanyInfoComponent implements OnInit {
         editMode: false,
       },
     });
+    this.companyInfoService.closeModal.next(false);
   }
 
   companyInfoList: Signal<CompanyInfo[]> = computed(() =>
-    this.adminService.companyInfoList()
+    this.companyInfoService.companyInfoList()
   );
 }

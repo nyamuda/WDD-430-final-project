@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
-import { CompanyInfo } from 'models/CompanyInfo';
+import { CompanyInfo } from '../models/CompanyInfo';
 
 export class CompanyInfoController {
   // Create a new info
@@ -19,7 +19,7 @@ export class CompanyInfoController {
     let info = {
       title: req.body.title,
 
-      price: req.body.value,
+      value: req.body.value,
     };
 
     // Post request
@@ -89,7 +89,7 @@ export class CompanyInfoController {
     let info = {
       title: req.body.title,
 
-      price: req.body.value,
+      value: req.body.value,
     };
 
     // PUT request
