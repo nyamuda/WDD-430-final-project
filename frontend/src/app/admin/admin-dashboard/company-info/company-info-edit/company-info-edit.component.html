@@ -1,0 +1,64 @@
+<form [formGroup]="formGroup" class="needs-validation p-4" novalidate>
+  <!-- Title input -->
+  <mdb-form-control class="mb-4">
+    <input
+      mdbInput
+      mdbValidate
+      [ngClass]="{
+        'is-invalid':
+          formGroup.get('title').invalid && formGroup.get('title').touched
+      }"
+      type="text"
+      id="title"
+      class="form-control form-control-lg"
+      formControlName="title"
+    />
+    <label mdbLabel class="form-label" for="title">Title</label>
+    <mdb-error
+      class="mt-1"
+      *ngIf="formGroup.get('title').invalid && formGroup.get('title').touched"
+      ><i class="fas fa-exclamation-triangle"></i> Please enter the title.
+    </mdb-error>
+  </mdb-form-control>
+
+  <!-- Value input -->
+  <mdb-form-control class="mb-4">
+    <input
+      mdbInput
+      [ngClass]="{
+        'is-invalid':
+          formGroup.get('value').invalid && formGroup.get('value').touched
+      }"
+      mdbValidate
+      type="number"
+      id="value"
+      class="form-control form-control-lg"
+      formControlName="value"
+    />
+    <label mdbLabel class="form-label" for="value">Value</label>
+    <mdb-error
+      class="mt-1"
+      *ngIf="formGroup.get('value').invalid && formGroup.get('value').touched"
+      ><i class="fas fa-exclamation-triangle"></i> Please enter the value.
+    </mdb-error>
+  </mdb-form-control>
+
+  <!-- Submit button -->
+  <div class="modal-footer bg-light">
+    <button
+      type="button"
+      class="btn btn-secondary text-dark"
+      (click)="modalRef.close()"
+    >
+      Cancel
+    </button>
+    <button
+      [ngClass]="{ disabled: formGroup.invalid }"
+      (click)="confirmed()"
+      type="button"
+      class="btn custom text-light"
+    >
+      Add
+    </button>
+  </div>
+</form>

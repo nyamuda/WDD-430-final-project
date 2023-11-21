@@ -34,6 +34,8 @@ export class GalleryDeleteComponent {
   openModal(id: string, imageUrl: string) {
     this.modalRef = this.modalService.open(ConfirmationModalComponent, {
       modalClass: 'modal-dialog-centered',
+
+      //data to pass to the modal
       data: {
         title: 'Please confirm deletion',
         message: 'Do you wish to proceed with deleting this image?',

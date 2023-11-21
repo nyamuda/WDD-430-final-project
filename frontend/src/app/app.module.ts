@@ -83,6 +83,8 @@ import { TestimonialItemComponent } from './homepage/homepage-testimonials/testi
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
+import { CompanyInfoComponent } from './admin/admin-dashboard/company-info/company-info.component';
+import { CompanyInfoEditComponent } from './admin/admin-dashboard/company-info/company-info-edit/company-info-edit.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +136,8 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
     AdminComponent,
     AdminLoginComponent,
     AdminDashboardComponent,
+    CompanyInfoComponent,
+    CompanyInfoEditComponent,
   ],
   imports: [
     BrowserModule,
