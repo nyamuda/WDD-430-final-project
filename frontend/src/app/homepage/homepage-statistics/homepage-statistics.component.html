@@ -11,39 +11,13 @@
     style="background-color: rgba(0, 0, 0, 0.6)"
   >
     <div
+      *ngFor="let item of companyInfoList; index as i"
       class="col d-flex flex-column align-items-center justify-content-center mb-2 mb-md-0"
     >
       <p class="fs-2 fw-bold mb-n1 colored-title">
-        <ngx-animated-counter [params]="params[0]"></ngx-animated-counter>
+        <ngx-animated-counter [params]="params[i]"></ngx-animated-counter>
       </p>
-      <p>Active Students</p>
-      <p class="heading-line rounded"></p>
-    </div>
-    <div
-      class="col d-flex flex-column align-items-center justify-content-center mb-2 mb-md-0"
-    >
-      <p class="fs-2 fw-bold mb-n1 colored-title">
-        <ngx-animated-counter [params]="params[1]"></ngx-animated-counter>
-      </p>
-      <p>Licenses Issued</p>
-      <p class="heading-line rounded"></p>
-    </div>
-    <div
-      class="col d-flex flex-column align-items-center justify-content-center mb-2 mb-md-0"
-    >
-      <p class="fs-2 fw-bold mb-n1 colored-title">
-        <ngx-animated-counter [params]="params[2]"></ngx-animated-counter>
-      </p>
-      <p>Course Reviews</p>
-      <p class="heading-line rounded"></p>
-    </div>
-    <div
-      class="col d-flex flex-column align-items-center justify-content-center mb-2 mb-md-0"
-    >
-      <p class="fs-2 fw-bold mb-n1 colored-title">
-        <ngx-animated-counter [params]="params[3]"></ngx-animated-counter>
-      </p>
-      <p>Years on the Market</p>
+      <p>{{ item.title }}</p>
       <p class="heading-line rounded"></p>
     </div>
   </div>

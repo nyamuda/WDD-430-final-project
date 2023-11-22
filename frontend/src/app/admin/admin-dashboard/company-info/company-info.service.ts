@@ -26,6 +26,8 @@ export class CompanyInfoService {
     new Array<CompanyInfo>()
   );
 
+  companyInfoSubject = new BehaviorSubject<CompanyInfo[]>([]);
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -45,6 +47,7 @@ export class CompanyInfoService {
 
     this.http.get<CompanyInfo[]>(url).subscribe((info: CompanyInfo[]) => {
       this.companyInfoList.set(info);
+      this.companyInfoSubject.next(info);
     });
   }
 
