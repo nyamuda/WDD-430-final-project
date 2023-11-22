@@ -60,8 +60,25 @@ export class HomepageStatisticsComponent implements OnInit {
     const newArray = [];
     companyInfo.forEach((originalItem) => {
       const endValue = originalItem.value;
-      const intervalValue = this.getRandomInt(10, 50); // Random interval between 10 and 50
-      const incrementValue = this.getRandomInt(5, 20); // Random increment between 1 and 10
+      let intervalValue;
+      let incrementValue;
+
+      if (endValue > 1000) {
+        intervalValue = this.getRandomInt(10, 50);
+        incrementValue = this.getRandomInt(50, 100);
+      } else if (endValue > 500) {
+        intervalValue = this.getRandomInt(20, 50);
+        incrementValue = this.getRandomInt(10, 20);
+      } else if (endValue > 100) {
+        intervalValue = this.getRandomInt(60, 150);
+        incrementValue = this.getRandomInt(5, 20);
+      } else if (endValue > 50) {
+        intervalValue = this.getRandomInt(100, 200);
+        incrementValue = this.getRandomInt(1, 10);
+      } else {
+        intervalValue = this.getRandomInt(150, 300);
+        incrementValue = this.getRandomInt(1, 2);
+      }
 
       const animationParameters = {
         start: 0,

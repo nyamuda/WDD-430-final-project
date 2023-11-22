@@ -1,5 +1,8 @@
 <div>
-  <div class="d-flex justify-content-end my-3">
+  <div
+    *ngIf="companyInfoList().length < 4"
+    class="d-flex justify-content-end my-3"
+  >
     <a class="btn custom text-light" (click)="addInfo()">Add</a>
   </div>
   <table class="table align-middle mb-0 bg-white">
