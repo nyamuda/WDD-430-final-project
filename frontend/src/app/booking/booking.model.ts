@@ -6,6 +6,7 @@ export class Booking {
   private _address: string;
   private _phone: string;
   private _service: string;
+  private _createdAt: string;
 
   constructor() {}
 
@@ -63,5 +64,13 @@ export class Booking {
   }
   set service(value: string) {
     this._service = value;
+  }
+
+  // Getter and Setter for CreatedAt
+  get createdAt(): string {
+    return this._createdAt;
+  }
+  set createdAt(value: string) {
+    this._createdAt = value;
   }
 }

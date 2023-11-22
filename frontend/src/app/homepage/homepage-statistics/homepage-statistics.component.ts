@@ -30,11 +30,14 @@ export class HomepageStatisticsComponent implements OnInit {
 
     this.companyInfoService.companyInfoSubject.subscribe(
       (info: CompanyInfo[]) => {
+        //only the first 4 elements
+        let firstFourItems = info.slice(0, 4);
         //animation parameters
-        this.params = this.generateParametersForAnimation(info);
+        this.params = this.generateParametersForAnimation(firstFourItems);
 
         //list of company information
-        this.companyInfoList = info;
+
+        this.companyInfoList = firstFourItems;
       }
     );
 
@@ -70,7 +73,7 @@ export class HomepageStatisticsComponent implements OnInit {
         intervalValue = this.getRandomInt(20, 50);
         incrementValue = this.getRandomInt(10, 20);
       } else if (endValue > 100) {
-        intervalValue = this.getRandomInt(60, 150);
+        intervalValue = this.getRandomInt(30, 100);
         incrementValue = this.getRandomInt(5, 20);
       } else if (endValue > 50) {
         intervalValue = this.getRandomInt(100, 200);

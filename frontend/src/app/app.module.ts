@@ -85,6 +85,8 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { CompanyInfoComponent } from './admin/admin-dashboard/company-info/company-info.component';
 import { CompanyInfoEditComponent } from './admin/admin-dashboard/company-info/company-info-edit/company-info-edit.component';
+import { UserStatisticsComponent } from './admin/admin-dashboard/user-statistics/user-statistics.component';
+import { BarChartComponent } from './admin/admin-dashboard/user-statistics/bar-chart/bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -138,6 +140,8 @@ import { CompanyInfoEditComponent } from './admin/admin-dashboard/company-info/c
     AdminDashboardComponent,
     CompanyInfoComponent,
     CompanyInfoEditComponent,
+    UserStatisticsComponent,
+    BarChartComponent,
   ],
   imports: [
     BrowserModule,
