@@ -1,4 +1,5 @@
 <form [formGroup]="formGroup" class="needs-validation p-4" novalidate>
+  <p class="text-center display-6">Company Info</p>
   <!-- Title input -->
   <mdb-form-control class="mb-4">
     <input
@@ -15,7 +16,7 @@
     />
     <label mdbLabel class="form-label" for="title">Title </label>
     <mdb-error
-      class="mt-1"
+      class="mt-1 error-text"
       *ngIf="formGroup.get('title').invalid && formGroup.get('title').touched"
       ><i class="fas fa-exclamation-triangle"></i> Please enter the title.
     </mdb-error>
@@ -37,7 +38,7 @@
     />
     <label mdbLabel class="form-label" for="value">Value</label>
     <mdb-error
-      class="mt-1"
+      class="mt-1 error-text"
       *ngIf="formGroup.get('value').invalid && formGroup.get('value').touched"
       ><i class="fas fa-exclamation-triangle"></i> Please enter the value.
     </mdb-error>

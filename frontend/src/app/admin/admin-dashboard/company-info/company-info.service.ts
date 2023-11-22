@@ -124,19 +124,12 @@ export class CompanyInfoService {
 
   //DELETE
   deleteInfo(id: string) {
-    //show loader
-    this.isProcessingRequest.set(true);
-
     //then delete the course information
     const url = `${this.appService.apiUrl}/company-info/${id}`;
     let headers = this.headers();
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        //stop loader
-        this.isProcessingRequest.set(false);
-        //close the modal
-        this.closeModal.next(true);
         this.getCompanyInformation();
         this.appService.showSuccessToast(
           'The information has been deleted.',

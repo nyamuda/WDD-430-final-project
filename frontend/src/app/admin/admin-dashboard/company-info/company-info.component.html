@@ -25,7 +25,10 @@
               (click)="editInfo(info['_id'])"
               class="fas fa-pen fa-lg me-3 action-icon"
             ></i>
-            <i class="fas fa-trash fa-lg ms-3 action-icon"></i>
+            <i
+              (click)="deleteInfo(info['_id'])"
+              class="fas fa-trash fa-lg ms-3 action-icon"
+            ></i>
           </div>
         </td>
       </tr>

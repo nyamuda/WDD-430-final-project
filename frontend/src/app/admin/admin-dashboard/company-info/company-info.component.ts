@@ -4,6 +4,7 @@ import { CompanyInfoEditComponent } from './company-info-edit/company-info-edit.
 
 import { CompanyInfo } from './company-info.model';
 import { CompanyInfoService } from './company-info.service';
+import { ConfirmationModalComponent } from '../../../confirmation-modal/confirmation-modal.component';
 
 @Component({
   selector: 'app-company-info',
@@ -12,6 +13,7 @@ import { CompanyInfoService } from './company-info.service';
 })
 export class CompanyInfoComponent implements OnInit {
   modalRef: MdbModalRef<CompanyInfoEditComponent>;
+  confirmationModalRef: MdbModalRef<ConfirmationModalComponent>;
 
   constructor(
     private modalService: MdbModalService,
@@ -48,4 +50,28 @@ export class CompanyInfoComponent implements OnInit {
   companyInfoList: Signal<CompanyInfo[]> = computed(() =>
     this.companyInfoService.companyInfoList()
   );
+
+  //Delete company information
+  deleteInfo(id: string) {
+    this.confirmationModalRef = this.modalService.open(
+      ConfirmationModalComponent,
+      {
+        modalClass: 'modal-dialog-centered',
+
+        //data to pass to the modal
+        data: {
+          title: 'Please confirm deletion',
+          message: 'Do you wish to proceed with deleting this information?',
+          action: 'Delete',
+        },
+      }
+    );
+
+    //if the deletion has been confirmed
+    this.confirmationModalRef.onClose.subscribe((message) => {
+      if (message === 'confirmed') {
+        this.companyInfoService.deleteInfo(id);
+      }
+    });
+  }
 }
