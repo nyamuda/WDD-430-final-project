@@ -20,6 +20,8 @@ export class BarChartComponent implements AfterViewInit {
   @Input() data_2: bookingStatistic = { label: '', value: 0 };
   @Input() data_3: bookingStatistic = { label: '', value: 0 };
   @Input() data_4: bookingStatistic = { label: '', value: 0 };
+  @Input() backgroundColor: string[] = [];
+  
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -50,6 +52,7 @@ export class BarChartComponent implements AfterViewInit {
               this.data_3.value,
               this.data_4.value,
             ],
+            backgroundColor: this.backgroundColor,
             borderWidth: 1,
           },
         ],

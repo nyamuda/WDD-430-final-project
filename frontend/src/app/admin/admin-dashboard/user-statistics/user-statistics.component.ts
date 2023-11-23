@@ -40,6 +40,9 @@ export class UserStatisticsComponent implements OnInit {
     });
   }
 
+  //Background color
+  backgroundColor = (color: string): string[] => Array(4).fill(color);
+
   //Filter bookings based on specific time periods
   // Filter bookings based on specific time periods
   filterBookings(bookings: Booking[]) {

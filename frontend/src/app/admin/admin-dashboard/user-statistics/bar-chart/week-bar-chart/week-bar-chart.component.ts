@@ -59,10 +59,20 @@ export class WeekBarChartComponent {
               this.data_6.value,
               this.data_7.value,
             ],
+            backgroundColor: [
+              '#A445F5',
+              '#A445F5',
+              '#A445F5',
+              '#A445F5',
+              '#A445F5',
+              '#A445F5',
+              '#A445F5',
+            ],
             borderWidth: 1,
           },
         ],
       },
+
       options: {
         scales: {
           y: {
