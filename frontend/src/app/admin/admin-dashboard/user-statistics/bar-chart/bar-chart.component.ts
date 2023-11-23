@@ -18,9 +18,11 @@ import { Chart } from 'chart.js/auto';
 })
 export class BarChartComponent implements AfterViewInit {
   chart: any = [];
-  @ViewChild('canvas') chartCanvas: ElementRef;
-  @Input() data_1: bookingStatistic = { label: '', value: 0 };
+  @ViewChild('canvas', { static: true }) chartCanvas: ElementRef;
+  @Input() data_1: bookingStatistic = { label: '', value: 5 };
   @Input() data_2: bookingStatistic = { label: '', value: 0 };
+  @Input() data_3: bookingStatistic = { label: '', value: 0 };
+  @Input() data_4: bookingStatistic = { label: '', value: 0 };
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -36,11 +38,21 @@ export class BarChartComponent implements AfterViewInit {
     this.chart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: [this.data_1.label, this.data_2.label],
+        labels: [
+          this.data_1.label,
+          this.data_2.label,
+          this.data_3.label,
+          this.data_4.label,
+        ],
         datasets: [
           {
             label: 'No. of Bookings',
-            data: [this.data_1.value, this.data_2.value],
+            data: [
+              this.data_1.value,
+              this.data_2.value,
+              this.data_3.value,
+              this.data_4.value,
+            ],
             borderWidth: 1,
           },
         ],

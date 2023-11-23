@@ -1,40 +1,53 @@
-<div>
-  <h2>Booking Statistics</h2>
+<div class="container-fluid">
+  <p class="heading-line m-auto rounded"></p>
+  <p class="display-6 text-uppercase text-center">Bookings</p>
   <div>
-    <h3>This Week and Last Week</h3>
     <div class="row">
-      <div class="container col">
+      <div class="container col-md-6 mb-3">
+        <h3>Weeks</h3>
         <app-bar-chart
-          [data_1]="{ label: 'This Week', value: bookingsThisWeek }"
-          [data_2]="{ label: 'Last Week', value: bookingsLastWeek }"
+          *ngIf="
+            thisWeek !== undefined &&
+            lastWeek !== undefined &&
+            twoWeeksAgo !== undefined &&
+            threeWeeksAgo !== undefined
+          "
+          [data_1]="{ label: 'This Week', value: thisWeek }"
+          [data_2]="{ label: 'Last Week', value: lastWeek }"
+          [data_3]="{ label: 'Two Weeks Ago', value: twoWeeksAgo }"
+          [data_4]="{ label: 'Three Weeks Ago', value: threeWeeksAgo }"
         ></app-bar-chart>
       </div>
-      <div class="container col">
+      <div class="container col-md-6 mb-3">
+        <h3>Months</h3>
         <app-bar-chart
-          [data_1]="{ label: 'This Week', value: bookingsThisWeek }"
-          [data_2]="{ label: 'Last Week', value: bookingsLastWeek }"
+          *ngIf="
+            thisMonth !== undefined &&
+            lastMonth !== undefined &&
+            twoMonthsAgo !== undefined &&
+            threeMonthsAgo !== undefined
+          "
+          [data_1]="{ label: 'This Month', value: thisMonth }"
+          [data_2]="{ label: 'Last Month', value: lastMonth }"
+          [data_3]="{ label: 'Two Months Ago', value: twoMonthsAgo }"
+          [data_4]="{ label: 'Three Months Ago', value: threeMonthsAgo }"
+        ></app-bar-chart>
+      </div>
+      <div class="container col-md-6 mb-3">
+        <h3>Years</h3>
+        <app-bar-chart
+          *ngIf="
+            thisYear !== undefined &&
+            lastYear !== undefined &&
+            twoYearsAgo !== undefined &&
+            threeYearsAgo !== undefined
+          "
+          [data_1]="{ label: 'This Year', value: thisYear }"
+          [data_2]="{ label: 'Last Year', value: lastYear }"
+          [data_3]="{ label: 'Two Years Ago', value: twoYearsAgo }"
+          [data_4]="{ label: 'Three Years Ago', value: threeYearsAgo }"
         ></app-bar-chart>
       </div>
     </div>
-  </div>
-  <div>
-    <h3>Last Week</h3>
-    <p>{{ bookingsLastWeek }} bookings registered last week.</p>
-  </div>
-  <div>
-    <h3>This Month</h3>
-    <p>{{ bookingsThisMonth }} bookings registered this month.</p>
-  </div>
-  <div>
-    <h3>Last Month</h3>
-    <p>{{ bookingsLastMonth }} bookings registered last month.</p>
-  </div>
-  <div>
-    <h3>This Year</h3>
-    <p>{{ bookingsThisYear }} bookings registered this year.</p>
-  </div>
-  <div>
-    <h3>Last Year</h3>
-    <p>{{ bookingsLastYear }} bookings registered last year.</p>
   </div>
 </div>

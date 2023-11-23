@@ -1,11 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AppService } from 'src/app/app.service';
 import { Booking } from '../../../booking/booking.model';
 import { UsersService } from '../../../users/users.service';
-
 
 @Injectable({
   providedIn: 'root',
@@ -17,7 +16,6 @@ export class UserStatisticsService {
     private userService: UsersService,
     private appService: AppService
   ) {}
-
 
   //Get all bookings
   getBookings(): Observable<Booking[]> {
@@ -33,6 +31,4 @@ export class UserStatisticsService {
 
     return headers;
   }
-
- 
 }
