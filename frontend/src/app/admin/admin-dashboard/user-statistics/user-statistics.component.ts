@@ -36,7 +36,7 @@ export class UserStatisticsComponent implements OnInit {
       this.filterBookings(bookings);
       this.dailyBookings = this.filterBookingsByDay(bookings);
 
-      
+      console.log(bookings);
     });
   }
 
@@ -48,7 +48,7 @@ export class UserStatisticsComponent implements OnInit {
     // This week
     const thisWeekStart = today.startOf('week');
     this.thisWeek = bookings.filter((booking) =>
-      moment(booking.createdAt).isSame(thisWeekStart, 'day')
+      moment(booking.createdAt).isSameOrAfter(thisWeekStart, 'day')
     ).length;
 
     // Last week
@@ -83,7 +83,7 @@ export class UserStatisticsComponent implements OnInit {
     // This month
     const thisMonthStart = today.startOf('month');
     this.thisMonth = bookings.filter((booking) =>
-      moment(booking.createdAt).isSame(thisMonthStart, 'day')
+      moment(booking.createdAt).isSameOrAfter(thisMonthStart, 'day')
     ).length;
 
     // Last month
