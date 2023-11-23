@@ -2,11 +2,19 @@
   <h2>Booking Statistics</h2>
   <div>
     <h3>This Week and Last Week</h3>
-    <div class="">
-      <app-bar-chart
-        [data_1]="{ label: 'This Week', value: bookingsThisWeek }"
-        [data_2]="{ label: 'Last Week', value: bookingsLastWeek }"
-      ></app-bar-chart>
+    <div class="row">
+      <div class="container col">
+        <app-bar-chart
+          [data_1]="{ label: 'This Week', value: bookingsThisWeek }"
+          [data_2]="{ label: 'Last Week', value: bookingsLastWeek }"
+        ></app-bar-chart>
+      </div>
+      <div class="container col">
+        <app-bar-chart
+          [data_1]="{ label: 'This Week', value: bookingsThisWeek }"
+          [data_2]="{ label: 'Last Week', value: bookingsLastWeek }"
+        ></app-bar-chart>
+      </div>
     </div>
   </div>
   <div>
