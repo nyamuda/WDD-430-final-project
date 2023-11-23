@@ -87,6 +87,7 @@ import { CompanyInfoComponent } from './admin/admin-dashboard/company-info/compa
 import { CompanyInfoEditComponent } from './admin/admin-dashboard/company-info/company-info-edit/company-info-edit.component';
 import { UserStatisticsComponent } from './admin/admin-dashboard/user-statistics/user-statistics.component';
 import { BarChartComponent } from './admin/admin-dashboard/user-statistics/bar-chart/bar-chart.component';
+import { WeekBarChartComponent } from './admin/admin-dashboard/user-statistics/bar-chart/week-bar-chart/week-bar-chart.component';
 
 @NgModule({
   declarations: [
@@ -142,6 +143,7 @@ import { BarChartComponent } from './admin/admin-dashboard/user-statistics/bar-c
     CompanyInfoEditComponent,
     UserStatisticsComponent,
     BarChartComponent,
+    WeekBarChartComponent,
   ],
   imports: [
     BrowserModule,

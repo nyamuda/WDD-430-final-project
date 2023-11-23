@@ -9,6 +9,8 @@ import moment from 'moment';
   styleUrls: ['./user-statistics.component.scss'],
 })
 export class UserStatisticsComponent implements OnInit {
+  //Days
+  dailyBookings: dayStatistics;
   //Weeks
   thisWeek: number;
   lastWeek: number;
@@ -32,8 +34,9 @@ export class UserStatisticsComponent implements OnInit {
   ngOnInit(): void {
     this.statsService.getBookings().subscribe((bookings: Booking[]) => {
       this.filterBookings(bookings);
+      this.dailyBookings = this.filterBookingsByDay(bookings);
 
-      console.log(this.thisYear);
+      
     });
   }
 
@@ -147,4 +150,52 @@ export class UserStatisticsComponent implements OnInit {
       )
     ).length;
   }
+
+  //Filter bookings for each day of the current week
+  filterBookingsByDay(bookings: Booking[]): dayStatistics {
+    const today = moment();
+    const dayOne = today.clone().startOf('week'); // Sunday
+    const dayTwo = dayOne.clone().add(1, 'days'); // Monday
+    const dayThree = dayOne.clone().add(2, 'days'); // Tuesday
+    const dayFour = dayOne.clone().add(3, 'days'); // Wednesday
+    const dayFive = dayOne.clone().add(4, 'days'); // Thursday
+    const daySix = dayOne.clone().add(5, 'days'); // Friday
+    const daySeven = dayOne.clone().add(6, 'days'); // Saturday
+
+    const filteredBookings = {
+      dayOne: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(dayOne, 'day')
+      ).length,
+      dayTwo: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(dayTwo, 'day')
+      ).length,
+      dayThree: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(dayThree, 'day')
+      ).length,
+      dayFour: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(dayFour, 'day')
+      ).length,
+      dayFive: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(dayFive, 'day')
+      ).length,
+      daySix: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(daySix, 'day')
+      ).length,
+      daySeven: bookings.filter((booking) =>
+        moment(booking.createdAt).isSame(daySeven, 'day')
+      ).length,
+    };
+
+    return filteredBookings;
+  }
+}
+
+interface dayStatistics {
+  dayOne: number;
+  dayTwo: number;
+  dayThree: number;
+  dayFour: number;
+  dayFive: number;
+  daySix: number;
+  daySeven: number;
 }

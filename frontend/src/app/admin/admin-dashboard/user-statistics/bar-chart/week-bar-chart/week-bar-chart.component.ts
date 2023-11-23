@@ -9,17 +9,20 @@ import {
 import { Chart } from 'chart.js/auto';
 
 @Component({
-  selector: 'app-bar-chart',
-  templateUrl: './bar-chart.component.html',
-  styleUrls: ['./bar-chart.component.scss'],
+  selector: 'app-week-bar-chart',
+  templateUrl: './week-bar-chart.component.html',
+  styleUrls: ['./week-bar-chart.component.scss'],
 })
-export class BarChartComponent implements AfterViewInit {
+export class WeekBarChartComponent {
   chart: any = [];
-  @ViewChild('canvas', { static: true }) chartCanvas: ElementRef;
+  @ViewChild('weekCanvas', { static: true }) chartCanvas: ElementRef;
   @Input() data_1: bookingStatistic = { label: '', value: 0 };
   @Input() data_2: bookingStatistic = { label: '', value: 0 };
   @Input() data_3: bookingStatistic = { label: '', value: 0 };
   @Input() data_4: bookingStatistic = { label: '', value: 0 };
+  @Input() data_5: bookingStatistic = { label: '', value: 0 };
+  @Input() data_6: bookingStatistic = { label: '', value: 0 };
+  @Input() data_7: bookingStatistic = { label: '', value: 0 };
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -40,6 +43,9 @@ export class BarChartComponent implements AfterViewInit {
           this.data_2.label,
           this.data_3.label,
           this.data_4.label,
+          this.data_5.label,
+          this.data_6.label,
+          this.data_7.label,
         ],
         datasets: [
           {
@@ -49,6 +55,9 @@ export class BarChartComponent implements AfterViewInit {
               this.data_2.value,
               this.data_3.value,
               this.data_4.value,
+              this.data_5.value,
+              this.data_6.value,
+              this.data_7.value,
             ],
             borderWidth: 1,
           },
@@ -64,7 +73,6 @@ export class BarChartComponent implements AfterViewInit {
     });
   }
 }
-
 interface bookingStatistic {
   label: string;
   value: number;

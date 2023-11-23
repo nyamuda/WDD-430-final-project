@@ -4,6 +4,24 @@
   <div>
     <div class="row">
       <div class="container col-md-6 mb-3">
+        <h3>Days - Current Week</h3>
+        <app-week-bar-chart
+          *ngIf="
+            thisWeek !== undefined &&
+            lastWeek !== undefined &&
+            twoWeeksAgo !== undefined &&
+            threeWeeksAgo !== undefined
+          "
+          [data_1]="{ label: 'Sunday', value: dailyBookings.dayOne }"
+          [data_2]="{ label: 'Monday', value: dailyBookings.dayTwo }"
+          [data_3]="{ label: 'Tuesday', value: dailyBookings.dayThree }"
+          [data_4]="{ label: 'Wednesday', value: dailyBookings.dayFour }"
+          [data_5]="{ label: 'Thursday', value: dailyBookings.dayFive }"
+          [data_6]="{ label: 'Friday', value: dailyBookings.daySix }"
+          [data_7]="{ label: 'Saturday', value: dailyBookings.daySeven }"
+        ></app-week-bar-chart>
+      </div>
+      <div class="container col-md-6 mb-3">
         <h3>Weeks</h3>
         <app-bar-chart
           *ngIf="
