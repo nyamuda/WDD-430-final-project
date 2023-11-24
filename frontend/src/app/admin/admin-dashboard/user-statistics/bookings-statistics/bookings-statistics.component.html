@@ -1,0 +1,92 @@
+<div class="container-fluid">
+  <p class="heading-line m-auto rounded"></p>
+  <p class="display-6 text-uppercase text-center">Bookings</p>
+  <div>
+    <div class="row">
+      <div class="container col-md-6 mb-3">
+        <!-- <p class="bar-title">Days - Current Week</p> -->
+        <app-week-bar-chart
+          *ngIf="
+            thisWeek !== undefined &&
+            lastWeek !== undefined &&
+            twoWeeksAgo !== undefined &&
+            threeWeeksAgo !== undefined
+          "
+          [data_1]="{ label: 'Sunday', value: dailyBookings.dayOne }"
+          [data_2]="{ label: 'Monday', value: dailyBookings.dayTwo }"
+          [data_3]="{ label: 'Tuesday', value: dailyBookings.dayThree }"
+          [data_4]="{ label: 'Wednesday', value: dailyBookings.dayFour }"
+          [data_5]="{ label: 'Thursday', value: dailyBookings.dayFive }"
+          [data_6]="{ label: 'Friday', value: dailyBookings.daySix }"
+          [data_7]="{ label: 'Saturday', value: dailyBookings.daySeven }"
+          [chartTitle]="'Days - Current Week'"
+        ></app-week-bar-chart>
+      </div>
+      <div class="container col-md-6 mb-3">
+        <!-- <p class="bar-title">Weeks</p> -->
+        <app-bar-chart
+          *ngIf="
+            thisWeek !== undefined &&
+            lastWeek !== undefined &&
+            twoWeeksAgo !== undefined &&
+            threeWeeksAgo !== undefined
+          "
+          [data_1]="{ label: 'This Week', value: thisWeek }"
+          [data_2]="{ label: 'Last Week', value: lastWeek }"
+          [data_3]="{ label: 'Two Weeks Ago', value: twoWeeksAgo }"
+          [data_4]="{ label: 'Three Weeks Ago', value: threeWeeksAgo }"
+          [backgroundColor]="backgroundColor('#BB343B')"
+          [chartTitle]="'Weeks'"
+        ></app-bar-chart>
+      </div>
+      <div class="container col-md-6 mb-3">
+        <!-- <p class="bar-title">Months</p> -->
+        <app-bar-chart
+          *ngIf="
+            thisMonth !== undefined &&
+            lastMonth !== undefined &&
+            twoMonthsAgo !== undefined &&
+            threeMonthsAgo !== undefined
+          "
+          [data_1]="{ label: 'This Month', value: thisMonth }"
+          [data_2]="{ label: 'Last Month', value: lastMonth }"
+          [data_3]="{ label: 'Two Months Ago', value: twoMonthsAgo }"
+          [data_4]="{ label: 'Three Months Ago', value: threeMonthsAgo }"
+          [backgroundColor]="backgroundColor('#106630')"
+          [chartTitle]="'Months'"
+        ></app-bar-chart>
+      </div>
+      <div class="container col-md-6 mb-3">
+        <!-- <p class="bar-title">Years</p> -->
+        <app-bar-chart
+          *ngIf="
+            thisYear !== undefined &&
+            lastYear !== undefined &&
+            twoYearsAgo !== undefined &&
+            threeYearsAgo !== undefined
+          "
+          [data_1]="{ label: 'This Year', value: thisYear }"
+          [data_2]="{ label: 'Last Year', value: lastYear }"
+          [data_3]="{ label: 'Two Years Ago', value: twoYearsAgo }"
+          [data_4]="{ label: 'Three Years Ago', value: threeYearsAgo }"
+          [backgroundColor]="backgroundColor('#2B1C63')"
+          [chartTitle]="'Years'"
+        ></app-bar-chart>
+      </div>
+    </div>
+    <div class="container">
+      <app-line-chart
+        *ngIf="
+          thisYear !== undefined &&
+          lastYear !== undefined &&
+          twoYearsAgo !== undefined &&
+          threeYearsAgo !== undefined
+        "
+        [labels]="monthNames"
+        [values]="monthYearlyBookings"
+        [backgroundColor]="'#F09401'"
+        [chartTitle]="'Monthly Booking Trends Over the Years'"
+      ></app-line-chart>
+    </div>
+  </div>
+</div>
