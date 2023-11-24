@@ -21,7 +21,7 @@ export class BarChartComponent implements AfterViewInit {
   @Input() data_3: bookingStatistic = { label: '', value: 0 };
   @Input() data_4: bookingStatistic = { label: '', value: 0 };
   @Input() backgroundColor: string[] = [];
-  
+  @Input() chartTitle: string = '';
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -61,6 +61,15 @@ export class BarChartComponent implements AfterViewInit {
         scales: {
           y: {
             beginAtZero: true,
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: this.chartTitle,
+            font: {
+              size: 16,
+            },
           },
         },
       },

@@ -23,6 +23,7 @@ export class WeekBarChartComponent {
   @Input() data_5: bookingStatistic = { label: '', value: 0 };
   @Input() data_6: bookingStatistic = { label: '', value: 0 };
   @Input() data_7: bookingStatistic = { label: '', value: 0 };
+  @Input() chartTitle: string = '';
 
   constructor(private cdr: ChangeDetectorRef) {}
 
@@ -77,6 +78,15 @@ export class WeekBarChartComponent {
         scales: {
           y: {
             beginAtZero: true,
+          },
+        },
+        plugins: {
+          title: {
+            display: true,
+            text: this.chartTitle,
+            font: {
+              size: 16,
+            },
           },
         },
       },
