@@ -9,3 +9,4 @@ export * from './bookings';
 export * from './contacts';
 export * from './oauth';
 export * from './company-info';
+export * from './faq';
