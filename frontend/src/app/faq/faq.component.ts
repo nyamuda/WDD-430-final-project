@@ -4,6 +4,8 @@ import { FaqEditComponent } from './faq-edit/faq-edit.component';
 import { ConfirmationModalComponent } from '../confirmation-modal/confirmation-modal.component';
 import { FaqService } from './faq.service';
 import { FAQ } from './faq.model';
+import { User } from '../users/user.model';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-faq',
@@ -16,7 +18,8 @@ export class FAQComponent {
 
   constructor(
     private modalService: MdbModalService,
-    private faqService: FaqService
+    private faqService: FaqService,
+    private userService: UsersService
   ) {}
 
   ngOnInit(): void {
@@ -70,5 +73,12 @@ export class FAQComponent {
         this.faqService.deleteQuestion(id);
       }
     });
+  }
+
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
+  //only admins have the authority to edit or delete FAQs
+  isAdmin(): boolean {
+    return this.currentUser().isAdmin;
   }
 }

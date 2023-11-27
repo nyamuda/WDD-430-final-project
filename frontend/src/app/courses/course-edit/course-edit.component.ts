@@ -104,14 +104,15 @@ export class CourseEditComponent implements OnInit {
     this.router.navigateByUrl('/courses');
   }
 
-  //information about the current logged in user
-  currentUser: Signal<User> = computed(() => this.userService.user());
+  
 
   //show a loader during an HTTP POST OR UPDATE request
   isProcessingRequest: Signal<boolean> = computed(() =>
     this.courseService.isProcessingRequest()
   );
 
+  //information about the current logged in user
+  currentUser: Signal<User> = computed(() => this.userService.user());
   //only admins have the authority to edit or delete courses
   isAdmin(): boolean {
     return this.currentUser().isAdmin;

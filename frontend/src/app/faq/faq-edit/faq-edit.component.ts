@@ -2,7 +2,7 @@ import { Component, Signal, computed } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MdbModalRef } from 'mdb-angular-ui-kit/modal';
 import { FaqService } from '../faq.service';
-import {FAQ} from '../faq.model';
+import { FAQ } from '../faq.model';
 @Component({
   selector: 'app-faq-edit',
   templateUrl: './faq-edit.component.html',
@@ -23,7 +23,7 @@ export class FaqEditComponent {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       question: ['', [Validators.required]],
-      answer: ['', [Validators.required, Validators.pattern(/^[1-9]\d*$/)]],
+      answer: ['', [Validators.required]],
     });
     //close the modal or not
     this.faqService.closeModal.subscribe((closeModal: boolean) => {

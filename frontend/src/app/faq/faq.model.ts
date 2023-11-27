@@ -1,15 +1,15 @@
 export class FAQ {
-  private _id: number;
+  private _id: string;
   private _question: string;
   private _answer: string;
 
   constructor() {}
 
-  get id(): number {
+  get id(): string {
     return this._id;
   }
 
-  set id(value: number) {
+  set id(value: string) {
     this._id = value;
   }
 

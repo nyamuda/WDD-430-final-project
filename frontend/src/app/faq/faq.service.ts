@@ -122,7 +122,7 @@ export class FaqService {
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        this.getAllQuestions;
+        this.getAllQuestions();
         this.appService.showSuccessToast(
           'The question has been deleted.',
           'Success!'
