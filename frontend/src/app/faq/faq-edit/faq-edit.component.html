@@ -1,0 +1,96 @@
+<form [formGroup]="formGroup" class="needs-validation p-4" novalidate>
+  <p class="text-center display-6">Company Info</p>
+  <!-- Question input -->
+  <mdb-form-control class="mb-4">
+    <textarea
+      mdbInput
+      mdbValidate
+      [ngClass]="{
+        'is-invalid':
+          formGroup.get('question').invalid && formGroup.get('question').touched
+      }"
+      rows="4"
+      id="question"
+      class="form-control form-control-lg"
+      formControlName="question"
+    ></textarea>
+    <label mdbLabel class="form-label" for="question">Question</label>
+    <mdb-error
+      class="mt-1 error-text"
+      *ngIf="
+        formGroup.get('question').invalid && formGroup.get('question').touched
+      "
+      ><i class="fas fa-exclamation-triangle"></i> Please enter the question.
+    </mdb-error>
+  </mdb-form-control>
+
+  <!-- Answer input -->
+  <mdb-form-control class="mb-4">
+    <textarea
+      mdbInput
+      [ngClass]="{
+        'is-invalid':
+          formGroup.get('answer').invalid && formGroup.get('answer').touched
+      }"
+      mdbValidate
+      rows="4"
+      id="answer"
+      class="form-control form-control-lg"
+      formControlName="answer"
+    ></textarea>
+    <label mdbLabel class="form-label" for="answer">Answer</label>
+    <mdb-error
+      class="mt-1 error-text"
+      *ngIf="formGroup.get('answer').invalid && formGroup.get('answer').touched"
+      ><i class="fas fa-exclamation-triangle"></i> Please enter the answer.
+    </mdb-error>
+  </mdb-form-control>
+
+  <!-- Submit button -->
+  <div
+    *ngIf="isProcessingRequest; else showLoader"
+    class="modal-footer bg-light"
+  >
+    <button
+      type="button"
+      class="btn btn-secondary text-dark"
+      (click)="modalRef.close()"
+    >
+      Cancel
+    </button>
+    <button
+      *ngIf="editMode; else elseBlock"
+      [ngClass]="{ disabled: formGroup.invalid }"
+      (click)="submit()"
+      type="button"
+      class="btn custom text-light"
+    >
+      Update
+    </button>
+    <ng-template #elseBlock>
+      <button
+        [ngClass]="{ disabled: formGroup.invalid }"
+        (click)="submit()"
+        type="button"
+        class="btn custom text-light"
+      >
+        Add
+      </button>
+    </ng-template>
+  </div>
+
+  <ng-template #showLoader>
+    <!-- Show a loader during a CRUD REQUEST -->
+    <ng-template #showLoader>
+      <div class="d-flex align-items-center">
+        <strong class="fs-5">Please wait...</strong>
+        <div
+          style="width: 3rem; height: 3rem"
+          class="spinner-border ms-auto"
+          role="status"
+          aria-hidden="true"
+        ></div>
+      </div>
+    </ng-template>
+  </ng-template>
+</form>

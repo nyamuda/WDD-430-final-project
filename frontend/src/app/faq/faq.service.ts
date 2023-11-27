@@ -1,32 +1,22 @@
-import {
-  HttpClient,
-  HttpHeaderResponse,
-  HttpHeaders,
-} from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, WritableSignal, signal } from '@angular/core';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AppService } from 'src/app/app.service';
-import { CompanyInfo } from './company-info.model';
-import { UsersService } from '../../../users/users.service';
-import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
-import { CompanyInfoEditComponent } from './company-info-edit/company-info-edit.component';
+import { AppService } from '../app.service';
+import { UsersService } from '../users/users.service';
+import { FAQ } from './faq.model';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CompanyInfoService {
+export class FaqService {
+  closeModal = new BehaviorSubject<boolean>(false);
   //show the loader or not
   isProcessingRequest: WritableSignal<boolean> = signal(false);
-  //close the modal or not
-  closeModal: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  //list of all the questions
+  faqList: WritableSignal<FAQ[]> = signal(new Array<FAQ>());
 
-  //list of all the company info
-  companyInfoList: WritableSignal<CompanyInfo[]> = signal(
-    new Array<CompanyInfo>()
-  );
-
-  companyInfoSubject = new BehaviorSubject<CompanyInfo[]>([]);
+  faqSubject = new BehaviorSubject<FAQ[]>([]);
 
   constructor(
     private http: HttpClient,
@@ -35,44 +25,44 @@ export class CompanyInfoService {
     private userService: UsersService
   ) {}
 
-  //get the company information by id
-  getCompanyInfoById(id: string): Observable<CompanyInfo> {
-    const url = `${this.appService.apiUrl}/company-info/${id}`;
-    return this.http.get<CompanyInfo>(url);
+  //get question by id
+  getQuestionById(id: string): Observable<FAQ> {
+    const url = `${this.appService.apiUrl}/faq/${id}`;
+    return this.http.get<FAQ>(url);
   }
 
-  //get all the company information
-  getCompanyInformation(): void {
-    const url = `${this.appService.apiUrl}/company-info/`;
+  //get all the questions
+  getAllQuestions(): void {
+    const url = `${this.appService.apiUrl}/faq/`;
 
-    this.http.get<CompanyInfo[]>(url).subscribe((info: CompanyInfo[]) => {
-      this.companyInfoList.set(info);
-      this.companyInfoSubject.next(info);
+    this.http.get<FAQ[]>(url).subscribe((questions: FAQ[]) => {
+      this.faqList.set(questions);
+      this.faqSubject.next(questions);
     });
   }
 
   //CREATE
-  addInfo(newInfo: CompanyInfo) {
-    if (!!newInfo) {
+  addQuestion(newQuestion: FAQ) {
+    if (!!newQuestion) {
       //show loader
       this.isProcessingRequest.set(true);
 
-      const url = `${this.appService.apiUrl}/company-info`;
+      const url = `${this.appService.apiUrl}/faq`;
       const headers = this.headers();
-      let infoDto = {
-        title: newInfo.title,
-        value: newInfo.value,
+      let questionDto = {
+        question: newQuestion.question,
+        answer: newQuestion.answer,
       };
 
-      this.http.post(url, infoDto, { headers }).subscribe(
+      this.http.post(url, questionDto, { headers }).subscribe(
         (response) => {
           //stop loader
           this.isProcessingRequest.set(false);
           //close the modal
           this.closeModal.next(true);
-          this.getCompanyInformation();
+          this.getAllQuestions();
           this.appService.showSuccessToast(
-            'The information has been successfully added.',
+            'The question has been successfully added.',
             'Success!'
           );
         },
@@ -81,7 +71,7 @@ export class CompanyInfoService {
           this.isProcessingRequest.set(false);
           this.appService.showFailureToast(
             'Please review your data and try again.',
-            'Failed to add information'
+            'Failed to add question'
           );
         }
       );
@@ -89,27 +79,27 @@ export class CompanyInfoService {
   }
 
   //UPDATE
-  updateInfo(id: string, newInfo: CompanyInfo) {
-    if (!!newInfo) {
+  updateQuestion(id: string, newQuestion: FAQ) {
+    if (!!newQuestion) {
       //show loader
       this.isProcessingRequest.set(true);
 
-      const url = `${this.appService.apiUrl}/company-info/${id}`;
+      const url = `${this.appService.apiUrl}/faq/${id}`;
       const headers = this.headers();
-      let infoDto = {
-        title: newInfo.title,
-        value: newInfo.value,
+      let questionDto = {
+        question: newQuestion.question,
+        answer: newQuestion.answer,
       };
 
-      this.http.put(url, infoDto, { headers }).subscribe(
+      this.http.put(url, questionDto, { headers }).subscribe(
         (response) => {
           //stop loader
           this.isProcessingRequest.set(false);
           //close the modal
           this.closeModal.next(true);
-          this.getCompanyInformation();
+          this.getAllQuestions();
           this.appService.showSuccessToast(
-            'The information has been successfully updated.',
+            'The question has been successfully updated.',
             'Success!'
           );
         },
@@ -118,7 +108,7 @@ export class CompanyInfoService {
           this.isProcessingRequest.set(false);
           this.appService.showFailureToast(
             'Please review your data and try again.',
-            'Failed to update information'
+            'Failed to update question'
           );
         }
       );
@@ -126,16 +116,15 @@ export class CompanyInfoService {
   }
 
   //DELETE
-  deleteInfo(id: string) {
-    
-    const url = `${this.appService.apiUrl}/company-info/${id}`;
+  deleteQuestion(id: string) {
+    const url = `${this.appService.apiUrl}/faq/${id}`;
     let headers = this.headers();
 
     this.http.delete(url, { headers }).subscribe(
       (response) => {
-        this.getCompanyInformation();
+        this.getAllQuestions;
         this.appService.showSuccessToast(
-          'The information has been deleted.',
+          'The question has been deleted.',
           'Success!'
         );
       },

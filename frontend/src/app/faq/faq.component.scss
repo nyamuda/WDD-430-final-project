@@ -1,0 +1,15 @@
+@import "../../sass/_variables";
+
+.action-icon {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+.action-icon:hover {
+  color: $background-color;
+}
+
+.heading-line {
+  border: 2px solid $primary-color;
+  width: 2rem;
+  margin-bottom: 0rem;
+}

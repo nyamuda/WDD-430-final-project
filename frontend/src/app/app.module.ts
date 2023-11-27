@@ -90,6 +90,8 @@ import { BarChartComponent } from './admin/admin-dashboard/user-statistics/bar-c
 import { WeekBarChartComponent } from './admin/admin-dashboard/user-statistics/bar-chart/week-bar-chart/week-bar-chart.component';
 import { BookingsStatisticsComponent } from './admin/admin-dashboard/user-statistics/bookings-statistics/bookings-statistics.component';
 import { LineChartComponent } from './admin/admin-dashboard/user-statistics/line-chart/line-chart.component';
+import { FAQComponent } from './faq/faq.component';
+import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,8 @@ import { LineChartComponent } from './admin/admin-dashboard/user-statistics/line
     WeekBarChartComponent,
     BookingsStatisticsComponent,
     LineChartComponent,
+    FAQComponent,
+    FaqEditComponent,
   ],
   imports: [
     BrowserModule,

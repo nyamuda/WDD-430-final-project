@@ -1,0 +1,29 @@
+<div class="container-fluid custom mt-5">
+  <p class="heading-line rounded"></p>
+  <p class="display-6 text-dark text-uppercase">FREQUENTLY ASKED QUESTIONS</p>
+  <mdb-accordion [borderless]="false">
+    <mdb-accordion-item>
+      <ng-template mdbAccordionItemHeader>
+        <div class="d-flex justify-content-start align-items-center">
+          <p>Accordion Item #1</p>
+          <p class="ms-3">
+            <i
+              (click)="editItem('2')"
+              class="fas fa-pen fa me-3 action-icon"
+            ></i>
+            <i
+              (click)="deleteItem('2')"
+              class="fas fa-trash fa ms-3 action-icon"
+            ></i>
+          </p>
+        </div>
+      </ng-template>
+      <ng-template mdbAccordionItemBody>
+        Placeholder content for this accordion, which is intended to demonstrate
+        the
+        <code>.accordion-borderless</code> class. This is the first item's
+        accordion body.
+      </ng-template>
+    </mdb-accordion-item>
+  </mdb-accordion>
+</div>
