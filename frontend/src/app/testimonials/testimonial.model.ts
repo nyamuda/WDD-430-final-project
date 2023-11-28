@@ -1,8 +1,9 @@
 import { MetaData } from '../app.meta';
+import { User } from '../users/user.model';
 
 export class Testimonial {
   private _id: string;
-  private _name: string;
+  private _userId: User;
   private _position: string;
   private _imageUrl: string;
   private _content: string;
@@ -18,12 +19,12 @@ export class Testimonial {
     this._id = value;
   }
 
-  get name(): string {
-    return this._name;
+  get userId(): User {
+    return this._userId;
   }
 
-  set name(value: string) {
-    this._name = value;
+  set userId(value: User) {
+    this._userId = value;
   }
 
   get position(): string {

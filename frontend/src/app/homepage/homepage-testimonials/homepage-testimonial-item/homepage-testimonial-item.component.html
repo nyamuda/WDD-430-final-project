@@ -12,7 +12,7 @@
               height="150"
             />
           </div>
-          <h5 class="font-weight-bold">{{ testimonial.name }}</h5>
+          <h5 class="font-weight-bold">{{ testimonial.userId.name }}</h5>
           <h6 class="font-weight-bold my-3">{{ testimonial.position }}</h6>
           <div class="d-flex justify-content-center">
             <star-rating
@@ -20,7 +20,7 @@
               [readOnly]="true"
               [starType]="'svg'"
               [size]="'medium'"
-              [rating]="5"
+              [rating]="testimonial.rating"
             ></star-rating>
           </div>
           <p class="mb-2">

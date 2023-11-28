@@ -41,7 +41,7 @@
       >
       <span
         ><i class="icon far fa-envelope ms-lg-3"></i>
-        <span class="text-light ms-2">loyd@example.com</span></span
+        <span class="text-light ms-2">loyd&#64;example.com</span></span
       >
 
       <div
@@ -107,7 +107,7 @@
       >
       <span
         ><i class="icon far fa-envelope ms-lg-3"></i>
-        <span class="text-light ms-2">loyd@example.com</span></span
+        <span class="text-light ms-2">loyd&#64;example.com</span></span
       >
 
       <div
@@ -229,6 +229,26 @@
               routerLinkActive="active-link"
               routerLink="gallery"
               >Gallery</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              (click)="isOpen = !isOpen"
+              (click)="buttonsNav.toggle()"
+              class="nav-link px-2 text-dark"
+              routerLinkActive="active-link"
+              routerLink="testimonials"
+              >Testimonials</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              (click)="isOpen = !isOpen"
+              (click)="buttonsNav.toggle()"
+              class="nav-link px-2 text-dark"
+              routerLinkActive="active-link"
+              routerLink="faq"
+              >FAQ</a
             >
           </li>
           <li class="nav-item">
@@ -376,6 +396,22 @@
               routerLinkActive="active-link"
               routerLink="gallery"
               >Gallery</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link px-2 text-dark"
+              routerLinkActive="active-link"
+              routerLink="testimonials"
+              >Testimonials</a
+            >
+          </li>
+          <li class="nav-item">
+            <a
+              class="nav-link px-2 text-dark"
+              routerLinkActive="active-link"
+              routerLink="faq"
+              >FAQ</a
             >
           </li>
           <li class="nav-item">

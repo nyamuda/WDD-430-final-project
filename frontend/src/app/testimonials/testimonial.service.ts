@@ -43,7 +43,7 @@ export class TestimonialService {
       const headers = this.headers();
 
       let testimonialDto = {
-        name: newTestimonial.name,
+        userId: this.loggedInUser()['_id'],
         imageUrl: newTestimonial.imageUrl,
         position: newTestimonial.position,
         content: newTestimonial.content,
@@ -113,7 +113,7 @@ export class TestimonialService {
       const headers = this.headers();
 
       let testimonialDto = {
-        name: newTestimonial.name,
+        userId: this.loggedInUser()['_id'],
         imageUrl: newTestimonial.imageUrl,
         position: newTestimonial.position,
         content: newTestimonial.content,

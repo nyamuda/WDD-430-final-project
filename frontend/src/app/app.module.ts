@@ -79,7 +79,7 @@ import { BookingItemComponent } from './booking/booking-item/booking-item.compon
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ContactUsItemComponent } from './contact-us/contact-us-item/contact-us-item.component';
 import { OauthComponent } from './login/oauth/oauth.component';
-import { TestimonialItemComponent } from './homepage/homepage-testimonials/testimonial-item/testimonial-item.component';
+import { TestimonialItemComponent } from './testimonials/testimonial-item/testimonial-item.component';
 import { AdminComponent } from './admin/admin.component';
 import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
@@ -95,6 +95,7 @@ import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
 import { TestimonialListComponent } from './testimonials/testimonial-list/testimonial-list.component';
+import { HomepageTestimonialItemComponent } from './homepage/homepage-testimonials/homepage-testimonial-item/homepage-testimonial-item.component';
 
 @NgModule({
   declarations: [
@@ -158,6 +159,7 @@ import { TestimonialListComponent } from './testimonials/testimonial-list/testim
     TestimonialsComponent,
     TestimonialEditComponent,
     TestimonialListComponent,
+    HomepageTestimonialItemComponent,
   ],
   imports: [
     BrowserModule,

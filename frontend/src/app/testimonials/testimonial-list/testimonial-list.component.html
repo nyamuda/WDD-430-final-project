@@ -1,4 +1,4 @@
-<div class="container-fluid custom">
+<div class="container-fluid custom mt-5">
   <div class="container m-auto text-center">
     <p class="heading-line m-auto rounded"></p>
     <p class="display-6 text-uppercase">Testimonials</p>
@@ -10,9 +10,9 @@
     </p>
   </div>
   <!-- PLACEHOLDER CONTENT START-->
-  <section *ngIf="isFetchingTestimonials(); else elseBlock">
-    <div class="row text-center">
-      <div class="col-md-4 mb-5 mb-md-0 placeholder-wave">
+  <section *ngIf="!isFetchingTestimonials(); else elseBlock">
+    <div *ngFor="let item of placeholders" class="row text-center">
+      <div class="col-md-4 mb-5 mb-md-0 placeholder-glow">
         <div class="d-flex justify-content-center mb-4">
           <img
             src="../../../assets/images/placeholder/placeholder1.png"
@@ -28,7 +28,7 @@
         <p class="px-xl-3 placeholder col-12"></p>
         <p class="px-xl-3 placeholder col-10"></p>
       </div>
-      <div class="col-md-4 mb-5 mb-md-0 placeholder-wave">
+      <div class="col-md-4 mb-5 mb-md-0 placeholder-glow">
         <div class="d-flex justify-content-center mb-4">
           <img
             src="../../../assets/images/placeholder/placeholder1.png"
@@ -44,7 +44,7 @@
         <p class="px-xl-3 placeholder col-12"></p>
         <p class="px-xl-3 placeholder col-10"></p>
       </div>
-      <div class="col-md-4 mb-5 mb-md-0 placeholder-wave">
+      <div class="col-md-4 mb-5 mb-md-0 placeholder-glow">
         <div class="d-flex justify-content-center mb-4">
           <img
             src="../../../assets/images/placeholder/placeholder1.png"

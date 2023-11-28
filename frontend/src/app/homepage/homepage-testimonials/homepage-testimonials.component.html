@@ -15,14 +15,16 @@
     <!-- Carousel for Large Screens -->
     <mdb-carousel class="d-none d-lg-block carousel-dark" [controls]="true">
       <mdb-carousel-item *ngFor="let items of groupsOfItems">
-        <app-testimonial-item [testimonials]="items"></app-testimonial-item>
+        <app-homepage-testimonial-item
+          [testimonials]="items"
+        ></app-homepage-testimonial-item>
       </mdb-carousel-item>
     </mdb-carousel>
     <!-- Carousel for Large Screens End -->
 
     <!-- Carousel for Small Screens -->
     <mdb-carousel class="d-lg-none carousel-dark pt-2" [controls]="true">
-      <mdb-carousel-item *ngFor="let testimonial of testimonials">
+      <mdb-carousel-item *ngFor="let testimonial of testimonials()">
         <div class="d-flex justify-content-center container-sm">
           <div class="row">
             <div class="col-lg-4 d-flex justify-content-center">
@@ -48,7 +50,7 @@
                 ></star-rating>
               </div>
               <h3 class="mb-0">
-                {{ testimonial.name }}
+                {{ testimonial.userId.name }}
               </h3>
               <p class="fw-bold text-muted mb-2">
                 {{ testimonial.position }}
