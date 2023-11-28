@@ -9,6 +9,7 @@ import { TestimonialService } from '../testimonial.service';
 })
 export class TestimonialListComponent implements OnInit {
   groupsOfItems: Testimonial[][] = [];
+  placeholders = new Array<number>(3);
 
   constructor(private testimonialService: TestimonialService) {}
 
@@ -33,5 +34,9 @@ export class TestimonialListComponent implements OnInit {
 
   testimonials: Signal<Testimonial[]> = computed(() =>
     this.testimonialService.testimonialListSignal()
+  );
+
+  isFetchingTestimonials: Signal<boolean> = computed(() =>
+    this.testimonialService.isFetchingTestimonials()
   );
 }
