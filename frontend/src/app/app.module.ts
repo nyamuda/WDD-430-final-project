@@ -92,6 +92,9 @@ import { BookingsStatisticsComponent } from './admin/admin-dashboard/user-statis
 import { LineChartComponent } from './admin/admin-dashboard/user-statistics/line-chart/line-chart.component';
 import { FAQComponent } from './faq/faq.component';
 import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
+import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
+import { TestimonialListComponent } from './testimonials/testimonial-list/testimonial-list.component';
 
 @NgModule({
   declarations: [
@@ -152,6 +155,9 @@ import { FaqEditComponent } from './faq/faq-edit/faq-edit.component';
     LineChartComponent,
     FAQComponent,
     FaqEditComponent,
+    TestimonialsComponent,
+    TestimonialEditComponent,
+    TestimonialListComponent,
   ],
   imports: [
     BrowserModule,

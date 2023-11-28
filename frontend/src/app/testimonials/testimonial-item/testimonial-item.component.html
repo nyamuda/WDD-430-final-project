@@ -1,0 +1,26 @@
+<div class="row text-center">
+  <div *ngFor="let testimonial of testimonials" class="col-md-4 mb-5 mb-md-0">
+    <div class="d-flex justify-content-center mb-4">
+      <img
+        [src]="testimonial.imageUrl"
+        class="rounded-circle shadow-1-strong"
+        width="150"
+        height="150"
+      />
+    </div>
+    <h5 class="mb-3">{{ testimonial.name }}</h5>
+    <h6 class="text-primary mb-3">{{ testimonial.position }}</h6>
+    <p class="px-xl-3">
+      <i class="fas fa-quote-left pe-2"></i>{{ testimonial.content }}
+    </p>
+    <div class="d-flex justify-content-center">
+      <star-rating
+        class="ms-n1"
+        [readOnly]="true"
+        [starType]="'svg'"
+        [size]="'medium'"
+        [rating]="testimonial.rating"
+      ></star-rating>
+    </div>
+  </div>
+</div>
