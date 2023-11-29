@@ -1,5 +1,5 @@
 <div class="row text-center">
-  <div *ngFor="let item of testimonials" class="col-md-4 mb-5 mb-md-0">
+  <div *ngFor="let item of testimonials" class="col-md-4 mb-3">
     <div class="d-flex justify-content-center mb-4">
       <img
         [src]="item.userId.imageUrl"
@@ -9,6 +9,24 @@
       />
     </div>
     <h5 class="mb-3">{{ item.userId.name }}</h5>
+    <!-- Edit or delete -->
+    <!-- show the edit and delete button if the current logged in user is the author of the testimonial -->
+    <p
+      *ngIf="isCurrentUserTestimonialAuthor(item.userId['_id'])"
+      class="small mb-0 text-center"
+      style="color: #aaa"
+    >
+      <a
+        [routerLink]="item['_id'] + '/edit'"
+        class="link-secondary"
+        fragment="testimonial-form"
+        >Edit</a
+      >
+      •
+      <a (click)="('')" class="link-secondary">Remove</a>
+      •
+    </p>
+    <!-- Edit or delete -->
     <h6 class="text-primary mb-3">{{ item.position }}</h6>
     <p class="px-xl-3">
       <i class="fas fa-quote-left pe-2"></i>{{ item.content }}

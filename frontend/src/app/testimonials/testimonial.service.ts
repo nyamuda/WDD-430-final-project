@@ -126,7 +126,7 @@ export class TestimonialService {
 
         position: newTestimonial.position,
         content: newTestimonial.content,
-        rating: newTestimonial.stars,
+        stars: newTestimonial.stars,
       };
 
       const url = `${this.appService.apiUrl}/testimonials/${id}`;
