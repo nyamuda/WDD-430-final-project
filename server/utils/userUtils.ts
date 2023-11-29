@@ -1,6 +1,6 @@
 import { JwtPayload, Secret, JsonWebTokenError } from 'jsonwebtoken';
 import * as jwt from 'jsonwebtoken';
-import { Review } from '../models';
+import { Review, Testimonial } from '../models';
 import { Request, Response, NextFunction } from 'express';
 import * as dotenv from 'dotenv';
 dotenv.config();
@@ -58,6 +58,49 @@ export class UserUtils {
         if (review) {
           //if the user ID of the token matches the userId of the review
           if (token.userId === review.userId.toString()) {
+            return next();
+          }
+        }
+        //if it's an admin
+        if (token.isAdmin) {
+          return next();
+        }
+        return res.status(401).json({
+          message: 'You do not have the authority to carry out this action.',
+        });
+      });
+    } catch (error) {
+      return res.status(401).json({
+        message: 'You do not have the authority to carry out this action.',
+        error: error,
+      });
+    }
+  };
+
+  //ensure its the right user who is trying to delete or edit a testimonial
+  public static ensureTestimonialRightUserMiddleware = (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    try {
+      let clientToken = req.headers.authorization!.split(' ')[1];
+      let SECRET: Secret = process.env.SECRET!;
+
+      jwt.verify(clientToken, SECRET, async (error: any, token: any) => {
+        if (error) {
+          return res.status(401).json({
+            message: 'You do not have the authority to carry out this action.',
+            error: error,
+          });
+        }
+
+        //get the the testimonial the user is trying to edit/delete
+        let testimonial = await Testimonial.findById(req.params.id);
+
+        if (testimonial) {
+          //if the user ID of the token matches the userId of the testimonial
+          if (token.userId === testimonial.userId.toString()) {
             return next();
           }
         }

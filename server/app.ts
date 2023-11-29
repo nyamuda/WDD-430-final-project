@@ -16,6 +16,7 @@ import {
   OauthRouter,
   CompanyInfoRouter,
   FAQRouter,
+  TestimonialRouter,
 } from './routes';
 
 const app = express();
@@ -36,13 +37,14 @@ app.use('/contact', ContactRouter);
 app.use('/oauth', OauthRouter);
 app.use('/company-info', CompanyInfoRouter);
 app.use('/faq', FAQRouter);
+app.use('/testimonials', TestimonialRouter);
 
 // Serve static files from the './dist/driving-school/' directory
 // app.use(express.static(path.join(__dirname, './dist/driving-school/')));
 
 // // Catch-all route for Angular application
 app.get('*', (req: Request, res: Response) => {
-  res.send('Welcome to Lody School of Driving API');
+  res.send('Welcome to Loyd School of Driving API');
 });
 
 export default app;

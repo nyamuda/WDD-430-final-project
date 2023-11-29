@@ -5,9 +5,8 @@ export class Testimonial {
   private _id: string;
   private _userId: User;
   private _position: string;
-  private _imageUrl: string;
   private _content: string;
-  private _rating: number;
+  private _stars: number;
 
   constructor() {}
 
@@ -35,14 +34,6 @@ export class Testimonial {
     this._position = value;
   }
 
-  get imageUrl(): string {
-    return this._imageUrl;
-  }
-
-  set imageUrl(value: string) {
-    this._imageUrl = value;
-  }
-
   get content(): string {
     return this._content;
   }
@@ -51,12 +42,12 @@ export class Testimonial {
     this._content = value;
   }
 
-  get rating(): number {
-    return this._rating;
+  get stars(): number {
+    return this._stars;
   }
 
-  set rating(value: number) {
-    this._rating = value;
+  set stars(value: number) {
+    this._stars = value;
   }
 }
 
