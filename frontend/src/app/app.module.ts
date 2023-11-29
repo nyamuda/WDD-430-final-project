@@ -96,6 +96,7 @@ import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
 import { TestimonialListComponent } from './testimonials/testimonial-list/testimonial-list.component';
 import { HomepageTestimonialItemComponent } from './homepage/homepage-testimonials/homepage-testimonial-item/homepage-testimonial-item.component';
+import { TestimonialPaginationComponent } from './testimonials/testimonial-pagination/testimonial-pagination.component';
 
 @NgModule({
   declarations: [
@@ -160,6 +161,7 @@ import { HomepageTestimonialItemComponent } from './homepage/homepage-testimonia
     TestimonialEditComponent,
     TestimonialListComponent,
     HomepageTestimonialItemComponent,
+    TestimonialPaginationComponent,
   ],
   imports: [
     BrowserModule,

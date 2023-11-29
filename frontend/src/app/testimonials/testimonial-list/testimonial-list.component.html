@@ -56,9 +56,7 @@
 <!-- TESTIMONIALS START -->
 <ng-template #elseBlock>
   <section>
-    <div *ngFor="let testimonial of groupsOfItems">
-      <app-testimonial-item [testimonials]="testimonial"></app-testimonial-item>
-    </div>
+    <app-testimonial-pagination></app-testimonial-pagination>
   </section>
 </ng-template>
 <!-- TESTIMONIALS END -->
