@@ -1,16 +1,18 @@
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
 import { Testimonial, User } from '../models';
+import { SortOrder } from 'mongoose';
 
 export class TestimonialsController {
   // Create a new testimonial
   public static async createTestimonial(req: Request, res: Response) {
+    console.log(req.body);
     // Validation
     let schema = Joi.object({
       content: Joi.string().required(),
       userId: Joi.string().required().hex().length(24),
       position: Joi.string().required(),
-      stars: Joi.number().required,
+      stars: Joi.number().required(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
@@ -50,10 +52,41 @@ export class TestimonialsController {
   }
 
   // Get all the testimonials
-  public static async getTestimonials(res: Response) {
+  public static async getTestimonials(req: Request, res: Response) {
     try {
-      let testimonials = await Testimonial.find({}).populate('userId');
-      return res.json(testimonials);
+      //PAGINATION
+
+      //items per page
+      let itemsPerPage = 9;
+      //current page
+      let currentPage = Number(req.query.page) || 1;
+
+      //items to skip
+      let itemsToSkip = (currentPage - 1) * itemsPerPage;
+
+      //sort by updatedAt
+      //in descending order -->-1
+      // let sortObject = {};
+      //sortObject['updatedAt'] = -1;
+      //in descending order -->-1
+      let sortObject: { [key: string]: SortOrder } = { updatedAt: -1 }; // -1 for descending order
+
+      let testimonials = await Testimonial.find({})
+        .populate('userId')
+        .skip(itemsToSkip)
+        .limit(itemsPerPage)
+        .sort(sortObject);
+
+      //total reviews for the course
+      let totalItems = await Testimonial.find({}).countDocuments();
+
+      let meta = {
+        totalItems,
+        currentPage,
+        pageSize: itemsPerPage,
+      };
+
+      return res.json({ testimonials, meta });
     } catch (err) {
       return res.status(500).json({
         message: 'An unexpected error occurred on the server.',
@@ -83,7 +116,7 @@ export class TestimonialsController {
     let schema = Joi.object({
       content: Joi.string().required(),
       position: Joi.string().required(),
-      stars: Joi.number().required,
+      stars: Joi.number().required(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);

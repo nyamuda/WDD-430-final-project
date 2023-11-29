@@ -73,6 +73,8 @@ export class TestimonialEditComponent implements OnInit {
       newTestimonial.position =
         this.testimonialFormGroup.controls['position'].value;
 
+
+
       //if in edit mode
       if (this.editMode) {
         this.testimonialService.updateTestimonial(
@@ -82,6 +84,7 @@ export class TestimonialEditComponent implements OnInit {
       } //else if in new testimonial mode
       else {
         this.testimonialService.addTestimonial(newTestimonial);
+       
       }
     }
   }

@@ -8,7 +8,7 @@ const router = express.Router();
 router
   .route('/')
   .get((req: Request, res: Response) => {
-    TestimonialsController.getTestimonials(res);
+    TestimonialsController.getTestimonials(req, res);
   })
   .post(UserUtils.ensureLoggedInMiddleware, (req: Request, res: Response) => {
     TestimonialsController.createTestimonial(req, res);

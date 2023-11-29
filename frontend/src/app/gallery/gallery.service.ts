@@ -75,12 +75,17 @@ export class GalleryService {
         this._gallery = response.items;
         this.galleryListSignal.set(this._gallery);
 
+        //save the meta data
         //meta data for pagination
-        let meta = new MetaData(
-          response.meta.totalItems,
-          response.meta.currentPage,
-          response.meta.pageSize
-        );
+        let totalItems = response.meta.totalItems
+          ? response.meta.totalItems
+          : 0;
+        let currentPage = response.meta.currentPage
+          ? response.meta.currentPage
+          : 0;
+        let pageSize = response.meta.pageSize ? response.meta.pageSize : 0;
+
+        let meta = new MetaData(totalItems, currentPage, pageSize);
         this.metaDataSignal.set(meta);
       },
       (error) => {

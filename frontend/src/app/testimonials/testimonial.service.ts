@@ -59,8 +59,14 @@ export class TestimonialService {
           );
         },
         (error) => {
+          let errorMessage = error['error']['message']
+            ? error['error']['message']
+            : error['error']['error']
+            ? error['error']['error']
+            : "We're sorry, but there was an error submitting your testimonial. Please try again later.";
+
           this.appService.showFailureToast(
-            "We're sorry, but there was an error submitting your testimonial. Please try again later.",
+            errorMessage,
             'Testimonial submission failed'
           );
         }
@@ -88,13 +94,17 @@ export class TestimonialService {
         //save the testimonials
         this.testimonialListSignal.set(response.testimonials);
 
+        let totalItems = response.meta.totalItems
+          ? response.meta.totalItems
+          : 0;
+        let currentPage = response.meta.currentPage
+          ? response.meta.currentPage
+          : 0;
+        let pageSize = response.meta.pageSize ? response.meta.pageSize : 0;
+
         //save the meta data
         //meta data for pagination
-        let meta = new MetaData(
-          response.meta.totalItems,
-          response.meta.currentPage,
-          response.meta.pageSize
-        );
+        let meta = new MetaData(totalItems, currentPage, pageSize);
         this.metaDataSignal.set(meta);
 
         //stop placeholder testimonials
@@ -133,8 +143,14 @@ export class TestimonialService {
             );
           },
           (error) => {
+            let errorMessage = error['error']['message']
+              ? error['error']['message']
+              : error['error']['error']
+              ? error['error']['error']
+              : "We're sorry, but there was an error updating your testimonial. Please try again later.";
+
             this.appService.showFailureToast(
-              "We're sorry, but there was an error updating your testimonial. Please try again later.",
+              errorMessage,
               'Testimonial update failed'
             );
           }
