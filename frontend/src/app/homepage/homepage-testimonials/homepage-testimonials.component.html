@@ -1,4 +1,8 @@
-<div style="background-color: #f3f2f2" class="container-fluid mt-5 py-4">
+<div
+  *ngIf="testimonials().length > 0"
+  style="background-color: #f3f2f2"
+  class="container-fluid mt-5 py-4"
+>
   <div class="container-fluid custom">
     <div
       class="d-flex flex-column align-items-start align-items-md-center text-center"
@@ -12,57 +16,114 @@
       </p>
     </div>
 
-    <!-- Carousel for Large Screens -->
-    <mdb-carousel class="d-none d-lg-block carousel-dark" [controls]="true">
+    <!-- Carousel for Large Screens Start-->
+    <mdb-carousel
+      *ngIf="groupsOfItems.length > 0; else largeScreenPlaceholders"
+      class="d-none d-lg-block carousel-dark"
+      [controls]="true"
+    >
       <mdb-carousel-item *ngFor="let items of groupsOfItems">
         <app-homepage-testimonial-item
           [testimonials]="items"
         ></app-homepage-testimonial-item>
       </mdb-carousel-item>
     </mdb-carousel>
+
+    <!-- Placeholder items start -->
+    <ng-template #largeScreenPlaceholders>
+      <mdb-carousel class="d-none d-lg-block carousel-dark" [controls]="true">
+        <mdb-carousel-item *ngFor="let items of placeholders().slice(0, 3)">
+          <app-homepage-testimonial-item></app-homepage-testimonial-item>
+        </mdb-carousel-item>
+      </mdb-carousel>
+    </ng-template>
+    <!-- Placeholder items end -->
+
     <!-- Carousel for Large Screens End -->
 
     <!-- Carousel for Small Screens -->
-    <mdb-carousel class="d-lg-none carousel-dark pt-2" [controls]="true">
+    <mdb-carousel
+      *ngIf="
+        !isFetchingTestimonials() || testimonials().length != 0;
+        else smallScreenPlaceholders
+      "
+      class="d-lg-none carousel-dark pt-2"
+      [controls]="true"
+    >
       <mdb-carousel-item *ngFor="let testimonial of testimonials()">
-        <div class="d-flex justify-content-center container-sm">
-          <div class="row">
-            <div class="col-lg-4 d-flex justify-content-center">
-              <img
-                [src]="testimonial.userId.imageUrl"
-                style="border-radius: 4px"
-                class="shadow-1 mb-3 mb-lg-0 img-fluid"
-                alt="Reviewer photo"
-                width="150"
-                height="150"
-              />
-            </div>
-            <div
-              class="col-md-9 col-lg-7 col-xl-8 text-center text-lg-start mx-auto mx-lg-0"
-            >
-              <div class="d-flex justify-content-center">
-                <star-rating
-                  class="ms-n1"
-                  [readOnly]="true"
-                  [starType]="'svg'"
-                  [size]="'medium'"
-                  [rating]="5"
-                ></star-rating>
+        <div class="row d-flex justify-content-center">
+          <div class="col-md-10">
+            <div>
+              <div class="m-3">
+                <div class="row">
+                  <div
+                    class="col-lg-4 d-flex justify-content-center align-items-center mb-4 mb-lg-0"
+                  >
+                    <img
+                      [src]="testimonial.userId.imageUrl"
+                      class="img-fluid shadow-1"
+                      alt="Reviewer photo"
+                      width="200"
+                      height="200"
+                    />
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <star-rating
+                      class="ms-n1"
+                      [readOnly]="true"
+                      [starType]="'svg'"
+                      [size]="'medium'"
+                      [rating]="testimonial.stars"
+                    ></star-rating>
+                  </div>
+                  <div class="col-lg-8 text-center">
+                    <p class="text-muted fw-light mb-4">
+                      <i class="fas fa-quote-left pe-2"></i
+                      >{{ testimonial.content }}
+                    </p>
+                    <p class="fw-bold lead mb-2">
+                      <strong> {{ testimonial.userId.name }}</strong>
+                    </p>
+                    <p class="fw-bold text-muted mb-0">
+                      {{ testimonial.position }}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <h3 class="mb-0">
-                {{ testimonial.userId.name }}
-              </h3>
-              <p class="fw-bold text-muted mb-2">
-                {{ testimonial.position }}
-              </p>
-              <p class="mb-0 pb-3">
-                {{ testimonial.content }}
-              </p>
             </div>
           </div>
         </div>
       </mdb-carousel-item>
     </mdb-carousel>
+
+    <!-- Placeholder items start -->
+    <ng-template #smallScreenPlaceholders>
+      <mdb-carousel class="d-lg-none carousel-dark pt-2" [controls]="true">
+        <mdb-carousel-item *ngFor="let placeholder of placeholders()">
+          <div
+            class="row mb-5 mb-md-0 placeholder-glow d-flex justify-content-center"
+          >
+            <div class="col-md-10 text-center">
+              <div class="d-flex justify-content-center mb-4">
+                <img
+                  src="../../../assets/images/placeholder/placeholder1.png"
+                  class="shadow-1-strong"
+                  width="200"
+                  height="150"
+                />
+              </div>
+              <p class="mb-3 placeholder col-4 placeholder-lg"></p>
+              <h6 class="text-primary mb-3"></h6>
+
+              <p class="px-xl-3 placeholder col-8"></p>
+              <p class="px-xl-3 placeholder col-12"></p>
+              <p class="px-xl-3 placeholder col-10"></p>
+            </div>
+          </div>
+        </mdb-carousel-item>
+      </mdb-carousel>
+    </ng-template>
+    <!-- Placeholder items end -->
     <!-- Carousel for Small Screens End -->
   </div>
 </div>

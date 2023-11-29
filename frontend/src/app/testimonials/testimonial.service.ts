@@ -20,6 +20,9 @@ export class TestimonialService {
   //meta data for pagination
   private _metaData = new MetaData(0, 0, 0);
 
+  //number of placeholder testimonial items
+  placeholders = new Array<number>(9);
+
   //Signals
   public testimonialListSignal: WritableSignal<Testimonial[]> = signal([]);
   public metaDataSignal: WritableSignal<MetaData> = signal(this._metaData);
