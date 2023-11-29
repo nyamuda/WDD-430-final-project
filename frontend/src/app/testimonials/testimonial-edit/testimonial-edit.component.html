@@ -1,1 +1,130 @@
-<p>testimonial-edit works!</p>
+<section>
+  <div class="my-3 text-dark rounded-top px-0 mb-5">
+    <form id="testimonial-form" [formGroup]="testimonialFormGroup">
+      <div class="card">
+        <div class="card-body p-4">
+          <div class="d-flex flex-column flex-lg-row flex-start w-100">
+            <div class="d-flex flex-start">
+              <img
+                class="rounded-circle shadow-1-strong me-3 reviewer-image"
+                [src]="
+                  currentUser().imageUrl
+                    ? currentUser().imageUrl
+                    : placeholderImageUrl()
+                "
+                alt="avatar"
+                width="65"
+                height="65"
+              />
+              <div class="d-lg-none">
+                <h5 *ngIf="!editMode; else elseBlock">Add testimonial</h5>
+                <ng-template #elseBlock
+                  ><h5>Update testimonial</h5></ng-template
+                >
+                <!-- Star rating -->
+                <div class="d-flex justify-content-start mb-2">
+                  <star-rating-control
+                    formControlName="stars"
+                    [starType]="'svg'"
+                    [rating]=""
+                  ></star-rating-control>
+                </div>
+              </div>
+            </div>
+            <div class="w-100">
+              <div class="d-none d-lg-block">
+                <h5 *ngIf="!editMode; else elseBlock">Add testimonial</h5>
+                <ng-template #elseBlock
+                  ><h5>Update testimonial</h5></ng-template
+                >
+                <!-- Star rating -->
+                <div class="d-flex justify-content-start mb-2">
+                  <star-rating-control
+                    formControlName="stars"
+                    [starType]="'svg'"
+                    [rating]=""
+                  ></star-rating-control>
+                </div>
+              </div>
+
+              <mdb-form-control class="mb-4 mt-3 mt-lg-0">
+                <input
+                  mdbValidate
+                  [ngClass]="{
+                    'is-invalid':
+                      testimonialFormGroup.get('position').invalid &&
+                      testimonialFormGroup.get('position').touched
+                  }"
+                  mdbInput
+                  class="form-control form-control-lg"
+                  id="position"
+                  formControlName="position"
+                />
+                <label mdbLabel class="form-label" for="position"
+                  >Course Taken</label
+                >
+                <mdb-error
+                  class="mt-1 error-text"
+                  *ngIf="
+                    testimonialFormGroup.get('position').invalid &&
+                    testimonialFormGroup.get('position').touched
+                  "
+                >
+                  The field is required.</mdb-error
+                >
+              </mdb-form-control>
+
+              <!-- Text area -->
+              <mdb-form-control class="mb-4 mt-3 mt-lg-0">
+                <textarea
+                  mdbValidate
+                  [ngClass]="{
+                    'is-invalid':
+                      testimonialFormGroup.invalid &&
+                      testimonialFormGroup.touched
+                  }"
+                  mdbInput
+                  class="form-control bg-light"
+                  id="textForm"
+                  rows="4"
+                  formControlName="content"
+                ></textarea>
+                <label mdbLabel class="form-label" for="textForm"
+                  >Testimonial</label
+                >
+                <mdb-error
+                  class="mt-1 error-text"
+                  *ngIf="
+                    testimonialFormGroup.get('content').invalid &&
+                    testimonialFormGroup.get('content').touched
+                  "
+                >
+                  The field is required.</mdb-error
+                >
+              </mdb-form-control>
+
+              <div class="d-flex justify-content-start pt-2">
+                <a
+                  (click)="submitForm($event)"
+                  [routerLink]="'/testimonials/'"
+                  [ngClass]="{ disabled: testimonialFormGroup.invalid }"
+                  class="btn custom text-light d-flex justify-content-center align-items-center px-3"
+                  href=""
+                  >Add testimonial</a
+                >
+
+                <a
+                  [routerLink]="'/testimonials/'"
+                  (click)="onCancel($event)"
+                  class="btn btn-secondary text-dark d-flex justify-content-center align-items-center ms-2 px-3"
+                  href=""
+                  >Cancel</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>

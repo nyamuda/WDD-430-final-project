@@ -1,1 +1,23 @@
-<app-testimonial-list></app-testimonial-list>
+<div class="container-fluid custom mt-5">
+  <div class="container m-auto text-center">
+    <p class="heading-line m-auto rounded"></p>
+    <p class="display-6 text-uppercase">Testimonials</p>
+    <p>
+      Find out why learners love our driving school through their testimonials.
+      These testimonials go beyond just driving skills, shedding light on the
+      supportive community and personalized guidance that set our programs
+      apart.
+    </p>
+  </div>
+  <div class="d-flex justify-content-start justify-content-lg-end mb-5">
+    <a
+      routerLink="new"
+      fragment="testimonial-form"
+      class="btn custom text-light"
+      >Write testimonial</a
+    >
+  </div>
+
+  <router-outlet></router-outlet>
+  <app-testimonial-list></app-testimonial-list>
+</div>

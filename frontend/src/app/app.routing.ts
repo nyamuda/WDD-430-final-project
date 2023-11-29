@@ -27,6 +27,7 @@ import { AdminLoginComponent } from './admin/admin-login/admin-login.component';
 import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard.component';
 import { FAQComponent } from './faq/faq.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
+import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -78,6 +79,18 @@ export const routes: Routes = [
   {
     path: 'testimonials',
     component: TestimonialsComponent,
+    children: [
+      {
+        path: ':id/edit',
+        component: TestimonialEditComponent,
+        canActivate: [loggedInAuthGuard],
+      },
+      {
+        path: 'new',
+        component: TestimonialEditComponent,
+        canActivate: [loggedInAuthGuard],
+      },
+    ],
   },
   {
     path: 'dashboard',

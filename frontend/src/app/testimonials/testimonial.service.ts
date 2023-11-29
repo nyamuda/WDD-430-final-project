@@ -44,10 +44,9 @@ export class TestimonialService {
 
       let testimonialDto = {
         userId: this.loggedInUser()['_id'],
-        imageUrl: newTestimonial.imageUrl,
         position: newTestimonial.position,
         content: newTestimonial.content,
-        rating: newTestimonial.rating,
+        stars: newTestimonial.stars,
       };
 
       this.http.post(url, testimonialDto, { headers }).subscribe(
@@ -114,10 +113,10 @@ export class TestimonialService {
 
       let testimonialDto = {
         userId: this.loggedInUser()['_id'],
-        imageUrl: newTestimonial.imageUrl,
+
         position: newTestimonial.position,
         content: newTestimonial.content,
-        rating: newTestimonial.rating,
+        rating: newTestimonial.stars,
       };
 
       const url = `${this.appService.apiUrl}/testimonials/${id}`;
