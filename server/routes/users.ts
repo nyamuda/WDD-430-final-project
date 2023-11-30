@@ -9,6 +9,9 @@ router
   .route('/')
   .get(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     UsersController.getUsers(res);
+  })
+  .put((req: Request, res: Response) => {
+    UsersController.changeUserVerificationStatus(req, res);
   });
 
 router

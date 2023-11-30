@@ -5,7 +5,9 @@ interface IUser {
   email: string;
   password: string;
   isAdmin: boolean;
-  imageUrl:string
+  imageUrl: string;
+  token: string;
+  verified: boolean;
 }
 
 let userSchema = new Schema<IUser>(
@@ -15,6 +17,8 @@ let userSchema = new Schema<IUser>(
     password: String,
     isAdmin: { type: Boolean },
     imageUrl: String,
+    token: String,
+    verified: Boolean,
   },
   {
     timestamps: true,

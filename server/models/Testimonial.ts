@@ -5,6 +5,7 @@ interface ITestimonial {
   userId: object;
   stars: number;
   position: string;
+  approved: boolean;
 }
 
 let testimonialSchema = new Schema<ITestimonial>(
@@ -13,6 +14,7 @@ let testimonialSchema = new Schema<ITestimonial>(
     userId: { type: mongoose.Types.ObjectId, ref: 'User' },
     stars: String,
     position: String,
+    approved: Boolean,
   },
   {
     timestamps: true,

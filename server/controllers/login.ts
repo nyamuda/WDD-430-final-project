@@ -46,11 +46,13 @@ export class LoginController {
     let userId = userExists._id.toString();
     let email = userExists.email;
     let isAdmin = userExists.isAdmin;
+    let verified = userExists.verified;
 
     let accessToken = UserUtils.createAccessToken({
       email,
       isAdmin,
       userId,
+      verified,
     });
 
     return res.json({
@@ -106,11 +108,13 @@ export class LoginController {
     let userId = userExists._id.toString();
     let email = userExists.email;
     let isAdmin = userExists.isAdmin;
+    let verified = userExists.verified;
 
     let accessToken = UserUtils.createAccessToken({
       email,
       isAdmin,
       userId,
+      verified,
     });
 
     return res.json({

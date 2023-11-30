@@ -34,6 +34,7 @@ export class TestimonialsController {
       userId: req.body.userId,
       position: req.body.position,
       stars: req.body.stars ? req.body.stars : 0,
+      approved: false,
     };
     // Post request
     await Testimonial.create(newTestimonial)
@@ -137,6 +138,7 @@ export class TestimonialsController {
       content: req.body.content,
       stars: req.body.stars ? req.body.stars : 0,
       position: req.body.position,
+      approved: false,
     };
 
     // PUT request
@@ -163,6 +165,44 @@ export class TestimonialsController {
     }
 
     await Testimonial.deleteOne({ _id: req.params.id })
+      .then(() => {
+        return res.status(204).end();
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          message: 'An unexpected error occurred on the server.',
+          error: err,
+        });
+      });
+  }
+
+  // Approve testimonial by ID
+  public static async approveTestimonial(req: Request, res: Response) {
+    // Validation
+    let schema = Joi.object({
+      approved: Joi.boolean().required(),
+    }).unknown(true);
+
+    let { error, value } = schema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+    // Check if the Testimonial with the specified ID exists
+    let testimonialExists = await Testimonial.findById(req.params.id);
+
+    if (!testimonialExists) {
+      return res.status(404).json({
+        message: 'The testimonial with that given ID does not exist.',
+      });
+    }
+
+    let testimonial = {
+      approved: req.body.approved,
+    };
+
+    // PUT request
+    await Testimonial.updateOne({ _id: req.params.id }, testimonial)
       .then(() => {
         return res.status(204).end();
       })

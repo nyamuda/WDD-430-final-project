@@ -186,4 +186,5 @@ type TokenPayload = {
   email: String;
   isAdmin: Boolean;
   userId: String;
+  verified: Boolean;
 };

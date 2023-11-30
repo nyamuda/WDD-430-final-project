@@ -3,9 +3,13 @@ import { Request, Response } from 'express';
 import * as bcrypt from 'bcrypt';
 import * as Joi from 'joi';
 import { UserUtils } from '../utils/userUtils';
+import * as nodemailer from 'nodemailer';
+import { EmailUtils, verifyEmailInfo } from '../utils/emailUtils';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 export class RegisterController {
-  //Create a new Course
+  //Register user
   public static async registerUser(req: Request, res: Response) {
     let schema = Joi.object({
       name: Joi.string().required(),
@@ -37,11 +41,12 @@ export class RegisterController {
       email: req.body.email,
       password: hashedPassword,
       isAdmin: false,
+      verified: false,
     };
 
     //Create user
     await User.create(newUser)
-      .then((user) => {
+      .then(async (user) => {
         //Create token
         let userId = user._id.toString();
 
@@ -50,7 +55,21 @@ export class RegisterController {
           email: user.email,
           isAdmin: user.isAdmin,
           userId,
+          verified: user.verified,
         });
+
+        //save the token to database
+        await User.updateOne({ _id: userId }, { token: accessToken });
+
+        //send verification email
+        let emailData: verifyEmailInfo = {
+          name: user.name,
+          email: user.name,
+          appDomain: process.env.APP_DOMAIN!,
+          token: accessToken,
+        };
+        await this.verifyUserEmail(emailData);
+
         return res.status(201).json({
           message: 'The user was successfully created.',
           token: accessToken,
@@ -62,5 +81,31 @@ export class RegisterController {
           error: err,
         });
       });
+  }
+
+  // Send verification email on registering
+  private static async verifyUserEmail(emailData: verifyEmailInfo) {
+    try {
+      const transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        service: 'gmail',
+        auth: {
+          user: 'ptnrlab@gmail.com',
+          pass: process.env.GMAIL_APP_PASSWORD,
+        },
+      });
+
+      const mailOptions = {
+        from: 'ptnrlab@gmail.com',
+        to: emailData.email,
+        subject: 'Verify your email address',
+        html: EmailUtils.VerifyEmailHTMLTemplate(emailData),
+      };
+
+      let info = await transporter.sendMail(mailOptions);
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

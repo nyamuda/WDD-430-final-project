@@ -32,4 +32,10 @@ router
     TestimonialsController.getTestimonial(req, res);
   });
 
+router
+  .route('/:id/approve')
+  .put(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
+    TestimonialsController.approveTestimonial(req, res);
+  });
+
 export { router as TestimonialRouter };

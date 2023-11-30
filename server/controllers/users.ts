@@ -144,4 +144,46 @@ export class UsersController {
 
     return false;
   }
+
+  //Change user verification status if they confirm their email address
+  public static async changeUserVerificationStatus(
+    req: Request,
+    res: Response
+  ) {
+    let userId = req.params['id'];
+    // Validation
+    let schema = Joi.object({
+      verified: Joi.boolean().required(),
+    }).unknown(true);
+
+    let { error, value } = schema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
+    // Check if the user exists
+    let userExists = await User.findById(userId);
+
+    if (!userExists) {
+      return res.status(404).json({
+        message: 'The requested user does not exist.',
+      });
+    }
+
+    let user = {
+      verified: req.body.verified,
+    };
+
+    // PUT request
+    await User.updateOne({ _id: req.params.id }, user)
+      .then((user) => {
+        return res.status(204).end();
+      })
+      .catch((err) => {
+        return res.status(500).json({
+          message: 'An unexpected error occurred on the server.',
+          error: err,
+        });
+      });
+  }
 }
