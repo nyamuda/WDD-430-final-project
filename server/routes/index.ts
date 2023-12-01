@@ -11,3 +11,4 @@ export * from './oauth';
 export * from './company-info';
 export * from './faq';
 export * from './testimonials';
+export * from './email';

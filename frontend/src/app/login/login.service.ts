@@ -6,6 +6,8 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
 import { AppService } from '../app.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { EmailVerificationService } from '../email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +25,9 @@ export class LoginService {
     private router: Router,
 
     private userService: UsersService,
-    private appService: AppService
+    private appService: AppService,
+    private jwtHelper: JwtHelperService,
+    private emailVerificationService: EmailVerificationService
   ) {}
 
   login(newUser: User) {
@@ -54,6 +58,9 @@ export class LoginService {
         //by decoding the access token
         this.userService.decodeJwtToken();
 
+        //check if the user has verified their email
+        this.emailVerificationService.checkUserEmailVerified(response['token']);
+
         this.appService.showSuccessToast('Login successful!', '');
 
         //navigate the user
@@ -74,6 +81,8 @@ export class LoginService {
       }
     );
   }
+
+  
 
   // When the user logs out
   logout() {

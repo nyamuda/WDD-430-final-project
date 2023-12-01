@@ -10,6 +10,8 @@ import { Observable } from 'rxjs';
 import { Injectable, inject } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { LoginService } from '../login/login.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { EmailVerificationService } from '../email-verification/email-verification.service';
 
 //Guard for logged in routes
 export const loggedInAuthGuard: CanActivateFn = (
@@ -20,6 +22,7 @@ export const loggedInAuthGuard: CanActivateFn = (
   const authService = inject(AuthService);
   const userService = inject(UsersService);
   const loginService = inject(LoginService);
+  const jwtHelper = inject(JwtHelperService);
 
   //if the user is logged in
   if (authService.isAuthenticated()) {

@@ -31,6 +31,7 @@ export class OauthController {
           email: userExists.email,
           isAdmin: userExists.isAdmin,
           userId: userExists._id.toString(),
+          verified: true,
         });
         return res.status(201).json({
           message: 'Login successful.',
@@ -47,6 +48,7 @@ export class OauthController {
             email: user.email,
             isAdmin: user.isAdmin,
             userId: user.toObject()._id.toString(),
+            verified: true,
           });
           return res.json({
             message: 'Login successful.',
@@ -95,6 +97,7 @@ export class OauthController {
           email: userExists.email,
           isAdmin: userExists.isAdmin,
           userId: userExists._id.toString(),
+          verified: true,
         });
         return res.status(201).json({
           message: 'Login successful.',
@@ -111,6 +114,7 @@ export class OauthController {
             email: user.email,
             isAdmin: user.isAdmin,
             userId: user.toObject()._id.toString(),
+            verified: true,
           });
           return res.json({
             message: 'Login successful.',

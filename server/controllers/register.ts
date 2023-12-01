@@ -6,6 +6,7 @@ import { UserUtils } from '../utils/userUtils';
 import * as nodemailer from 'nodemailer';
 import { EmailUtils, verifyEmailInfo } from '../utils/emailUtils';
 import * as dotenv from 'dotenv';
+import { EmailVerificationController } from './email';
 dotenv.config();
 
 export class RegisterController {
@@ -62,13 +63,7 @@ export class RegisterController {
         await User.updateOne({ _id: userId }, { token: accessToken });
 
         //send verification email
-        let emailData: verifyEmailInfo = {
-          name: user.name,
-          email: user.name,
-          appDomain: process.env.APP_DOMAIN!,
-          token: accessToken,
-        };
-        await this.verifyUserEmail(emailData);
+        await EmailVerificationController.sendVerificationEmail(req, res);
 
         return res.status(201).json({
           message: 'The user was successfully created.',
@@ -81,31 +76,5 @@ export class RegisterController {
           error: err,
         });
       });
-  }
-
-  // Send verification email on registering
-  private static async verifyUserEmail(emailData: verifyEmailInfo) {
-    try {
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 587,
-        service: 'gmail',
-        auth: {
-          user: 'ptnrlab@gmail.com',
-          pass: process.env.GMAIL_APP_PASSWORD,
-        },
-      });
-
-      const mailOptions = {
-        from: 'ptnrlab@gmail.com',
-        to: emailData.email,
-        subject: 'Verify your email address',
-        html: EmailUtils.VerifyEmailHTMLTemplate(emailData),
-      };
-
-      let info = await transporter.sendMail(mailOptions);
-    } catch (error) {
-      console.log(error);
-    }
   }
 }

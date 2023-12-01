@@ -55,7 +55,7 @@ export class EmailUtils {
       
           <p>Thanks for signing up to Loyd School of driving. Please verify your email address.</p>
       
-          <a href="${info.appDomain}/verify?token=${info.token}">VERIFY MY EMAIL</a>
+          <a href="${info.appDomain}/email-verification/?token=${info.token}">VERIFY MY EMAIL</a>
       
         </div>
       

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
+import { EmailVerificationService } from '../email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class RegisterService {
   constructor(
     private http: HttpClient,
     private appService: AppService,
-    private router: Router
+    private emailVerificationService: EmailVerificationService
   ) {}
 
   register(newUser: User) {
@@ -30,18 +31,14 @@ export class RegisterService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {
-        console.log(response['token']);
-        //show toast
-        this.appService.showSuccessToast(
-          `You can now log in with your credentials.`,
-          'Registration Successful'
-        );
-
         //disable loading button
         this.isRegistering.set(false);
 
-        //take the user to the login page
-        this.router.navigateByUrl('/login');
+        //save the JWT token to session storage
+        sessionStorage.setItem('jwt_token', response['token']);
+
+        //ask the user to verify their email
+        this.emailVerificationService.checkUserEmailVerified(response['token']);
       },
       (error) => {
         //show toast
