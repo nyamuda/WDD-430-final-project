@@ -42,8 +42,6 @@ export class EmailVerificationController {
         };
 
         let info = await transporter.sendMail(mailOptions);
-
-        return res.status(204).end();
       }
     } catch (error) {
       return res.status(500).json({

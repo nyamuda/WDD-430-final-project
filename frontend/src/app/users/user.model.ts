@@ -5,6 +5,7 @@ export class User {
   private _password: string;
   private _isAdmin: boolean;
   private _imageUrl: string;
+  private _verified: boolean;
 
   constructor() {
     // Initialize any default values or perform other operations
@@ -62,5 +63,14 @@ export class User {
 
   set imageUrl(value: string) {
     this._imageUrl = value;
+  }
+
+  // Getter and Setter for verified
+  get verified(): boolean {
+    return this._verified;
+  }
+
+  set verified(value: boolean) {
+    this._verified = value;
   }
 }

@@ -45,7 +45,7 @@ export class OauthService {
       urlState.currentState === sessionState.currentState
     ) {
       //set the app redirect URL in case the login is a success
-      this.loginService.redirectUrl.set(sessionState.currentState);
+      this.appService.redirectUrl.set(sessionState.currentState);
       return true;
     }
     //show an error the states don't match

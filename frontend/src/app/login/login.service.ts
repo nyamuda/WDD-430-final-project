@@ -1,4 +1,10 @@
-import { Injectable, WritableSignal, signal } from '@angular/core';
+import {
+  Injectable,
+  Signal,
+  WritableSignal,
+  computed,
+  signal,
+} from '@angular/core';
 import { User } from '../users/user.model';
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
@@ -17,7 +23,7 @@ export class LoginService {
   rememberMe: WritableSignal<boolean> = signal(false); // remember me on log in
   //redirect URL if log in is a success
   //default is the homepage
-  redirectUrl: WritableSignal<string> = signal('');
+  redirectUrl: Signal<string> = computed(() => this.appService.redirectUrl());
 
   constructor(
     private http: HttpClient,
@@ -41,30 +47,46 @@ export class LoginService {
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {
-        //if the user wants to be be remembered on log in
-        //save the JWT token to local storage
-        if (this.rememberMe) {
-          localStorage.setItem('jwt_token', response['token']);
-        }
-        //else save the JWT token to session storage
-        else {
-          sessionStorage.setItem('jwt_token', response['token']);
-        }
-
         //disable loading button
         this.isLoggingIn.set(false);
+        //get access token
+        let accessToken = response['token'];
+        //check if user email is verified before storing the token
+        let isUserVerified: boolean = this.userService.isVerified(accessToken);
 
-        //load the user information to the user service
-        //by decoding the access token
-        this.userService.decodeJwtToken();
+        //user verified
+        //save the access token to local/session storage
+        if (isUserVerified) {
+          //if the user wants to be be remembered on log in
+          //save the JWT token to local storage
+          if (this.rememberMe) {
+            localStorage.setItem('jwt_token', response['token']);
+          }
+          //else save the JWT token to session storage
+          else {
+            sessionStorage.setItem('jwt_token', response['token']);
+          }
 
-        //check if the user has verified their email
-        this.emailVerificationService.checkUserEmailVerified(response['token']);
+          //load the user information to the user service
+          //by decoding the access token
+          this.userService.decodeJwtToken();
 
-        this.appService.showSuccessToast('Login successful!', '');
+          this.appService.showSuccessToast('Login successful!', '');
 
-        //navigate the user
-        this.router.navigateByUrl(this.redirectUrl());
+          //navigate the user
+          this.router.navigateByUrl(this.redirectUrl());
+        }
+
+        //user not verified
+        //send verification email
+        //navigate the user to the email verification page
+        else {
+          //the email that needs to be verified
+          let emailToVerify = userDto.email;
+          this.emailVerificationService.emailToVerify.set(emailToVerify);
+          this.emailVerificationService.sendVerificationEmail();
+          this.router.navigateByUrl('/email-verification');
+        }
       },
       (error) => {
         //disable loading button
@@ -81,8 +103,6 @@ export class LoginService {
       }
     );
   }
-
-  
 
   // When the user logs out
   logout() {

@@ -2,6 +2,8 @@ import { Injectable, WritableSignal, Signal } from '@angular/core';
 import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UsersService } from '../users/users.service';
+import { User } from '../users/user.model';
+import { EmailVerificationService } from '../email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,8 @@ export class AuthService {
   constructor(
     private loginService: LoginService,
     private jwtHelper: JwtHelperService,
-    private userService: UsersService
+    private userService: UsersService,
+    private emailVerificationService: EmailVerificationService
   ) {}
 
   isAuthenticated(): boolean {
@@ -22,7 +25,6 @@ export class AuthService {
     if (!token) {
       return false;
     }
-
 
     return true;
   }
@@ -43,8 +45,7 @@ export class AuthService {
     return decodedToken.isAdmin;
   }
 
-  //get user access token
-  //check if its the admin
+  //get user decoded access token
   getTokenInfo(): string {
     if (this.isAuthenticated()) {
       let token = this.userService.getJwtToken();

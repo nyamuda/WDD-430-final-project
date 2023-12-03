@@ -9,6 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AppService {
   private _courses = new Array<Course>();
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
+  public redirectUrl: WritableSignal<string> = signal('');
   // public apiUrl = 'https://driving-school-5txd.onrender.com';
   public apiUrl = 'http://localhost:8000';
 

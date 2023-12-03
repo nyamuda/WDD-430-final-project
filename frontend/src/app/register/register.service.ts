@@ -16,7 +16,8 @@ export class RegisterService {
   constructor(
     private http: HttpClient,
     private appService: AppService,
-    private emailVerificationService: EmailVerificationService
+    private emailVerificationService: EmailVerificationService,
+    private router: Router
   ) {}
 
   register(newUser: User) {
@@ -34,18 +35,24 @@ export class RegisterService {
         //disable loading button
         this.isRegistering.set(false);
 
+        console.log(response);
+
         //save the JWT token to session storage
         sessionStorage.setItem('jwt_token', response['token']);
 
         //ask the user to verify their email
-        this.emailVerificationService.checkUserEmailVerified(response['token']);
+        this.emailVerificationService.sendVerificationEmail(newUser.email);
+
+        this.router.navigateByUrl('/email-verification');
       },
       (error) => {
         //show toast
         //show toast
         let message = error['error']['message']
           ? error['error']['message']
-          : error['error']['error'];
+          : error['error']['error']
+          ? error['error']['error']
+          : 'An unexpected error occurred on the server.';
         this.appService.showFailureToast(message, 'Registration failed');
         //disable loading button
         this.isRegistering.set(false);

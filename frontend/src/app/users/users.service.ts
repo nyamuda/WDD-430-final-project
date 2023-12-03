@@ -45,7 +45,7 @@ export class UsersService {
     return this.http.get<User>(url);
   }
 
-  //Get access token from local storage
+  //Get access token from local/session storage
   public getJwtToken(): string {
     //check if there is a token in session storage
     let sessionToken = sessionStorage.getItem('jwt_token');
@@ -180,5 +180,18 @@ export class UsersService {
     }
 
     return hexCodes[0];
+  }
+
+  //check if user email is verified
+  isVerified(token: string): boolean {
+    let decodedToken = this.jwtHelper.decodeToken(token);
+    let isUserVerified = decodedToken.verified;
+
+    if (isUserVerified) {
+      return true;
+    }
+
+    // User is not verified,
+    return false;
   }
 }

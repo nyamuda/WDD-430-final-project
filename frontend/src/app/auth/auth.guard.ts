@@ -12,6 +12,8 @@ import { UsersService } from '../users/users.service';
 import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { EmailVerificationService } from '../email-verification/email-verification.service';
+import { AppService } from '../app.service';
+import { User } from '../users/user.model';
 
 //Guard for logged in routes
 export const loggedInAuthGuard: CanActivateFn = (
@@ -21,8 +23,9 @@ export const loggedInAuthGuard: CanActivateFn = (
   const router = inject(Router);
   const authService = inject(AuthService);
   const userService = inject(UsersService);
-  const loginService = inject(LoginService);
+  const emailVerificationService = inject(EmailVerificationService);
   const jwtHelper = inject(JwtHelperService);
+  const appService = inject(AppService);
 
   //if the user is logged in
   if (authService.isAuthenticated()) {
@@ -31,12 +34,12 @@ export const loggedInAuthGuard: CanActivateFn = (
     userService.decodeJwtToken();
 
     return true;
+  } else {
+    // User is not authenticated, redirect to the login page
+    //and preserve the attempted URL by saving it
+    appService.redirectUrl.set(state.url);
+    return router.createUrlTree(['/login']);
   }
-
-  // User is not authenticated, redirect to the login page
-  //and preserve the attempted URL by saving it
-  loginService.redirectUrl.set(state.url);
-  return router.createUrlTree(['/login']);
 };
 
 //Guard for admin routes
@@ -47,7 +50,7 @@ export const adminAuthGuard: CanActivateFn = (
   const router = inject(Router);
   const authService = inject(AuthService);
   const userService = inject(UsersService);
-  const loginService = inject(LoginService);
+  const appService = inject(AppService);
 
   //if the user is logged in
   if (authService.isAdmin()) {
@@ -60,7 +63,7 @@ export const adminAuthGuard: CanActivateFn = (
 
   // User is not admin redirect to the login page
   //and preserve the attempted URL by saving it
-  loginService.redirectUrl.set(state.url);
+  appService.redirectUrl.set(state.url);
   return router.navigateByUrl('/admin');
 };
 
@@ -75,8 +78,8 @@ export const rightUserAuthGuard: CanActivateFn = (
   const router = inject(Router);
   const authService = inject(AuthService);
   const userService = inject(UsersService);
-  const loginService = inject(LoginService);
-
+  const appService = inject(AppService);
+  const jwtHelper = inject(JwtHelperService);
   const loggedInUserId = authService.getTokenInfo()['userId'];
   const paramValue = route.params['id'];
 
@@ -91,6 +94,6 @@ export const rightUserAuthGuard: CanActivateFn = (
 
   // User is not admin redirect to the login page
   //and preserve the attempted URL by saving it
-  loginService.redirectUrl.set(state.url);
+  appService.redirectUrl.set(state.url);
   return router.navigateByUrl('/login');
 };

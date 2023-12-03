@@ -1,0 +1,23 @@
+<div class="container-fluid custom text-center">
+  <div *ngIf="success; else emailVerificationFailed">
+    <h2>Thank You!</h2>
+    <p>
+      Your email address has been successfully verified. Welcome to our
+      platform!
+    </p>
+    <a [routerLink]="redirectUrl()" class="btn btn-primary">Continue</a>
+  </div>
+
+  <ng-template #emailVerificationFailed>
+    <h2>Verification Failed</h2>
+    <p>
+      Sorry, an unexpected error occurred during the verification process.
+      Please try again later or contact our support team for assistance.
+    </p>
+    <div class="">
+      <button (click)="resendVerificationEmail()" class="btn btn-primary">
+        Resend Verification Email
+      </button>
+    </div>
+  </ng-template>
+</div>

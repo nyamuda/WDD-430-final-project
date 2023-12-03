@@ -29,7 +29,7 @@ import { FAQComponent } from './faq/faq.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
 import { EmailVerificationComponent } from './email-verification/email-verification.component';
-import { EmailVerificationSuccessComponent } from './email-verification/email-verification-success/email-verification-success.component';
+import { EmailVerificationResultComponent } from './email-verification/email-verification-result/email-verification-result.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -82,12 +82,15 @@ export const routes: Routes = [
     path: 'email-verification',
     component: EmailVerificationComponent,
     canActivate: [loggedInAuthGuard],
+    children: [
+      {
+        path: ':result',
+        component: EmailVerificationResultComponent,
+        canActivate: [loggedInAuthGuard],
+      },
+    ],
   },
-  {
-    path: 'email-verification/success',
-    component: EmailVerificationSuccessComponent,
-    canActivate: [loggedInAuthGuard],
-  },
+
   {
     path: 'testimonials',
     component: TestimonialsComponent,

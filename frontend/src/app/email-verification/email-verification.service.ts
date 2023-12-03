@@ -1,4 +1,10 @@
-import { Injectable, Signal, computed } from '@angular/core';
+import {
+  Injectable,
+  Signal,
+  WritableSignal,
+  computed,
+  signal,
+} from '@angular/core';
 import { AppService } from '../app.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UsersService } from '../users/users.service';
@@ -11,6 +17,7 @@ import { Router } from '@angular/router';
 })
 export class EmailVerificationService {
   userSignal: Signal<User> = computed(() => this.userService.user());
+  emailToVerify: WritableSignal<string> = signal('');
 
   constructor(
     private appService: AppService,
@@ -23,8 +30,7 @@ export class EmailVerificationService {
   //send verification email if the user is not verified
   sendVerificationEmail() {
     let userDto = {
-      name: this.userSignal().name.trim(),
-      email: this.userSignal().email.trim(),
+      email: this.emailToVerify,
     };
     const url = `${this.appService.apiUrl}/email-verification/send`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
@@ -42,7 +48,7 @@ export class EmailVerificationService {
   verifyUser(userId: string, token: string) {
     let verificationToken = { userId, token };
 
-    const url = `${this.appService.apiUrl}/email-verification/verify`;
+    const url = `${this.appService.apiUrl}/users/verify`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     this.http.post(url, verificationToken, { headers }).subscribe(
@@ -50,25 +56,21 @@ export class EmailVerificationService {
         this.router.navigateByUrl('email-verification/success');
       },
       (error) => {
-        //show toast
-        //show toast
-        this.appService.showFailureToast('Verification failed', '');
+        this.router.navigateByUrl('email-verification/fail');
       }
     );
   }
 
   //check if the user has verified their email when they login
-  checkUserEmailVerified(token: string) {
+  checkUserEmailVerified(token: string): boolean {
     //check to see if the user is verified
     let decodedToken = this.jwtHelper.decodeToken(token);
     let verified: boolean = decodedToken.verified;
-    if (!verified) {
-      // User is not verified,
-      //send email to the user and
-      ///redirect to the email verification page
-      this.sendVerificationEmail();
-
-      this.router.navigateByUrl('/email-verification');
+    let email = decodedToken.email;
+    if (verified) {
+      return true;
     }
+
+    return false;
   }
 }
