@@ -11,7 +11,6 @@ import { Injectable, inject } from '@angular/core';
 import { UsersService } from '../users/users.service';
 import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { EmailVerificationService } from '../email-verification/email-verification.service';
 import { AppService } from '../app.service';
 import { User } from '../users/user.model';
 
@@ -23,7 +22,6 @@ export const loggedInAuthGuard: CanActivateFn = (
   const router = inject(Router);
   const authService = inject(AuthService);
   const userService = inject(UsersService);
-  const emailVerificationService = inject(EmailVerificationService);
   const jwtHelper = inject(JwtHelperService);
   const appService = inject(AppService);
 

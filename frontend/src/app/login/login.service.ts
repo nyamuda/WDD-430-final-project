@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 import { UsersService } from '../users/users.service';
 import { AppService } from '../app.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { EmailVerificationService } from '../email-verification/email-verification.service';
+import { EmailVerificationService } from '../email/email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -60,11 +60,11 @@ export class LoginService {
           //if the user wants to be be remembered on log in
           //save the JWT token to local storage
           if (this.rememberMe) {
-            localStorage.setItem('jwt_token', response['token']);
+            localStorage.setItem('jwt_token', accessToken);
           }
           //else save the JWT token to session storage
           else {
-            sessionStorage.setItem('jwt_token', response['token']);
+            sessionStorage.setItem('jwt_token', accessToken);
           }
 
           //load the user information to the user service
@@ -85,7 +85,6 @@ export class LoginService {
           let emailToVerify = userDto.email;
           this.emailVerificationService.emailToVerify.set(emailToVerify);
           this.emailVerificationService.sendVerificationEmail();
-          this.router.navigateByUrl('/email-verification');
         }
       },
       (error) => {

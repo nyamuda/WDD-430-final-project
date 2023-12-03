@@ -3,7 +3,7 @@ import { LoginService } from '../login/login.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UsersService } from '../users/users.service';
 import { User } from '../users/user.model';
-import { EmailVerificationService } from '../email-verification/email-verification.service';
+import { EmailVerificationService } from '../email/email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',

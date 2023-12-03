@@ -1,8 +1,8 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmailVerificationService } from '../email-verification.service';
-import { AppService } from 'src/app/app.service';
-import { UsersService } from 'src/app/users/users.service';
+import { AppService } from '../../../app.service';
+import { UsersService } from '../../../users/users.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
@@ -12,6 +12,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class EmailVerificationResultComponent implements OnInit {
   success: boolean = false;
+  token: string = '';
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -22,22 +23,35 @@ export class EmailVerificationResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.params.subscribe((params) => {
-      let result = params['result'];
-      if (result === 'success') {
-        this.success = true;
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.token = params['token'];
+      //if the token exists
+      if (this.token) {
+        //first get the ID of the user associated with that token
+        let decodedToken = this.jwtHelper.decodeToken(this.token);
+        let userId = decodedToken.userId;
+        //then send the token to the database so that it can be verified
+        this.emailVerificationService.verifyUser(userId, this.token);
+      }
+
+      //verification has failed
+      else {
+        this.emailVerificationService.status.set('fail');
       }
     });
   }
 
   resendVerificationEmail() {
     //get the user email from token
-    let decodedToken = this.jwtHelper.decodeToken(
-      this.userService.getJwtToken()
-    );
+    let decodedToken = this.jwtHelper.decodeToken(this.token);
     let userEmail = decodedToken['email'];
-    this.emailVerificationService.sendVerificationEmail(userEmail);
+    this.emailVerificationService.emailToVerify.set(userEmail);
+    this.emailVerificationService.sendVerificationEmail();
   }
 
   redirectUrl: Signal<string> = computed(() => this.appService.redirectUrl());
+
+  result: Signal<string> = computed(() =>
+    this.emailVerificationService.status()
+  );
 }

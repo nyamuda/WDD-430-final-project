@@ -10,9 +10,6 @@ router
   .get(UserUtils.ensureIsAdminMiddleware, (req: Request, res: Response) => {
     UsersController.getUsers(res);
   });
-router.route('/verify').put((req: Request, res: Response) => {
-  UsersController.verifyUser(req, res);
-});
 
 router
   .route('/:id')

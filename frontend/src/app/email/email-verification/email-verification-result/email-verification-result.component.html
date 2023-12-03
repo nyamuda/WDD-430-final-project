@@ -1,0 +1,38 @@
+<div class="container-fluid custom text-center mt-5">
+  <div [ngSwitch]="result()">
+    <ng-template ngSwitchCase="success">
+      <h2>Thank You!</h2>
+      <p>
+        Your email address has been successfully verified. Welcome to our
+        platform!
+      </p>
+      <a [routerLink]="redirectUrl()" class="btn btn-primary">Continue</a>
+    </ng-template>
+
+    <ng-template ngSwitchCase="fail">
+      <h2>Verification Failed</h2>
+      <p>
+        Sorry, an unexpected error occurred during the verification process.
+        Please try again later.
+      </p>
+      <div class="">
+        <button (click)="resendVerificationEmail()" class="btn btn-primary">
+          Resend Verification Email
+        </button>
+      </div>
+    </ng-template>
+
+    <ng-template ngSwitchDefault>
+      <div class="d-flex align-items-center justify-content-center">
+        <div
+          class="spinner-border me-1"
+          role="status"
+          style="width: 3rem; height: 3rem"
+        >
+          <span class="visually-hidden">Loading...</span>
+        </div>
+        <div class="ms-1 fw-bold">Please wait...</div>
+      </div>
+    </ng-template>
+  </div>
+</div>

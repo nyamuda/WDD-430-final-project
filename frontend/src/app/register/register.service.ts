@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
 import { AppService } from '../app.service';
-import { EmailVerificationService } from '../email-verification/email-verification.service';
+import { EmailVerificationService } from '../email/email-verification/email-verification.service';
 
 @Injectable({
   providedIn: 'root',
@@ -35,15 +35,10 @@ export class RegisterService {
         //disable loading button
         this.isRegistering.set(false);
 
-        console.log(response);
-
-        //save the JWT token to session storage
-        sessionStorage.setItem('jwt_token', response['token']);
-
-        //ask the user to verify their email
-        this.emailVerificationService.sendVerificationEmail(newUser.email);
-
-        this.router.navigateByUrl('/email-verification');
+        //verify the user email
+        let emailToVerify = userDto.email; //the email that needs to be verified
+        this.emailVerificationService.emailToVerify.set(emailToVerify);
+        this.emailVerificationService.sendVerificationEmail();
       },
       (error) => {
         //show toast

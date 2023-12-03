@@ -1,8 +1,6 @@
 import { User, Review, Course } from '../models/';
 import { Request, Response } from 'express';
 import * as Joi from 'joi';
-import * as jwt from 'jsonwebtoken';
-import { JwtPayload, Secret, JsonWebTokenError } from 'jsonwebtoken';
 
 export class UsersController {
   // Get all the users
@@ -145,53 +143,5 @@ export class UsersController {
     }
 
     return false;
-  }
-
-  //Change user verification status if they confirm their email address
-  public static async verifyUser(req: Request, res: Response) {
-    // Validation
-    let schema = Joi.object({
-      token: Joi.string().required(),
-      userId: Joi.string().required(),
-    }).unknown(true);
-
-    let { error, value } = schema.validate(req.body);
-    if (error) {
-      return res.status(400).json({ error: error.details[0].message });
-    }
-
-    // Check if the user exists
-    let userExists = await User.findById(req.body.userId);
-
-    if (!userExists) {
-      return res.status(404).json({
-        message: 'The requested user does not exist.',
-      });
-    }
-
-    //Verify the token
-    let clientToken = req.body.token;
-    let SECRET: Secret = process.env.SECRET!;
-
-    jwt.verify(clientToken, SECRET, async (error: any, token: any) => {
-      if (error) {
-        return res.status(401).json({
-          message: 'Invalid or expired token',
-          error: error,
-        });
-      }
-      //if token is valid, mark the user as verified in the database
-      // PUT request
-      await User.updateOne({ _id: req.body.userId }, { verified: true })
-        .then((user) => {
-          return res.status(204).end();
-        })
-        .catch((err) => {
-          return res.status(500).json({
-            message: 'An unexpected error occurred on the server.',
-            error: err,
-          });
-        });
-    });
   }
 }

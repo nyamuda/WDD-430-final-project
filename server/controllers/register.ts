@@ -62,9 +62,6 @@ export class RegisterController {
         //save the token to database
         await User.updateOne({ _id: userId }, { token: accessToken });
 
-        //send verification email
-        await EmailVerificationController.sendVerificationEmail(req, res);
-
         return res.status(201).json({
           message: 'The user was successfully created.',
           token: accessToken,

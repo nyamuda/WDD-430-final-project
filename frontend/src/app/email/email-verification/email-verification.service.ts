@@ -5,12 +5,15 @@ import {
   computed,
   signal,
 } from '@angular/core';
-import { AppService } from '../app.service';
+
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UsersService } from '../users/users.service';
-import { User } from '../users/user.model';
+
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { User } from 'src/app/users/user.model';
+import { AppService } from 'src/app/app.service';
+import { UsersService } from 'src/app/users/users.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,6 +21,8 @@ import { Router } from '@angular/router';
 export class EmailVerificationService {
   userSignal: Signal<User> = computed(() => this.userService.user());
   emailToVerify: WritableSignal<string> = signal('');
+
+  status: WritableSignal<string> = signal('verifying'); //verification status
 
   constructor(
     private appService: AppService,
@@ -30,33 +35,39 @@ export class EmailVerificationService {
   //send verification email if the user is not verified
   sendVerificationEmail() {
     let userDto = {
-      email: this.emailToVerify,
+      email: this.emailToVerify(),
     };
+
     const url = `${this.appService.apiUrl}/email-verification/send`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
-      (response) => {},
+      (response) => {
+        this.router.navigateByUrl('email-verification');
+      },
       (error) => {
-        //show toast
-        //show toast
-        this.appService.showFailureToast('Verification failed', '');
+        console.log(error);
       }
     );
   }
 
   //verify user
   verifyUser(userId: string, token: string) {
+    this.status.set('verifying');
     let verificationToken = { userId, token };
-
-    const url = `${this.appService.apiUrl}/users/verify`;
+    const url = `${this.appService.apiUrl}/email-verification/verify`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     this.http.post(url, verificationToken, { headers }).subscribe(
       (response) => {
-        this.router.navigateByUrl('email-verification/success');
+        this.status.set('success');
+
+        //if the email has been verified
+        //save JWT token to session storage
+        sessionStorage.setItem('jwt_token', token);
+        this.userService.decodeJwtToken();
       },
       (error) => {
-        this.router.navigateByUrl('email-verification/fail');
+        this.status.set('fail');
       }
     );
   }

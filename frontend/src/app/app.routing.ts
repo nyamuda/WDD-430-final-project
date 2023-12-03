@@ -28,8 +28,9 @@ import { AdminDashboardComponent } from './admin/admin-dashboard/admin-dashboard
 import { FAQComponent } from './faq/faq.component';
 import { TestimonialsComponent } from './testimonials/testimonials.component';
 import { TestimonialEditComponent } from './testimonials/testimonial-edit/testimonial-edit.component';
-import { EmailVerificationComponent } from './email-verification/email-verification.component';
-import { EmailVerificationResultComponent } from './email-verification/email-verification-result/email-verification-result.component';
+import { EmailVerificationComponent } from './email/email-verification/email-verification.component';
+import { EmailVerificationResultComponent } from './email/email-verification/email-verification-result/email-verification-result.component';
+import { EmailComponent } from './email/email.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -80,13 +81,12 @@ export const routes: Routes = [
   },
   {
     path: 'email-verification',
-    component: EmailVerificationComponent,
-    canActivate: [loggedInAuthGuard],
+    component: EmailComponent,
     children: [
+      { path: '', component: EmailVerificationComponent },
       {
-        path: ':result',
+        path: 'verify',
         component: EmailVerificationResultComponent,
-        canActivate: [loggedInAuthGuard],
       },
     ],
   },

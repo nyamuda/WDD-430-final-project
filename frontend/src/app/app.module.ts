@@ -97,8 +97,9 @@ import { TestimonialEditComponent } from './testimonials/testimonial-edit/testim
 import { TestimonialListComponent } from './testimonials/testimonial-list/testimonial-list.component';
 import { HomepageTestimonialItemComponent } from './homepage/homepage-testimonials/homepage-testimonial-item/homepage-testimonial-item.component';
 import { TestimonialPaginationComponent } from './testimonials/testimonial-pagination/testimonial-pagination.component';
-import { EmailVerificationComponent } from './email-verification/email-verification.component';
-import { EmailVerificationResultComponent } from './email-verification/email-verification-result/email-verification-result.component';
+import { EmailVerificationComponent } from './email/email-verification/email-verification.component';
+import { EmailVerificationResultComponent } from './email/email-verification/email-verification-result/email-verification-result.component';
+import { EmailComponent } from './email/email.component';
 
 @NgModule({
   declarations: [
@@ -166,6 +167,7 @@ import { EmailVerificationResultComponent } from './email-verification/email-ver
     TestimonialPaginationComponent,
     EmailVerificationComponent,
     EmailVerificationResultComponent,
+    EmailComponent,
   ],
   imports: [
     BrowserModule,
