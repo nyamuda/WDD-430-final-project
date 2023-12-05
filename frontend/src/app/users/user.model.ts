@@ -9,6 +9,13 @@ export class User {
 
   constructor() {
     // Initialize any default values or perform other operations
+    (this.id = ''),
+      (this.name = ''),
+      (this.email = ''),
+      (this.password = ''),
+      (this.isAdmin = false),
+      (this.imageUrl = ''),
+      (this.verified = false);
   }
 
   // Getter and Setter for id

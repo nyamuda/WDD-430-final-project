@@ -43,6 +43,7 @@ export class RegisterController {
       password: hashedPassword,
       isAdmin: false,
       verified: false,
+      imageUrl: '',
     };
 
     //Create user

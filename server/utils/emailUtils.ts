@@ -49,15 +49,14 @@ export class EmailUtils {
       </head>
       <body>
       
-        <div id="container">
-      
-          <h2>Hi ${info.name}!</h2>
-      
-          <p>Thanks for signing up to Loyd School of driving. Please verify your email address.</p>
-      
-          <a href="${info.appDomain}/email-verification/verify/?token=${info.token}">VERIFY MY EMAIL</a>
-      
-        </div>
+      <div id="container">
+      <h2>Hi ${info.name},</h2>
+      <p>Thanks for signing up to Loyd School of Driving. Please verify your email address.</p>
+      <a href="${info.appDomain}/email-verification/verify/?token=${info.token}">VERIFY MY EMAIL</a>
+      <p>Please note that this link will expire in 24 hours.</p>
+      <p>Regards,</p>
+      <p>Loyd School of Driving Team</p>
+    </div>
       
       </body>
       </html>      

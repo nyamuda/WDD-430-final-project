@@ -30,4 +30,9 @@ export class TestimonialItemComponent {
       return false;
     }
   }
+  //placeholder image in case the reviewer
+  //does not have a profile picture
+  placeholderImageUrl = (testimonial: Testimonial) => {
+    return this.userService.imagePlaceholderUrl(testimonial.userId.name);
+  };
 }

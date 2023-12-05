@@ -4,12 +4,25 @@
 .ql-editor {
   font-family: "Oxygen", sans-serif;
   font-size: 1rem;
-  color: #212529;
+  color: inherit;
+  background-color: transparent !important;
 }
 
 .container-fluid.custom {
   width: 100%;
   margin: auto;
+}
+
+.ql-editor p {
+  margin-bottom: 10px; /* Adjust this value to control the spacing */
+}
+
+.ql-editor h1 {
+  margin-bottom: 10px; /* Adjust this value to control the spacing */
+}
+
+.ql-editor h2 {
+  margin-bottom: 10px; /* Adjust this value to control the spacing */
 }
 
 @media (min-width: 768px) {
@@ -37,6 +50,7 @@
 .btn {
   text-transform: none;
   font-size: 1rem;
+  box-shadow: none;
 }
 
 .btn.custom {

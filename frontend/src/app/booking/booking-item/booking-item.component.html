@@ -15,7 +15,7 @@
       class="form-control"
       formControlName="name"
       placeholder="Name"
-      [value]="currentUser().name ? currentUser().name : ''"
+      [value]="currentUser()?.name ? currentUser().name : ''"
     />
     <label class="form-label" for="bookName">Name*</label>
     <div
@@ -43,7 +43,7 @@
       class="form-control"
       formControlName="email"
       placeholder="name@example.com"
-      [value]="currentUser().email ? currentUser().email : ''"
+      [value]="currentUser()?.email ? currentUser().email : ''"
     />
     <label class="form-label" for="bookEmail">Email*</label>
     <div

@@ -12,7 +12,11 @@
         <div class="card-body py-4 mt-2">
           <div class="d-flex justify-content-center mb-4">
             <img
-              [src]="testimonial.userId.imageUrl"
+              [src]="
+                testimonial.userId?.imageUrl
+                  ? testimonial.userId.imageUrl
+                  : placeholderImageUrl(testimonial)
+              "
               class="rounded-circle shadow-1-strong reviewer-image"
               width="150"
               height="150"

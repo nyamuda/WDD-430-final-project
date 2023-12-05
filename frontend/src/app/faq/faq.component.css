@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.action-icon {
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.action-icon:hover {
+  color: #333333;
+}
+
+.heading-line {
+  border: 2px solid #f24711;
+  width: 2rem;
+  margin-bottom: 0rem;
+}/*# sourceMappingURL=faq.component.css.map */

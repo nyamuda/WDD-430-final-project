@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { EmailVerificationService } from './email-verification.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -29,4 +29,8 @@ export class EmailVerificationComponent implements OnInit {
   resendVerificationEmail() {
     this.emailVerificationService.sendVerificationEmail();
   }
+
+  isSendingEmailSignal: Signal<boolean> = computed(() =>
+    this.emailVerificationService.isSendingEmailSignal()
+  );
 }

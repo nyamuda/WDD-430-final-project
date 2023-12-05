@@ -37,8 +37,10 @@ export class RegisterService {
 
         //verify the user email
         let emailToVerify = userDto.email; //the email that needs to be verified
-        this.emailVerificationService.emailToVerify.set(emailToVerify);
+        //save the email to session storage
+        sessionStorage.setItem('email_to_verify', emailToVerify);
         this.emailVerificationService.sendVerificationEmail();
+        this.router.navigateByUrl('email-verification');
       },
       (error) => {
         //show toast

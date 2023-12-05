@@ -36,7 +36,7 @@ export class EmailVerificationResultComponent implements OnInit {
 
       //verification has failed
       else {
-        this.emailVerificationService.status.set('fail');
+        this.emailVerificationService.status.set('verifying');
       }
     });
   }

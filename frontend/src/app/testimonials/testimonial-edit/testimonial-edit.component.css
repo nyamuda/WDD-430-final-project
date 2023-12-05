@@ -1,0 +1,8 @@
+.error-text {
+  font-size: 0.8rem;
+}
+
+.reviewer-image {
+  -o-object-fit: cover;
+     object-fit: cover;
+}/*# sourceMappingURL=testimonial-edit.component.css.map */

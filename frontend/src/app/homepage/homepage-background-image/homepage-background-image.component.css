@@ -1,0 +1,91 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.carousel {
+  position: relative;
+  z-index: 1;
+}
+
+.cards {
+  position: relative;
+  z-index: 2;
+  margin-top: -3rem !important;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.icon {
+  color: #333333;
+}
+
+.carousel-caption h5 {
+  text-transform: capitalize;
+}
+
+.caption-bold {
+  color: #f2ba11;
+}
+
+.display-4 {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+.carousel-item.active {
+  position: relative;
+}
+
+.main-title {
+  font-size: 2rem;
+}
+
+.btn-container {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .main-title {
+    font-size: 3.5rem;
+  }
+  .sentence {
+    font-size: 1.2rem;
+  }
+}
+@media (min-width: 992px) {
+  .main-title {
+    font-size: 4.5rem;
+  }
+  .sentence {
+    font-size: 1.5rem;
+  }
+}
+.carousel-item {
+  transition: all 0.5s ease-out;
+}
+
+.carousel-item img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.the_slide {
+  width: 100%;
+  height: 24rem;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+@media (min-width: 728px) {
+  .the_slide {
+    height: 25rem;
+  }
+}
+@media (min-width: 1024px) {
+  .the_slide {
+    height: 30rem;
+  }
+}
+/* The images - END *//*# sourceMappingURL=homepage-background-image.component.css.map */

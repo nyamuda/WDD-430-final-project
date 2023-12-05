@@ -20,9 +20,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class EmailVerificationService {
   userSignal: Signal<User> = computed(() => this.userService.user());
-  emailToVerify: WritableSignal<string> = signal('');
+  emailToVerify: WritableSignal<string> = signal(
+    sessionStorage.getItem('email_to_verify')
+  );
 
   status: WritableSignal<string> = signal('verifying'); //verification status
+  isSendingEmailSignal: WritableSignal<boolean> = signal(false); //verification status
 
   constructor(
     private appService: AppService,
@@ -37,12 +40,13 @@ export class EmailVerificationService {
     let userDto = {
       email: this.emailToVerify(),
     };
+    this.isSendingEmailSignal.set(true);
 
     const url = `${this.appService.apiUrl}/email-verification/send`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
     this.http.post(url, userDto, { headers }).subscribe(
       (response) => {
-        this.router.navigateByUrl('email-verification');
+        this.isSendingEmailSignal.set(false);
       },
       (error) => {
         console.log(error);
@@ -65,6 +69,9 @@ export class EmailVerificationService {
         //save JWT token to session storage
         sessionStorage.setItem('jwt_token', token);
         this.userService.decodeJwtToken();
+
+        //remove the email from session storage
+        sessionStorage.removeItem('email_to_verify');
       },
       (error) => {
         this.status.set('fail');

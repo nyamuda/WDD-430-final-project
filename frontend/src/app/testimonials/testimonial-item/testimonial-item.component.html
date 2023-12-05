@@ -1,8 +1,13 @@
 <div class="row text-center">
   <div *ngFor="let item of testimonials" class="col-md-4 mb-3">
+    {{ item }}
     <div class="d-flex justify-content-center mb-4">
       <img
-        [src]="item.userId.imageUrl"
+        [src]="
+          item.userId?.imageUrl
+            ? item.userId.imageUrl
+            : placeholderImageUrl(item)
+        "
         class="rounded-circle shadow-1-strong reviewer-image"
         width="150"
         height="150"

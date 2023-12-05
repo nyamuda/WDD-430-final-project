@@ -40,7 +40,7 @@ export class EmailVerificationController {
         const mailOptions = {
           from: 'ptnrlab@gmail.com',
           to: emailData.email,
-          subject: 'Verify your email address',
+          subject: 'Verify Your Email Address',
           html: EmailUtils.VerifyEmailHTMLTemplate(emailData),
         };
 
