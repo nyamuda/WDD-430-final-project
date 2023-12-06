@@ -104,6 +104,7 @@ import { PasswordComponent } from './password/password.component';
 import { PasswordForgotComponent } from './password/password-forgot/password-forgot.component';
 import { PasswordResetComponent } from './password/password-reset/password-reset.component';
 import { PasswordResetResultComponent } from './password/password-reset-result/password-reset-result.component';
+import { PasswordEmailComponent } from './password/password-email/password-email.component';
 
 @NgModule({
   declarations: [
@@ -176,6 +177,7 @@ import { PasswordResetResultComponent } from './password/password-reset-result/p
     PasswordForgotComponent,
     PasswordResetComponent,
     PasswordResetResultComponent,
+    PasswordEmailComponent,
   ],
   imports: [
     BrowserModule,

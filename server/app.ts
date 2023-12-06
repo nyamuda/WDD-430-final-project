@@ -18,6 +18,7 @@ import {
   FAQRouter,
   TestimonialRouter,
   EmailVerificationRouter,
+  PasswordRouter,
 } from './routes';
 
 const app = express();
@@ -40,6 +41,7 @@ app.use('/company-info', CompanyInfoRouter);
 app.use('/faq', FAQRouter);
 app.use('/testimonials', TestimonialRouter);
 app.use('/email-verification', EmailVerificationRouter);
+app.use('/password', PasswordRouter);
 
 // Serve static files from the './dist/driving-school/' directory
 // app.use(express.static(path.join(__dirname, './dist/driving-school/')));

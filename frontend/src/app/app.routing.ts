@@ -35,6 +35,7 @@ import { PasswordForgotComponent } from './password/password-forgot/password-for
 import { PasswordResetComponent } from './password/password-reset/password-reset.component';
 import { PasswordComponent } from './password/password.component';
 import { PasswordResetResultComponent } from './password/password-reset-result/password-reset-result.component';
+import { PasswordEmailComponent } from './password/password-email/password-email.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -126,6 +127,10 @@ export const routes: Routes = [
       {
         path: 'reset',
         component: PasswordResetComponent,
+      },
+      {
+        path: 'email',
+        component: PasswordEmailComponent,
       },
     ],
   },

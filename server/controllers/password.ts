@@ -1,21 +1,24 @@
 import { User } from '../models/';
 import { Request, Response } from 'express';
+import * as bcrypt from 'bcrypt';
 
 import * as Joi from 'joi';
 import * as nodemailer from 'nodemailer';
-import { EmailUtils, verifyEmailInfo } from '../utils/emailUtils';
+import { PasswordUtils, userInfo } from '../utils/passwordUtils';
 import * as dotenv from 'dotenv';
 import * as jwt from 'jsonwebtoken';
 import { Secret } from 'jsonwebtoken';
+import { UserUtils } from '../utils/userUtils';
 dotenv.config();
 
-export class EmailVerificationController {
-  // Send verification email
-  public static async sendVerificationEmail(req: Request, res: Response) {
+export class PasswordController {
+  // Send password reset email
+  public static async sendResetEmail(req: Request, res: Response) {
     try {
       //get the user by email
       let user = await User.findOne({ email: req.body.email });
 
+      //if the user is not in the database
       if (!user) {
         return res.status(404).json({
           message:
@@ -24,13 +27,27 @@ export class EmailVerificationController {
       }
 
       //if the user exits
-      //send verification email
+      //send password reset email
       if (user) {
-        let emailData: verifyEmailInfo = {
-          name: user.name,
-          email: user.email,
+        //create and access token
+        let userId = user._id.toString();
+        let email = user.email;
+        let isAdmin = user.isAdmin;
+        let verified = user.verified;
+        let name = user.name;
+
+        let accessToken = UserUtils.createAccessToken({
+          email,
+          isAdmin,
+          userId,
+          verified,
+        });
+
+        let emailData: userInfo = {
+          name,
+          email,
           appDomain: process.env.APP_DOMAIN!,
-          token: user.token,
+          token: accessToken,
         };
         const transporter = nodemailer.createTransport({
           host: 'smtp.gmail.com',
@@ -45,8 +62,8 @@ export class EmailVerificationController {
         const mailOptions = {
           from: 'ptnrlab@gmail.com',
           to: emailData.email,
-          subject: 'Verify Your Email Address',
-          html: EmailUtils.VerifyEmailHTMLTemplate(emailData),
+          subject: 'Password Reset',
+          html: PasswordUtils.passwordResetHTMLTemplate(emailData),
         };
 
         let info = await transporter.sendMail(mailOptions);
@@ -64,12 +81,13 @@ export class EmailVerificationController {
     }
   }
 
-  //Change user verification status if they confirm their email address
-  public static async verifyUserEmail(req: Request, res: Response) {
+  //Change user password if the provided token is valid
+  public static async resetPassword(req: Request, res: Response) {
     // Validation
     let schema = Joi.object({
       token: Joi.string().required(),
       userId: Joi.string().required(),
+      password: Joi.string().required(),
     }).unknown(true);
 
     let { error, value } = schema.validate(req.body);
@@ -86,10 +104,13 @@ export class EmailVerificationController {
       });
     }
 
-    //Verify the token
+    //data from the body
     let clientToken = req.body.token;
-    let SECRET: Secret = process.env.SECRET!;
+    let hashedPassword = await bcrypt.hash(req.body.password, 10); //hash the password
+    let userId = req.body.userId;
 
+    //Verify the token
+    let SECRET: Secret = process.env.SECRET!;
     jwt.verify(clientToken, SECRET, async (error: any, token: any) => {
       if (error) {
         return res.status(401).json({
@@ -97,9 +118,13 @@ export class EmailVerificationController {
           error: error,
         });
       }
-      //if token is valid, mark the user as verified in the database
+      //if token is valid, change the password
+      let newData = {
+        token: clientToken,
+        password: hashedPassword,
+      };
       // PUT request
-      await User.updateOne({ _id: req.body.userId }, { verified: true })
+      await User.updateOne({ _id: userId }, newData)
         .then((user) => {
           return res.status(204).end();
         })

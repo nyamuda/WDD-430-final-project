@@ -34,6 +34,7 @@ export class PasswordService {
     this.http.post(url, emailDto, { headers }).subscribe(
       (response) => {
         this.isSendingEmailSignal.set(false);
+        this.router.navigateByUrl('/password/email');
       },
       (error) => {
         console.log(error);
