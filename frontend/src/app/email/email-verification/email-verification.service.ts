@@ -20,9 +20,6 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class EmailVerificationService {
   userSignal: Signal<User> = computed(() => this.userService.user());
-  emailToVerify: WritableSignal<string> = signal(
-    sessionStorage.getItem('email_to_verify')
-  );
 
   status: WritableSignal<string> = signal('verifying'); //verification status
   isSendingEmailSignal: WritableSignal<boolean> = signal(false); //verification status
@@ -34,6 +31,14 @@ export class EmailVerificationService {
     private jwtHelper: JwtHelperService,
     private router: Router
   ) {}
+
+  emailToVerify(): string {
+    let email = localStorage.getItem('emailToVerify');
+    if (email) {
+      return email;
+    }
+    return '';
+  }
 
   //send verification email if the user is not verified
   sendVerificationEmail() {
@@ -66,12 +71,12 @@ export class EmailVerificationService {
         this.status.set('success');
 
         //if the email has been verified
-        //save JWT token to session storage
-        sessionStorage.setItem('jwt_token', token);
+        //save JWT token to local storage
+        localStorage.setItem('jwt_token', token);
         this.userService.decodeJwtToken();
 
-        //remove the email from session storage
-        sessionStorage.removeItem('email_to_verify');
+        //remove the email from local storage
+        localStorage.removeItem('emailToVerify');
       },
       (error) => {
         this.status.set('fail');

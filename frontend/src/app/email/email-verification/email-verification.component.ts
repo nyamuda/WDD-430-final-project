@@ -3,6 +3,7 @@ import { EmailVerificationService } from './email-verification.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { UsersService } from '../../users/users.service';
+import { AppService } from 'src/app/app.service';
 
 @Component({
   selector: 'app-email-verification',
@@ -13,10 +14,8 @@ export class EmailVerificationComponent implements OnInit {
   verified: boolean;
   constructor(
     private emailVerificationService: EmailVerificationService,
-    private activatedRoute: ActivatedRoute,
-    private jwtHelper: JwtHelperService,
-    private userService: UsersService,
-    private router: Router
+    private router: Router,
+    private appService: AppService
   ) {}
 
   ngOnInit(): void {

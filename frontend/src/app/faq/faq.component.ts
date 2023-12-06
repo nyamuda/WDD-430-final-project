@@ -79,6 +79,6 @@ export class FAQComponent {
   currentUser: Signal<User> = computed(() => this.userService.user());
   //only admins have the authority to edit or delete FAQs
   isAdmin(): boolean {
-    return this.currentUser().isAdmin;
+    return this.currentUser()?.isAdmin;
   }
 }

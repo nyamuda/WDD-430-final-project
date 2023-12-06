@@ -83,8 +83,8 @@ export class LoginService {
         else {
           //the email that needs to be verified
           let emailToVerify = userDto.email;
-          //save the email to session storage
-          sessionStorage.setItem('email_to_verify', emailToVerify);
+          //save the email to local storage
+          localStorage.setItem('emailToVerify', emailToVerify);
           this.emailVerificationService.sendVerificationEmail();
           this.router.navigateByUrl('email-verification');
         }

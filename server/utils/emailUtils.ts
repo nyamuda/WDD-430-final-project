@@ -26,7 +26,7 @@ export class EmailUtils {
           }
       
           h2 {
-            color: #007bff;
+            
           }
       
           p {

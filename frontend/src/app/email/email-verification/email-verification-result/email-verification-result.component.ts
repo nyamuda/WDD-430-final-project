@@ -1,5 +1,5 @@
 import { Component, OnInit, Signal, computed } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { EmailVerificationService } from '../email-verification.service';
 import { AppService } from '../../../app.service';
 import { UsersService } from '../../../users/users.service';
@@ -18,8 +18,8 @@ export class EmailVerificationResultComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private emailVerificationService: EmailVerificationService,
     private appService: AppService,
-    private userService: UsersService,
-    private jwtHelper: JwtHelperService
+    private jwtHelper: JwtHelperService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -42,10 +42,6 @@ export class EmailVerificationResultComponent implements OnInit {
   }
 
   resendVerificationEmail() {
-    //get the user email from token
-    let decodedToken = this.jwtHelper.decodeToken(this.token);
-    let userEmail = decodedToken['email'];
-    this.emailVerificationService.emailToVerify.set(userEmail);
     this.emailVerificationService.sendVerificationEmail();
   }
 
@@ -54,4 +50,8 @@ export class EmailVerificationResultComponent implements OnInit {
   result: Signal<string> = computed(() =>
     this.emailVerificationService.status()
   );
+
+  continue() {
+    this.router.navigateByUrl(this.redirectUrl());
+  }
 }

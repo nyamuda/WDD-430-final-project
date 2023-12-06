@@ -1,7 +1,7 @@
 <div class="container-fluid custom mt-5">
   <p class="heading-line rounded"></p>
   <p class="display-6 text-dark text-uppercase">FREQUENTLY ASKED QUESTIONS</p>
-  <div *ngIf="isAdmin()" class="d-flex justify-content-end my-3">
+  <div *ngIf="isAdmin() || false" class="d-flex justify-content-end my-3">
     <a class="btn custom text-light" (click)="addItem()">Add</a>
   </div>
   <mdb-accordion [borderless]="false">

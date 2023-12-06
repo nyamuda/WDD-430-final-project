@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
 export class AppService {
   private _courses = new Array<Course>();
   public courseListSignal: WritableSignal<Course[]> = signal(this._courses);
-  public redirectUrl: WritableSignal<string> = signal('');
+
   // public apiUrl = 'https://driving-school-5txd.onrender.com';
   public apiUrl = 'http://localhost:8000';
 
@@ -28,6 +28,21 @@ export class AppService {
         console.error(error);
       }
     );
+  }
+
+  redirectUrl(): string {
+    const storedJsonString = localStorage.getItem('redirectUrl');
+
+    let url = atob(localStorage.getItem('redirectUrl'));
+    if (url) {
+      return url;
+    }
+    return '';
+  }
+
+  //store redirect url to local storage
+  storeRedirectUrl(url: string): void {
+    localStorage.setItem('redirectUrl', btoa(url));
   }
 
   //Toast

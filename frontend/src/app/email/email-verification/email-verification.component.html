@@ -9,7 +9,7 @@
 
     <div class="">
       <button
-        *ngIf="!isSendingEmailSignal; else sendingLoader"
+        *ngIf="!isSendingEmailSignal(); else sendingLoader"
         (click)="resendVerificationEmail()"
         class="btn custom text-light"
       >
@@ -24,7 +24,7 @@
             role="status"
             aria-hidden="true"
           ></span>
-          <span class="ms-1">Sending email...</span>
+          Sending email...
         </button>
       </ng-template>
     </div>

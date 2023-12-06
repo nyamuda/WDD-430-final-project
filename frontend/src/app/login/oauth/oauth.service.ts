@@ -44,8 +44,8 @@ export class OauthService {
       urlState.randomString === sessionState.randomString &&
       urlState.currentState === sessionState.currentState
     ) {
-      //set the app redirect URL in case the login is a success
-      this.appService.redirectUrl.set(sessionState.currentState);
+      //save the redirect URL in case the login is a success
+      localStorage.setItem('redirectUrl', sessionState.currentState);
       return true;
     }
     //show an error the states don't match

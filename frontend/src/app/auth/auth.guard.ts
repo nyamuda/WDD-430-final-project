@@ -35,7 +35,7 @@ export const loggedInAuthGuard: CanActivateFn = (
   } else {
     // User is not authenticated, redirect to the login page
     //and preserve the attempted URL by saving it
-    appService.redirectUrl.set(state.url);
+    appService.storeRedirectUrl(state.url);
     return router.createUrlTree(['/login']);
   }
 };
@@ -61,7 +61,7 @@ export const adminAuthGuard: CanActivateFn = (
 
   // User is not admin redirect to the login page
   //and preserve the attempted URL by saving it
-  appService.redirectUrl.set(state.url);
+  appService.storeRedirectUrl(state.url);
   return router.navigateByUrl('/admin');
 };
 
@@ -92,6 +92,6 @@ export const rightUserAuthGuard: CanActivateFn = (
 
   // User is not admin redirect to the login page
   //and preserve the attempted URL by saving it
-  appService.redirectUrl.set(state.url);
+  appService.storeRedirectUrl(state.url);
   return router.navigateByUrl('/login');
 };
