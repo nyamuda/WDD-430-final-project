@@ -34,6 +34,7 @@ import { EmailComponent } from './email/email.component';
 import { PasswordForgotComponent } from './password/password-forgot/password-forgot.component';
 import { PasswordResetComponent } from './password/password-reset/password-reset.component';
 import { PasswordComponent } from './password/password.component';
+import { PasswordResetResultComponent } from './password/password-reset-result/password-reset-result.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -115,11 +116,15 @@ export const routes: Routes = [
     component: PasswordComponent,
     children: [
       {
+        path: 'result',
+        component: PasswordResetResultComponent,
+      },
+      {
         path: 'forgot',
         component: PasswordForgotComponent,
       },
       {
-        path: 'reset/:token',
+        path: 'reset',
         component: PasswordResetComponent,
       },
     ],

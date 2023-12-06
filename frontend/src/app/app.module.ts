@@ -103,6 +103,7 @@ import { EmailComponent } from './email/email.component';
 import { PasswordComponent } from './password/password.component';
 import { PasswordForgotComponent } from './password/password-forgot/password-forgot.component';
 import { PasswordResetComponent } from './password/password-reset/password-reset.component';
+import { PasswordResetResultComponent } from './password/password-reset-result/password-reset-result.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +175,7 @@ import { PasswordResetComponent } from './password/password-reset/password-reset
     PasswordComponent,
     PasswordForgotComponent,
     PasswordResetComponent,
+    PasswordResetResultComponent,
   ],
   imports: [
     BrowserModule,

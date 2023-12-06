@@ -11,7 +11,8 @@ import { Password } from './password.model';
 })
 export class PasswordService {
   isSendingEmailSignal: WritableSignal<boolean> = signal(false);
-  status: WritableSignal<string> = signal('verifying'); //reset status
+  isResettingPasswordSignal: WritableSignal<boolean> = signal(false);
+  resetResultSignal: WritableSignal<string> = signal('fail'); //reset status
 
   constructor(
     private appService: AppService,
@@ -42,17 +43,21 @@ export class PasswordService {
 
   //reset password
   resetPassword(password: Password, token: string) {
-    this.status.set('resetting');
+    this.isResettingPasswordSignal.set(true);
     let passwordDto = { password, token };
     const url = `${this.appService.apiUrl}/password/reset`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
     this.http.post(url, passwordDto, { headers }).subscribe(
       (response) => {
-        this.status.set('success');
+        this.isResettingPasswordSignal.set(false);
+        this.resetResultSignal.set('success');
+        this.router.navigateByUrl('/password/result');
       },
       (error) => {
-        this.status.set('fail');
+        this.router.navigateByUrl('/password/result');
+        this.resetResultSignal.set('fail');
+        this.isResettingPasswordSignal.set(false);
       }
     );
   }
