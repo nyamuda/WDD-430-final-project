@@ -37,15 +37,24 @@ export class PasswordService {
         this.router.navigateByUrl('/password/email');
       },
       (error) => {
-        console.log(error);
+        this.isSendingEmailSignal.set(false);
+
+        //show toast
+        let errorMessage = error['error']['message']
+          ? error['error']['message']
+          : error['error']['error']
+          ? error['error']['error']
+          : 'Please check your email and try again.';
+
+        this.appService.showFailureToast(errorMessage, 'Request failed');
       }
     );
   }
 
   //reset password
-  resetPassword(password: Password, token: string) {
+  resetPassword(password: Password, token: string, userId: string) {
     this.isResettingPasswordSignal.set(true);
-    let passwordDto = { password, token };
+    let passwordDto = { password, token, userId };
     const url = `${this.appService.apiUrl}/password/reset`;
     const headers = new HttpHeaders().set('Content-Type', 'application/json');
 
