@@ -100,6 +100,9 @@ import { TestimonialPaginationComponent } from './testimonials/testimonial-pagin
 import { EmailVerificationComponent } from './email/email-verification/email-verification.component';
 import { EmailVerificationResultComponent } from './email/email-verification/email-verification-result/email-verification-result.component';
 import { EmailComponent } from './email/email.component';
+import { PasswordComponent } from './password/password.component';
+import { PasswordForgotComponent } from './password/password-forgot/password-forgot.component';
+import { PasswordResetComponent } from './password/password-reset/password-reset.component';
 
 @NgModule({
   declarations: [
@@ -168,6 +171,9 @@ import { EmailComponent } from './email/email.component';
     EmailVerificationComponent,
     EmailVerificationResultComponent,
     EmailComponent,
+    PasswordComponent,
+    PasswordForgotComponent,
+    PasswordResetComponent,
   ],
   imports: [
     BrowserModule,

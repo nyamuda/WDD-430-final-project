@@ -31,18 +31,19 @@ export class AppService {
   }
 
   redirectUrl(): string {
-    const storedJsonString = localStorage.getItem('redirectUrl');
-
-    let url = atob(localStorage.getItem('redirectUrl'));
+    let url = localStorage.getItem('redirectUrl');
     if (url) {
+      //remove the redirectUrl property from local storage
+      localStorage.removeItem('redirectUrl');
+      //return redirectUrl
       return url;
     }
     return '';
   }
 
-  //store redirect url to local storage
+  //store redirect url to session storage
   storeRedirectUrl(url: string): void {
-    localStorage.setItem('redirectUrl', btoa(url));
+    localStorage.setItem('redirectUrl', url || '');
   }
 
   //Toast
