@@ -1,4 +1,4 @@
-@import "../../sass/_variables";
+@import "../../../sass/_variables";
 
 .heading-line {
   border: 2px solid $primary-color;
@@ -9,23 +9,14 @@
 .btn {
   height: 3rem;
 }
+
 .container {
   margin: auto;
   width: 95%;
 }
 
-.cascading-right {
-  margin-right: -50px;
-}
-
 @media (min-width: 768px) {
   .container {
     width: 30rem;
-  }
-}
-
-@media (max-width: 991.98px) {
-  .cascading-right {
-    margin-right: 0;
   }
 }

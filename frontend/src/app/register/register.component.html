@@ -1,107 +1,31 @@
-<div [class]="'container mt-' + topMargin">
-  <form [formGroup]="registerFormGroup" class="needs-validation" novalidate>
-    <app-oauth action="Sign up"></app-oauth>
-    <!-- Name input -->
-    <div class="form-floating mb-3">
-      <input
-        [ngClass]="{
-          'is-invalid':
-            registerFormGroup.get('name').invalid &&
-            registerFormGroup.get('name').touched
-        }"
-        type="text"
-        id="registerName"
-        class="form-control"
-        formControlName="name"
-        placeholder="Name"
-      />
-      <label class="form-label" for="registerName">Name</label>
-      <div
-        *ngIf="
-          registerFormGroup.get('name').invalid &&
-          registerFormGroup.get('name').touched
-        "
-        class="invalid-feedback"
-      >
-        Please choose a name.
+<!-- Section: Design Block -->
+<section class="container-fluid custom m-auto mt-5">
+  <!-- Jumbotron -->
+  <div class="py-4">
+    <div class="row g-0 align-items-center">
+      <div class="col-lg-6 mb-5 mb-lg-0">
+        <div
+          class="card cascading-right"
+          style="
+            background: hsla(0, 0%, 100%, 0.55);
+            backdrop-filter: blur(30px);
+          "
+        >
+          <div class="card-body py-5 px-2 px-lg-5 shadow-5">
+            <app-register-item></app-register-item>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-none d-lg-block col-lg-6 mb-5 mb-lg-0">
+        <img
+          [src]="'../../assets/images/login/img_' + imageNumber + '.jpg'"
+          class="w-100 rounded-4 shadow-4"
+          alt=""
+        />
       </div>
     </div>
-
-    <!-- Email input -->
-    <div class="form-floating mb-3">
-      <input
-        [ngClass]="{
-          'is-invalid':
-            registerFormGroup.get('email').invalid &&
-            registerFormGroup.get('email').touched
-        }"
-        type="email"
-        id="registerEmail"
-        class="form-control"
-        formControlName="email"
-        placeholder="name@example.com"
-      />
-      <label class="form-label" for="registerEmail">Email</label>
-      <div
-        *ngIf="
-          registerFormGroup.get('email').invalid &&
-          registerFormGroup.get('email').touched
-        "
-        class="invalid-feedback"
-      >
-        Please enter a valid email address.
-      </div>
-    </div>
-
-    <!-- Password input -->
-    <div class="form-floating mb-3">
-      <input
-        [ngClass]="{
-          'is-invalid':
-            registerFormGroup.get('password').invalid &&
-            registerFormGroup.get('password').touched
-        }"
-        type="password"
-        id="registerPassword"
-        class="form-control"
-        formControlName="password"
-        placeholder="Password"
-      />
-      <label class="form-label" for="registerPassword">Password</label>
-      <div
-        *ngIf="
-          registerFormGroup.get('password').invalid &&
-          registerFormGroup.get('password').touched
-        "
-        class="invalid-feedback"
-      >
-        Your password should have a minimum length of 8 characters and include a
-        combination of letters, and numbers.
-      </div>
-    </div>
-
-    <!-- Submit button -->
-    <button
-      [ngClass]="{ disabled: registerFormGroup.invalid }"
-      *ngIf="!registering(); else loadingBtn"
-      (click)="submitForm()"
-      type="submit"
-      class="btn custom text-light btn-block mb-3"
-    >
-      Register
-    </button>
-    <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
-
-    <!-- Loading button -->
-    <ng-template #loadingBtn>
-      <button class="btn custom text-light btn-block" type="button" disabled>
-        <span
-          class="spinner-border spinner-border-sm"
-          role="status"
-          aria-hidden="true"
-        ></span>
-        <span class="ms-1">Please wait...</span>
-      </button>
-    </ng-template>
-  </form>
-</div>
+  </div>
+  <!-- Jumbotron -->
+</section>
+<!-- Section: Design Block -->

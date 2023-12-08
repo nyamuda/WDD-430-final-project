@@ -1,0 +1,107 @@
+<div [class]="'container mt-' + topMargin">
+  <form [formGroup]="registerFormGroup" class="needs-validation" novalidate>
+    <app-oauth action="Sign up"></app-oauth>
+    <!-- Name input -->
+    <div class="form-floating mb-3">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            registerFormGroup.get('name').invalid &&
+            registerFormGroup.get('name').touched
+        }"
+        type="text"
+        id="registerName"
+        class="form-control"
+        formControlName="name"
+        placeholder="Name"
+      />
+      <label class="form-label" for="registerName">Name</label>
+      <div
+        *ngIf="
+          registerFormGroup.get('name').invalid &&
+          registerFormGroup.get('name').touched
+        "
+        class="invalid-feedback"
+      >
+        Please choose a name.
+      </div>
+    </div>
+
+    <!-- Email input -->
+    <div class="form-floating mb-3">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            registerFormGroup.get('email').invalid &&
+            registerFormGroup.get('email').touched
+        }"
+        type="email"
+        id="registerEmail"
+        class="form-control"
+        formControlName="email"
+        placeholder="name@example.com"
+      />
+      <label class="form-label" for="registerEmail">Email</label>
+      <div
+        *ngIf="
+          registerFormGroup.get('email').invalid &&
+          registerFormGroup.get('email').touched
+        "
+        class="invalid-feedback"
+      >
+        Please enter a valid email address.
+      </div>
+    </div>
+
+    <!-- Password input -->
+    <div class="form-floating mb-3">
+      <input
+        [ngClass]="{
+          'is-invalid':
+            registerFormGroup.get('password').invalid &&
+            registerFormGroup.get('password').touched
+        }"
+        type="password"
+        id="registerPassword"
+        class="form-control"
+        formControlName="password"
+        placeholder="Password"
+      />
+      <label class="form-label" for="registerPassword">Password</label>
+      <div
+        *ngIf="
+          registerFormGroup.get('password').invalid &&
+          registerFormGroup.get('password').touched
+        "
+        class="invalid-feedback"
+      >
+        Your password should have a minimum length of 8 characters and include a
+        combination of letters, and numbers.
+      </div>
+    </div>
+
+    <!-- Submit button -->
+    <button
+      [ngClass]="{ disabled: registerFormGroup.invalid }"
+      *ngIf="!registering(); else loadingBtn"
+      (click)="submitForm()"
+      type="submit"
+      class="btn custom text-light btn-block mb-3"
+    >
+      Register
+    </button>
+    <!-- <button (click)="hello()" class="btn btn-danger">Toast</button> -->
+
+    <!-- Loading button -->
+    <ng-template #loadingBtn>
+      <button class="btn custom text-light btn-block" type="button" disabled>
+        <span
+          class="spinner-border spinner-border-sm"
+          role="status"
+          aria-hidden="true"
+        ></span>
+        <span class="ms-1">Please wait...</span>
+      </button>
+    </ng-template>
+  </form>
+</div>

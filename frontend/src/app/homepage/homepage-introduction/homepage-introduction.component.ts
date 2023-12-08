@@ -13,9 +13,8 @@ export class HomepageIntroductionComponent implements OnInit {
     AOS.init();
   }
 
-  //Generate random number between 1 and 3
+  //Generate random number between 1 and 4
   generateRandomNumber(): number {
-    // Generate a random number between 1 and 3
     return Math.floor(Math.random() * 4) + 1;
   }
 }
