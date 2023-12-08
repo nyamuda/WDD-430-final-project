@@ -11,17 +11,14 @@ import { UsersService } from 'src/app/users/users.service';
 export class HomepageTestimonialItemComponent {
   @Input() testimonials: Testimonial[];
 
-  constructor(private testimonialService: TestimonialService, private userService:UsersService) {}
+  constructor(
+    private testimonialService: TestimonialService,
+    private userService: UsersService
+  ) {}
 
   placeholders = () => this.testimonialService.placeholders;
 
   isFetchingTestimonials: Signal<boolean> = computed(() =>
     this.testimonialService.isFetchingTestimonials()
   );
-
-  //placeholder image in case the reviewer
-  //does not have a profile picture
-  placeholderImageUrl = (testimonial: Testimonial) => {
-    return this.userService.imagePlaceholderUrl(testimonial.userId.name);
-  };
 }

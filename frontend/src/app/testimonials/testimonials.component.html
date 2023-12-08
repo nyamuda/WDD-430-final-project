@@ -1,23 +1,34 @@
 <div class="container-fluid custom mt-5">
+  <div class="row mb-5">
+    <div class="col-lg-8 p-4">
+      <p>
+        Find out why learners love our driving school through their
+        testimonials. These testimonials go beyond just driving skills, shedding
+        light on the supportive community and personalized guidance that set our
+        programs apart.
+      </p>
+    </div>
+    <div class="verification-block col-lg-4 p-4">
+      <p class="fw-bold">Testimonial Verification</p>
+      <p>
+        Before you write your testimonial, please ensure you use your real name,
+        create an account, and verify your email address. You must have received
+        products or services from our school (not just a quote) and be able to
+        provide proof if requested. Your testimonial should also be constructive
+        and describe the work or services you received.
+      </p>
+      <a
+        routerLink="new"
+        fragment="testimonial-form"
+        class="btn custom text-light"
+        >Write testimonial</a
+      >
+    </div>
+  </div>
+  <router-outlet></router-outlet>
   <div class="container m-auto text-center">
     <p class="heading-line m-auto rounded"></p>
-    <p class="display-6 text-uppercase">Testimonials</p>
-    <p>
-      Find out why learners love our driving school through their testimonials.
-      These testimonials go beyond just driving skills, shedding light on the
-      supportive community and personalized guidance that set our programs
-      apart.
-    </p>
+    <p class="fs-3 text-uppercase">See our most recent testimonials</p>
   </div>
-  <div class="d-flex justify-content-end mb-5">
-    <a
-      routerLink="new"
-      fragment="testimonial-form"
-      class="btn custom text-light"
-      >Write testimonial</a
-    >
-  </div>
-
-  <router-outlet></router-outlet>
   <app-testimonial-list></app-testimonial-list>
 </div>

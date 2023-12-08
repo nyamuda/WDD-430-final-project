@@ -1,4 +1,4 @@
-import { Component, Input, Signal, computed } from '@angular/core';
+import { Component, Input, OnInit, Signal, computed } from '@angular/core';
 import { Testimonial } from '../testimonial.model';
 import { User } from 'src/app/users/user.model';
 import { UsersComponent } from 'src/app/users/users.component';
@@ -11,6 +11,7 @@ import { UsersService } from 'src/app/users/users.service';
 })
 export class TestimonialItemComponent {
   @Input() testimonials: Testimonial[];
+  @Input() testimonial: Testimonial;
 
   constructor(private userService: UsersService) {}
 
@@ -30,9 +31,4 @@ export class TestimonialItemComponent {
       return false;
     }
   }
-  //placeholder image in case the reviewer
-  //does not have a profile picture
-  placeholderImageUrl = (testimonial: Testimonial) => {
-    return this.userService.imagePlaceholderUrl(testimonial.userId.name);
-  };
 }

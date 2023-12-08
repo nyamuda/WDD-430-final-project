@@ -1,12 +1,11 @@
 <div class="row text-center">
   <div *ngFor="let item of testimonials" class="col-md-4 mb-3">
-    {{ item }}
     <div class="d-flex justify-content-center mb-4">
       <img
         [src]="
           item.userId?.imageUrl
             ? item.userId.imageUrl
-            : placeholderImageUrl(item)
+            : '../../../assets/images/placeholder/placeholder1.png'
         "
         class="rounded-circle shadow-1-strong reviewer-image"
         width="150"
@@ -14,6 +13,7 @@
       />
     </div>
     <h5 class="mb-3">{{ item.userId.name }}</h5>
+    <p class="text-muted small mb-0">{{ item.updatedAt | moment }}</p>
     <!-- Edit or delete -->
     <!-- show the edit and delete button if the current logged in user is the author of the testimonial -->
     <p

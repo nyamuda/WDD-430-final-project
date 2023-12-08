@@ -94,8 +94,9 @@ export class TestimonialService {
     //and meta data for pagination
     this.http.get<TestimonialMetaDto>(url).subscribe(
       (response: TestimonialMetaDto) => {
-        //save the testimonials
-        this.testimonialListSignal.set(response.testimonials);
+        //add placeholder image URLs to testimonials and
+        //and save them
+        this.addPlaceholderImages(response.testimonials);
 
         let totalItems = response.meta.totalItems
           ? response.meta.totalItems
@@ -190,5 +191,31 @@ export class TestimonialService {
       .set('Authorization', `Bearer ${token}`);
 
     return headers;
+  }
+
+  //Add placeholder image URLs to testimonials
+  //whose users do not have profile images
+  addPlaceholderImages(testimonials: Testimonial[]): void {
+    //add placeholder image to the testimonial if the user
+    //does not have one
+    let testimonialsWithImages = testimonials.map(
+      (testimonial: Testimonial) => {
+        if (testimonial.userId.imageUrl) {
+          return testimonial;
+        } else {
+          //get the username
+          let userName = testimonial.userId.name;
+          //use the username to general a placeholder image URL
+          let placeholderUrl = this.userService.imagePlaceholderUrl(userName);
+
+          //save the placeholder URL to the testimonial
+          testimonial.userId.imageUrl = placeholderUrl;
+          return testimonial;
+        }
+      }
+    );
+
+    //update the testimonialListSignal
+    this.testimonialListSignal.set(testimonialsWithImages);
   }
 }
