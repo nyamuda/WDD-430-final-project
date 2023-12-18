@@ -186,6 +186,7 @@ import { RegisterItemComponent } from './register/register-item/register-item.co
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+
     MdbAccordionModule,
     MdbCarouselModule,
     MdbCheckboxModule,

@@ -1,39 +1,96 @@
-<div class="container-fluid custom mt-5">
-  <p class="heading-line rounded"></p>
-  <p class="display-5 text-dark text-uppercase">
-    Join Us <span class="colored-text">Today</span>
-  </p>
-  <p>
-    Choose us for a driving education experience that is both professional and
-    cost-effective, and join the ranks of our satisfied, skilled drivers who
-    have passed their driving tests with flying colors on their very first
-    attempt.
-  </p>
-  <div class="row row-cols-1 row-cols-md-2">
-    <!-- Image for small screens start -->
-    <div class="d-md-none col-md-6 d-flex align-items-center">
-      <img
-        src="../../assets/images/illustrations/illustration_6.png"
-        class="img-fluid"
-        alt="Car image"
-      />
-    </div>
-    <!-- Image for small screens end -->
+<!-- Section: Design Block -->
+<section class="background-radial-gradient overflow-hidden">
+  <style>
+    .background-radial-gradient {
+      background-color: hsl(28, 41%, 15%); /* Orangish background color */
+      background-image: radial-gradient(
+          650px circle at 0% 0%,
+          hsl(28, 41%, 35%) 15%,
+          hsl(28, 41%, 30%) 35%,
+          hsl(28, 41%, 20%) 75%,
+          hsl(28, 41%, 19%) 80%,
+          transparent 100%
+        ),
+        radial-gradient(
+          1250px circle at 100% 100%,
+          hsl(28, 41%, 45%) 15%,
+          hsl(28, 41%, 30%) 35%,
+          hsl(28, 41%, 20%) 75%,
+          hsl(28, 41%, 19%) 80%,
+          transparent 100%
+        );
+    }
 
-    <!-- Contact form start -->
-    <div class="col-md-6">
-      <app-booking-item></app-booking-item>
-    </div>
-    <!-- Contact form end -->
+    #radius-shape-1 {
+      height: 220px;
+      width: 220px;
+      top: -60px;
+      left: -130px;
+      background: radial-gradient(
+        #ff7700,
+        #ffcc33
+      ); /* Orangish radial gradient */
+      overflow: hidden;
+    }
 
-    <!--Image for large screens start -->
-    <div class="d-none d-md-block col-md-6 d-md-flex align-items-center">
-      <img
-        src="../../assets/images/illustrations/illustration_6.png"
-        class="img-fluid"
-        alt="Car image"
-      />
+    #radius-shape-2 {
+      border-radius: 38% 62% 63% 37% / 70% 33% 67% 30%;
+      bottom: -60px;
+      right: -110px;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(
+        #ff7700,
+        #ffcc33
+      ); /* Orangish radial gradient */
+      overflow: hidden;
+    }
+
+    .bg-glass {
+      background-color: hsla(
+        28,
+        10%,
+        98%,
+        0.9
+      ) !important; /* Very light orangish background color with lower saturation */
+      backdrop-filter: saturate(200%) blur(25px);
+    }
+  </style>
+
+  <div class="container px-4 py-5 px-md-5 text-center text-lg-start my-5">
+    <div class="row gx-lg-5 align-items-center mb-5">
+      <div class="col-lg-6 mb-5 mb-lg-0" style="z-index: 10">
+        <h1
+          class="display-5 fw-bold ls-tight"
+          style="color: hsl(218, 81%, 95%)"
+        >
+          JOIN US <span style="color: hsl(218, 81%, 75%)">TODAY</span>
+        </h1>
+        <p class="mb-4" style="color: hsl(218, 81%, 95%)">
+          Choose us for a driving education experience that is both professional
+          and cost-effective, and join the ranks of our satisfied, skilled
+          drivers who have passed their driving tests with flying colors on
+          their very first attempt.
+        </p>
+      </div>
+
+      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
+        <div
+          id="radius-shape-1"
+          class="position-absolute rounded-circle shadow-5-strong"
+        ></div>
+        <div
+          id="radius-shape-2"
+          class="position-absolute shadow-5-strong"
+        ></div>
+
+        <div class="card bg-glass">
+          <div class="card-body">
+            <app-booking-item></app-booking-item>
+          </div>
+        </div>
+      </div>
     </div>
-    <!--Image for large screens end -->
   </div>
-</div>
+</section>
+<!-- Section: Design Block -->
