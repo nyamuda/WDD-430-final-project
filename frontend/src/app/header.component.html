@@ -240,16 +240,7 @@
               >Testimonials</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              (click)="isOpen = !isOpen"
-              (click)="buttonsNav.toggle()"
-              class="nav-link px-2 text-dark"
-              routerLinkActive="active-link"
-              routerLink="faq"
-              >FAQ</a
-            >
-          </li>
+
           <li class="nav-item">
             <a
               (click)="isOpen = !isOpen"
@@ -260,9 +251,45 @@
               >Contact Us</a
             >
           </li>
+          <!-- Dropdown -->
+          <li mdbDropdown class="nav-item dropdown">
+            <a
+              class="nav-link px-2 text-dark dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+            >
+              Info
+            </a>
+            <ul
+              mdbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <a
+                  (click)="isOpen = !isOpen"
+                  (click)="buttonsNav.toggle()"
+                  class="dropdown-item"
+                  routerLink="faq"
+                  >FAQs</a
+                >
+              </li>
+              <li>
+                <a
+                  (click)="isOpen = !isOpen"
+                  (click)="buttonsNav.toggle()"
+                  class="dropdown-item"
+                  routerLink="about-us"
+                  >About Us</a
+                >
+              </li>
+            </ul>
+          </li>
         </ul>
-        <!-- Left links -->
 
+        <!-- Left links -->
         <div class="d-flex justify-content-start align-items-center">
           <div>
             <a
@@ -405,14 +432,7 @@
               >Testimonials</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link px-2 text-dark"
-              routerLinkActive="active-link"
-              routerLink="faq"
-              >FAQ</a
-            >
-          </li>
+
           <li class="nav-item">
             <a
               class="nav-link px-2 text-dark"
@@ -420,6 +440,42 @@
               routerLink="contact"
               >Contact Us</a
             >
+          </li>
+          <!-- Dropdown -->
+          <li mdbDropdown class="nav-item dropdown">
+            <a
+              class="nav-link px-2 text-dark dropdown-toggle"
+              id="navbarDropdownMenuLink"
+              role="button"
+              mdbDropdownToggle
+              aria-expanded="false"
+            >
+              Info
+            </a>
+            <ul
+              mdbDropdownMenu
+              class="dropdown-menu"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <li>
+                <a
+                  (click)="isOpen = !isOpen"
+                  (click)="buttonsNav.toggle()"
+                  class="dropdown-item"
+                  routerLink="faq"
+                  >FAQs</a
+                >
+              </li>
+              <li>
+                <a
+                  (click)="isOpen = !isOpen"
+                  (click)="buttonsNav.toggle()"
+                  class="dropdown-item"
+                  routerLink="about-us"
+                  >About Us</a
+                >
+              </li>
+            </ul>
           </li>
         </ul>
         <!-- Left links -->
