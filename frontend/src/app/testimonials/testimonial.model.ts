@@ -8,6 +8,7 @@ export class Testimonial {
   private _content: string;
   private _stars: number;
   private _updatedAt: string;
+  private _createdAt: string;
 
   constructor() {}
 
@@ -52,6 +53,13 @@ export class Testimonial {
   }
   public get updatedAt(): string {
     return this._updatedAt;
+  }
+
+  public get createdAt(): string {
+    return this._createdAt;
+  }
+  public set createdAt(value: string) {
+    this._createdAt = value;
   }
 }
 

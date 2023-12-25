@@ -30,10 +30,9 @@
             "styles": [
               "src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/css-star-rating/scss/star-rating.scss",
-              "node_modules/aos/dist/aos.css"
+              "node_modules/css-star-rating/scss/star-rating.scss"
             ],
-            "scripts": ["node_modules/aos/dist/aos.js"]
+            "scripts": []
           },
           "configurations": {
             "production": {

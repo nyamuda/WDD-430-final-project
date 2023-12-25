@@ -8,8 +8,6 @@ import { AppService } from './app.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'mdb-angular-ui-kit-free';
-
   constructor(
     private userService: UsersService,
     private appService: AppService

@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ToastrModule } from 'ngx-toastr';
 
 import { AppComponent } from './app.component';
+import { DatePipe } from '@angular/common';
 
 // MDB Modules
 import { MdbAccordionModule } from 'mdb-angular-ui-kit/accordion';
@@ -233,6 +234,7 @@ import { RegisterItemComponent } from './register/register-item/register-item.co
   providers: [
     { useValue: JWT_OPTIONS, provide: JWT_OPTIONS },
     JwtHelperService,
+    DatePipe,
   ],
   bootstrap: [AppComponent],
   exports: [RouterModule],

@@ -12,6 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppService } from '../app.service';
 import { UsersService } from '../users/users.service';
 import { Observable } from 'rxjs';
+import { DatePipe } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +37,8 @@ export class TestimonialService {
   constructor(
     private http: HttpClient,
     private appService: AppService,
-    private userService: UsersService
+    private userService: UsersService,
+    private datePipe: DatePipe
   ) {}
 
   // CREATE
@@ -94,9 +96,17 @@ export class TestimonialService {
     //and meta data for pagination
     this.http.get<TestimonialMetaDto>(url).subscribe(
       (response: TestimonialMetaDto) => {
-        //add placeholder image URLs to testimonials and
-        //and save them
-        this.addPlaceholderImages(response.testimonials);
+        //add placeholder image URLs to testimonials that do not have images
+        let testimonialPlaceholders = this.addPlaceholderImages(
+          response.testimonials
+        );
+
+        //format the testimonials createdAt date
+        let formattedTestimonials = this.formatTestimonialDate(
+          testimonialPlaceholders
+        );
+        //update the testimonialListSignal
+        this.testimonialListSignal.set(formattedTestimonials);
 
         let totalItems = response.meta.totalItems
           ? response.meta.totalItems
@@ -195,7 +205,7 @@ export class TestimonialService {
 
   //Add placeholder image URLs to testimonials
   //whose users do not have profile images
-  addPlaceholderImages(testimonials: Testimonial[]): void {
+  addPlaceholderImages(testimonials: Testimonial[]): Testimonial[] {
     //add placeholder image to the testimonial if the user
     //does not have one
     let testimonialsWithImages = testimonials.map(
@@ -215,7 +225,21 @@ export class TestimonialService {
       }
     );
 
-    //update the testimonialListSignal
-    this.testimonialListSignal.set(testimonialsWithImages);
+    return testimonialsWithImages;
+  }
+
+  //format the date of the testimonial
+  formatTestimonialDate(testimonials: Testimonial[]): Testimonial[] {
+    let formattedTestimonials = testimonials.map((testimonial: Testimonial) => {
+      //format the date
+      let originalFormat = testimonial.createdAt;
+      let newFormat = 'd MMMM yyyy';
+      testimonial.createdAt = this.datePipe.transform(
+        originalFormat,
+        newFormat
+      );
+      return testimonial;
+    });
+    return formattedTestimonials;
   }
 }

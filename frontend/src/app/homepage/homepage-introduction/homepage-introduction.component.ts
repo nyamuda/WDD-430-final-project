@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as AOS from 'AOS';
+
 @Component({
   selector: 'app-homepage-introduction',
   templateUrl: './homepage-introduction.component.html',
@@ -10,7 +10,6 @@ export class HomepageIntroductionComponent implements OnInit {
 
   ngOnInit(): void {
     this.imageNumber = this.generateRandomNumber();
-    AOS.init();
   }
 
   //Generate random number between 1 and 4
