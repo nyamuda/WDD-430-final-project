@@ -27,6 +27,7 @@ export class TestimonialService {
   //Signals
   public testimonialListSignal: WritableSignal<Testimonial[]> = signal([]);
   public metaDataSignal: WritableSignal<MetaData> = signal(this._metaData);
+  public topTestimonialSignal = signal(new Testimonial());
 
   //display placeholder testimonials
   //in case its fetching testimonials
@@ -101,10 +102,20 @@ export class TestimonialService {
           response.testimonials
         );
 
-        //format the testimonials createdAt date
+        //format the testimonials' createdAt date
         let formattedTestimonials = this.formatTestimonialDate(
           testimonialPlaceholders
         );
+
+        //get the top testimonial and save it
+        let topTestimonial = this.getTopTestimonial(formattedTestimonials);
+        this.topTestimonialSignal.set(topTestimonial);
+
+        //remove the top testimonial from the list
+        formattedTestimonials = formattedTestimonials.filter(
+          (item) => item['_id'] != topTestimonial['_id']
+        );
+
         //update the testimonialListSignal
         this.testimonialListSignal.set(formattedTestimonials);
 
@@ -241,5 +252,14 @@ export class TestimonialService {
       return testimonial;
     });
     return formattedTestimonials;
+  }
+
+  //get the top testimonial
+  getTopTestimonial(testimonials: Testimonial[]): Testimonial {
+    //sort them by rating
+    let items = testimonials.sort((a, b) => b.stars - a.stars);
+
+    //return the first item
+    return items[0];
   }
 }

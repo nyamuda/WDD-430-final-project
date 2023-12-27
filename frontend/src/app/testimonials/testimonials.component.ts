@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Signal, computed } from '@angular/core';
 import { Testimonial } from './testimonial.model';
 import { TestimonialService } from './testimonial.service';
 
@@ -13,4 +13,8 @@ export class TestimonialsComponent implements OnInit {
   ngOnInit(): void {
     this.testimonialService.getTestimonials();
   }
+
+  topTestimonial: Signal<Testimonial> = computed(() =>
+    this.testimonialService.topTestimonialSignal()
+  );
 }

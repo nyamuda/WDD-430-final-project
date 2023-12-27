@@ -10,20 +10,21 @@
       <!-- Top Testimonial -->
       <div class="text-center">
         <p class="lead font-italic mx-4 mx-md-5">
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
-          error amet numquam iure provident voluptate esse quasi, voluptas
-          nostrum quisquam!"
+          "{{ topTestimonial().content }}"
         </p>
         <div class="mt-5 mb-4">
           <img
-            src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
-            class="rounded-circle img-fluid shadow-1-strong"
-            alt="smaple image"
+            [src]="
+              topTestimonial().userId?.imageUrl
+                ? topTestimonial().userId.imageUrl
+                : '../../../assets/images/placeholder/placeholder1.png'
+            "
+            class="rounded-circle shadow-1-strong reviewer-image"
             width="100"
             height="100"
           />
         </div>
-        <p class="text-muted mb-0">- Anna Morian</p>
+        <p class="text-muted mb-0">- {{ topTestimonial().userId.name }}</p>
       </div>
     </div>
     <div class="verification-block col-lg-4 py-4 px-lg-4">
@@ -44,6 +45,9 @@
     </div>
   </div>
   <router-outlet></router-outlet>
+
+  <app-stars-distribution></app-stars-distribution>
+
   <div class="m-auto text-center mt-5">
     <p class="heading-line m-auto rounded"></p>
     <p class="fs-3 text-uppercase text-start text-lg-center">

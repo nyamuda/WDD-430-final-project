@@ -108,6 +108,8 @@ import { PasswordResetResultComponent } from './password/password-reset-result/p
 import { PasswordEmailComponent } from './password/password-email/password-email.component';
 import { LoginItemComponent } from './login/login-item/login-item.component';
 import { RegisterItemComponent } from './register/register-item/register-item.component';
+import { TestimonialFilterComponent } from './testimonials/testimonial-filter/testimonial-filter.component';
+import { StarsDistributionComponent } from './stars-distribution/stars-distribution.component';
 
 @NgModule({
   declarations: [
@@ -183,6 +185,8 @@ import { RegisterItemComponent } from './register/register-item/register-item.co
     PasswordEmailComponent,
     LoginItemComponent,
     RegisterItemComponent,
+    TestimonialFilterComponent,
+    StarsDistributionComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,14 @@
+<!-- Sort By -->
+<div class="col-md-4">
+  <select
+    (change)="sortBy()"
+    [(ngModel)]="sortingField"
+    class="form-select form-select-lg rounded"
+    aria-label=".form-select-lg example"
+  >
+    <option selected hidden>Sort By</option>
+    <option value="stars">Stars</option>
+    <option value="date">Date</option>
+    <option value="title">Name</option>
+  </select>
+</div>
