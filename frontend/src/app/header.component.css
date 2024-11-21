@@ -37,16 +37,20 @@ a {
 }
 
 /* Icon 1 */
-#nav-icon3 {
-  width: 60px;
-  height: 45px;
-  position: relative;
+#nav-icon1,
+#nav-icon2,
+#nav-icon3,
+#nav-icon4 {
+  width: 3.5rem;
+  height: 2.5rem;
   transform: rotate(0deg);
-  transition: 0.25s ease-in-out;
+  transition: 0.5s ease-in-out;
   cursor: pointer;
 }
 
-#nav-icon3 span {
+#nav-icon1 span,
+#nav-icon3 span,
+#nav-icon4 span {
   display: block;
   position: absolute;
   height: 9px;
@@ -56,38 +60,32 @@ a {
   opacity: 1;
   left: 0;
   transform: rotate(0deg);
-  transition: 0.125s ease-in-out;
+  transition: 0.25s ease-in-out;
 }
 
-#nav-icon3 span:nth-child(1) {
+#nav-icon1 span:nth-child(1) {
   top: 0px;
 }
 
-#nav-icon3 span:nth-child(2),
-#nav-icon3 span:nth-child(3) {
+#nav-icon1 span:nth-child(2) {
   top: 18px;
 }
 
-#nav-icon3 span:nth-child(4) {
+#nav-icon1 span:nth-child(3) {
   top: 36px;
 }
 
-#nav-icon3.open span:nth-child(1) {
+#nav-icon1.open span:nth-child(1) {
   top: 18px;
-  width: 0%;
-  left: 50%;
+  transform: rotate(135deg);
 }
 
-#nav-icon3.open span:nth-child(2) {
-  transform: rotate(45deg);
+#nav-icon1.open span:nth-child(2) {
+  opacity: 0;
+  left: -60px;
 }
 
-#nav-icon3.open span:nth-child(3) {
-  transform: rotate(-45deg);
-}
-
-#nav-icon3.open span:nth-child(4) {
+#nav-icon1.open span:nth-child(3) {
   top: 18px;
-  width: 0%;
-  left: 50%;
+  transform: rotate(-135deg);
 }/*# sourceMappingURL=header.component.css.map */

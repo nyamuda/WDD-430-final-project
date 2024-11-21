@@ -1,0 +1,20 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.colored-text {
+  color: #f2ba11;
+}
+
+.icon {
+  color: #f2ba11;
+}
+
+.bg-image {
+  height: 10rem;
+}
+
+@media (min-width: 768px) {
+  .car-illustration {
+    width: 50rem;
+  }
+}/*# sourceMappingURL=homepage-call-to-action.component.css.map */

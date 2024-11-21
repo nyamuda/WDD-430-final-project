@@ -1,0 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Oxygen&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap");
+.heading-line {
+  border: 2px solid #f24711;
+  width: 2rem;
+  margin-bottom: 0rem;
+}
+
+.card {
+  border-radius: 0;
+}
+
+.card-img-top {
+  border-radius: 0;
+}/*# sourceMappingURL=course-list.component.css.map */

@@ -37,7 +37,8 @@
 }
 
 .form-control:focus,
-.form-select:focus {
+.form-select:focus,
+.form-select.is-valid:focus {
   box-shadow: none;
 }
 
